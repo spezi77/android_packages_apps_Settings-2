@@ -4520,6 +4520,15 @@
     <string name="navigation_bar_height_28">28dp</string>
     <string name="navigation_bar_height_24">24dp</string>
 
+    <!--- Kill app longpress back -->
+    <string name="kill_app_longpress_timeout">Longpress back kill timeout</string>
+    <string name="kill_app_longpress_timeout_3000">3000ms</string>
+    <string name="kill_app_longpress_timeout_2500">2500ms</string>
+    <string name="kill_app_longpress_timeout_2000">2000ms</string>
+    <string name="kill_app_longpress_timeout_1500">1500ms (default)</string>
+    <string name="kill_app_longpress_timeout_1000">1000ms</string>
+    <string name="kill_app_longpress_timeout_500">500ms</string>
+
     <string name="lock_screen_title">Lock screen</string>
 
     <!-- Lock Screen Shortcuts -->

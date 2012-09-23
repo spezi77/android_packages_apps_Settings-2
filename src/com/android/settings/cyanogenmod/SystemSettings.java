@@ -20,6 +20,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.view.IWindowManager;
@@ -28,7 +30,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-public class SystemSettings extends SettingsPreferenceFragment {
+public class SystemSettings extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener {
     private static final String TAG = "SystemSettings";
 
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
@@ -38,6 +41,9 @@ public class SystemSettings extends SettingsPreferenceFragment {
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
+    private static final String KEY_KILL_APP_LONGPRESS_TIMEOUT = "kill_app_longpress_timeout";
+
+    private ListPreference mKillAppLongpressTimeout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,15 @@ public class SystemSettings extends SettingsPreferenceFragment {
                 getPreferenceScreen().removePreference(mNotificationPulse);
             } else {
                 updateLightPulseDescription();
+
+	mKillAppLongpressTimeout = (ListPreference) findPreference(KEY_KILL_APP_LONGPRESS_TIMEOUT);
+        mKillAppLongpressTimeout.setOnPreferenceChangeListener(this);
+
+        int statusKillAppLongpressTimeout = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                 Settings.System.KILL_APP_LONGPRESS_TIMEOUT, 1500);
+        mKillAppLongpressTimeout.setValue(String.valueOf(statusKillAppLongpressTimeout));
+        mKillAppLongpressTimeout.setSummary(mKillAppLongpressTimeout.getEntry());
+
             }
         }
 
@@ -118,6 +133,19 @@ public class SystemSettings extends SettingsPreferenceFragment {
         super.onResume();
         updateLightPulseDescription();
         updateBatteryPulseDescription();
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        if (preference == mKillAppLongpressTimeout) {
+            int statusKillAppLongpressTimeout = Integer.valueOf((String) objValue);
+            int index = mKillAppLongpressTimeout.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.KILL_APP_LONGPRESS_TIMEOUT, statusKillAppLongpressTimeout);
+            mKillAppLongpressTimeout.setSummary(mKillAppLongpressTimeout.getEntries()[index]);
+            return true;
+
+        }
+        return false;
     }
 
     @Override
