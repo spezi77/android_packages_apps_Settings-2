@@ -4505,6 +4505,10 @@
     <!-- Notification Drawer  -->
     <string name="notification_drawer_title">Notification drawer</string>
 
+    <!--- Statusbar transparency -->
+    <string name="status_bar_transparency_title">Statusbar Transparency</string>
+    <string name="status_bar_transparency_summary">Adjust statusbar transparency</string>
+
     <!--- Navigation bar -->
     <string name="navigation_key_title">Navigation key settings</string>
     <string name="navigation_controls_title">Show Navigation bar</string>
