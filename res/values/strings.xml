@@ -4503,6 +4503,23 @@
     <!-- Notification Drawer  -->
     <string name="notification_drawer_title">Notification drawer</string>
 
+    <!--- Navigation bar -->
+    <string name="navigation_key_title">Navigation key settings</string>
+    <string name="navigation_controls_title">Show Navigation bar</string>
+    <string name="combined_bar_navigation_color_title">Button color</string>
+    <string name="combined_bar_navigation_glow_title">Button glow effect</string>
+    <string name="combined_bar_navigation_glow_color_title">Button glow color</string>
+    <string name="combined_bar_navigation_quick_glow_title">Shorter button glow</string>
+
+    <string name="navigation_bar_height">Navbar height</string>
+    <string name="navigation_bar_height_48">48dp (default)</string>
+    <string name="navigation_bar_height_44">44dp</string>
+    <string name="navigation_bar_height_40">40dp</string>
+    <string name="navigation_bar_height_36">36dp</string>
+    <string name="navigation_bar_height_32">32dp</string>
+    <string name="navigation_bar_height_28">28dp</string>
+    <string name="navigation_bar_height_24">24dp</string>
+
     <string name="lock_screen_title">Lock screen</string>
 
     <!-- Lock Screen Shortcuts -->

@@ -92,6 +92,7 @@ public class SystemSettings extends SettingsPreferenceFragment {
      //   if (removeNavbar) {
        //     getPreferenceScreen().removePreference(findPreference(KEY_NAVIGATION_BAR));
      //   }
+
     }
 
     private void updateLightPulseDescription() {

@@ -152,7 +152,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                         Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
             }
         }
-
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -390,7 +389,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     mVolumeWake.isChecked() ? 1 : 0);
             return true;
         }
-
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
