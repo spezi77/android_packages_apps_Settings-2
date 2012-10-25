@@ -29,11 +29,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "LockscreenInterface";
     public static final String KEY_SEE_TRHOUGH_PREF = "lockscreen_see_through";
+    public static final String KEY_TEXT_COLOR = "lockscreen_custom_text_color";
     private static final String KEY_ALWAYS_BATTERY_PREF = "lockscreen_battery_status";
     private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
 
     private PreferenceScreen mLockscreenButtons;
     private CheckBoxPreference mSeeThrough;
+    private Preference mTextColor;
     private ListPreference mBatteryStatus;
 
     public boolean hasButtons() {
@@ -49,6 +51,8 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mSeeThrough = (CheckBoxPreference) findPreference(KEY_SEE_TRHOUGH_PREF);
         mSeeThrough.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_SEE_THROUGH, 0) == 1));
+
+        mTextColor = (Preference) findPreference(KEY_TEXT_COLOR);
 
         // Battery status
         mBatteryStatus = (ListPreference) findPreference(KEY_ALWAYS_BATTERY_PREF);
@@ -73,6 +77,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_SEE_THROUGH, value);
             return true;
+        } else if (preference == mTextColor) {
+            ColorPickerDialog cp = new ColorPickerDialog(getActivity(),
+                    mTextColorListener, Settings.System.getInt(getActivity()
+                    .getApplicationContext()
+                    .getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_TEXT_COLOR, 0xFFFFFFFF));
+            cp.setDefaultColor(0xFFFFFFFF);
+            cp.show();
+            return true;
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -90,4 +102,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         }
         return false;
     }
+    ColorPickerDialog.OnColorChangedListener mTextColorListener =
+        new ColorPickerDialog.OnColorChangedListener() {
+            public void colorChanged(int color) {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.LOCKSCREEN_CUSTOM_TEXT_COLOR, color);
+            }
+            public void colorUpdate(int color) {
+            }
+    };
 }
