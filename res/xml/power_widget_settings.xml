@@ -55,6 +55,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceScreen
+            android:key="toggle_icon_color_on"
+            android:title="@string/toggle_icon_color_on_title">
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:key="toggle_icon_color_off"
+            android:title="@string/toggle_icon_color_off_title">
+        </PreferenceScreen>
+
     <PreferenceCategory
        android:title="@string/power_widget_behavior">
 
