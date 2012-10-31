@@ -55,6 +55,19 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+       android:title="@string/toggle_color_title">
+
+        <CheckBoxPreference
+            android:key="enable_toggle_colors"
+            android:title="@string/enable_toggle_colors_title"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="enable_toggle_bar"
+            android:title="@string/enable_toggle_bar_title"
+            android:defaultValue="false" />
+
     <PreferenceScreen
             android:key="toggle_icon_color_on"
             android:title="@string/toggle_icon_color_on_title">
@@ -64,6 +77,7 @@
             android:key="toggle_icon_color_off"
             android:title="@string/toggle_icon_color_off_title">
         </PreferenceScreen>
+    </PreferenceCategory>
 
     <PreferenceCategory
        android:title="@string/power_widget_behavior">

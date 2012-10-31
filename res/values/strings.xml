@@ -5046,8 +5046,13 @@
     <string name="pref_volume_wake_summary">Pressing the volume rocker up/down will wake the device</string>
 
     <!-- Power Widget toggle color -->
-    <string name="toggle_icon_color_on_title">Color for notification toggle icons (on)</string>
-    <string name="toggle_icon_color_off_title">Color for notification toggle icons (off)</string>
+    <string name="toggle_color_title">Toggles color and bar</string>
+    <string name="enable_toggle_colors_title">Enable toggle colors</string>
+    <string name="enable_toggle_bar_title">Enable toggle bar</string>
+    <string name="toggle_icon_color_on_title">Color icons (on)</string>
+    <string name="toggle_icon_color_on_summary">Sets color for activated toggle icons</string>
+    <string name="toggle_icon_color_off_title">Color icons (off)</string>
+    <string name="toggle_icon_color_off_summary">Sets color for not activated toggle icons</string>
 
     <!-- Setting checkbox summary for displaying USB debugging notification -->
     <string name="adb_notify">USB debugging notify</string>
