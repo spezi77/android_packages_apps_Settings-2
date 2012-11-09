@@ -873,4 +873,5 @@ public class Settings extends PreferenceActivity
     public static class DaydreamSettingsActivity extends Settings { /* empty */ }
     public static class QuietHoursSettingsActivity extends Settings { /* empty */ }
     public static class DreamSettingsActivity extends Settings { /* empty */ }
+    public static class NotificationShortcutsSettingsActivity extends Settings { /* empty */ }
 }
