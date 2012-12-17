@@ -4517,6 +4517,7 @@
     <string name="notification_background_default_wallpaper">Default background</string>
     <string name="notification_drawer_custom_background_dialog_title">Choose color</string>
     <string name="notif_wallpaper_alpha_title">Notification background transparency</string>
+    <string name="notif_alpha_title">Notification Rows transparency</string>
 
     <!--- Statusbar transparency -->
     <string name="status_bar_transparency_title">Statusbar Transparency</string>
