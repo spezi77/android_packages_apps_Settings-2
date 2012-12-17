@@ -1530,6 +1530,7 @@
 
 	<activity android:name=".cyanogenmod.StatusBar" />
         <activity android:name=".cyanogenmod.StatusBarClockStyle" />
+	<activity android:name=".cyanogenmod.NotificationDrawerStyle" />
 
         <activity
             android:name=".cyanogenmod.DensityChanger"
