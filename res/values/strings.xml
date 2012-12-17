@@ -5329,6 +5329,7 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="navbar_restart_systemui_summary">Change this option will restart SystemUI</string>
 
     <string name="interface_title">Interface</string>
+    <string name="status_bar_battery_status_dotted_circle">Dotted Circle with percentage</string>
 
     <!-- General UI -->
     <string name="misc_short">Misc</string>
