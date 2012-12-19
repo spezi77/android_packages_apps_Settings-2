@@ -5506,4 +5506,14 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="dual_pane_prefs_off">Never</string>
     <string name="dual_pane_prefs_landscape">Only in landscape</string>
 
+    <string name="circle_battery_color">Circle color</string>
+    <string name="circle_battery_text_color">Circle text color</string>
+    <string name="circle_battery_animation_speed">Circle animation speed</string>
+    <string name="circle_battery_animation_speed_none">None</string>
+    <string name="circle_battery_animation_speed_slow">Slow</string>
+    <string name="circle_battery_animation_speed_stock">Normal</string>
+    <string name="circle_battery_animation_speed_fast">Fast</string>
+    <string name="circle_battery_reset_title">Reset circle colors</string>
+    <string name="circle_battery_reset_summary">Reset circle colors to apply installed theme engine colors</string>
+
 </resources>
