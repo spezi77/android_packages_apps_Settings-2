@@ -1834,4 +1834,25 @@
     <string name="user_picture_title" msgid="7297782792000291692">"Identificador de la foto"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Emissions mòbils"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Selecciona els tipus d\'alertes d\'emergència que es mostraran."</string>
+    
+    <string name="header_category_jellybeer">JellyBeer</string>
+    <string name="beerbong_settings">Ajustaments</string>
+    
+    <!-- Visualization settings -->
+    <string name="beerbong_visualization_title">UIModes</string>
+    <string name="beerbong_visualization_summary">Canvia entre UIModes i DPIs</string>
+    <string name="ui_long">UIModes i DPIs</string>
+    <string name="dpi_settings_title">Densitat LCD</string>
+    <string name="system_dpi_title">Densitat LCD</string>
+    <string name="system_dpi_summary">Densitat LCD actual:</string>
+    <string name="system_dpi_standar_title">Densitat estàndard</string>
+    <string name="system_dpi_standar_summary">Seleccioni la densitat estàndard d\'una llista</string>
+    <string name="system_dpi_custom_title">Introduir densitat personalitzada</string>
+    <string name="system_dpi_custom_hint">120 a 480</string>
+    <string name="system_dpi_custom_summary">Selecciona una densitat personalitzada de 120 a 480</string>
+    
+    <string name="alert_reboot">"És necessari reiniciar"</string>
+    <string name="alert_reboot_message">"Aquest canvi necessita un reinici per ser aplicat. Vols reiniciar ara?"</string>
+    <string name="alert_yes">Si</string>
+    <string name="alert_no">No</string>
 </resources>

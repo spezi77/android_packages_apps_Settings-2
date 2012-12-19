@@ -5577,4 +5577,24 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="high_end_gfx_title">High end graphic effects</string>
     <string name="high_end_gfx_summary">Enable graphic effects disabled on lower end devices</string>
 
+    <string name="header_category_jellybeer">BeanStalk</string>
+    <string name="beerbong_settings">Settings</string>
+
+    <!-- Visualization settings -->
+    <string name="beerbong_visualization_title">UIModes</string>
+    <string name="beerbong_visualization_summary">Change UIModes and DPIs</string>
+    <string name="ui_long">UIModes and DPIs</string>
+    <string name="dpi_settings_title">LCD density</string>
+    <string name="system_dpi_title">LCD density</string>
+    <string name="system_dpi_summary">Current LCD density:</string>
+    <string name="system_dpi_standar_title">Standard density</string>
+    <string name="system_dpi_standar_summary">Select the density from a list</string>
+    <string name="system_dpi_custom_title">Specify custom density</string>
+    <string name="system_dpi_custom_hint">120 to 480</string>
+    <string name="system_dpi_custom_summary">Select a custom density from 120 to 480</string>
+
+    <string name="alert_reboot">Reboot needed</string>
+    <string name="alert_reboot_message">This change needs a reboot to be applied. Do you want to reboot now?</string>
+    <string name="alert_yes">Yes</string>
+    <string name="alert_no">No</string>
 </resources>
