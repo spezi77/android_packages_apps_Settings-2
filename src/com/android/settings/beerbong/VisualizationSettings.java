@@ -113,7 +113,6 @@ public class VisualizationSettings extends SettingsPreferenceFragment implements
             int index = mUimode.findIndexOfValue((String)objValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.UI_MODE, uiMode);
             mUimode.setSummary(mUimode.getEntries()[index]);
-            setTabletUI(uiMode == 3);
             Utils.reboot();
         }
 
