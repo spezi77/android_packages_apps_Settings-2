@@ -64,6 +64,7 @@ public class QuickSettingsUtil {
     public static final String TILE_DAYDREAM = "toggleDaydream";
     public static final String TILE_QUIETHOURS = "toggleQuietHours";
     public static final String TILE_REBOOT = "toggleReboot"; 
+    public static final String TILE_FAVCONTACT = "toggleFavoriteContact"; 
 
     private static final String TILE_DELIMITER = "|";
     protected static ArrayList<String> TILES_DEFAULT = new ArrayList<String>();
@@ -77,6 +78,7 @@ public class QuickSettingsUtil {
         TILES_DEFAULT.add(TILE_BATTERY);
         TILES_DEFAULT.add(TILE_AIRPLANE);
         TILES_DEFAULT.add(TILE_BLUETOOTH);
+	TILES_DEFAULT.add(TILE_FAVCONTACT);
     }
 
     /**
@@ -161,6 +163,9 @@ public class QuickSettingsUtil {
         TILES.put(TILE_DAYDREAM, new QuickSettingsUtil.TileInfo(
                 TILE_DAYDREAM, R.string.screensaver_settings_title,
                 "com.android.systemui:drawable/ic_qs_clock_circle"));
+	TILES.put(TILE_FAVCONTACT, new QuickSettingsUtil.TileInfo(
+                TILE_FAVCONTACT, R.string.title_tile_favcontact,
+                "com.android.systemui:drawable/ic_qs_default_user")); 
 
 // These toggles are not available yet.  Comment out for now
 //        if(PhoneConstants.LTE_ON_CDMA_TRUE == TelephonyManager.getDefault().getLteOnCdmaMode() ||
