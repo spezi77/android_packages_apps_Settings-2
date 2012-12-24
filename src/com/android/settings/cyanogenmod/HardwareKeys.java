@@ -31,6 +31,10 @@ import com.android.settings.SettingsPreferenceFragment;
 
 public class HardwareKeys extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
+    private static final String KEY_MENU_ENABLED = "key_menu_enabled";
+    private static final String KEY_BACK_ENABLED = "key_back_enabled";
+    private static final String KEY_HOME_ENABLED = "key_home_enabled";
+
     private static final String HARDWARE_KEYS_CATEGORY_BINDINGS = "hardware_keys_bindings";
     private static final String HARDWARE_KEYS_ENABLE_CUSTOM = "hardware_keys_enable_custom";
     private static final String HARDWARE_KEYS_HOME_LONG_PRESS = "hardware_keys_home_long_press";
@@ -60,6 +64,10 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
     private static final int KEY_MASK_ASSIST = 0x08;
     private static final int KEY_MASK_APP_SWITCH = 0x10;
 
+    private CheckBoxPreference mMenuKeyEnabled;
+    private CheckBoxPreference mBackKeyEnabled;
+    private CheckBoxPreference mHomeKeyEnabled;
+
     private CheckBoxPreference mEnableCustomBindings;
     private ListPreference mHomeLongPressAction;
     private ListPreference mMenuPressAction;
@@ -83,6 +91,10 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
 
         addPreferencesFromResource(R.xml.hardware_keys);
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mMenuKeyEnabled = (CheckBoxPreference) prefSet.findPreference(KEY_MENU_ENABLED);
+        mBackKeyEnabled = (CheckBoxPreference) prefSet.findPreference(KEY_BACK_ENABLED);
+        mHomeKeyEnabled = (CheckBoxPreference) prefSet.findPreference(KEY_HOME_ENABLED);
 
         mEnableCustomBindings = (CheckBoxPreference) prefSet.findPreference(
                 HARDWARE_KEYS_ENABLE_CUSTOM);
@@ -178,6 +190,16 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
             bindingsCategory.removePreference(mAppSwitchLongPressAction);
         }
 
+        mMenuKeyEnabled.setChecked((Settings.System.getInt(getActivity().
+		getApplicationContext().getContentResolver(),
+                Settings.System.KEY_MENU_ENABLED, 1) == 1));
+        mBackKeyEnabled.setChecked((Settings.System.getInt(getActivity().
+		getApplicationContext().getContentResolver(),
+                Settings.System.KEY_BACK_ENABLED, 1) == 1));
+        mHomeKeyEnabled.setChecked((Settings.System.getInt(getActivity().
+		getApplicationContext().getContentResolver(),
+                Settings.System.KEY_HOME_ENABLED, 1) == 1));
+
         mEnableCustomBindings.setChecked((Settings.System.getInt(getActivity().
                 getApplicationContext().getContentResolver(),
                 Settings.System.HARDWARE_KEY_REBINDING, 0) == 1));
@@ -248,12 +270,13 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+	boolean enabled;
         if (preference == mEnableCustomBindings) {
             Settings.System.putInt(getContentResolver(), Settings.System.HARDWARE_KEY_REBINDING,
                     mEnableCustomBindings.isChecked() ? 1 : 0);
             return true;
         } else if (preference == mShowActionOverflow) {
-            boolean enabled = mShowActionOverflow.isChecked();
+            enabled = mShowActionOverflow.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.UI_FORCE_OVERFLOW_BUTTON,
                     enabled ? 1 : 0);
             // Show appropriate
@@ -264,6 +287,21 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
                 Toast.makeText(getActivity(), R.string.hardware_keys_show_overflow_toast_disable,
                         Toast.LENGTH_LONG).show();
             }
+            return true;
+        } else if (preference == mMenuKeyEnabled) {
+            enabled = mMenuKeyEnabled.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.KEY_MENU_ENABLED, enabled ? 1 : 0);
+            return true;
+        } else if (preference == mBackKeyEnabled) {
+            enabled = mBackKeyEnabled.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.KEY_BACK_ENABLED, enabled ? 1 : 0);
+            return true;
+        } else if (preference == mHomeKeyEnabled) {
+            enabled = mHomeKeyEnabled.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.KEY_HOME_ENABLED, enabled ? 1 : 0);
             return true;
         }
         return false;
