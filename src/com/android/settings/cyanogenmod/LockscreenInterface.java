@@ -29,12 +29,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "LockscreenInterface";
     public static final String KEY_SEE_TRHOUGH_PREF = "lockscreen_see_through";
+    public static final String KEY_AUTO_ROTATE_PREF = "lockscreen_auto_rotate";
     public static final String KEY_TEXT_COLOR = "lockscreen_custom_text_color";
     private static final String KEY_ALWAYS_BATTERY_PREF = "lockscreen_battery_status";
     private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
 
     private PreferenceScreen mLockscreenButtons;
     private CheckBoxPreference mSeeThrough;
+    private CheckBoxPreference mAutoRotate;
     private Preference mTextColor;
     private ListPreference mBatteryStatus;
 
@@ -51,6 +53,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mSeeThrough = (CheckBoxPreference) findPreference(KEY_SEE_TRHOUGH_PREF);
         mSeeThrough.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_SEE_THROUGH, 0) == 1));
+
+        mAutoRotate = (CheckBoxPreference) findPreference(KEY_AUTO_ROTATE_PREF);
+        mAutoRotate.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.LOCKSCREEN_AUTO_ROTATE, 0) == 1));
 
         mTextColor = (Preference) findPreference(KEY_TEXT_COLOR);
 
@@ -76,6 +82,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             int value = mSeeThrough.isChecked() ? 1 : 0;
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_SEE_THROUGH, value);
+            return true;
+       } else if (preference == mAutoRotate) {
+            int value = mAutoRotate.isChecked() ? 1 : 0;
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_AUTO_ROTATE, value);
             return true;
         } else if (preference == mTextColor) {
             ColorPickerDialog cp = new ColorPickerDialog(getActivity(),

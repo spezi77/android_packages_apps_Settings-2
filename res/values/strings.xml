@@ -4551,6 +4551,8 @@
 
     <string name="lockscreen_text_color_title">Change color of lockscreen text</string>
 
+    <string name="lockscreen_auto_rotate_title">Auto rotate Lockscreen</string>
+
     <!-- Lock screen vibrate settings -->
     <string name="lockscreen_vibrate_enabled_title">Vibrate</string>
     <string name="lockscreen_vibrate_enabled_head">Vibrate when unlocking</string>
