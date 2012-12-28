@@ -68,30 +68,30 @@ public class SystemSettings extends SettingsPreferenceFragment {
 
         // Only show the hardware keys config on a device that does not have a navbar
         // Only show the navigation bar config on phones that has a navigation bar
-        boolean removeKeys = false;
-        boolean removeNavbar = false;
-        IWindowManager windowManager = IWindowManager.Stub.asInterface(
-                ServiceManager.getService(Context.WINDOW_SERVICE));
-        try {
-            if (windowManager.hasNavigationBar()) {
-                removeKeys = true;
-                if (Utils.isTablet(getActivity())) {
-                    removeNavbar = true;
-                }
-            } else {
-                removeNavbar = true;
-            }
-        } catch (RemoteException e) {
+  //      boolean removeKeys = false;
+  //      boolean removeNavbar = false;
+  //      IWindowManager windowManager = IWindowManager.Stub.asInterface(
+  //              ServiceManager.getService(Context.WINDOW_SERVICE));
+  //      try {
+  //          if (windowManager.hasNavigationBar()) {
+  //              removeKeys = true;
+  //              if (Utils.isTablet(getActivity())) {
+  //                  removeNavbar = true;
+  //             }
+  //          } else {
+  //              removeNavbar = true;
+  //          }
+  //      } catch (RemoteException e) {
             // Do nothing
-        }
+   //     }
 
         // Act on the above
-        if (removeKeys) {
-            getPreferenceScreen().removePreference(findPreference(KEY_HARDWARE_KEYS));
-        }
-        if (removeNavbar) {
-            getPreferenceScreen().removePreference(findPreference(KEY_NAVIGATION_BAR));
-        }
+      //  if (removeKeys) {
+       //     getPreferenceScreen().removePreference(findPreference(KEY_HARDWARE_KEYS));
+      //  }
+     //   if (removeNavbar) {
+       //     getPreferenceScreen().removePreference(findPreference(KEY_NAVIGATION_BAR));
+     //   }
     }
 
     private void updateLightPulseDescription() {
