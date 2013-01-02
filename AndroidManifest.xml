@@ -1521,6 +1521,21 @@
 
         <activity android:name=".cyanogenmod.StatusBarBatteryStyle" />
 
+        <activity android:name=".cyanogenmod.NavbarSettings" />
+        <activity android:name=".cyanogenmod.NavRingTargets" />
+        <activity android:name=".cyanogenmod.NavbarButtonSettings" />
+        <activity android:name=".cyanogenmod.NavbarStyleDimenSettings" />
+
+        <activity android:name=".cyanogenmod.UserInterface" />
+
+        <activity
+            android:name=".cyanogenmod.DensityChanger"
+            android:label="@string/lcd_density_wizard" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".profiles.NFCProfile"
                 android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>

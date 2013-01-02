@@ -20,9 +20,19 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceScreen
+        android:key="general_ui_settings"
+        android:fragment="com.android.settings.cyanogenmod.UserInterface"
+        android:title="@string/title_ui" />
+
+    <PreferenceScreen
         android:key="status_bar"
         android:fragment="com.android.settings.cyanogenmod.StatusBar"
         android:title="@string/status_bar_title" />
+
+    <PreferenceScreen
+        android:key="navbar_settings"
+        android:fragment="com.android.settings.cyanogenmod.NavbarSettings"
+        android:title="@string/navigation_bar" />
 
     <PreferenceScreen
         android:key="quick_settings_panel"
