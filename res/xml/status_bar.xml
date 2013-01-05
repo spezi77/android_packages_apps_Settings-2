@@ -49,11 +49,6 @@
             android:defaultValue="0"/>
 
     <PreferenceScreen
-        android:key="statusbar_clock"
-        android:fragment="com.android.settings.cyanogenmod.StatusBarClock"
-        android:title="@string/statusbar_clock_title" />
-
-    <PreferenceScreen
             android:key="battery_style_pref"
             android:fragment="com.android.settings.cyanogenmod.StatusBarBatteryStyle"
             android:title="@string/status_bar_battery_bar_title" />

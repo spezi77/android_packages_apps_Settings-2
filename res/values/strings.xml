@@ -4510,8 +4510,10 @@
     <string name="status_bar_transparency_summary">Adjust statusbar transparency</string>
 
     <!--- Navigation bar -->
-    <string name="navigation_bar_title">Navigation key settings</string>
+    <string name="navigation_bar_title">Navigation bar settings</string>
     <string name="navigation_controls_title">Show Navigation bar</string>
+    <string name="dont_show">Show Navigation bar</string>
+
     <string name="combined_bar_navigation_color_title">Button color</string>
     <string name="combined_bar_navigation_glow_title">Button glow effect</string>
     <string name="combined_bar_navigation_glow_color_title">Button glow color</string>
