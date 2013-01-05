@@ -51,7 +51,10 @@ public class UserInterface extends SettingsPreferenceFragment {
 
     public static final String TAG = "UserInterface";
 
+    private static final String PREF_USE_ALT_RESOLVER = "use_alt_resolver";
+
     Preference mLcdDensity;
+    CheckBoxPreference mUseAltResolver;
 
     int newDensityValue;
 
@@ -64,6 +67,11 @@ public class UserInterface extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.user_interface_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
+
+	mUseAltResolver = (CheckBoxPreference) findPreference(PREF_USE_ALT_RESOLVER);
+        mUseAltResolver.setChecked(Settings.System.getInt(
+                getActivity().getContentResolver(),
+                Settings.System.ACTIVITY_RESOLVER_USE_ALT, 0) == 1);
 
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
@@ -84,7 +92,12 @@ public class UserInterface extends SettingsPreferenceFragment {
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);
             return true;
-        }
+        } else if (preference == mUseAltResolver) {
+		Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.ACTIVITY_RESOLVER_USE_ALT,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+	}
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 }
