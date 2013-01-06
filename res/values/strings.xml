@@ -4565,10 +4565,6 @@
     <string name="lockscreen_target_edit_title">Edit shortcut and icon</string>
     <string name="lockscreen_target_edit_msg">Select or change the desired application or activity and the associated icon</string>
 
-    <!-- Lock screen see through -->
-    <string name="lockscreen_see_through_title">See through</string>
-    <string name="lockscreen_see_through_summary">Allows to see the activity behind the lock screen. Custom image will disable this preference.</string>
-
     <!-- Lock screen vibrate settings -->
     <string name="lockscreen_vibrate_enabled_title">Vibrate</string>
     <string name="lockscreen_vibrate_enabled_head">Vibrate when unlocking</string>
