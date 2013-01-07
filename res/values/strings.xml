@@ -5347,6 +5347,9 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="alt_resolver">Use Alt Default App Grid</string>
     <string name="alt_resolver_summary">Use Alternate Default App Picker</string>
 
+    <!-- Misc Settings -->
+    <string name="misc_settings_title">Misc settings</string>
+
     <!-- Lock screen background -->
     <string name="lockscreen_style_options_title">Lock screen style</string>
     <string name="lockscreen_custom_background_title">Background</string>
