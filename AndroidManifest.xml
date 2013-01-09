@@ -1553,6 +1553,8 @@
 
         <activity android:name=".notificationlight.BatteryLightSettings" />
 
+	<activity android:name=".cyanogenmod.KeyboardInputSettings" />
+
         <activity android:name=".ApnEditor" />
 
         <activity android:name="Settings$AnonymousStatsActivity"
