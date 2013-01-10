@@ -117,9 +117,9 @@ public class PropModder extends PreferenceFragment implements
     private static final String TCP_STACK_PROP_3 = "net.tcp.buffersize.gprs";
     private static final String TCP_STACK_PROP_4 = "net.tcp.buffersize.edge";
     private static final String TCP_STACK_BUFFER = "4096,87380,256960,4096,16384,256960";
-    private static final String JIT_PREF = "pref_jit";
-    private static final String JIT_PERSIST_PROP = "persist_jit";
-    private static final String JIT_PROP = "dalvik.vm.execution-mode";
+//    private static final String JIT_PREF = "pref_jit";
+//    private static final String JIT_PERSIST_PROP = "persist_jit";
+//    private static final String JIT_PROP = "dalvik.vm.execution-mode";
     private static final String THREE_G_PREF = "pref_g_speed";
     private static final String THREE_G_PERSIST_PROP = "persist_3g_speed";
     private static final String THREE_G_PROP_0 = "ro.ril.enable.3g.prefix";
@@ -136,7 +136,7 @@ public class PropModder extends PreferenceFragment implements
 
     private String placeholder;
     private String tcpstack0;
-    private String jitVM;
+//    private String jitVM;
 
     private String ModPrefHolder = SystemProperties.get(MOD_VERSION_PERSIST_PROP,
                 SystemProperties.get(MOD_VERSION_PROP, MOD_VERSION_DEFAULT));
@@ -155,7 +155,7 @@ public class PropModder extends PreferenceFragment implements
     private EditTextPreference mModVersionPref;
     private ListPreference mSleepPref;
     private CheckBoxPreference mTcpStackPref;
-    private CheckBoxPreference mJitPref;
+ //   private CheckBoxPreference mJitPref;
     private CheckBoxPreference m3gSpeedPref;
     private CheckBoxPreference mGpuPref;
     private AlertDialog mAlertDialog;
@@ -198,7 +198,7 @@ public class PropModder extends PreferenceFragment implements
 
         mTcpStackPref = (CheckBoxPreference) prefSet.findPreference(TCP_STACK_PREF);
 
-        mJitPref = (CheckBoxPreference) prefSet.findPreference(JIT_PREF);
+ //       mJitPref = (CheckBoxPreference) prefSet.findPreference(JIT_PREF);
 
         mModVersionPref = (EditTextPreference) prefSet.findPreference(MOD_VERSION_PREF);
         String mod = Helpers.findBuildPropValueOf(MOD_VERSION_PROP);
@@ -244,10 +244,10 @@ public class PropModder extends PreferenceFragment implements
                     && doMod(null, TCP_STACK_PROP_2, String.valueOf(value ? TCP_STACK_BUFFER : DISABLE))
                     && doMod(null, TCP_STACK_PROP_3, String.valueOf(value ? TCP_STACK_BUFFER : DISABLE))
                     && doMod(TCP_STACK_PERSIST_PROP, TCP_STACK_PROP_4, String.valueOf(value ? TCP_STACK_BUFFER : DISABLE));
-        } else if (preference == mJitPref) {
-            Log.d(TAG, "mJitPref.onPreferenceTreeClick()");
-            value = mJitPref.isChecked();
-            return doMod(JIT_PERSIST_PROP, JIT_PROP, String.valueOf(value ? "int:fast" : "int:jit"));
+//        } else if (preference == mJitPref) {
+ //           Log.d(TAG, "mJitPref.onPreferenceTreeClick()");
+//            value = mJitPref.isChecked();
+//            return doMod(JIT_PERSIST_PROP, JIT_PROP, String.valueOf(value ? "int:fast" : "int:jit"));
         } else if (preference == m3gSpeedPref) {
             value = m3gSpeedPref.isChecked();
             return doMod(THREE_G_PERSIST_PROP, THREE_G_PROP_0, String.valueOf(value ? 1 : DISABLE))
@@ -427,12 +427,12 @@ public class PropModder extends PreferenceFragment implements
         } else {
             mTcpStackPref.setChecked(false);
         }
-        String jit = Helpers.findBuildPropValueOf(JIT_PROP);
-        if (jit.equals("int:jit")) {
-            mJitPref.setChecked(true);
-        } else {
-            mJitPref.setChecked(false);
-        }
+       // String jit = Helpers.findBuildPropValueOf(JIT_PROP);
+       // if (jit.equals("int:jit")) {
+       //     mJitPref.setChecked(true);
+      //  } else {
+       //     mJitPref.setChecked(false);
+       // }
         String mod = Helpers.findBuildPropValueOf(MOD_VERSION_PROP);
         mModVersionPref.setSummary(String.format(getString(R.string.pref_mod_version_alt_summary), mod));
         String g0 = Helpers.findBuildPropValueOf(THREE_G_PROP_0);
