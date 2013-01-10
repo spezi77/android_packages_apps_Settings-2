@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -47,9 +48,14 @@ import com.android.settings.R;
 import com.android.settings.util.CMDProcessor;
 import com.android.settings.util.Helpers;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class UserInterface extends SettingsPreferenceFragment {
 
     public static final String TAG = "UserInterface";
+
+    private static final String KEY_CHRONUS = "chronus";
 
     private static final String PREF_USE_ALT_RESOLVER = "use_alt_resolver";
 
@@ -65,6 +71,8 @@ public class UserInterface extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.user_interface_settings);
+
+	removePreferenceIfPackageNotInstalled(findPreference(KEY_CHRONUS));
 
         PreferenceScreen prefs = getPreferenceScreen();
 
@@ -99,5 +107,23 @@ public class UserInterface extends SettingsPreferenceFragment {
             return true;
 	}
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    private boolean removePreferenceIfPackageNotInstalled(Preference preference) {
+        String intentUri = ((PreferenceScreen) preference).getIntent().toUri(1);
+        Pattern pattern = Pattern.compile("component=([^/]+)/");
+        Matcher matcher = pattern.matcher(intentUri);
+
+        String packageName = matcher.find() ? matcher.group(1) : null;
+        if (packageName != null) {
+            try {
+                getPackageManager().getPackageInfo(packageName, 0);
+            } catch (NameNotFoundException e) {
+                Log.e(TAG, "package " + packageName + " not installed, hiding preference.");
+                getPreferenceScreen().removePreference(preference);
+                return true;
+            }
+        }
+        return false;
     }
 }
