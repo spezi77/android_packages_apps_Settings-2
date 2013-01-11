@@ -325,8 +325,7 @@ public class PropModder extends PreferenceFragment implements
                 }
             } else {
                 Log.d(TAG, "append command starting");
-                success = cmd.su.runWaitFor("echo \"\n\" >> /data/local.prop").success();
-                success = cmd.su.runWaitFor(String.format(APPEND_CMD_LOCAL, key, value)).success();
+                success = cmd.su.runWaitFor(String.format(APPEND_CMD, key, value)).success();
             }
             if (!success) {
                 restoreBuildProp();
