@@ -40,10 +40,12 @@ import com.android.settings.Utils;
     private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
     private static final String KEY_KILL_APP_LONGPRESS_TIMEOUT = "kill_app_longpress_timeout";
 //    private static final String KEY_HIGH_END_GFX = "high_end_gfx";
+    private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
 
 //    private CheckBoxPreference mHighEndGfx;
     private CheckBoxPreference mKillAppLongpressBack;
     private ListPreference mKillAppLongpressTimeout;
+    private CheckBoxPreference mRamBar;
 
     private ContentResolver mContentResolver;
 
@@ -73,6 +75,11 @@ import com.android.settings.Utils;
                  Settings.System.KILL_APP_LONGPRESS_TIMEOUT, 1500);
         mKillAppLongpressTimeout.setValue(String.valueOf(statusKillAppLongpressTimeout));
         mKillAppLongpressTimeout.setSummary(mKillAppLongpressTimeout.getEntry());
+
+	mRamBar = (CheckBoxPreference) findPreference(KEY_RECENTS_RAM_BAR);
+        mRamBar.setChecked(Settings.System.getInt(
+                getActivity().getContentResolver(),
+                Settings.System.RECENTS_RAM_BAR, 0) == 1);
     }
 
     @Override
@@ -109,6 +116,11 @@ if (preference == mKillAppLongpressTimeout) {
         boolean value;
 	if (preference == mKillAppLongpressBack) {
             writeKillAppLongpressBackOptions();
+	} else if (preference == mRamBar) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_RAM_BAR,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);

@@ -35,4 +35,9 @@ limitations under the License.
             android:entries="@array/kill_app_longpress_timeout_entries"
             android:entryValues="@array/kill_app_longpress_timeout_values" />
 
+     <CheckBoxPreference
+            android:key="recents_ram_bar"
+            android:title="@string/ram_bar"
+            android:summary="@string/ram_bar_summary" />
+
 </PreferenceScreen>

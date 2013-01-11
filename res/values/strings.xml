@@ -5434,6 +5434,10 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="custom_carrier_label_explain">Specify the carrier label or leave it blank.</string>
     <string name="custom_carrier_label_notset">Carrier label not specified</string>
 
+    <!-- Recents Ram Bar -->
+    <string name="ram_bar">Recents RAM Bar</string>
+    <string name="ram_bar_summary">Shows RAM usage in the recents menu</string>
+
     <!-- Keyboard and Input ASS methods  -->
     <string name="title_keyboard_input">Keyboard and input methods</string>
     <string name="disable_fullscreen_keyboard_title">Disable fullscreen keyboard</string>
