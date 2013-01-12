@@ -5443,4 +5443,9 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="disable_fullscreen_keyboard_title">Disable fullscreen keyboard</string>
     <string name="disable_fullscreen_keyboard_summary">Landscape keyboard will never take up entire screen</string>
 
+    <string name="ui_short">UI</string>
+
+    <string name="multipane_ui">Enable Dual panel</string>
+    <string name="multipane_ui_summary">This will enable/disable Dual panel"</string>
+
 </resources>
