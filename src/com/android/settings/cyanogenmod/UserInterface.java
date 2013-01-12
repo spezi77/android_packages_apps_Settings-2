@@ -54,6 +54,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.View;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -64,6 +66,9 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.util.CMDProcessor;
 import com.android.settings.util.Helpers;
+import com.android.internal.view.RotationPolicy;
+import com.android.settings.DreamSettings;
+import com.android.settings.cyanogenmod.DisplayRotation;
 
 public class UserInterface extends SettingsPreferenceFragment {
 
@@ -89,6 +94,9 @@ public class UserInterface extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+	mContext = getActivity();
+//      Utils.setContext(mContext);
+        ContentResolver resolver = getActivity().getContentResolver();
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.user_interface_settings);
 
