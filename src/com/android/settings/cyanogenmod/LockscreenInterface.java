@@ -37,6 +37,7 @@ import android.view.Display;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.android.internal.view.RotationPolicy;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -48,20 +49,20 @@ import java.io.IOException;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 import net.margaritov.preference.colorpicker.ColorPickerView;
 
-public class LockscreenInterface extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener {
+public class LockscreenInterface extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "LockscreenInterface";
 
     private static final int LOCKSCREEN_BACKGROUND = 1024;
 
     private static final String KEY_ALWAYS_BATTERY_PREF = "lockscreen_battery_status";
     private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
+    private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
 
     private static final String KEY_BACKGROUND_PREF = "lockscreen_background";
     private static final String KEY_BACKGROUND_ALPHA_PREF = "lockscreen_alpha";
-    private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
 
     private ListPreference mBatteryStatus;
+    private PreferenceScreen mLockscreenButtons;
     private ListPreference mCustomBackground;
     private SeekBarPreference mBgAlpha;
     private CheckBoxPreference mMaximizeWidgets;
@@ -81,35 +82,15 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.lockscreen_interface_settings);
-
-        mBatteryStatus = (ListPreference) findPreference(KEY_ALWAYS_BATTERY_PREF);
-        if (mBatteryStatus != null) {
-            mBatteryStatus.setOnPreferenceChangeListener(this);
-	
-	mActivity = getActivity();
+        mActivity = getActivity();
         mResolver = mActivity.getContentResolver();
 
         mIsScreenLarge = Utils.isTablet(getActivity());
-	createCustomLockscreenView();
 
-        }
-
-	mMaximizeWidgets = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
-        if (!Utils.isPhone(getActivity())) {
-            getPreferenceScreen().removePreference(mMaximizeWidgets);
-            mMaximizeWidgets = null;
-        } else {
-            mMaximizeWidgets.setOnPreferenceChangeListener(this);
-        }
-
-        PreferenceScreen lockscreenButtons = (PreferenceScreen) findPreference(KEY_LOCKSCREEN_BUTTONS);
-        if (!hasButtons()) {
-            getPreferenceScreen().removePreference(lockscreenButtons);
-        }
+        createCustomLockscreenView();
     }
 
-        private PreferenceScreen createCustomLockscreenView() {
+    private PreferenceScreen createCustomLockscreenView() {
         PreferenceScreen prefs = getPreferenceScreen();
         if (prefs != null) {
             prefs.removeAll();
@@ -117,8 +98,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.lockscreen_interface_settings);
         prefs = getPreferenceScreen();
-
-//        mAdditionalOptions = (PreferenceCategory) prefs.findPreference(KEY_ADDITIONAL_OPTIONS);
 
         mCustomBackground = (ListPreference) findPreference(KEY_BACKGROUND_PREF);
         mCustomBackground.setOnPreferenceChangeListener(this);
@@ -141,62 +120,53 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mBgAlpha.setProperty(Settings.System.LOCKSCREEN_ALPHA);
         mBgAlpha.setOnPreferenceChangeListener(this);
 
-//        mBatteryStatus = (ListPreference) findPreference(KEY_ALWAYS_BATTERY_PREF);
-//        mBatteryStatus.setOnPreferenceChangeListener(this);
-//        setBatteryStatusSummary();
+        mMaximizeWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
+        if (!Utils.isPhone(getActivity())) {
+            mMaximizeWidgets.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, 0) == 1);
+        }
 
-//        mLockscreenButtons = (PreferenceScreen) findPreference(KEY_LOCKSCREEN_BUTTONS);
-//        if (!hasButtons()) {
-//            mAdditionalOptions.removePreference(mLockscreenButtons);
-//        }
+        mBatteryStatus = (ListPreference) findPreference(KEY_ALWAYS_BATTERY_PREF);
+        mBatteryStatus.setOnPreferenceChangeListener(this);
 
-//        mUnsecureUnlockMethod = Settings.System.getInt(getActivity().getContentResolver(),
-//                Settings.System.LOCKSCREEN_UNSECURE_USED, 1);
-
-        //setup custom lockscreen customize view
-//        if (mUnsecureUnlockMethod != 1) {
-//             PreferenceCategory sliderCategory = (PreferenceCategory) findPreference(KEY_SLIDER_OPTIONS);
-//             getPreferenceScreen().removePreference(sliderCategory);
-//        }
-
-//        setBatteryStatusSummary();
+        setBatteryStatusSummary();
         updateCustomBackgroundSummary();
         return prefs;
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
+        createCustomLockscreenView();
+    }
 
-        ContentResolver cr = getActivity().getContentResolver();
-        if (mBatteryStatus != null) {
-            int batteryStatus = Settings.System.getInt(cr,
-                    Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY, 0);
-            mBatteryStatus.setValueIndex(batteryStatus);
-            mBatteryStatus.setSummary(mBatteryStatus.getEntries()[batteryStatus]);
-        }
+    @Override
+    public void onPause() {
+        super.onPause();
+        setBatteryStatusSummary();
+    }
 
-        if (mMaximizeWidgets != null) {
-            mMaximizeWidgets.setChecked(Settings.System.getInt(cr,
-                    Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, 0) == 1);
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mMaximizeWidgets) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, mMaximizeWidgets.isChecked() ? 1 : 0);
+            return true;
         }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-	ContentResolver cr = getActivity().getContentResolver();
-
         if (preference == mBatteryStatus) {
             int value = Integer.valueOf((String) objValue);
             int index = mBatteryStatus.findIndexOfValue((String) objValue);
-            Settings.System.putInt(cr, Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY, value);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY, value);
             mBatteryStatus.setSummary(mBatteryStatus.getEntries()[index]);
             return true;
-	} else if (preference == mMaximizeWidgets) {
-            boolean value = (Boolean) objValue;
-            Settings.System.putInt(cr, Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, value ? 1 : 0);
-            return true;
-                } else if (preference == mCustomBackground) {
+        } else if (preference == mCustomBackground) {
             int indexOf = mCustomBackground.findIndexOfValue(objValue.toString());
             switch (indexOf) {
             //Displays color dialog when user has chosen color fill
@@ -295,11 +265,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             Settings.System.putFloat(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_ALPHA, val / 100);
             return true;
-	}	
+        }
         return false;
     }
 
-        private void updateCustomBackgroundSummary() {
+    private void updateCustomBackgroundSummary() {
         int resId;
             int customBackground = Settings.System.getInt(mResolver,
                     Settings.System.LOCKSCREEN_BACKGROUND_VALUE, 3);
@@ -323,7 +293,17 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mCustomBackground.setSummary(getResources().getString(resId));
     }
 
-        @Override
+    private void setBatteryStatusSummary() {
+        // Set the battery status description text
+        if (mBatteryStatus != null) {
+            int batteryStatus = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY, 0);
+            mBatteryStatus.setValueIndex(batteryStatus);
+            mBatteryStatus.setSummary(mBatteryStatus.getEntries()[batteryStatus]);
+        }
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == LOCKSCREEN_BACKGROUND) {
             if (resultCode == Activity.RESULT_OK) {
