@@ -1318,6 +1318,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="7218498768415430963">"Сохранять масштаб"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Сохранять масштаб при переходе между приложениями"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Кнопка питания завершает вызов"</string>
+    <string name="accessibility_home_button_answers_call_prerefence_title">Отвечать на вызов кнопкой \"Домой\"</string>
     <string name="accessibility_toggle_speak_password_preference_title" msgid="5986628515113204844">"Озвучивать пароли"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Задержка при нажатии и удержании"</string>
     <string name="accessibility_toggle_script_injection_preference_title" msgid="7950932054266694403">"Специальные веб-скрипты"</string>
@@ -2283,6 +2284,17 @@
     <string name="hardware_keys_action_voice_search">Голосовой поиск</string>
     <string name="hardware_keys_action_in_app_search">Поиск в приложении</string>
 
+    <!-- Navigation Bar #CM -->
+    <string name="navigation_bar_title">Строка навигации</string>
+    <string name="navigation_bar_help_text">1 - Для редактирования, нажмите значок замка\n2 - Нажмите любую кнопку, чтобы задать или изменить функциональность\n3 - Долгим нажатием на любой кнопке можно изменить её порядок\n4 - Для сохранения нажмите на значок замка\n5 - Для сброса настроек, нажмите кнопку сброса\n</string>
+    <string name="navigation_bar_tips">&#8226; Одно действие может быть назначено только на одну кнопку\n\n&#8226; Кнопка \"Домой\" не может быть изменена\n\n&#8226; Боковые кнопки не могут быть изменены</string>
+    <string name="navigation_bar_tips_title">Быстрые подсказки</string>
+    <string name="navigation_bar_reset_message">Удалить текущие настройки и восстановить значения по умолчанию?</string>
+    <string name="navigation_bar_save_message">Настройки строки навигации сохранены</string>
+    <string name="navigation_bar_reset_toast">Настройки строки навигации сброшены по умолчанию</string>
+    <string name="navigation_bar_menu_editable">Режим правки</string>
+    <string name="navigation_bar_menu_locked">Заблокировано</string>
+
     <!-- Power Widget #CM -->
     <string name="power_widget_title">Кнопки в панели уведомлений</string>
     <string name="title_expanded_widget">Кнопки в панели уведомлений</string>
@@ -2434,11 +2446,11 @@
     <string name="title_tile_profile">Профиль</string>
     <string name="title_tile_autorotate">Автоповорот</string>
     <string name="title_tile_settings">Настройки</string>
-    <string name="title_tile_screentimeout">Задержка выкл. экрана</string>
+    <string name="title_tile_screen_timeout">Задержка выкл. экрана</string>
     <string name="title_tile_sound">Звук</string>
     <string name="title_tile_sync">Синхронизация</string>
     <string name="title_tile_wifiap">Точка доступа Wi-Fi</string>
-    <string name="title_tile_user">Переключение пользователей</string>
+    <string name="title_tile_user">Пользователи</string>
     <string name="title_tile_networkmode">Режим сети</string>
 
     <string name="title_dynamic_tiles">Динамические плитки</string>
@@ -2478,6 +2490,17 @@
     <string name="sms_security_check_limit_title">Ограничение SMS-сообщений</string>
     <string name="sms_security_check_limit_summary">Показывать предупреждение при слишком частой отправке SMS-сообщений приложениями. Текущее значение: %d сообщений в 15 минут.</string>
     <string name="sms_security_check_limit_default">30 (По умолч.)</string>
+
+    <!--- Lock clock -->
+    <string name="lock_clock_title">Виджет \"Chronus\"</string>
+    <string name="lock_clock_summary">Просмотр или изменение настроек отображения виджета \"Chronus\" на рабочем столе или экране блокировки</string>
+
+    <!-- Stylus Icon -->
+    <string name="stylus_icon_enabled_title">Указатель пера</string>
+    <string name="stylus_icon_enabled_summary">Показывать значок указателя при работе с пером</string>
+
+    <string name="lockscreen_maximize_widgets_title">Развёрнутые виджеты</string>
+    <string name="lockscreen_maximize_widgets_summary">Показывать виджеты экрана блокировки развёрнутыми, а разблокировку экрана в свёрнутом виде</string>
 
     <!-- **** CYANOGENMOD ADDITIONS END **** -->
 </resources>

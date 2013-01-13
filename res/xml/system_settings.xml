@@ -59,6 +59,16 @@
         android:fragment="com.android.settings.cyanogenmod.NavigationBar"
         android:title="@string/navigation_bar_title" /> -->
 
+    <!-- Lock clock -->
+    <PreferenceScreen
+        android:key="lock_clock"
+        android:title="@string/lock_clock_title"
+        android:summary="@string/lock_clock_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.cyanogenmod.lockclock"
+                android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
+    </PreferenceScreen>
+
     <PreferenceScreen
         android:key="notification_pulse"
         android:title="@string/notification_pulse_title"
