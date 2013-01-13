@@ -60,6 +60,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
     private static final String KEY_BACKGROUND_PREF = "lockscreen_background";
     private static final String KEY_BACKGROUND_ALPHA_PREF = "lockscreen_alpha";
+    public static final String KEY_TEXT_COLOR = "lockscreen_custom_text_color";
 
     private ListPreference mBatteryStatus;
     private PreferenceScreen mLockscreenButtons;
@@ -73,6 +74,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private ContentResolver mResolver;
     private File wallpaperImage;
     private File wallpaperTemporary;
+    private Preference mTextColor;
 
     public boolean hasButtons() {
         return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
@@ -84,7 +86,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
         mActivity = getActivity();
         mResolver = mActivity.getContentResolver();
-
+	mTextColor = (Preference) findPreference(KEY_TEXT_COLOR);
         mIsScreenLarge = Utils.isTablet(getActivity());
 
         createCustomLockscreenView();
@@ -152,6 +154,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         if (preference == mMaximizeWidgets) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, mMaximizeWidgets.isChecked() ? 1 : 0);
+            return true;
+	} else if (preference == mTextColor) {
+            ColorPickerDialog cp = new ColorPickerDialog(getActivity(),
+                    mTextColorListener, Settings.System.getInt(getActivity()
+                    .getApplicationContext()
+                    .getContentResolver(), Settings.System.LOCKSCREEN_CUSTOM_TEXT_COLOR, 0xFFFFFFFF));
+            cp.setDefaultColor(0xFFFFFFFF);
+            cp.show();
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -328,4 +338,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         }
     }
 
+    ColorPickerDialog.OnColorChangedListener mTextColorListener =
+        new ColorPickerDialog.OnColorChangedListener() {
+            public void colorChanged(int color) {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.LOCKSCREEN_CUSTOM_TEXT_COLOR, color);
+            }
+            public void colorUpdate(int color) {
+            }
+    };
 }
