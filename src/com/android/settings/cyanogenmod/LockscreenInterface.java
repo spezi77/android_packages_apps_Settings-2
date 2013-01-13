@@ -105,7 +105,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 
         PreferenceScreen lockscreenButtons = (PreferenceScreen) findPreference(KEY_LOCKSCREEN_BUTTONS);
         if (!hasButtons()) {
-            getPreferenceScreen().removePreference(LockscreenButtons);
+            getPreferenceScreen().removePreference(lockscreenButtons);
         }
     }
 
