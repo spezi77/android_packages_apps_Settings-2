@@ -5112,7 +5112,6 @@
     <string name="title_toggle_favcontact">Toggle Favorite Contact</string>
     <string name="title_tile_favcontact">Favorite Contact</string>
     <string name="title_tile_usb_tether">USB Tether</string>
-    <string name="lockscreen_text_color_title">Change color of lockscreen text</string>
 
     <string name="title_dynamic_tiles">Dynamic tiles</string>
     <string name="dynamic_tiles_note_title">Note</string>
