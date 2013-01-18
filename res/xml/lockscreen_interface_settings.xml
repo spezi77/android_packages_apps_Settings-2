@@ -43,6 +43,11 @@
          <extra android:name="cm_security" android:value="true" />
      </PreferenceScreen>
 
+     <CheckBoxPreference
+                android:key="lockscreen_auto_rotate"
+                android:title="@string/lockscreen_auto_rotate_title"
+                android:summary="@string/lockscreen_auto_rotate_summary" />
+
      <ListPreference
         android:key="lockscreen_battery_status"
         android:persistent="false"

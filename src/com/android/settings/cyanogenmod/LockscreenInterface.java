@@ -38,6 +38,8 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.android.internal.view.RotationPolicy;
+
+import com.android.internal.view.RotationPolicy;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -60,12 +62,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
     private static final String KEY_BACKGROUND_PREF = "lockscreen_background";
     private static final String KEY_BACKGROUND_ALPHA_PREF = "lockscreen_alpha";
+    private static final String PREF_LOCKSCREEN_AUTO_ROTATE = "lockscreen_auto_rotate";
 
     private ListPreference mBatteryStatus;
     private PreferenceScreen mLockscreenButtons;
     private ListPreference mCustomBackground;
     private SeekBarPreference mBgAlpha;
     private CheckBoxPreference mMaximizeWidgets;
+    private CheckBoxPreference mLockscreenAutoRotate;
 
     private boolean mIsScreenLarge;
 
@@ -126,6 +130,16 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
                 Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, 0) == 1);
         }
 
+	mLockscreenAutoRotate = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_AUTO_ROTATE);
+        int defaultValue = getResources().getBoolean(com.android.internal.R.bool.config_enableLockScreenRotation) ? 1 : 0;
+        mLockscreenAutoRotate.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.LOCKSCREEN_AUTO_ROTATE, defaultValue) == 1);
+
+        if (RotationPolicy.isRotationLocked(getActivity())) {
+            mLockscreenAutoRotate.setEnabled(false);
+            mLockscreenAutoRotate.setSummary(getResources().getString(R.string.lockscreen_no_rotate_summary));
+        }
+
         mBatteryStatus = (ListPreference) findPreference(KEY_ALWAYS_BATTERY_PREF);
         mBatteryStatus.setOnPreferenceChangeListener(this);
 
@@ -153,7 +167,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, mMaximizeWidgets.isChecked() ? 1 : 0);
             return true;
-        }
+        } else if (preference == mLockscreenAutoRotate) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_AUTO_ROTATE, mLockscreenAutoRotate.isChecked() ? 1 : 0);
+            return true;
+	}
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 

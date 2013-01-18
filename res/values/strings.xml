@@ -5480,4 +5480,8 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="multipane_ui">Enable Dual panel</string>
     <string name="multipane_ui_summary">This will enable/disable Dual panel"</string>
 
+    <string name="lockscreen_auto_rotate_title">Allow lockscreen rotation</string>
+    <string name="lockscreen_auto_rotate_summary">Lockscreen will have the ability to rotate. This is dependent of Auto-rotation in display</string>
+    <string name="lockscreen_no_rotate_summary">System auto rotate is disabled. Enable it for this option.</string>
+
 </resources>
