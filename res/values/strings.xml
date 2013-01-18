@@ -5483,5 +5483,7 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="lockscreen_auto_rotate_title">Allow lockscreen rotation</string>
     <string name="lockscreen_auto_rotate_summary">Lockscreen will have the ability to rotate. This is dependent of Auto-rotation in display</string>
     <string name="lockscreen_no_rotate_summary">System auto rotate is disabled. Enable it for this option.</string>
+    <string name="lockscreen_use_widget_container_carousel_title">Use widget carousel in portrait</string>
+    <string name="lockscreen_use_widget_container_carousel_summary">Use carousel animation in portrait like it is in landscape when switching between lockscreen widgets.</string>
 
 </resources>

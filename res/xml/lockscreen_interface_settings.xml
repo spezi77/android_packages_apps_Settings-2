@@ -63,6 +63,11 @@
         android:title="@string/lockscreen_maximize_widgets_title"
         android:summary="@string/lockscreen_maximize_widgets_summary" />
 
+     <CheckBoxPreference
+            android:key="lockscreen_use_widget_container_carousel"
+            android:title="@string/lockscreen_use_widget_container_carousel_title"
+            android:summary="@string/lockscreen_use_widget_container_carousel_summary" />
+
      <Preference
         android:fragment="com.android.settings.cyanogenmod.LockscreenTargets"
         android:key="lockscreen_targets"
