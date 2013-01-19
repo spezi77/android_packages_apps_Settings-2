@@ -128,6 +128,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
         mMaximizeWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
         if (!Utils.isPhone(getActivity())) {
+            if (mMaximizeWidgets != null)
+                widgetCategory.removePreference(mMaximizeWidgets);
+            mMaximizeWidgets = null;
+        } else {
             mMaximizeWidgets.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, 0) == 1);
         }
