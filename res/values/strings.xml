@@ -5486,4 +5486,12 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="lockscreen_use_widget_container_carousel_title">Use widget carousel in portrait</string>
     <string name="lockscreen_use_widget_container_carousel_summary">Use carousel animation in portrait like it is in landscape when switching between lockscreen widgets.</string>
 
+    <string name="disable_bootanimation_title">Disable boot animation</string>
+    <string name="custom_bootanimation_title">Custom boot animation</string>
+    <string name="custom_bootanimation_summary">Select bootanimation zip from sdcard. Previous bootanimation will be backed up to /system/media.</string>
+    <string name="install_file_manager_error">No application found to pick the zip file. Please install a file manager.</string>
+    <string name="insult_jerk">Jerk!</string>
+    <string name="insult_protekk">ProTekk!</string>
+    <string name="insult_unicorns">Concede pink unicorns are for little girls</string>
+
 </resources>

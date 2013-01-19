@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.lang.StringBuilder;
 import java.util.Random;
 import android.util.Log;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.RemoteException;
@@ -69,6 +71,7 @@ import com.android.settings.util.Helpers;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.DreamSettings;
 import com.android.settings.cyanogenmod.DisplayRotation;
+import com.android.settings.util.AbstractAsyncSuCMDProcessor;
 
 public class UserInterface extends SettingsPreferenceFragment {
 
@@ -77,10 +80,18 @@ public class UserInterface extends SettingsPreferenceFragment {
     private static final String PREF_USE_ALT_RESOLVER = "use_alt_resolver";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String PREF_FORCE_DUAL_PANEL = "force_dualpanel";
+    private static final int REQUEST_PICK_BOOT_ANIMATION = 203;
 
+    Preference mCustomBootAnimation;
     Preference mLcdDensity;
     CheckBoxPreference mUseAltResolver;
     private Preference mCustomLabel;
+    CheckBoxPreference mDisableBootAnimation;
+
+    private Random randomGenerator = new Random();
+    // previous random; so we don't repeat
+    private static int mLastRandomInsultIndex = -1;
+    private String[] mInsults;
 
     int newDensityValue;
 
@@ -101,6 +112,8 @@ public class UserInterface extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.user_interface_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
+	mInsults = mContext.getResources().getStringArray(
+                R.array.disable_bootanimation_insults);
 
 	mUseAltResolver = (CheckBoxPreference) findPreference(PREF_USE_ALT_RESOLVER);
         mUseAltResolver.setChecked(Settings.System.getInt(
@@ -122,12 +135,23 @@ public class UserInterface extends SettingsPreferenceFragment {
         }
 
         mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
-    }
 
+	mDisableBootAnimation = (CheckBoxPreference)findPreference("disable_bootanimation");
+        mDisableBootAnimation.setChecked(!new File("/system/media/bootanimation.zip").exists());
+        if (mDisableBootAnimation.isChecked()) {
+            Resources res = mContext.getResources();
+            String[] insults = res.getStringArray(R.array.disable_bootanimation_insults);
+            int randomInt = randomGenerator.nextInt(insults.length);
+            mDisableBootAnimation.setSummary(insults[randomInt]);
+        }
+
+	mCustomBootAnimation = findPreference("custom_bootanimation");
+
+    }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-            Preference preference) {
+            final Preference preference) {
         if (preference == mLcdDensity) {
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);
@@ -139,6 +163,23 @@ public class UserInterface extends SettingsPreferenceFragment {
 		Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.ACTIVITY_RESOLVER_USE_ALT,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+	} else if (preference == mDisableBootAnimation) {
+            DisableBootAnimation();
+            return true;
+	} else if (preference == mCustomBootAnimation) {
+            PackageManager packageManager = getActivity().getPackageManager();
+            Intent test = new Intent(Intent.ACTION_GET_CONTENT);
+            test.setType("file/*");
+            List<ResolveInfo> list = packageManager.queryIntentActivities(test, PackageManager.GET_ACTIVITIES);
+            if(list.size() > 0) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+                intent.setType("file/*");
+                startActivityForResult(intent, REQUEST_PICK_BOOT_ANIMATION);
+            } else {
+                //No app installed to handle the intent - file explorer required
+                Toast.makeText(mContext, R.string.install_file_manager_error, Toast.LENGTH_SHORT).show();
+            }
             return true;
 	} else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
@@ -178,5 +219,95 @@ public class UserInterface extends SettingsPreferenceFragment {
         } else {
             mCustomLabel.setSummary(mCustomLabelText);
         }
+    }
+
+    private void DisableBootAnimation() {
+        CMDProcessor term = new CMDProcessor();
+        if (!term.su.runWaitFor(
+                "grep -q \"debug.sf.nobootanimation\" /system/build.prop")
+                .success()) {
+            // if not add value
+            Helpers.getMount("rw");
+            term.su.runWaitFor("echo debug.sf.nobootanimation="
+                + String.valueOf(mDisableBootAnimation.isChecked() ? 1 : 0)
+                + " >> /system/build.prop");
+            Helpers.getMount("ro");
+        }
+        // preform bootanimation operations off UI thread
+        AbstractAsyncSuCMDProcessor processor = new AbstractAsyncSuCMDProcessor(true) {
+            @Override
+            protected void onPostExecute(String result) {
+                if (mDisableBootAnimation.isChecked()) {
+                    // do not show same insult as last time
+                    int newInsult = randomGenerator.nextInt(mInsults.length);
+                    while (newInsult == mLastRandomInsultIndex)
+                        newInsult = randomGenerator.nextInt(mInsults.length);
+
+                    // update our static index reference
+                    mLastRandomInsultIndex = newInsult;
+                    mDisableBootAnimation.setSummary(mInsults[newInsult]);
+                } else {
+                    mDisableBootAnimation.setSummary("");
+                }
+            }
+        };
+        processor.execute(getBootAnimationCommand(mDisableBootAnimation.isChecked()));
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_PICK_BOOT_ANIMATION) {
+                if (data==null) {
+                    //Nothing returned by user, probably pressed back button in file manager
+                    return;
+                }
+
+                String path = data.getData().getEncodedPath();
+
+                Helpers.getMount("rw");
+                //backup old boot animation
+                new CMDProcessor().su.runWaitFor("mv /system/media/bootanimation.zip /system/media/bootanimation.backup");
+
+                //Copy new bootanimation, give proper permissions
+                new CMDProcessor().su.runWaitFor("cp "+ path +" /system/media/bootanimation.zip");
+                new CMDProcessor().su.runWaitFor("chmod 644 /system/media/bootanimation.zip");
+
+                //Update setting to reflect that boot animation is now enabled
+                mDisableBootAnimation.setChecked(false);
+
+                Helpers.getMount("ro");
+            }
+        }
+    }
+
+    /**
+     * creates a couple commands to perform all root
+     * operations needed to disable/enable bootanimations
+     *
+     * @param checked state of CheckBox
+     * @return script to turn bootanimations on/off
+     */
+    private String[] getBootAnimationCommand(boolean checked) {
+        String[] cmds = new String[2];
+        String storedLocation = "/system/media/bootanimation.backup";
+        String activeLocation = "/system/media/bootanimation.zip";
+        if (checked) {
+            /* make backup */
+            cmds[0] = "mv " + activeLocation + " " + storedLocation + "; ";
+        } else {
+            /* apply backup */
+            cmds[0] = "mv " + storedLocation + " " + activeLocation + "; ";
+        }
+        /*
+         * use sed to replace build.prop property
+         * debug.sf.nobootanimation=[1|0]
+         *
+         * without we get the Android shine animation when
+         * /system/media/bootanimation.zip is not found
+         */
+        cmds[1] = "busybox sed -i \"/debug.sf.nobootanimation/ c "
+                + "debug.sf.nobootanimation=" + String.valueOf(checked ? 1 : 0)
+                + "\" " + "/system/build.prop";
+        return cmds;
     }
 }

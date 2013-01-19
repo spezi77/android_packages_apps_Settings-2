@@ -1960,4 +1960,11 @@
         <item>1</item>
     </string-array>
 
+    <!-- boot animation stuff -->
+    <string-array name="disable_bootanimation_insults">
+        <item>Jerk!</item>
+        <item>ProTekk!</item>
+	<item>@string/insult_unicorns</item>
+    </string-array>
+
 </resources>
