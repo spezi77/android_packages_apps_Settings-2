@@ -40,6 +40,7 @@ import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceCategory;
@@ -73,20 +74,21 @@ import com.android.settings.DreamSettings;
 import com.android.settings.cyanogenmod.DisplayRotation;
 import com.android.settings.util.AbstractAsyncSuCMDProcessor;
 
-public class UserInterface extends SettingsPreferenceFragment {
+public class UserInterface extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     public static final String TAG = "UserInterface";
 
     private static final String PREF_USE_ALT_RESOLVER = "use_alt_resolver";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
-    private static final String PREF_FORCE_DUAL_PANEL = "force_dualpanel";
     private static final int REQUEST_PICK_BOOT_ANIMATION = 203;
+    private static final String DUAL_PANE_PREFS = "dual_pane_prefs";
 
     Preference mCustomBootAnimation;
     Preference mLcdDensity;
     CheckBoxPreference mUseAltResolver;
     private Preference mCustomLabel;
     CheckBoxPreference mDisableBootAnimation;
+    private ListPreference mDualPanePrefs;
 
     private Random randomGenerator = new Random();
     // previous random; so we don't repeat
@@ -97,8 +99,6 @@ public class UserInterface extends SettingsPreferenceFragment {
 
     private String mCustomLabelText = null;
     DensityChanger densityFragment;
-
-    private CheckBoxPreference mDualpane;
 
     private Context mContext;
 
@@ -123,9 +123,6 @@ public class UserInterface extends SettingsPreferenceFragment {
 	mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
 
-	    mDualpane = (CheckBoxPreference) findPreference(PREF_FORCE_DUAL_PANEL);
-        mDualpane.setChecked(Settings.System.getBoolean(mContext.getContentResolver(), Settings.System.FORCE_DUAL_PANEL, false));
-
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
         try {
@@ -147,6 +144,19 @@ public class UserInterface extends SettingsPreferenceFragment {
 
 	mCustomBootAnimation = findPreference("custom_bootanimation");
 
+	mDualPanePrefs = (ListPreference) prefs.findPreference(DUAL_PANE_PREFS);
+        mDualPanePrefs.setOnPreferenceChangeListener(this);
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mDualPanePrefs) {
+            int value = Integer.valueOf((String) newValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.DUAL_PANE_PREFS, value);
+            getActivity().recreate();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -155,9 +165,6 @@ public class UserInterface extends SettingsPreferenceFragment {
         if (preference == mLcdDensity) {
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);
-            return true;
-	} else if (preference == mDualpane) {
-            Settings.System.putBoolean(mContext.getContentResolver(), Settings.System.FORCE_DUAL_PANEL, ((CheckBoxPreference) preference).isChecked());
             return true;
         } else if (preference == mUseAltResolver) {
 		Settings.System.putInt(getActivity().getContentResolver(),

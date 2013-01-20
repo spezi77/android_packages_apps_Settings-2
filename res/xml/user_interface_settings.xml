@@ -29,11 +29,13 @@
             android:key="custom_carrier_label"
             android:title="@string/custom_carrier_label_title" />
 
-      <CheckBoxPreference
-            android:key="force_dualpanel"
-            android:title="@string/multipane_ui"
-            android:summary="@string/multipane_ui_summary"
-            android:defaultValue="false" />
+      <ListPreference
+        android:key="dual_pane_prefs"
+        android:dialogTitle="@string/dual_pane_prefs_title"
+        android:title="@string/dual_pane_prefs_title"
+        android:summary="@string/dual_pane_prefs_summary"
+        android:entries="@array/entries_dual_pane_prefs"
+        android:entryValues="@array/values_dual_pane_prefs" />
 
       <CheckBoxPreference
             android:key="disable_bootanimation"

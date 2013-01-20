@@ -5475,11 +5475,6 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="disable_fullscreen_keyboard_title">Disable fullscreen keyboard</string>
     <string name="disable_fullscreen_keyboard_summary">Landscape keyboard will never take up entire screen</string>
 
-    <string name="ui_short">UI</string>
-
-    <string name="multipane_ui">Enable Dual panel</string>
-    <string name="multipane_ui_summary">This will enable/disable Dual panel"</string>
-
     <string name="lockscreen_auto_rotate_title">Allow lockscreen rotation</string>
     <string name="lockscreen_auto_rotate_summary">Lockscreen will have the ability to rotate. This is dependent of Auto-rotation in display</string>
     <string name="lockscreen_no_rotate_summary">System auto rotate is disabled. Enable it for this option.</string>
@@ -5493,5 +5488,11 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="insult_jerk">Jerk!</string>
     <string name="insult_protekk">ProTekk!</string>
     <string name="insult_unicorns">Concede pink unicorns are for little girls</string>
+
+    <string name="dual_pane_prefs_title">Dual pane preferences</string>
+    <string name="dual_pane_prefs_summary">Choose when to use dual pane preferences</string>
+    <string name="dual_pane_prefs_on">Always</string>
+    <string name="dual_pane_prefs_off">Never</string>
+    <string name="dual_pane_prefs_landscape">Only in landscape</string>
 
 </resources>
