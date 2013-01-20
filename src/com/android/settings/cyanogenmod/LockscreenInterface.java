@@ -72,6 +72,8 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private CheckBoxPreference mMaximizeWidgets;
     private CheckBoxPreference mLockscreenAutoRotate;
     private CheckBoxPreference mLockscreenUseCarousel;
+    private CheckBoxPreference mAllWidgets;
+    private static final String KEY_LOCKSCREEN_ALL_WIDGETS = "lockscreen_all_widgets";
 
     private boolean mIsScreenLarge;
 
@@ -126,6 +128,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         mBgAlpha.setProperty(Settings.System.LOCKSCREEN_ALPHA);
         mBgAlpha.setOnPreferenceChangeListener(this);
 
+	mAllWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_ALL_WIDGETS);
+        mAllWidgets.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.KG_ALL_WIDGETS, 1) == 1);
+
         mMaximizeWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
         if (!Utils.isPhone(getActivity())) {
             if (mMaximizeWidgets != null)
@@ -173,7 +179,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mMaximizeWidgets) {
+	if (preference == mAllWidgets) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.KG_ALL_WIDGETS, mAllWidgets.isChecked() ? 1 : 0);
+            return true;
+        } else if (preference == mMaximizeWidgets) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, mMaximizeWidgets.isChecked() ? 1 : 0);
             return true;
