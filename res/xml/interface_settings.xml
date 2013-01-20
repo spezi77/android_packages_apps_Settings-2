@@ -34,4 +34,9 @@
         android:fragment="com.android.settings.cyanogenmod.NavbarSettings"
         android:title="@string/navigation_bar" />
 
+    <PreferenceScreen
+        android:key="wifi_settings"
+        android:fragment="com.android.settings.slim.WifiSettings"
+        android:title="@string/ass_wifi_settings_title" />
+
 </PreferenceScreen>

@@ -1461,6 +1461,8 @@
         <!-- CyanogenMod activities Start -->
         <activity android:name=".cyanogenmod.PowerWidget" />
 
+        <activity android:name=".cyanogenmod.WifiSettings" />
+
         <activity android:name=".cyanogenmod.SystemSettings" />
 
         <activity android:name=".cyanogenmod.PerformanceSettings" />
