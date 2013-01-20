@@ -5047,9 +5047,9 @@
     <string name="toggle_color_title">Toggles color and bar</string>
     <string name="enable_toggle_colors_title">Enable toggle colors</string>
     <string name="enable_toggle_bar_title">Enable toggle bar</string>
-    <string name="toggle_icon_color_on_title">Color icons (on)</string>
+    <string name="toggle_icon_color_on_title">Set color for 'on' icons</string>
     <string name="toggle_icon_color_on_summary">Sets color for activated toggle icons</string>
-    <string name="toggle_icon_color_off_title">Color icons (off)</string>
+    <string name="toggle_icon_color_off_title">Set color for 'off' icons</string>
     <string name="toggle_icon_color_off_summary">Sets color for not activated toggle icons</string>
 
     <!-- Setting checkbox summary for displaying USB debugging notification -->
@@ -5485,9 +5485,9 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="custom_bootanimation_title">Custom boot animation</string>
     <string name="custom_bootanimation_summary">Select bootanimation zip from sdcard. Previous bootanimation will be backed up to /system/media.</string>
     <string name="install_file_manager_error">No application found to pick the zip file. Please install a file manager.</string>
-    <string name="insult_jerk">Jerk!</string>
-    <string name="insult_protekk">ProTekk!</string>
-    <string name="insult_unicorns">Concede pink unicorns are for little girls</string>
+    <string name="insult_jerk">Animation disabled.</string>
+    <string name="insult_protekk">Animation disabled.</string>
+    <string name="insult_unicorns">Animation disabled.</string>
 
     <string name="dual_pane_prefs_title">Dual pane preferences</string>
     <string name="dual_pane_prefs_summary">Choose when to use dual pane preferences</string>
