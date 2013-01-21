@@ -37,9 +37,6 @@ import android.view.Display;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.android.internal.view.RotationPolicy;
-
-import com.android.internal.view.RotationPolicy;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -62,7 +59,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
     private static final String KEY_BACKGROUND_PREF = "lockscreen_background";
     private static final String KEY_BACKGROUND_ALPHA_PREF = "lockscreen_alpha";
-    private static final String PREF_LOCKSCREEN_AUTO_ROTATE = "lockscreen_auto_rotate";
     private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
 
     private ListPreference mBatteryStatus;
@@ -70,7 +66,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private ListPreference mCustomBackground;
     private SeekBarPreference mBgAlpha;
     private CheckBoxPreference mMaximizeWidgets;
-    private CheckBoxPreference mLockscreenAutoRotate;
     private CheckBoxPreference mLockscreenUseCarousel;
     private CheckBoxPreference mAllWidgets;
     private static final String KEY_LOCKSCREEN_ALL_WIDGETS = "lockscreen_all_widgets";
@@ -142,16 +137,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
                 Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, 0) == 1);
         }
 
-	mLockscreenAutoRotate = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_AUTO_ROTATE);
-        int defaultValue = getResources().getBoolean(com.android.internal.R.bool.config_enableLockScreenRotation) ? 1 : 0;
-        mLockscreenAutoRotate.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.LOCKSCREEN_AUTO_ROTATE, defaultValue) == 1);
-
-        if (RotationPolicy.isRotationLocked(getActivity())) {
-            mLockscreenAutoRotate.setEnabled(false);
-            mLockscreenAutoRotate.setSummary(getResources().getString(R.string.lockscreen_no_rotate_summary));
-        }
-
 	mLockscreenUseCarousel = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_USE_CAROUSEL);
         mLockscreenUseCarousel.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, 0) == 1);
@@ -186,10 +171,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         } else if (preference == mMaximizeWidgets) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, mMaximizeWidgets.isChecked() ? 1 : 0);
-            return true;
-        } else if (preference == mLockscreenAutoRotate) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_AUTO_ROTATE, mLockscreenAutoRotate.isChecked() ? 1 : 0);
             return true;
 	} else if (preference == mLockscreenUseCarousel) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
