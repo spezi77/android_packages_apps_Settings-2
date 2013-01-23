@@ -1535,6 +1535,7 @@
 	<activity android:name=".cyanogenmod.StatusBar" />
         <activity android:name=".cyanogenmod.StatusBarClockStyle" />
 	<activity android:name=".cyanogenmod.NotificationDrawerStyle" />
+	<activity android:name=".cyanogenmod.RamBar" />
 
         <activity
             android:name=".cyanogenmod.DensityChanger"
@@ -1542,6 +1543,16 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
+        </activity>
+
+        <activity android:name="Settings$ASSRamBarActivity"
+                android:label="@string/ram_bar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.slim.RamBar" />
         </activity>
 
         <activity android:name=".profiles.NFCProfile"

@@ -45,7 +45,7 @@ import com.android.settings.Utils;
 //    private CheckBoxPreference mHighEndGfx;
     private CheckBoxPreference mKillAppLongpressBack;
     private ListPreference mKillAppLongpressTimeout;
-    private CheckBoxPreference mRamBar;
+    private Preference mRamBar;
 
     private ContentResolver mContentResolver;
 
@@ -76,17 +76,31 @@ import com.android.settings.Utils;
         mKillAppLongpressTimeout.setValue(String.valueOf(statusKillAppLongpressTimeout));
         mKillAppLongpressTimeout.setSummary(mKillAppLongpressTimeout.getEntry());
 
-	mRamBar = (CheckBoxPreference) findPreference(KEY_RECENTS_RAM_BAR);
-        mRamBar.setChecked(Settings.System.getInt(
-                getActivity().getContentResolver(),
-                Settings.System.RECENTS_RAM_BAR, 0) == 1);
+	mRamBar = findPreference(KEY_RECENTS_RAM_BAR);
+        updateRamBar();
+    }
+
+    private void updateRamBar() {
+        int ramBarMode = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.RECENTS_RAM_BAR_MODE, 0);
+        if (ramBarMode != 0)
+            mRamBar.setSummary(getResources().getString(R.string.ram_bar_color_enabled));
+        else
+            mRamBar.setSummary(getResources().getString(R.string.ram_bar_color_disabled));
     }
 
     @Override
     public void onResume() {
         super.onResume();
         updateKillAppLongpressBackOptions();
+	updateRamBar();
     }
+
+     @Override
+     public void onPause() {
+         super.onResume();
+        updateRamBar();
+     }
 
     private void writeKillAppLongpressBackOptions() {
         Settings.System.putInt(getActivity().getContentResolver(),
@@ -116,11 +130,6 @@ if (preference == mKillAppLongpressTimeout) {
         boolean value;
 	if (preference == mKillAppLongpressBack) {
             writeKillAppLongpressBackOptions();
-	} else if (preference == mRamBar) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.RECENTS_RAM_BAR,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
-            return true;
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
