@@ -5174,7 +5174,7 @@
     <!-- **** CYANOGENMOD ADDITIONS END **** -->
 
 <!-- Battery Bar -->
-    <string name="status_bar_battery_bar_title">Battery bar style</string>
+    <string name="status_bar_battery_bar_title">Battery bar | circle styles</string>
     <string name="battery_bar">Battery bar location</string>
     <string name="battery_bar_color">Battery bar color</string>
     <string name="battery_bar_cat">Battery bar style</string>
@@ -5507,6 +5507,7 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="dual_pane_prefs_landscape">Only in landscape</string>
 
     <string name="circle_battery_color">Circle color</string>
+    <string name="circle_battery_title">Battery circle style</string>
     <string name="circle_battery_text_color">Circle text color</string>
     <string name="circle_battery_animation_speed">Circle animation speed</string>
     <string name="circle_battery_animation_speed_none">None</string>
