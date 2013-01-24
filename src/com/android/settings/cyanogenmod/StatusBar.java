@@ -16,22 +16,61 @@
 
 package com.android.settings.cyanogenmod;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.util.Random;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Intent;
+import android.content.Context;
+import android.content.res.Resources;
+import android.content.DialogInterface;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.text.Spannable;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.view.Display;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.Window;
+import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import com.android.settings.util.Helpers;
 import com.android.settings.widget.SeekBarPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.util.Helpers;
+
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class StatusBar extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
@@ -39,18 +78,24 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String TAG = "StatusBar";
     private static final String STATUS_BAR_BATTERY = "status_bar_battery";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
-    private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
+ //   private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
     private static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
     private static final String STATUS_BAR_TRANSPARENCY = "status_bar_transparency";
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
 
+    private ColorPickerPreference mColorPicker;
     private ListPreference mStatusBarBattery;
-    private ListPreference mStatusBarCmSignal;
+  //  private ListPreference mStatusBarCmSignal;
     private SeekBarPreference mStatusbarTransparency;
     private CheckBoxPreference mStatusBarBrightnessControl;
     private CheckBoxPreference mStatusBarNotifCount;
     private PreferenceScreen mClockStyle;
     private PreferenceCategory mPrefCategoryGeneral;
+
+    ListPreference mDbmStyletyle;
+    ListPreference mWifiStyle;
+    ColorPickerPreference mWifiColorPicker;
+    CheckBoxPreference mHideSignal;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +107,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
         mStatusBarBrightnessControl = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
         mStatusBarBattery = (ListPreference) prefSet.findPreference(STATUS_BAR_BATTERY);
-        mStatusBarCmSignal = (ListPreference) prefSet.findPreference(STATUS_BAR_SIGNAL);
+ //       mStatusBarCmSignal = (ListPreference) prefSet.findPreference(STATUS_BAR_SIGNAL);
 
 	float defaultAlpha;
         try{
@@ -95,11 +140,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarBattery.setSummary(mStatusBarBattery.getEntry());
         mStatusBarBattery.setOnPreferenceChangeListener(this);
 
-        int signalStyle = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.STATUS_BAR_SIGNAL_TEXT, 0);
-        mStatusBarCmSignal.setValue(String.valueOf(signalStyle));
-        mStatusBarCmSignal.setSummary(mStatusBarCmSignal.getEntry());
-        mStatusBarCmSignal.setOnPreferenceChangeListener(this);
+//        int signalStyle = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+  //              Settings.System.STATUS_BAR_SIGNAL_TEXT, 0);
+  //      mStatusBarCmSignal.setValue(String.valueOf(signalStyle));
+  //      mStatusBarCmSignal.setSummary(mStatusBarCmSignal.getEntry());
+  //      mStatusBarCmSignal.setOnPreferenceChangeListener(this);
 
         mStatusBarNotifCount = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_NOTIF_COUNT);
         mStatusBarNotifCount.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -107,9 +152,31 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
         mPrefCategoryGeneral = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_GENERAL);
 
-        if (Utils.isWifiOnly(getActivity())) {
-            mPrefCategoryGeneral.removePreference(mStatusBarCmSignal);
-        }
+//        if (Utils.isWifiOnly(getActivity())) {
+//            mPrefCategoryGeneral.removePreference(mStatusBarCmSignal);
+//        }
+
+	mDbmStyletyle = (ListPreference) findPreference("signal_style");
+        mDbmStyletyle.setOnPreferenceChangeListener(this);
+        mDbmStyletyle.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.STATUSBAR_SIGNAL_TEXT,
+                0)));
+
+        mColorPicker = (ColorPickerPreference) findPreference("signal_color");
+        mColorPicker.setOnPreferenceChangeListener(this);
+        mWifiStyle = (ListPreference) findPreference("wifi_signal_style");
+        mWifiStyle.setOnPreferenceChangeListener(this);
+        mWifiStyle.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.STATUSBAR_WIFI_SIGNAL_TEXT,
+                0)));
+
+        mWifiColorPicker = (ColorPickerPreference) findPreference("wifi_signal_color");
+        mWifiColorPicker.setOnPreferenceChangeListener(this);
+
+        mHideSignal = (CheckBoxPreference) findPreference("hide_signal");
+        mHideSignal.setChecked(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.STATUSBAR_HIDE_SIGNAL_BARS,
+                0) != 0);
 
 	mClockStyle = (PreferenceScreen) prefSet.findPreference("clock_style_pref");
         if (mClockStyle != null) {
@@ -138,13 +205,41 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                     Settings.System.STATUS_BAR_TRANSPARENCY,
                     val / 100);
             return true;
-        } else if (preference == mStatusBarCmSignal) {
-            int signalStyle = Integer.valueOf((String) newValue);
-            int index = mStatusBarCmSignal.findIndexOfValue((String) newValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUS_BAR_SIGNAL_TEXT, signalStyle);
-            mStatusBarCmSignal.setSummary(mStatusBarCmSignal.getEntries()[index]);
+	} else if (preference == mDbmStyletyle) {
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_SIGNAL_TEXT, val);
             return true;
+        } else if (preference == mColorPicker) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_SIGNAL_TEXT_COLOR, intHex);
+            return true;
+        } else if (preference == mWifiStyle) {
+
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_WIFI_SIGNAL_TEXT, val);
+            return true;
+        } else if (preference == mWifiColorPicker) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hex);
+
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_WIFI_SIGNAL_TEXT_COLOR, intHex);
+            return true;
+ //       } else if (preference == mStatusBarCmSignal) {
+//            int signalStyle = Integer.valueOf((String) newValue);
+//            int index = mStatusBarCmSignal.findIndexOfValue((String) newValue);
+//            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+//                    Settings.System.STATUS_BAR_SIGNAL_TEXT, signalStyle);
+//            mStatusBarCmSignal.setSummary(mStatusBarCmSignal.getEntries()[index]);
+//            return true;
         }
         return false;
     }
@@ -161,6 +256,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             value = mStatusBarNotifCount.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_NOTIF_COUNT, value ? 1 : 0);
+            return true;
+	} else if (preference == mHideSignal) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_HIDE_SIGNAL_BARS,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
