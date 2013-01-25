@@ -19,6 +19,22 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/status_bar_title">
 
+        <ListPreference
+            android:key="statusbar_background_style"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:persistent="true"
+            android:entries="@array/background_entries"
+            android:entryValues="@array/background_values"
+            android:title="@string/background_style" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="statusbar_background_color"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:persistent="true"
+            android:title="@string/statusbar_background_color"
+            android:defaultValue="#000000"
+            alphaSlider="true" />
+
     <!-- Status bar tweaks -->
     <PreferenceCategory
         android:title="@string/status_bar_style_title">
@@ -28,38 +44,10 @@
             android:key="clock_style_pref"
             android:title="@string/status_bar_clock" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory
-            android:key="signal"
-            android:title="@string/status_bar_signal_header">
-
-        <ListPreference
-            android:entries="@array/signal_style_entries"
-            android:entryValues="@array/signal_style_values"
-            android:key="signal_style"
-            android:title="@string/signal_style" />
-
-        <net.margaritov.preference.colorpicker.ColorPickerPreference
-            android:key="signal_color"
-            android:title="@string/signal_color_title"
-            android:defaultValue="@android:color/holo_blue_light" />
-
-        <ListPreference
-            android:entries="@array/wifi_signal_style_entries"
-            android:entryValues="@array/wifi_signal_style_values"
-            android:key="wifi_signal_style"
-            android:title="@string/wifi_signal_style" />
-
-        <net.margaritov.preference.colorpicker.ColorPickerPreference
-            android:key="wifi_signal_color"
-            android:title="@string/wifi_signal_color_title"
-            android:defaultValue="@android:color/holo_blue_light" />
-
-        <CheckBoxPreference
-            android:key="hide_signal"
-            android:title="@string/hide_signal_title"
-            android:summary="@string/hide_signal_summary" />
+	<PreferenceScreen
+        android:key="status_bar_signal"
+        android:fragment="com.android.settings.cyanogenmod.StatusBarSignal"
+	android:title="@string/status_bar_signal_header" />
 
     </PreferenceCategory>
 

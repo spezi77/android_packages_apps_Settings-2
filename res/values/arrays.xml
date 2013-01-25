@@ -955,6 +955,17 @@
         <item>3</item>
     </string-array>
 
+    <string-array name="background_entries">
+        <item>@string/bgs_color</item>
+        <item>@string/bgs_defaultbg_plus_color</item>
+        <item>@string/bgs_defaultbg</item>
+    </string-array>
+    <string-array name="background_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
     <string-array name="lockscreen_delay_entries" translatable="false">
         <item>@string/slide_lock_delay_none</item>
         <item>@string/slide_lock_delay_1s</item>
