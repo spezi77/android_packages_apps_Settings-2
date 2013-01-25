@@ -59,6 +59,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
     private static final String KEY_BACKGROUND_PREF = "lockscreen_background";
     private static final String KEY_BACKGROUND_ALPHA_PREF = "lockscreen_alpha";
+    private static final String PREF_LOCKSCREEN_MINIMIZE_CHALLENGE = "lockscreen_minimize_challenge";
     private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
 
     private ListPreference mBatteryStatus;
@@ -69,6 +70,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private CheckBoxPreference mLockscreenUseCarousel;
     private CheckBoxPreference mAllWidgets;
     private static final String KEY_LOCKSCREEN_ALL_WIDGETS = "lockscreen_all_widgets";
+    CheckBoxPreference mLockscreenMinChallenge;
 
     private boolean mIsScreenLarge;
 
@@ -141,6 +143,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         mLockscreenUseCarousel.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, 0) == 1);
 
+	mLockscreenMinChallenge = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_MINIMIZE_CHALLENGE);
+        mLockscreenMinChallenge.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_MINIMIZE_LOCKSCREEN_CHALLENGE, false));
+
         mBatteryStatus = (ListPreference) findPreference(KEY_ALWAYS_BATTERY_PREF);
         mBatteryStatus.setOnPreferenceChangeListener(this);
 
@@ -175,6 +181,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 	} else if (preference == mLockscreenUseCarousel) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, mLockscreenUseCarousel.isChecked() ? 1 : 0);
+            return true;
+	} else if (preference == mLockscreenMinChallenge) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_MINIMIZE_LOCKSCREEN_CHALLENGE,
+                    ((CheckBoxPreference)preference).isChecked() ? 1 : 0);
             return true;
 	}
         return super.onPreferenceTreeClick(preferenceScreen, preference);

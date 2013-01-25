@@ -71,7 +71,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_LIVELINESS_OFF = 125;
-    private static final String LOCK_MINIMIZE_CHALLENGE = "lockscreen_minimize_challenge";
 
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
@@ -112,8 +111,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private CheckBoxPreference mPowerButtonInstantlyLocks;
 
     private boolean mIsPrimary;
-
-    private CheckBoxPreference mLockscreenMinChallenge;
 
     // Cyanogenmod Additions
     private CheckBoxPreference mSlideLockDelayToggle;
@@ -263,12 +260,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     .findPreference(LOCKSCREEN_QUICK_UNLOCK_CONTROL);
             mQuickUnlockScreen.setChecked(Settings.System.getInt(resolver,
                     Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, 0) == 1);
-
-	    // Lock screen Minimize challenge
-            mLockscreenMinChallenge = (CheckBoxPreference) root
-                    .findPreference(LOCK_MINIMIZE_CHALLENGE);
-            mLockscreenMinChallenge.setChecked(Settings.System.getInt(resolver,
-                    Settings.System.LOCKSCREEN_MINIMIZE_LOCKSCREEN_CHALLENGE, 0) == 1);
 
             // Menu Unlock
             mMenuUnlock = (CheckBoxPreference) root.findPreference(MENU_UNLOCK_PREF);
@@ -658,9 +649,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } if (preference == mQuickUnlockScreen) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, isToggled(preference) ? 1 : 0);
-	} else if (preference == mLockscreenMinChallenge) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_MINIMIZE_LOCKSCREEN_CHALLENGE, isToggled(preference) ? 1 : 0);
         } else if (preference == mMenuUnlock) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.MENU_UNLOCK_SCREEN, isToggled(preference) ? 1 : 0);
