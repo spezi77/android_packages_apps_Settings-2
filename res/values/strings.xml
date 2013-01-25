@@ -5192,7 +5192,7 @@
     <string name="battery_bar_color">Battery bar color</string>
     <string name="battery_bar_cat">Battery bar style</string>
     <string name="battery_bar_style_title">Battery bar alignment</string>
-    <string name="status_bar_signal_header">Signal</string>
+    <string name="status_bar_signal_header">Signal styles</string>
     <string name="battery_bar_thickness_title">Battery bar thickness</string>
     <string name="battery_bar_animate_title">Charging animation</string>
     <string name="battery_bar_animate_summary">The charging animation may result in a poor user expe
@@ -5252,6 +5252,7 @@ rience. Better keep it disabled on lower end devices.</string>
     <!-- Statusbar | Signal -->
     <string name="signal_style">Signal text style</string>
     <string name="signal_color_title">Signal color</string>
+    <string name="signal_color_summary">text color only!</string>
     <string name="hide_signal_title">Hide signal bars</string>
     <string name="hide_signal_summary">Updates when signal strength changes</string>
     <string name="wifi_signal_style">WiFi signal text style</string>

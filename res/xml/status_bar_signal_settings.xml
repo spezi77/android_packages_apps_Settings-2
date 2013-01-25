@@ -10,6 +10,7 @@
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="signal_color"
         android:title="@string/signal_color_title"
+        android:summary="@string/signal_color_summary"
         android:defaultValue="@android:color/holo_blue_light" />
 
     <ListPreference
@@ -21,6 +22,7 @@
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="wifi_signal_color"
         android:title="@string/wifi_signal_color_title"
+        android:summary="@string/signal_color_summary"
         android:defaultValue="@android:color/holo_blue_light" />
 
     <CheckBoxPreference
