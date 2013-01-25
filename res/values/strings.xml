@@ -4581,6 +4581,10 @@
 
     <string name="lock_screen_title">Lock screen</string>
 
+    <!-- Lock screen Minimize Challenge (By MarcLandis) -->
+    <string name="lockscreen_minimize_challenge_title">Minimize lockscreen challenge</string>
+    <string name="lockscreen_minimize_challenge_summary">Set wether the lockscreen challenge (circle, pattern, pin) is minimized when the screen is turned on.</string>
+
     <!-- Lock Screen Shortcuts -->
     <string name="lockscreen_target_info">Drag the slider to targets to assign shortcuts</string>
     <string name="lockscreen_target_title">Slider shortcuts</string>
