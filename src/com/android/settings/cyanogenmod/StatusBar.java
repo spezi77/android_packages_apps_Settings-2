@@ -80,7 +80,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
  //   private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
     private static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
-    private static final String STATUS_BAR_TRANSPARENCY = "status_bar_transparency";
+//    private static final String STATUS_BAR_TRANSPARENCY = "status_bar_transparency";
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
     private static final String PREF_STATUSBAR_BACKGROUND_STYLE = "statusbar_background_style";
     private static final String PREF_STATUSBAR_BACKGROUND_COLOR = "statusbar_background_color";
@@ -88,7 +88,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private ColorPickerPreference mColorPicker;
     private ListPreference mStatusBarBattery;
   //  private ListPreference mStatusBarCmSignal;
-    private SeekBarPreference mStatusbarTransparency;
+  //  private SeekBarPreference mStatusbarTransparency;
     private CheckBoxPreference mStatusBarBrightnessControl;
     private CheckBoxPreference mStatusBarNotifCount;
     private PreferenceScreen mClockStyle;
@@ -108,18 +108,18 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarBrightnessControl = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
         mStatusBarBattery = (ListPreference) prefSet.findPreference(STATUS_BAR_BATTERY);
 
-	float defaultAlpha;
-        try{
-            defaultAlpha = Settings.System.getFloat(getActivity()
-                     .getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY);
-        } catch (Exception e) {
-            defaultAlpha = 0.0f;
-                    Settings.System.putFloat(getActivity().getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY, 0.0f);
-        }
-        mStatusbarTransparency = (SeekBarPreference) prefSet.findPreference(STATUS_BAR_TRANSPARENCY);
-        mStatusbarTransparency.setProperty(Settings.System.STATUS_BAR_TRANSPARENCY);
-        mStatusbarTransparency.setInitValue((int) (defaultAlpha * 100));
-        mStatusbarTransparency.setOnPreferenceChangeListener(this);
+//	float defaultAlpha;
+//        try{
+//            defaultAlpha = Settings.System.getFloat(getActivity()
+//                     .getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY);
+//        } catch (Exception e) {
+//            defaultAlpha = 0.0f;
+//                    Settings.System.putFloat(getActivity().getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY, 0.0f);
+//        }
+//        mStatusbarTransparency = (SeekBarPreference) prefSet.findPreference(STATUS_BAR_TRANSPARENCY);
+//        mStatusbarTransparency.setProperty(Settings.System.STATUS_BAR_TRANSPARENCY);
+//        mStatusbarTransparency.setInitValue((int) (defaultAlpha * 100));
+//        mStatusbarTransparency.setOnPreferenceChangeListener(this);
 
         mStatusBarBrightnessControl.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1));
@@ -182,13 +182,13 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                     Settings.System.STATUS_BAR_BATTERY, statusBarBattery);
             mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[index]);
             return true;
-        } else if (preference == mStatusbarTransparency) {
-            float val = Float.parseFloat((String) newValue);
-            Log.e("R", "value: " + val / 100);
-            Settings.System.putFloat(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUS_BAR_TRANSPARENCY,
-                    val / 100);
-            return true;
+//        } else if (preference == mStatusbarTransparency) {
+//            float val = Float.parseFloat((String) newValue);
+//            Log.e("R", "value: " + val / 100);
+//            Settings.System.putFloat(getActivity().getApplicationContext().getContentResolver(),
+//                    Settings.System.STATUS_BAR_TRANSPARENCY,
+//                    val / 100);
+//            return true;
         } else if (preference == mStatusbarBgStyle) {
             int value = Integer.valueOf((String) newValue);
             int index = mStatusbarBgStyle.findIndexOfValue((String) newValue);

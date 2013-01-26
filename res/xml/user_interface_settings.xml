@@ -2,28 +2,16 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:key="misc"
-        android:title="@string/misc_short">
-
         <Preference
             android:key="lcd_density_setup"
             android:title="@string/lcd_density_title"
             android:summary="@string/lcd_density_summary" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="misc"
-        android:title="@string/misc_short">
 
         <CheckBoxPreference
             android:key="use_alt_resolver"
             android:title="@string/alt_resolver"
             android:summary="@string/alt_resolver_summary"
             android:defaultValue="false" />
-
-    </PreferenceCategory>
 
     <Preference
             android:key="custom_carrier_label"
