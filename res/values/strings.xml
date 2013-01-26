@@ -5570,8 +5570,4 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="bgs_defaultbg">Default Background only</string>
     <string name="statusbar_bg">Statusbar background</string>
 
-    <!-- High End Gfx Effects -->
-    <string name="high_end_gfx_title">High end graphic effects</string>
-    <string name="high_end_gfx_summary">Enable graphic effects disabled on lower end devices</string>
-
 </resources>

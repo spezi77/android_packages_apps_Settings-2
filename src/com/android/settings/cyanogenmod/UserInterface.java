@@ -17,7 +17,6 @@ import java.io.*;
 
 import android.app.Activity;
 import android.app.ActivityManagerNative;
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.app.admin.DevicePolicyManager;
@@ -83,7 +82,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final int REQUEST_PICK_BOOT_ANIMATION = 203;
     private static final String DUAL_PANE_PREFS = "dual_pane_prefs";
-    private static final String KEY_HIGH_END_GFX = "high_end_gfx";
 
     Preference mCustomBootAnimation;
     Preference mLcdDensity;
@@ -96,7 +94,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     // previous random; so we don't repeat
     private static int mLastRandomInsultIndex = -1;
     private String[] mInsults;
-    private CheckBoxPreference mHighEndGfx;
 
     int newDensityValue;
 
@@ -149,19 +146,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
 	mDualPanePrefs = (ListPreference) prefs.findPreference(DUAL_PANE_PREFS);
         mDualPanePrefs.setOnPreferenceChangeListener(this);
-
-	mHighEndGfx = (CheckBoxPreference) findPreference(KEY_HIGH_END_GFX);
-
-        if (!ActivityManager.isHighEndGfx()) {
-            // Only show this if the device does not have HighEndGfx enabled natively
-            try {
-                mHighEndGfx.setChecked(Settings.System.getInt(getContentResolver(),Settings.System.HIGH_END_GFX_ENABLED) == 1);
-            } catch (Exception e) {
-                Settings.System.putInt(getContentResolver(),Settings.System.HIGH_END_GFX_ENABLED, mHighEndGfx.isChecked() ? 1 : 0 );
-            }
-        } else {
-            getPreferenceScreen().removePreference(mHighEndGfx);
-        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -182,10 +166,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);
             return true;
-	} else if (preference == mHighEndGfx) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.HIGH_END_GFX_ENABLED,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
         } else if (preference == mUseAltResolver) {
 		Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.ACTIVITY_RESOLVER_USE_ALT,
