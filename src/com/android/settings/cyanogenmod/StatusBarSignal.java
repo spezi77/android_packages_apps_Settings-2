@@ -28,7 +28,7 @@ public class StatusBarSignal extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setTitle(R.string.title_statusbar_signal);
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.status_bar_signal_settings);
 
@@ -53,6 +53,11 @@ public class StatusBarSignal extends SettingsPreferenceFragment implements
         mHideSignal.setChecked(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.STATUSBAR_HIDE_SIGNAL_BARS,
                 0) != 0);
+
+        mAltSignal = (CheckBoxPreference) findPreference("alt_signal");
+        mAltSignal.setChecked(Settings.System.getBoolean(getContentResolver(),
+                Settings.System.STATUSBAR_SIGNAL_CLUSTER_ALT,false));
+
     }
 
     @Override
@@ -63,6 +68,10 @@ public class StatusBarSignal extends SettingsPreferenceFragment implements
                     Settings.System.STATUSBAR_HIDE_SIGNAL_BARS,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
 
+            return true;
+        } else if (preference == mAltSignal) {
+            Settings.System.putBoolean(getContentResolver(),
+                    Settings.System.STATUSBAR_SIGNAL_CLUSTER_ALT,mAltSignal.isChecked());
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
