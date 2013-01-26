@@ -38,6 +38,12 @@
         android:entryValues="@array/values_dual_pane_prefs" />
 
       <CheckBoxPreference
+            android:key="high_end_gfx"
+            android:title="@string/high_end_gfx_title"
+            android:summary="@string/high_end_gfx_summary"
+            android:defaultValue="true" />
+
+      <CheckBoxPreference
             android:key="disable_bootanimation"
             android:title="@string/disable_bootanimation_title" />
 
