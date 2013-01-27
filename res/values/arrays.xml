@@ -1831,6 +1831,7 @@
         <item>@string/home</item>
         <item>@string/back</item>
         <item>@string/recents</item>
+	<item>@string/lastapp</item>
         <item>@string/search</item>
         <item>@string/screenshot</item>
         <item>@string/menu</item>
@@ -1846,6 +1847,7 @@
         <item>**home**</item>
         <item>**back**</item>
         <item>**recents**</item>
+	<item>**lastapp**</item>
         <item>**search**</item>
         <item>**screenshot**</item>
         <item>**menu**</item>
@@ -1865,6 +1867,7 @@
         <item>@string/ring_silent</item>
         <item>@string/ring_vib_silent</item>
         <item>@string/kill_app</item>
+	<item>@string/lastapp</item>
         <item>@string/screen_off</item>
         <item>@string/google_now</item>
         <item>@string/select_application</item>
@@ -1878,6 +1881,7 @@
         <item>**ring_silent**</item>
         <item>**ring_vib_silent**</item>
         <item>**kill**</item>
+	<item>**lastapp**</item>
         <item>**power**</item>
         <item>**assist**</item>
         <item>**app**</item>
