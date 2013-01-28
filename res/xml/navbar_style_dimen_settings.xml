@@ -22,8 +22,11 @@
 
             <net.margaritov.preference.colorpicker.ColorPickerPreference
                     android:key="nav_bar_color"
+		    android:layout="?android:attr/preferenceLayoutChild"
+	            android:persistent="true"
                     android:title="@string/navigation_bar_tint_title"
-                    android:defaultValue="#000000" />
+                    android:defaultValue="#000000"
+		    alphaSlider="true" />
 
             <net.margaritov.preference.colorpicker.ColorPickerPreference
                     android:key="nav_button_color"
