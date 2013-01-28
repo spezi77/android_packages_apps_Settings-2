@@ -61,6 +61,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private static final String KEY_BACKGROUND_ALPHA_PREF = "lockscreen_alpha";
     private static final String PREF_LOCKSCREEN_MINIMIZE_CHALLENGE = "lockscreen_minimize_challenge";
     private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
+    public static final String KEY_ALLOW_ROTATION = "allow_rotation";
 
     private ListPreference mBatteryStatus;
     private PreferenceScreen mLockscreenButtons;
@@ -71,6 +72,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private CheckBoxPreference mAllWidgets;
     private static final String KEY_LOCKSCREEN_ALL_WIDGETS = "lockscreen_all_widgets";
     CheckBoxPreference mLockscreenMinChallenge;
+    private CheckBoxPreference mAllowRotation;
 
     private boolean mIsScreenLarge;
 
@@ -128,6 +130,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 	mAllWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_ALL_WIDGETS);
         mAllWidgets.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.KG_ALL_WIDGETS, 1) == 1);
+
+	mAllowRotation = (CheckBoxPreference) prefSet.findPreference(KEY_ALLOW_ROTATION);
+        mAllowRotation.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALLOW_ROTATION, 0) == 1);   
 
         mMaximizeWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
         if (!Utils.isPhone(getActivity())) {
@@ -187,6 +193,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
                     Settings.System.LOCKSCREEN_MINIMIZE_LOCKSCREEN_CHALLENGE,
                     ((CheckBoxPreference)preference).isChecked() ? 1 : 0);
             return true;
+	} else if (preference == mAllowRotation) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALLOW_ROTATION, mAllowRotation.isChecked()
+                    ? 1 : 0);
 	}
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
