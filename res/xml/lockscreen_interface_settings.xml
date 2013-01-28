@@ -53,6 +53,11 @@
         android:defaultValue="0" />
 
      <CheckBoxPreference
+        android:key="lockscreen_auto_rotate"
+        android:title="@string/lockscreen_auto_rotate_title"
+        android:summary="@string/lockscreen_auto_rotate_summary" />
+
+     <CheckBoxPreference
             android:key="lockscreen_all_widgets"
             android:title="@string/lockscreen_widgets_all_title"
             android:summary="@string/lockscreen_widgets_all_summary" />

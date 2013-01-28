@@ -5434,6 +5434,8 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="lockscreen_background_full_transparent">Full transparent</string>
     <string name="lockscreen_background_default_wallpaper">Default wallpaper</string>
     <string name="lockscreen_alpha_title">Background transparency</string>
+    <string name="lockscreen_auto_rotate_title">Allow lockscreen rotation</string>
+    <string name="lockscreen_auto_rotate_summary">Lockscreen will have ability to rotate via device orientation. This is independent of Auto-rotation in display</string>
 
     <!-- LCD Density -->
     <string name="dpi">DPI</string>

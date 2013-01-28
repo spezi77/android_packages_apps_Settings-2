@@ -58,10 +58,12 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
 
     private static final String KEY_BACKGROUND_PREF = "lockscreen_background";
+    private static final String PREF_LOCKSCREEN_AUTO_ROTATE = "lockscreen_auto_rotate";
     private static final String KEY_BACKGROUND_ALPHA_PREF = "lockscreen_alpha";
     private static final String PREF_LOCKSCREEN_MINIMIZE_CHALLENGE = "lockscreen_minimize_challenge";
     private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
 
+    CheckBoxPreference mLockscreenAutoRotate;
     private ListPreference mBatteryStatus;
     private PreferenceScreen mLockscreenButtons;
     private ListPreference mCustomBackground;
@@ -103,6 +105,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
         addPreferencesFromResource(R.xml.lockscreen_interface_settings);
         prefs = getPreferenceScreen();
+
+	mLockscreenAutoRotate = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_AUTO_ROTATE);
+        mLockscreenAutoRotate.setChecked(Settings.System.getBoolean(mContext
+                .getContentResolver(), Settings.System.LOCKSCREEN_AUTO_ROTATE, false));
 
         mCustomBackground = (ListPreference) findPreference(KEY_BACKGROUND_PREF);
         mCustomBackground.setOnPreferenceChangeListener(this);
@@ -177,6 +183,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         } else if (preference == mMaximizeWidgets) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, mMaximizeWidgets.isChecked() ? 1 : 0);
+            return true;
+	} else if (preference == mLockscreenAutoRotate) {
+            Settings.System.putBoolean(mContext.getContentResolver(),
+                    Settings.System.LOCKSCREEN_AUTO_ROTATE,
+                    ((CheckBoxPreference) preference).isChecked());
             return true;
 	} else if (preference == mLockscreenUseCarousel) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
