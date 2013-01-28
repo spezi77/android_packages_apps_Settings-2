@@ -43,6 +43,11 @@
          <extra android:name="cm_security" android:value="true" />
      </PreferenceScreen>
 
+    <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="lockscreen_text_color"
+            android:title="@string/lockscreen_text_color_title"
+            android:defaultValue="#ffffffff" />
+
      <ListPreference
         android:key="lockscreen_battery_status"
         android:persistent="false"
