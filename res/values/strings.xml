@@ -5184,10 +5184,6 @@
     <string name="lockscreen_maximize_widgets_title">Maximize widgets</string>
     <string name="lockscreen_maximize_widgets_summary">Show widgets maximized and the unlock minimized when the screen is turned on</string>
 
-    <!-- Allow rotation -->
-    <string name="allow_rotate_title">Allow rotation</string>
-    <string name="allow_rotate_summary">Enables landscape mode on lockscreen.</string>
-
     <!-- **** CYANOGENMOD ADDITIONS END **** -->
 
 <!-- Battery Bar -->
