@@ -1560,6 +1560,7 @@
 	<activity android:name=".cyanogenmod.RamBar" />
 	<activity android:name=".cyanogenmod.StatusBarStyle" />
 	<activity android:name=".cyanogenmod.NavBarStyle" />
+	<activity android:name=".cyanogenmod.NavBarButtonStyle" />
 
         <activity
             android:name=".cyanogenmod.DensityChanger"
