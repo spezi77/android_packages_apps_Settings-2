@@ -1525,6 +1525,8 @@
 
         <activity android:name=".cyanogenmod.StatusBarBatteryStyle" />
 
+        <activity android:name=".cyanogenmod.Scroller" />
+
         <activity android:name=".cyanogenmod.NavbarSettings" />
         <activity android:name=".cyanogenmod.NavRingTargets" />
         <activity android:name=".cyanogenmod.NavbarButtonSettings" />

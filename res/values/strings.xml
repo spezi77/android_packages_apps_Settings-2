@@ -5570,4 +5570,13 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="bgs_defaultbg">Default Background only</string>
     <string name="statusbar_bg">Statusbar background</string>
 
+    <!-- Scroller options -->
+  <string name="scroller_options">Scroller options</string>
+        <string name="scroll">Scroller</string>
+  <string name="scroll_title">Scroller options</string>
+  <string name="scroll_summary">Adjust feel of your scroller</string>
+
+  <string name="scroll_friction_title">Scroll friction</string>
+  <string name="custom_fling_velocity_title">Scroll fling velocity</string>
+
 </resources>
