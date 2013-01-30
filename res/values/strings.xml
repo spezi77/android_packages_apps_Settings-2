@@ -1504,10 +1504,6 @@
 
     <!-- Wi-Fi settings diables message if Wifi is off-->
     <string name="wifi_setting_countrycode_disabled">Enable Wi-Fi to change this option.</string>
-    <!-- Wi-Fi settings screen, advanced, title of the item to set the Wi-Fi priority. -->
-    <string name="wifi_setting_priority_title">Wi-Fi priority</string>
-    <!-- Wi-Fi settings screen, setting summary for setting the Wi-Fi priority-->
-    <string name="wifi_setting_priority_summary">Specify the priority of Wi-Fi networks</string>
     <string name="wifi_priority_disabled">Enable Wi-Fi to specify the priority</string>
     <string name="ass_wifi_settings_title">Wi-Fi</string>
 
@@ -5196,7 +5192,7 @@
     <!-- **** CYANOGENMOD ADDITIONS END **** -->
 
 <!-- Battery Bar -->
-    <string name="status_bar_battery_bar_title">Battery bar | circle styles</string>
+    <string name="status_bar_battery_bar_title">Battery styles</string>
     <string name="battery_bar">Battery bar location</string>
     <string name="battery_bar_color">Battery bar color</string>
     <string name="battery_bar_cat">Battery bar style</string>
