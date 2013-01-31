@@ -84,6 +84,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
     private static final String PREF_STATUSBAR_BACKGROUND_STYLE = "statusbar_background_style";
     private static final String PREF_STATUSBAR_BACKGROUND_COLOR = "statusbar_background_color";
+    private static final String STATUS_BAR_DONOTDISTURB = "status_bar_donotdisturb";
 
     private ColorPickerPreference mColorPicker;
  //   private ListPreference mStatusBarBattery;
@@ -93,6 +94,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private CheckBoxPreference mStatusBarNotifCount;
     private PreferenceScreen mClockStyle;
     private PreferenceCategory mPrefCategoryGeneral;
+    private CheckBoxPreference mStatusBarDoNotDisturb;
 
     ColorPickerPreference mStatusbarBgColor;
     ListPreference mStatusbarBgStyle;
@@ -159,6 +161,10 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
         mStatusbarBgStyle = (ListPreference) prefSet.findPreference(PREF_STATUSBAR_BACKGROUND_STYLE);
         mStatusbarBgStyle.setOnPreferenceChangeListener(this);
+
+	mStatusBarDoNotDisturb = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_DONOTDISTURB);
+        mStatusBarDoNotDisturb.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.STATUS_BAR_DONOTDISTURB, 0) == 1));
 
         updateVisibility();
     }
@@ -229,6 +235,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             value = mStatusBarNotifCount.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_NOTIF_COUNT, value ? 1 : 0);
+            return true;
+	}else if (preference == mStatusBarDoNotDisturb) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_DONOTDISTURB,
+                    mStatusBarDoNotDisturb.isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
