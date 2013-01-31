@@ -76,20 +76,14 @@ import net.margaritov.preference.colorpicker.ColorPickerPreference;
 public class StatusBar extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String TAG = "StatusBar";
-//    private static final String STATUS_BAR_BATTERY = "status_bar_battery";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
- //   private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
     private static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
-//    private static final String STATUS_BAR_TRANSPARENCY = "status_bar_transparency";
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
     private static final String PREF_STATUSBAR_BACKGROUND_STYLE = "statusbar_background_style";
     private static final String PREF_STATUSBAR_BACKGROUND_COLOR = "statusbar_background_color";
     private static final String STATUS_BAR_DONOTDISTURB = "status_bar_donotdisturb";
 
     private ColorPickerPreference mColorPicker;
- //   private ListPreference mStatusBarBattery;
-  //  private ListPreference mStatusBarCmSignal;
-  //  private SeekBarPreference mStatusbarTransparency;
     private CheckBoxPreference mStatusBarBrightnessControl;
     private CheckBoxPreference mStatusBarNotifCount;
     private PreferenceScreen mClockStyle;
@@ -108,20 +102,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         PreferenceScreen prefSet = getPreferenceScreen();
 
         mStatusBarBrightnessControl = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_BRIGHTNESS_CONTROL);
- //       mStatusBarBattery = (ListPreference) prefSet.findPreference(STATUS_BAR_BATTERY);
-
-//	float defaultAlpha;
-//        try{
-//            defaultAlpha = Settings.System.getFloat(getActivity()
-//                     .getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY);
-//        } catch (Exception e) {
-//            defaultAlpha = 0.0f;
-//                    Settings.System.putFloat(getActivity().getContentResolver(), Settings.System.STATUS_BAR_TRANSPARENCY, 0.0f);
-//        }
-//        mStatusbarTransparency = (SeekBarPreference) prefSet.findPreference(STATUS_BAR_TRANSPARENCY);
-//        mStatusbarTransparency.setProperty(Settings.System.STATUS_BAR_TRANSPARENCY);
-//        mStatusbarTransparency.setInitValue((int) (defaultAlpha * 100));
-//        mStatusbarTransparency.setOnPreferenceChangeListener(this);
 
         mStatusBarBrightnessControl.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1));
@@ -134,12 +114,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             }
         } catch (SettingNotFoundException e) {
         }
-
- //       int statusBarBattery = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
- //               Settings.System.STATUS_BAR_BATTERY, 0);
- //       mStatusBarBattery.setValue(String.valueOf(statusBarBattery));
- //       mStatusBarBattery.setSummary(mStatusBarBattery.getEntry());
- //       mStatusBarBattery.setOnPreferenceChangeListener(this);
 
         mStatusBarNotifCount = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_NOTIF_COUNT);
         mStatusBarNotifCount.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -181,20 +155,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean result = false;
-//        if (preference == mStatusBarBattery) {
-//            int statusBarBattery = Integer.valueOf((String) newValue);
-//            int index = mStatusBarBattery.findIndexOfValue((String) newValue);
-//            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-//                    Settings.System.STATUS_BAR_BATTERY, statusBarBattery);
-//            mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[index]);
-//            return true;
-//        } else if (preference == mStatusbarTransparency) {
-//            float val = Float.parseFloat((String) newValue);
-//            Log.e("R", "value: " + val / 100);
-//            Settings.System.putFloat(getActivity().getApplicationContext().getContentResolver(),
-//                    Settings.System.STATUS_BAR_TRANSPARENCY,
-//                    val / 100);
-//            return true;
          if (preference == mStatusbarBgStyle) {
             int value = Integer.valueOf((String) newValue);
             int index = mStatusbarBgStyle.findIndexOfValue((String) newValue);
@@ -212,13 +172,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_BACKGROUND_COLOR, intHex);
             Log.e("BAKED", intHex + "");
- //       } else if (preference == mStatusBarCmSignal) {
-//            int signalStyle = Integer.valueOf((String) newValue);
-//            int index = mStatusBarCmSignal.findIndexOfValue((String) newValue);
-//            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-//                    Settings.System.STATUS_BAR_SIGNAL_TEXT, signalStyle);
-//            mStatusBarCmSignal.setSummary(mStatusBarCmSignal.getEntries()[index]);
-//            return true;
         }
         return false;
     }
