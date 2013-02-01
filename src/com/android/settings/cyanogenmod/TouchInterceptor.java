@@ -188,6 +188,7 @@ public class TouchInterceptor extends ListView {
             params.height = mItemHeightNormal;
             v.setLayoutParams(params);
             v.setVisibility(View.VISIBLE);
+	    v.setDrawingCacheEnabled(false);
         }
     }
 
