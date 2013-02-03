@@ -62,6 +62,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_DISPLAY_ROTATION = "display_rotation";
     private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
+    private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
 
     // Strings used for building the summary
     private static final String ROTATION_ANGLE_0 = "0";
@@ -81,6 +82,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
+    private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
 
     private WifiDisplayStatus mWifiDisplayStatus;
     private Preference mWifiDisplayPreference;
@@ -150,6 +152,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                         Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
             }
         }
+	
+	mWakeUpWhenPluggedOrUnplugged = (CheckBoxPreference) findPreference(KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
+        mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, 1) == 1);
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -382,8 +388,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mVolumeWake) {
-            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.VOLUME_WAKE_SCREEN,
                     mVolumeWake.isChecked() ? 1 : 0);
+            return true;
+	} else if (preference == mWakeUpWhenPluggedOrUnplugged) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,
+                    mWakeUpWhenPluggedOrUnplugged.isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);

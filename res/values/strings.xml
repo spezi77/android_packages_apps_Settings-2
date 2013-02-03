@@ -5015,6 +5015,9 @@
     <string name="ime_switcher_notify">Selector notification</string>
     <string name="ime_switcher_notify_summary">Display input method selector notification</string>
 
+    <string name="wakeup_when_plugged_unplugged_title">Wake up on charge</string>
+    <string name="wakeup_when_plugged_unplugged_summary">Wake up device if charger is plugged/unplugged.</string>
+
     <!-- Status bar  -->
     <string name="status_bar_title">Status bar</string>
     <string name="status_bar_general_title">General</string>
