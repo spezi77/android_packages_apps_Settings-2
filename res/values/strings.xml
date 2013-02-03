@@ -5569,4 +5569,8 @@ rience. Better keep it disabled on lower end devices.</string>
   <string name="status_bar_donotdisturb_title">Do not disturb</string>
   <string name="status_bar_donotdisturb_summary">Disable ticker animation for incoming notifications</string>
 
+   <!-- High End Gfx Effects -->
+    <string name="high_end_gfx_title">High end graphic effects</string>
+    <string name="high_end_gfx_summary">Enable graphic effects disabled on lower end devices</string>
+
 </resources>

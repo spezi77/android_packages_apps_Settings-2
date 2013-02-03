@@ -28,6 +28,12 @@ limitations under the License.
             android:title="@string/kill_app_longpress_back"
             android:summary="@string/kill_app_longpress_back_summary"/>
 
+	<CheckBoxPreference
+            android:key="high_end_gfx"
+            android:title="@string/high_end_gfx_title"
+            android:summary="@string/high_end_gfx_summary"
+            android:defaultValue="true" />
+
      <ListPreference
             android:key="kill_app_longpress_timeout"
             android:title="@string/kill_app_longpress_timeout"
