@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -40,6 +41,7 @@ import com.android.settings.Utils;
     private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
     private static final String KEY_KILL_APP_LONGPRESS_TIMEOUT = "kill_app_longpress_timeout";
     private static final String KEY_HIGH_END_GFX = "high_end_gfx";
+    private static final String USE_HIGH_END_GFX_PROP = "persist.sys.use_high_end_gfx";
     private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
 
     private CheckBoxPreference mHighEndGfx;
@@ -57,6 +59,15 @@ import com.android.settings.Utils;
         PreferenceScreen prefSet = getPreferenceScreen();
         mContentResolver = getActivity().getApplicationContext().getContentResolver();
 
+	   boolean isHighEndGfx = ActivityManager.isHighEndGfx();
+            mHighEndGfx = (CheckBoxPreference) findPreference(KEY_HIGH_END_GFX);
+            if(isHighEndGfx) {
+                getPreferenceScreen().removePreference(mHighEndGfx);
+            } else {
+                mHighEndGfx.setChecked(SystemProperties.getBoolean(USE_HIGH_END_GFX_PROP,
+false));
+            }
+
         mKillAppLongpressBack = (CheckBoxPreference) findPreference(KILL_APP_LONGPRESS_BACK);
 
         mKillAppLongpressTimeout = (ListPreference) findPreference(KEY_KILL_APP_LONGPRESS_TIMEOUT);
@@ -66,19 +77,6 @@ import com.android.settings.Utils;
                  Settings.System.KILL_APP_LONGPRESS_TIMEOUT, 1500);
         mKillAppLongpressTimeout.setValue(String.valueOf(statusKillAppLongpressTimeout));
         mKillAppLongpressTimeout.setSummary(mKillAppLongpressTimeout.getEntry());
-
-	mHighEndGfx = (CheckBoxPreference) findPreference(KEY_HIGH_END_GFX);
-
-        if (!ActivityManager.isHighEndGfx()) {
-            // Only show this if the device does not have HighEndGfx enabled natively
-            try {
-                mHighEndGfx.setChecked(Settings.System.getInt(getContentResolver(),Settings.System.HIGH_END_GFX_ENABLED) == 1);
-            } catch (Exception e) {
-                Settings.System.putInt(getContentResolver(),Settings.System.HIGH_END_GFX_ENABLED, mHighEndGfx.isChecked() ? 1 : 0 );
-            }
-        } else {
-            getPreferenceScreen().removePreference(mHighEndGfx);
-        }
 
 	mRamBar = findPreference(KEY_RECENTS_RAM_BAR);
         updateRamBar();
@@ -132,15 +130,14 @@ if (preference == mKillAppLongpressTimeout) {
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean value;
-	if (preference == mKillAppLongpressBack) {
+if (preference == mHighEndGfx) {
+SystemProperties.set(USE_HIGH_END_GFX_PROP, mHighEndGfx.isChecked() ? "1" : "0");
+        } else if (preference == mKillAppLongpressBack) {
             writeKillAppLongpressBackOptions();
-            return true;
-        } else if (preference == mHighEndGfx) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.HIGH_END_GFX_ENABLED,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+        } else {
+            // If we didn't handle it, let preferences handle it.
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return true;
     }
-
 }
