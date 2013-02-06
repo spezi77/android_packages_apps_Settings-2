@@ -28,11 +28,11 @@
             android:title="@string/system_dpi_title"
             android:summary="@string/system_dpi_summary" />
 
-	    <ListPreference
+	<!--    <ListPreference
 	        android:entries="@array/uimode_entries"
 	        android:entryValues="@array/uimode_values"
 	        android:key="ui_mode"
-	        android:title="@string/uimode_title" />
+	        android:title="@string/uimode_title" /> -->
 
         <PreferenceScreen
             android:key="dpi_groups"

@@ -29,7 +29,7 @@ public class DpiGroups extends SettingsPreferenceFragment {
     protected static final String PREFS_NAME = "custom_dpi_groups_preference";
     protected static final String PROPERTY_CUSTOM_DPI_LIST = "custom_dpi_groups";
     protected static final String PROPERTY_AUTO_BACKUP = "auto_backup";
-    protected static final String DEFAULT_GROUPS = "120|160|213|240|320|480";
+    protected static final String DEFAULT_GROUPS = "120|140|170|190|210|240";
 
     private CheckBoxPreference mAutoBackup;
     private Preference mBackup;
