@@ -5639,4 +5639,7 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="tiles_per_row_title">Toggles per row</string>
     <string name="tiles_per_row_summary">Choose how many toggles to show per row (SystemUI will restart)</string>
 
+    <string name="vibrate_notif_expand_title">Vibrate on expand</string>
+    <string name="vibrate_notif_expand_summary">Vibrate when expanding notifications (requires UI restart)</string>
+
 </resources>

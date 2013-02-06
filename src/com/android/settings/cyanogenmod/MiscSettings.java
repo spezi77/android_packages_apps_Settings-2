@@ -43,11 +43,13 @@ import com.android.settings.Utils;
     private static final String KEY_HIGH_END_GFX = "high_end_gfx";
     private static final String USE_HIGH_END_GFX_PROP = "persist.sys.use_high_end_gfx";
     private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
+    private static final String PREF_VIBRATE_NOTIF_EXPAND = "vibrate_notif_expand";
 
     private CheckBoxPreference mHighEndGfx;
     private CheckBoxPreference mKillAppLongpressBack;
     private ListPreference mKillAppLongpressTimeout;
     private Preference mRamBar;
+    CheckBoxPreference mVibrateOnExpand;
 
     private ContentResolver mContentResolver;
 
@@ -77,6 +79,10 @@ false));
                  Settings.System.KILL_APP_LONGPRESS_TIMEOUT, 1500);
         mKillAppLongpressTimeout.setValue(String.valueOf(statusKillAppLongpressTimeout));
         mKillAppLongpressTimeout.setSummary(mKillAppLongpressTimeout.getEntry());
+
+	mVibrateOnExpand = (CheckBoxPreference) findPreference(PREF_VIBRATE_NOTIF_EXPAND);
+        mVibrateOnExpand.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.VIBRATE_NOTIF_EXPAND, true));
 
 	mRamBar = findPreference(KEY_RECENTS_RAM_BAR);
         updateRamBar();
@@ -134,6 +140,12 @@ if (preference == mHighEndGfx) {
 SystemProperties.set(USE_HIGH_END_GFX_PROP, mHighEndGfx.isChecked() ? "1" : "0");
         } else if (preference == mKillAppLongpressBack) {
             writeKillAppLongpressBackOptions();
+	} else if (preference == mVibrateOnExpand) {
+            Settings.System.putBoolean(mContext.getContentResolver(),
+                    Settings.System.VIBRATE_NOTIF_EXPAND,
+                    ((CheckBoxPreference) preference).isChecked());
+            Helpers.restartSystemUI();
+            return true;
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);

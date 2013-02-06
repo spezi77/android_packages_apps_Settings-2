@@ -34,6 +34,11 @@ limitations under the License.
             android:summary="@string/high_end_gfx_summary"
             android:defaultValue="true" />
 
+	<CheckBoxPreference
+            android:key="vibrate_notif_expand"
+            android:title="@string/vibrate_notif_expand_title"
+            android:summary="@string/vibrate_notif_expand_summary" />
+
      <ListPreference
             android:key="kill_app_longpress_timeout"
             android:title="@string/kill_app_longpress_timeout"
