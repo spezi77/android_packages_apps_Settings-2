@@ -67,8 +67,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
     private static final String GENERAL_SETTINGS = "pref_general_settings";
     private static final String STATIC_TILES = "static_tiles";
     private static final String DYNAMIC_TILES = "pref_dynamic_tiles";
+    private static final String TILES_PER_ROW = "tiles_per_row";
 
     MultiSelectListPreference mRingMode;
+    ListPreference mTilesPerRow;
     ListPreference mNetworkMode;
     ListPreference mScreenTimeoutMode;
     CheckBoxPreference mDynamicAlarm;
@@ -101,6 +103,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
         mDynamicTiles = (PreferenceCategory) prefSet.findPreference(DYNAMIC_TILES);
         mQuickPulldown = (ListPreference) prefSet.findPreference(QUICK_PULLDOWN);
 	mNoNotificationsPulldown = (CheckBoxPreference) prefSet.findPreference(NO_NOTIFICATIONS_PULLDOWN);
+	mTilesPerRow = (ListPreference) prefSet.findPreference(TILES_PER_ROW);
+        mTilesPerRow.setOnPreferenceChangeListener(this);
         if (!Utils.isPhone(getActivity())) {
             if(mQuickPulldown != null)
                 mGeneralSettings.removePreference(mQuickPulldown);
@@ -293,6 +297,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
                     Settings.System.EXPANDED_SCREENTIMEOUT_MODE, value);
             mScreenTimeoutMode.setSummary(mScreenTimeoutMode.getEntries()[index]);
             return true;
+	} else if (preference == mTilesPerRow) {
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.QUICK_TILES_PER_ROW, val);
+            Helpers.restartSystemUI();
         }
         return false;
     }

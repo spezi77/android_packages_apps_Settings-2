@@ -5636,4 +5636,7 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="expanded_desktop_only_status_bar">Hide status bar</string>
     <string name="expanded_desktop_both_hidden">Hide navigation and status bar</string>
 
+    <string name="tiles_per_row_title">Toggles per row</string>
+    <string name="tiles_per_row_summary">Choose how many toggles to show per row (SystemUI will restart)</string>
+
 </resources>
