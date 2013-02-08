@@ -867,4 +867,5 @@ public class Settings extends PreferenceActivity
     public static class ProfilesSettingsActivity extends Settings { /* empty */ }
     public static class ASSRamBarActivity extends Settings { /* empty */ }
     public static class DaydreamSettingsActivity extends Settings { /* empty */ }
+    public static class QuietHoursSettingsActivity extends Settings { /* empty */ }
 }
