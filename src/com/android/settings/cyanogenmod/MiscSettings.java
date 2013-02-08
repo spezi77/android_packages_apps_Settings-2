@@ -36,6 +36,8 @@ import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.util.Helpers;
+import com.android.settings.util.CMDProcessor;
 
     public class MiscSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
     private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";

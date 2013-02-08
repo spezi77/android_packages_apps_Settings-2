@@ -41,6 +41,7 @@ import com.android.internal.telephony.Phone;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.util.Helpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -88,12 +89,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.quick_settings_panel_settings);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        addPreferencesFromResource(R.xml.quick_settings_panel_settings);
 
         PreferenceScreen prefSet = getPreferenceScreen();
         PackageManager pm = getPackageManager();
@@ -103,8 +104,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
         mDynamicTiles = (PreferenceCategory) prefSet.findPreference(DYNAMIC_TILES);
         mQuickPulldown = (ListPreference) prefSet.findPreference(QUICK_PULLDOWN);
 	mNoNotificationsPulldown = (CheckBoxPreference) prefSet.findPreference(NO_NOTIFICATIONS_PULLDOWN);
-	mTilesPerRow = (ListPreference) prefSet.findPreference(TILES_PER_ROW);
-        mTilesPerRow.setOnPreferenceChangeListener(this);
+
         if (!Utils.isPhone(getActivity())) {
             if(mQuickPulldown != null)
                 mGeneralSettings.removePreference(mQuickPulldown);
@@ -119,6 +119,9 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
 	    mNoNotificationsPulldown.setChecked(Settings.System.getInt(resolver,
                 Settings.System.QS_NO_NOTIFICATION_PULLDOWN, 0) == 1);
         }
+
+	mTilesPerRow = (ListPreference) prefSet.findPreference(TILES_PER_ROW);
+        mTilesPerRow.setOnPreferenceChangeListener(this);
 
         mCollapsePanel = (CheckBoxPreference) prefSet.findPreference(COLLAPSE_PANEL);
         mCollapsePanel.setChecked(Settings.System.getInt(resolver, Settings.System.QS_COLLAPSE_PANEL, 0) == 1);
@@ -303,7 +306,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
                     Settings.System.QUICK_TILES_PER_ROW, val);
             Helpers.restartSystemUI();
         }
-        return false;
+        return true;
     }
 
     private void updateSummary(String val, MultiSelectListPreference pref, int defSummary) {
