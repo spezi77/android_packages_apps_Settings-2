@@ -1657,6 +1657,16 @@
                 <action android:name="android.provider.Contacts.PROFILE_CHANGED" />
             </intent-filter>
         </receiver>
+        
+        <activity
+             android:name=".shortcuts.Shortcuts"
+             android:label="Lockscreen Shortcuts" >
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.android.settings.SHORTCUT" />
+             </intent-filter>
+        </activity>
 
     </application>
 </manifest>

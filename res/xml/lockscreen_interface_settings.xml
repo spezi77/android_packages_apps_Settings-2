@@ -83,11 +83,22 @@
             android:title="@string/lockscreen_use_widget_container_carousel_title"
             android:summary="@string/lockscreen_use_widget_container_carousel_summary" />
 
+     <PreferenceCategory
+        android:key="lockscreen"
+        android:title="LockScreen Custom Apps">
+
      <Preference
         android:fragment="com.android.settings.cyanogenmod.LockscreenTargets"
         android:key="lockscreen_targets"
         android:summary="@string/lockscreen_target_summary"
         android:title="@string/lockscreen_target_title" />
+
+     <PreferenceScreen
+        android:key="lock_screen_shortcuts"
+        android:fragment="com.android.settings.shortcuts.Shortcuts"
+        android:title="@string/lock_screen_shortcuts_title" 
+        android:summary="@string/lock_screen_shortcuts_summary" />
+     </PreferenceCategory>
 
      <PreferenceScreen
         android:fragment="com.android.settings.cyanogenmod.LockscreenButtons"

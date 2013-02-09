@@ -5607,4 +5607,17 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="cyanogenmod_waiver_title">Waiver</string>
     <string name="cyanogenmod_waiver_body">Changing this setting may be against your state or government laws.\n\nIn selecting \'OK\' below, you acknowledge this warning and waive, indemnify and hold harmless CyanogenMod and its contributors from all legal liabilities.</string>
 
+   <!-- Shortcuts -->
+    <string name="lock_screen_shortcuts_title">Static lockscreen shortcuts</string>
+    <string name="lock_screen_shortcuts_summary">Under Clock Line up Shortcuts</string>
+    <string name="lock_screen_shortcuts_add">Add</string>
+    <string name="lock_screen_shortcuts_reset">Reset</string>
+    <string name="lock_screen_shortcuts_reset_message">Reset lock screen shortcuts?</string>
+    <string name="lock_screen_shortcuts_limit">Only 6 shorcuts are allowed!</string>
+    <string name="icon_picker_type">Select icon type:</string>
+    <string name="icon_default">Default</string>
+    <string name="icon_presets">Presets</string>
+    <string name="icon_custom">Custom</string>
+    <string name="choose_app">Choose application</string>
+
 </resources>
