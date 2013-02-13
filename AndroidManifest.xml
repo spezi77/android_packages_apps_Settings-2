@@ -1462,8 +1462,6 @@
             android:launchMode="singleTop"
             android:theme="@style/CryptKeeperBlankTheme"
         />
-        
-        <activity android:name=".beerbong.Settings" />
 
         <!-- CyanogenMod activities Start -->
         <activity android:name=".cyanogenmod.PowerWidget" />
