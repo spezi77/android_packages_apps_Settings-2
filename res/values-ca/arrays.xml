@@ -295,10 +295,4 @@
     <item msgid="5077768429488260031">"No permetis mai"</item>
     <item msgid="1417929597727989746">"Permet sempre"</item>
   </string-array>
-    <string-array name="uimode_entries">
-        <item>Cap</item>
-        <item>PhoneUI</item>
-        <item>PhabletUI</item>
-        <item>TabletUI</item>
-    </string-array>
 </resources>

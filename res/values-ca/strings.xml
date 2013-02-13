@@ -1841,9 +1841,7 @@
     <!-- Visualization settings -->
     <string name="beerbong_visualization_title">UIModes</string>
     <string name="beerbong_visualization_summary">Canvia entre UIModes i DPIs</string>
-    
     <string name="ui_long">UIModes i DPIs</string>
-    
     <string name="dpi_settings_title">Densitat LCD</string>
     <string name="system_dpi_title">Densitat LCD</string>
     <string name="system_dpi_summary">Densitat LCD actual:</string>
@@ -1852,34 +1850,6 @@
     <string name="system_dpi_custom_title">Introduir densitat personalitzada</string>
     <string name="system_dpi_custom_hint">120 a 480</string>
     <string name="system_dpi_custom_summary">Selecciona una densitat personalitzada de 120 a 480</string>
-    
-    <string name="uimode_title">UIMode</string>
-
-    <string name="dpi_groups_title">Grups DPI</string>
-    <string name="dpi_groups_summary">Defineix quines apps han d\'anar a cada grup DPI</string>
-    <string name="dpi_groups_apps">aplicacions</string>
-    <string name="dpi_group_add_app">Afegir aplicació</string>
-    <string name="dpi_group_app_list">Llista d\'aplicacions</string>
-    <string name="dpi_group_alert_add_app_title">Tria una aplicació</string>
-    <string name="dpi_groups_alert_remove_app">Esborrar aplicació</string>
-    <string name="dpi_groups_remove_app">Esborrar l\'aplicació %s del grup?</string>
-    <string name="dpi_groups_backuprestore_title">Còpia i recuperació</string>
-    <string name="dpi_groups_auto_backup">Auto còpia</string>
-    <string name="dpi_groups_auto_backup_summary">Fes una còpia automàtica cada vegada que canvia la configuració</string>
-    <string name="dpi_groups_backup_title">Còpia</string>
-    <string name="dpi_groups_backup_summary">Fes una còpia de seguretat de la teva configuració</string>
-    <string name="dpi_groups_restore_title">Recuperació</string>
-    <string name="dpi_groups_restore_summary">Recupera la teva còpia de la configuració</string>
-    <string name="dpi_groups_backup_done">Còpia de la configuració feta</string>
-    <string name="dpi_groups_restore_done">Arxiu de configuració recuperat</string>
-    <string name="dpi_groups_restore_default_title">Restaurar els grups per defecte</string>
-    <string name="dpi_groups_restore_default_summary">Esborrar els grups personalitzats i deixar els grups per defecte</string>
-    <string name="dpi_groups_delete_title">Esborrar grup DPI</string>
-    <string name="dpi_groups_delete_summary">Vols esborrar aquest grup DPI?</string>
-    <string name="customdpigroup">Afegir grup</string>
-    <string name="customdpigroup_summary">Afegir un grup amb un dpi personalitzat</string>
-    <string name="custom_dpi">Dpi actual:</string>
-    <string name="customdpigroup_group_exists">El grup dpi seleccionat ja existeix.</string>
     
     <string name="alert_reboot">"És necessari reiniciar"</string>
     <string name="alert_reboot_message">"Aquest canvi necessita un reinici per ser aplicat. Vols reiniciar ara?"</string>

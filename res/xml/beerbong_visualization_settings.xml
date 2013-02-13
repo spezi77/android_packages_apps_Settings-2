@@ -28,7 +28,7 @@
             android:title="@string/system_dpi_title"
             android:summary="@string/system_dpi_summary" />
 
-	    <ListPreference
+	    <!--ListPreference
 	        android:entries="@array/uimode_entries"
 	        android:entryValues="@array/uimode_values"
 	        android:key="ui_mode"
@@ -38,7 +38,7 @@
             android:key="dpi_groups"
             android:fragment="com.android.settings.beerbong.DpiGroups"
             android:title="@string/dpi_groups_title"
-            android:summary="@string/dpi_groups_summary" />
+            android:summary="@string/dpi_groups_summary" /-->
 
     </PreferenceCategory>
 

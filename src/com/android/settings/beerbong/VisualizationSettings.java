@@ -73,10 +73,10 @@ public class VisualizationSettings extends SettingsPreferenceFragment implements
     
     private static final String TAG = "BeerbongVisualizationSettings";
 
-    private static final String PREF_UI_MODE = "ui_mode";
+    //private static final String PREF_UI_MODE = "ui_mode";
 
     private PreferenceScreen mDpiScreen;
-    private ListPreference mUimode;
+    //private ListPreference mUimode;
 
     private Context mContext;
 
@@ -92,12 +92,14 @@ public class VisualizationSettings extends SettingsPreferenceFragment implements
 	    mDpiScreen = (PreferenceScreen) findPreference("system_dpi");
 	    updateDensityTextSummary();
 
-        mUimode = (ListPreference) findPreference(PREF_UI_MODE);
+        /*mUimode = (ListPreference) findPreference(PREF_UI_MODE);
 
         int uiMode = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.UI_MODE, 0);
         mUimode.setValue(String.valueOf(uiMode));
         mUimode.setSummary(mUimode.getEntry());
         mUimode.setOnPreferenceChangeListener(this);
+
+        setTabletUI(uiMode == 3);*/
     }
 
     @Override
@@ -108,14 +110,14 @@ public class VisualizationSettings extends SettingsPreferenceFragment implements
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
-        if (PREF_UI_MODE.equals(key)) {
+        /*if (PREF_UI_MODE.equals(key)) {
             int uiMode = Integer.valueOf((String) objValue);
             int index = mUimode.findIndexOfValue((String)objValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.UI_MODE, uiMode);
             mUimode.setSummary(mUimode.getEntries()[index]);
             setTabletUI(uiMode == 3);
             Utils.reboot();
-        }
+        }*/
 
         return true;
     }
@@ -125,4 +127,9 @@ public class VisualizationSettings extends SettingsPreferenceFragment implements
         if (prop == null) prop = Utils.getProperty("ro.sf.lcd_density");
         mDpiScreen.setSummary(getResources().getString(R.string.system_dpi_summary) + " " + prop);
     }
+    /*private void setTabletUI(boolean tabletUI) {
+        if (tabletUI) {
+            Settings.System.putInt(getActivity().getContentResolver(), Settings.System.STATUSBAR_CLOCK_POSITION, 1);
+        }
+    }*/
 }
