@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2010 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/beerbong_settings"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+        <PreferenceScreen
+            android:key="visualization_screen"
+            android:fragment="com.android.settings.beerbong.VisualizationSettings"
+            android:title="@string/beerbong_visualization_title"
+            android:summary="@string/beerbong_visualization_summary" />
+
+        <!--PreferenceScreen
+            android:key="display_screen"
+            android:fragment="com.android.settings.beerbong.DisplaySettings"
+            android:title="@string/beerbong_display_title"
+            android:summary="@string/beerbong_display_summary" />
+
+        <PreferenceScreen
+            android:key="softkeys_screen"
+            android:fragment="com.android.settings.beerbong.NavbarSettings"
+            android:title="@string/softkeys_title"
+            android:summary="@string/softkeys_summary2" />
+
+        <PreferenceScreen
+            android:key="system_screen"
+            android:fragment="com.android.settings.beerbong.SystemSettings"
+            android:title="@string/beerbong_system_title"
+            android:summary="@string/beerbong_system_summary" />
+
+        <PreferenceScreen
+            android:key="toggles_screen"
+            android:fragment="com.android.settings.beerbong.StatusBarToggles"
+            android:title="@string/toggles_layout"
+            android:summary="@string/header_summary_toggles" /-->
+
+</PreferenceScreen>
