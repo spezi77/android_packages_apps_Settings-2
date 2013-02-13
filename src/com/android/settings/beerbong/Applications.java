@@ -16,19 +16,6 @@
 
 package com.android.settings.beerbong;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-
 import android.app.ActivityManagerNative;
 import android.app.IActivityManager;
 import android.app.AlertDialog;
@@ -72,8 +59,6 @@ public class Applications {
             return a1.name.compareTo(a2.name);
         }
     }
-    
-    private static final String BACKUP = "/data/data/com.android.settings/files/properties.conf";
 
     private static final String APPEND_CMD = "echo \"%s=%s\" >> /system/etc/beerbong/properties.conf";
     private static final String REPLACE_CMD = "busybox sed -i \"/%s/ c %<s=%s\" /system/etc/beerbong/properties.conf";
@@ -206,11 +191,8 @@ public class Applications {
     
     public static void backup(Context mContext) {
         Utils.execute(new String[] {
-            "cd /data/data/com.android.settings",
-            "mkdir files",
-            "chmod 777 files",
-            "cp /system/etc/beerbong/properties.conf " + BACKUP,
-            "chmod 644 " + BACKUP
+            "cp /system/etc/beerbong/properties.conf /data/data/com.android.settings/files/properties.conf",
+            "chmod 644 /data/data/com.android.settings/files/properties.conf"
         }, 0);
         Toast.makeText(mContext, R.string.dpi_groups_backup_done, Toast.LENGTH_SHORT).show();
     }
@@ -218,21 +200,21 @@ public class Applications {
     public static void restore(Context mContext) {
         Utils.execute(new String[] {
             Utils.MOUNT_SYSTEM_RW,
-            "cp " + BACKUP + " /system/etc/beerbong/properties.conf",
+            "cp /data/data/com.android.settings/files/properties.conf /system/etc/beerbong/properties.conf",
             "chmod 644 /system/etc/beerbong/properties.conf",
             Utils.MOUNT_SYSTEM_RO
         }, 0);
         Toast.makeText(mContext, R.string.dpi_groups_restore_done, Toast.LENGTH_SHORT).show();
     }
     
-    public static boolean backupExists() {
-        return new File(BACKUP).exists();
-    }
-    
     private static void checkAutoBackup(Context mContext) {
         boolean isAutoBackup = mContext.getSharedPreferences(DpiGroups.PREFS_NAME, 0).getBoolean(DpiGroups.PROPERTY_AUTO_BACKUP, false);
         if (isAutoBackup) {
-            backup(mContext);
+            Utils.execute(new String[] {
+                "cp /system/etc/beerbong/properties.conf /data/data/com.android.settings/files/properties.conf",
+                "chmod 644 /data/data/com.android.settings/files/properties.conf"
+	        }, 0);
+            Toast.makeText(mContext, R.string.dpi_groups_backup_done, Toast.LENGTH_SHORT).show();
         }
     }
     private static boolean mount(String read_value) {
@@ -253,22 +235,5 @@ public class Applications {
             if (app.pack.equals(packageName)) return app;
         }
         return null;
-    }
-    private static String read() throws Exception {
-        StringBuffer sb = new StringBuffer();
-
-        FileInputStream fstream = new FileInputStream("/system/etc/beerbong/properties.conf");
-
-        DataInputStream in = new DataInputStream(fstream);
-        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-        String line = br.readLine();
-
-        while (line != null) {
-
-            sb.append(line + "\n");
-            line = br.readLine();
-
-        }
-        return sb.toString();
     }
 }

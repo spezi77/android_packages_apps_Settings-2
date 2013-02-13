@@ -65,8 +65,6 @@ public class DpiGroups extends SettingsPreferenceFragment {
         
         mAutoBackup.setChecked(isAutoBackup);
         
-        mRestore.setEnabled(Applications.backupExists());
-        
         mCustomDpi.setDpiGroups(this);
    	}
    	
@@ -80,6 +78,7 @@ public class DpiGroups extends SettingsPreferenceFragment {
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mBackup) {
             Applications.backup(mContext);
+            mRestore.setEnabled(true);
         } else if (preference == mRestore) {
             Applications.restore(mContext);
         } else if (preference == mAutoBackup) {
@@ -111,7 +110,6 @@ public class DpiGroups extends SettingsPreferenceFragment {
 
             alert.show();
         }
-        mRestore.setEnabled(Applications.backupExists());
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -125,7 +123,10 @@ public class DpiGroups extends SettingsPreferenceFragment {
     }
     protected void updateGroups() {
     
-        mRestore.setEnabled(Applications.backupExists());
+        long time = System.currentTimeMillis();
+    
+        File f = new File("/data/data/com.android.settings/files/properties.conf");
+        mRestore.setEnabled(f.exists());
         
         updateProperties();
         
