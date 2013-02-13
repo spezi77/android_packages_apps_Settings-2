@@ -57,6 +57,14 @@
         android:breadCrumbTitle="@string/wireless_networks_settings_title"
         android:fragment="com.android.settings.WirelessSettings"
         android:icon="@drawable/empty_icon" />
+        
+    <!-- JellyBeer Settings -->
+    <header android:title="@string/header_category_jellybeer" />
+    <header
+        android:id="@+id/beerbong_settings"
+        android:icon="@drawable/ic_settings_jellybeer"
+        android:fragment="com.android.settings.beerbong.Settings"
+        android:title="@string/beerbong_settings" />
 
     <!-- INTERFACE -->
     <header android:id="@+id/interface_section"

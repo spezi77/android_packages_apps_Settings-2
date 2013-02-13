@@ -2049,19 +2049,33 @@
     <string-array name="entries_dpi_system_window">
         <item>120 dpi</item>
         <item>140 dpi</item>
-        <item>170 dpi</item>
-        <item>190 dpi</item>
-        <item>210 dpi</item>
+        <item>160 dpi</item>
+        <item>180 dpi</item>
+        <item>213 dpi</item>
         <item>240 dpi</item>
     </string-array>
 
     <string-array name="values_dpi_system_window" translatable="false">
         <item>120 dpi</item>
         <item>140 dpi</item>
-        <item>170 dpi</item>
-        <item>190 dpi</item>
-        <item>210 dpi</item>
+        <item>160 dpi</item>
+        <item>180 dpi</item>
+        <item>213 dpi</item>
         <item>240 dpi</item>
+    </string-array>
+    
+    <string-array name="uimode_entries">
+        <item>None</item>
+        <item>PhoneUI</item>
+        <item>PhabletUI</item>
+        <item>TabletUI</item>
+    </string-array>
+    
+    <string-array name="uimode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 
     <!-- Expanded desktop -->

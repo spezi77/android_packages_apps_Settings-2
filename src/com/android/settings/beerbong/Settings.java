@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/* package com.android.settings.beerbong;
+package com.android.settings.beerbong;
 
 import android.os.Bundle;
 import android.preference.Preference;
@@ -38,4 +38,4 @@ public class Settings extends SettingsPreferenceFragment implements Preference.O
     public boolean onPreferenceChange(Preference preference, Object objValue) {
 	    return false;
     }
-} */
+}
