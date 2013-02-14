@@ -5633,5 +5633,12 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="auto_brightness_menu_edit_lux">Ambient brightness range</string>
     <string name="auto_brightness_menu_split">Split</string>
     <string name="auto_brightness_menu_remove">Remove</string>
-    <!-- **** CYANOGENMOD ADDITIONS END **** -->
+
+    <!-- Display : Animation options -->
+    <string name="display_category_animation_options_title">Animation options</string>
+    <string name="system_power_crt_screen_off_title">CRT Screen Off</string>
+    <string name="system_power_crt_screen_off_summary">Screen will animate an Electron Beam when turned off</string>
+    <string name="system_power_crt_screen_on_title">CRT Screen On</string>
+    <string name="system_power_crt_screen_on_summary">Screen will animate an Electron Beam when turned on</string>
+
 </resources>
