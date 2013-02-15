@@ -160,25 +160,4 @@ public class PowerMenu extends SettingsPreferenceFragment implements
 
         return true;
     }
-
-    private void updateExpandedDesktopSummary(int value) {
-        Resources res = getResources();
-
-        if (value == 0) {
-            /* expanded desktop deactivated */
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 0);
-            mExpandedDesktopPref.setSummary(res.getString(R.string.expanded_desktop_disabled));
-        } else if (value == 1) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
-            String statusBarPresent = res.getString(R.string.expanded_desktop_summary_status_bar);
-            mExpandedDesktopPref.setSummary(res.getString(R.string.summary_expanded_desktop, statusBarPresent));
-        } else if (value == 2) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
-            String statusBarPresent = res.getString(R.string.expanded_desktop_summary_no_status_bar);
-            mExpandedDesktopPref.setSummary(res.getString(R.string.summary_expanded_desktop, statusBarPresent));
-        }
-    }
 }
