@@ -611,11 +611,6 @@ public class DevelopmentSettings extends PreferenceFragment
         }
     }
 
-    private void updateKillAppLongpressBackOptions() {
-        mKillAppLongpressBack.setChecked(Settings.Secure.getInt(
-            getActivity().getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
-    }
-
     private void updatePasswordSummary() {
         try {
             if (mBackupManager.hasBackupPassword()) {
