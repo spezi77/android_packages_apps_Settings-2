@@ -76,6 +76,7 @@ public class StatusBarBatteryStyle extends SettingsPreferenceFragment implements
         }
         hexColor = String.format("#%08x", (0xffffffff & intColor));
         mCircleColor.setSummary(hexColor);
+        mCircleColor.setNewPreviewColor(intColor);
 
         mBatteryTextColor = (ColorPickerPreference) findPreference(PREF_STATUS_BAR_BATTERY_TEXT_COLOR);
         mBatteryTextColor.setOnPreferenceChangeListener(this);
@@ -87,6 +88,7 @@ public class StatusBarBatteryStyle extends SettingsPreferenceFragment implements
         }
         hexColor = String.format("#%08x", (0xffffffff & intColor));
         mBatteryTextColor.setSummary(hexColor);
+        mBatteryTextColor.setNewPreviewColor(intColor);
 
         mCircleAnimSpeed = (ListPreference) findPreference(PREF_STATUS_BAR_CIRCLE_BATTERY_ANIMATIONSPEED);
         mCircleAnimSpeed.setOnPreferenceChangeListener(this);
@@ -120,6 +122,7 @@ public class StatusBarBatteryStyle extends SettingsPreferenceFragment implements
                     Settings.System.STATUSBAR_BATTERY_BAR_COLOR, defaultColor);
         hexColor = String.format("#%08x", (0xffffffff & intColor));
         mBatteryBarColor.setSummary(hexColor);
+        mBatteryBarColor.setNewPreviewColor(intColor);
 
         mBatteryBarChargingAnimation = (CheckBoxPreference) findPreference(PREF_BATT_ANIMATE);
         mBatteryBarChargingAnimation.setChecked(Settings.System.getInt(
