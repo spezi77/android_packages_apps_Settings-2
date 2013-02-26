@@ -51,7 +51,7 @@ public class MemoryManagement extends SettingsPreferenceFragment implements
 
     private static final String PURGEABLE_ASSETS_PERSIST_PROP = "persist.sys.purgeable_assets";
 
-    private static final String PURGEABLE_ASSETS_DEFAULT = "0";
+    private static final String PURGEABLE_ASSETS_DEFAULT = "1";
 
     private ListPreference mzRAM;
 
