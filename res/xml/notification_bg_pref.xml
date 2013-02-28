@@ -40,15 +40,4 @@
              android:key="notification_alpha"
              android:title="@string/notif_alpha_title" />
 
-    <PreferenceCategory
-        android:title="@string/notification_shortcuts_grouptitle">
-
-        <PreferenceScreen
-            android:id="@+id/liquid_notification_shortcuts"
-            android:fragment="com.android.settings.notificationshortcut.NotificationShortcuts"
-            android:key="liquid_shortcuts_settings"
-            android:title="@string/notification_shortcuts_settings_title"
-            android:summary="@string/notification_shortcuts_settings_summary" />
-    </PreferenceCategory>
-
 </PreferenceScreen>
