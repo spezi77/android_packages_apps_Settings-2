@@ -5800,4 +5800,6 @@ rience. Better keep it disabled on lower end devices.</string>
     <!-- Notification Behavior Preferences -->
    <string name="notification_behaviour_title">Notification behavior</string>
 
+    <string name="pref_low_battery_warning_policy_title">Low battery warning</string>
+
 </resources>
