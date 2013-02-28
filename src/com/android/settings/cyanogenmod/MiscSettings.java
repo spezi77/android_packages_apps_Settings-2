@@ -141,8 +141,8 @@ if (preference == mKillAppLongpressTimeout) {
             mKillAppLongpressTimeout.setSummary(mKillAppLongpressTimeout.getEntries()[index]);
             return true;
 	} else if (preference == mLowBatteryWarning) {
-            int lowBatteryWarning = Integer.valueOf((String) newValue);
-            int index = mLowBatteryWarning.findIndexOfValue((String) newValue);
+            int lowBatteryWarning = Integer.valueOf((String) objValue);
+            int index = mLowBatteryWarning.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY, lowBatteryWarning);
             mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
