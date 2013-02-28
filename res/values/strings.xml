@@ -5713,4 +5713,7 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="notification_shortcuts_icon_picker_twitter">Twitter</string>
     <string name="notification_shortcuts_icon_picker_unlock">Unlock</string>
 
+    <!-- Notification Behavior Preferences -->
+   <string name="notification_behaviour_title">Notification behavior</string>
+
 </resources>

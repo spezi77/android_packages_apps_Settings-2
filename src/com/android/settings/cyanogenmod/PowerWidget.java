@@ -27,6 +27,7 @@ import java.util.Set;
 
 import android.app.ListFragment;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -65,6 +66,7 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     private static final String ENABLE_TOGGLE_BAR = "enable_toggle_bar";
     private static final String TOGGLE_ICON_ON_COLOR = "toggle_icon_color_on";
     private static final String TOGGLE_ICON_OFF_COLOR = "toggle_icon_color_off";
+    private static final String KEY_NOTIFICATION_BEHAVIOUR = "notifications_behaviour";
 
     private CheckBoxPreference mPowerWidget;
     private CheckBoxPreference mPowerWidgetHideOnChange;
@@ -72,6 +74,9 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     private ListPreference mPowerWidgetHapticFeedback;
     private CheckBoxPreference mEnableToggleColors;
     private CheckBoxPreference mEnableToggleBar;
+    private ListPreference mNotificationsBeh;
+    private ContentResolver mCr;
+    private PreferenceScreen mPrefSet;
 
     private Preference mToggleIconOnColor;
     private Preference mToggleIconOffColor;
@@ -79,6 +84,8 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+	mPrefSet = getPreferenceScreen();
+        mCr = getContentResolver();
 
         if (getPreferenceManager() != null) {
             addPreferencesFromResource(R.xml.power_widget_settings);
@@ -120,6 +127,12 @@ public class PowerWidget extends SettingsPreferenceFragment implements
 
 	    mToggleIconOnColor = (Preference) prefSet.findPreference(TOGGLE_ICON_ON_COLOR);
             mToggleIconOffColor = (Preference) prefSet.findPreference(TOGGLE_ICON_OFF_COLOR);
+
+	    int CurrentBeh = Settings.System.getInt(mCr, Settings.System.NOTIFICATIONS_BEHAVIOUR, 0);
+        mNotificationsBeh = (ListPreference) findPreference(KEY_NOTIFICATION_BEHAVIOUR);
+        mNotificationsBeh.setValue(String.valueOf(CurrentBeh));
+                mNotificationsBeh.setSummary(mNotificationsBeh.getEntry());
+        mNotificationsBeh.setOnPreferenceChangeListener(this);
         }
     }
 
@@ -130,6 +143,13 @@ public class PowerWidget extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.EXPANDED_HAPTIC_FEEDBACK, intValue);
             mPowerWidgetHapticFeedback.setSummary(mPowerWidgetHapticFeedback.getEntries()[index]);
+            return true;
+	} else if (preference == mNotificationsBeh) {
+            String val = (String) newValue;
+                     Settings.System.putInt(mCr, Settings.System.NOTIFICATIONS_BEHAVIOUR,
+            Integer.valueOf(val));
+            int index = mNotificationsBeh.findIndexOfValue(val);
+            mNotificationsBeh.setSummary(mNotificationsBeh.getEntries()[index]);
             return true;
         }
         return false;
