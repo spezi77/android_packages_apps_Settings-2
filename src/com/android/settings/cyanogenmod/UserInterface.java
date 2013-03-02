@@ -84,7 +84,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String DUAL_PANE_PREFS = "dual_pane_prefs";
 
     Preference mCustomBootAnimation;
-    Preference mLcdDensity;
     CheckBoxPreference mUseAltResolver;
     private Preference mCustomLabel;
     CheckBoxPreference mDisableBootAnimation;
@@ -125,16 +124,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 	mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
 
-        mLcdDensity = findPreference("lcd_density_setup");
-        String currentProperty = SystemProperties.get("ro.sf.lcd_density");
-        try {
-            newDensityValue = Integer.parseInt(currentProperty);
-        } catch (Exception e) {
-            getPreferenceScreen().removePreference(mLcdDensity);
-        }
-
-        mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
-
 	mScroller = findPreference("scroll_setup");
         mScroller.setSummary(R.string.scroll_summary);
 
@@ -167,11 +156,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             final Preference preference) {
-        if (preference == mLcdDensity) {
-            ((PreferenceActivity) getActivity())
-            .startPreferenceFragment(new DensityChanger(), true);
-            return true;
-        } else if (preference == mScroller) {
+        if (preference == mScroller) {
             ((PreferenceActivity) getActivity())
                     .startPreferenceFragment(new Scroller(), true);
             return true;
