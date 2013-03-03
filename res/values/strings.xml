@@ -4973,7 +4973,12 @@
     <string name="power_menu_reboot_title">Reboot menu</string>
     <string name="power_menu_screenshot_title">Screenshot</string>
     <string name="power_menu_expanded_desktop">Expanded desktop</string>
-
+    <string name="summary_expanded_desktop">%1$s</string>
+    <string name="expanded_desktop_summary_status_bar">With status bar</string>
+    <string name="expanded_desktop_summary_no_status_bar">Without status bar</string>
+    <string name="expanded_desktop_disabled">Off</string>
+    <string name="expanded_desktop_status_bar">With status bar</string>
+    <string name="expanded_desktop_no_status_bar">Without status bar</string>
     <string name="power_menu_profiles_title">Profile switcher</string>
     <string name="power_menu_airplane_title">Airplane mode</string>
     <string name="power_menu_user_title">User switcher</string>
@@ -5373,13 +5378,6 @@ rience. Better keep it disabled on lower end devices.</string>
    <!-- High End Gfx Effects -->
     <string name="high_end_gfx_title">High end graphic effects</string>
     <string name="high_end_gfx_summary">Enable graphic effects disabled on lower end devices</string>
-    
-    <string name="summary_expanded_desktop">%1$s</string>
-    <string name="expanded_desktop_summary">Show or change expanded desktop mode</string>
-    <string name="expanded_desktop_disabled">Off</string>
-    <string name="expanded_desktop_only_nav_bar">Hide navigation bar</string>
-    <string name="expanded_desktop_only_status_bar">Hide status bar</string>
-    <string name="expanded_desktop_both_hidden">Hide navigation and status bar</string>
 
     <string name="tiles_per_row_title">Tiles per row</string>
     <string name="tiles_per_row_summary">Choose how many tiles to show per row</string>
