@@ -95,10 +95,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static int mLastRandomInsultIndex = -1;
     private String[] mInsults;
 
-    int newDensityValue;
-
     private String mCustomLabelText = null;
-    DensityChanger densityFragment;
     Scroller scrollerFragment;
 
     private Context mContext;

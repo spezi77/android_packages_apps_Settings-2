@@ -4528,7 +4528,7 @@
     <string name="status_bar_transparency_title">Statusbar Transparency</string>
     <string name="status_bar_transparency_summary">Adjust statusbar transparency</string>
 
-    <!--- Navigation bar -->
+    <!--- Navigation bar
     <string name="navigation_bar_title">Navigation bar settings</string>
     <string name="navigation_controls_title">Show Navigation bar</string>
     <string name="dont_show">Show Navigation bar</string>
@@ -4545,7 +4545,7 @@
     <string name="navigation_bar_height_36">36dp</string>
     <string name="navigation_bar_height_32">32dp</string>
     <string name="navigation_bar_height_28">28dp</string>
-    <string name="navigation_bar_height_24">24dp</string>
+    <string name="navigation_bar_height_24">24dp</string> -->
 
     <!--- Kill app longpress back -->
     <string name="kill_app_longpress_timeout">Longpress back kill timeout</string>
