@@ -79,8 +79,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
     private static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
-    private static final String PREF_STATUSBAR_BACKGROUND_STYLE = "statusbar_background_style";
-    private static final String PREF_STATUSBAR_BACKGROUND_COLOR = "statusbar_background_color";
     private static final String STATUS_BAR_DONOTDISTURB = "status_bar_donotdisturb";
 
     private ColorPickerPreference mColorPicker;
@@ -89,9 +87,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private PreferenceScreen mClockStyle;
     private PreferenceCategory mPrefCategoryGeneral;
     private CheckBoxPreference mStatusBarDoNotDisturb;
-
-    ColorPickerPreference mStatusbarBgColor;
-    ListPreference mStatusbarBgStyle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -130,50 +125,10 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             mPrefCategoryGeneral.removePreference(mStatusBarBrightnessControl);
         }
 
-        mStatusbarBgColor = (ColorPickerPreference) prefSet.findPreference(PREF_STATUSBAR_BACKGROUND_COLOR);
-        mStatusbarBgColor.setOnPreferenceChangeListener(this);
-
-        mStatusbarBgStyle = (ListPreference) prefSet.findPreference(PREF_STATUSBAR_BACKGROUND_STYLE);
-        mStatusbarBgStyle.setOnPreferenceChangeListener(this);
-
 	mStatusBarDoNotDisturb = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_DONOTDISTURB);
         mStatusBarDoNotDisturb.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.STATUS_BAR_DONOTDISTURB, 0) == 1));
 
-        updateVisibility();
-    }
-
-    private void updateVisibility() {
-        int visible = Settings.System.getInt(getActivity().getContentResolver(),
-                    Settings.System.STATUSBAR_BACKGROUND_STYLE, 2);
-        if (visible == 2) {
-            mStatusbarBgColor.setEnabled(false);
-        } else {
-            mStatusbarBgColor.setEnabled(true);
-        }
-    }
-
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean result = false;
-         if (preference == mStatusbarBgStyle) {
-            int value = Integer.valueOf((String) newValue);
-            int index = mStatusbarBgStyle.findIndexOfValue((String) newValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUSBAR_BACKGROUND_STYLE, value);
-            preference.setSummary(mStatusbarBgStyle.getEntries()[index]);
-            updateVisibility();
-            return true;
-        } else if (preference == mStatusbarBgColor) {
-            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
-                    .valueOf(newValue)));
-            preference.setSummary(hex);
-
-            int intHex = ColorPickerPreference.convertToColorInt(hex);
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STATUSBAR_BACKGROUND_COLOR, intHex);
-            Log.e("BAKED", intHex + "");
-        }
-        return false;
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {

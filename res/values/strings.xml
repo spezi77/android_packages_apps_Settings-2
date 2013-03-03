@@ -5543,14 +5543,6 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="battery_color_reset_title">Reset battery colors</string>
     <string name="battery_color_reset_summary">Reset battery colors to apply installed theme engine colors</string>
 
-    <string name="statusbar_background_color">Statusbar color</string>
-
-    <string name="background_style">Background Color Style</string>
-    <string name="bgs_color">Color/Alpha only</string>
-    <string name="bgs_defaultbg_plus_color">Default Background + Color/Alpha</string>
-    <string name="bgs_defaultbg">Default Background only</string>
-    <string name="statusbar_bg">Statusbar background</string>
-
     <!-- Scroller options -->
   <string name="scroller_options">Scroller options</string>
         <string name="scroll">Scroller</string>
