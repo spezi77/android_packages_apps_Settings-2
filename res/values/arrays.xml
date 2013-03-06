@@ -1379,6 +1379,19 @@
         <item>10000</item>
     </integer-array>
 
+    <!-- QuickSettings tiles per row -->
+    <string-array name="tiles_per_row_entries" translatable="false">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="tiles_per_row_values" translatable="false">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
     <string-array name="entries_screentimeout_widget">
         <item>15s | 1m | 5m</item>
         <item>30s | 2m | 5m</item>

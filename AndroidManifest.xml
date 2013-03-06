@@ -1563,6 +1563,7 @@
 	<activity android:name=".cyanogenmod.NavBarButtonStyle" />
 	<activity android:name=".cyanogenmod.Pie" />
         <activity android:name=".cyanogenmod.PieColor" />
+	<activity android:name=".cyanogenmod.quicksettings.QuickSettingsTilesStyle" />
 
         <activity
             android:name=".cyanogenmod.DensityChanger"
