@@ -29,13 +29,6 @@
             android:entryValues="@array/quick_pulldown_values"
             android:persistent="false" />
 
-	<ListPreference
-            android:key="tiles_per_row"
-            android:entries="@array/tiles_per_row_entries"
-            android:entryValues="@array/tiles_per_row_values"
-            android:title="@string/tiles_per_row_title"
-            android:summary="@string/tiles_per_row_summary" />
-
         <CheckBoxPreference
             android:key="collapse_panel"
             android:title="@string/title_collapse_panel"

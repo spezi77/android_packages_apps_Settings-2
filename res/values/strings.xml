@@ -5659,9 +5659,6 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="expanded_desktop_only_status_bar">Hide status bar</string>
     <string name="expanded_desktop_both_hidden">Hide navigation and status bar</string>
 
-    <string name="tiles_per_row_title">Tiles per row</string>
-    <string name="tiles_per_row_summary">Choose how many tiles to show per row</string>
-
     <string name="vibrate_notif_expand_title">Vibrate on expand</string>
     <string name="vibrate_notif_expand_summary">Vibrate when expanding notifications (requires UI restart)</string>
 

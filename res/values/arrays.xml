@@ -2259,19 +2259,6 @@
         <item>3</item>
     </string-array>
 
-    <!-- Tiles per row -->
-    <string-array name="tiles_per_row_entries" translatable="false">
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-
-    <string-array name="tiles_per_row_values" translatable="false">
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-
     <!-- Icon type for lockscreen targets. -->
    <string-array name="icon_types">
         <item>@string/icon_default</item>

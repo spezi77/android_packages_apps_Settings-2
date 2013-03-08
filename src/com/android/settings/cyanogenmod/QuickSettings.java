@@ -68,10 +68,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
     private static final String GENERAL_SETTINGS = "pref_general_settings";
     private static final String STATIC_TILES = "static_tiles";
     private static final String DYNAMIC_TILES = "pref_dynamic_tiles";
-    private static final String TILES_PER_ROW = "tiles_per_row";
 
     MultiSelectListPreference mRingMode;
-    ListPreference mTilesPerRow;
     ListPreference mNetworkMode;
     ListPreference mScreenTimeoutMode;
     CheckBoxPreference mDynamicAlarm;
@@ -89,12 +87,12 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.quick_settings_panel_settings);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        addPreferencesFromResource(R.xml.quick_settings_panel_settings);
 
         PreferenceScreen prefSet = getPreferenceScreen();
         PackageManager pm = getPackageManager();
@@ -119,9 +117,6 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
 	    mNoNotificationsPulldown.setChecked(Settings.System.getInt(resolver,
                 Settings.System.QS_NO_NOTIFICATION_PULLDOWN, 0) == 1);
         }
-
-	mTilesPerRow = (ListPreference) prefSet.findPreference(TILES_PER_ROW);
-        mTilesPerRow.setOnPreferenceChangeListener(this);
 
         mCollapsePanel = (CheckBoxPreference) prefSet.findPreference(COLLAPSE_PANEL);
         mCollapsePanel.setChecked(Settings.System.getInt(resolver, Settings.System.QS_COLLAPSE_PANEL, 0) == 1);
@@ -306,13 +301,8 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
                     Settings.System.EXPANDED_SCREENTIMEOUT_MODE, value);
             mScreenTimeoutMode.setSummary(mScreenTimeoutMode.getEntries()[index]);
             return true;
-	} else if (preference == mTilesPerRow) {
-            int val = Integer.parseInt((String) newValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.QUICK_TILES_PER_ROW, val);
-            Helpers.restartSystemUI();
-        }
-        return true;
+	}
+        return false;
     }
 
     private void updateSummary(String val, MultiSelectListPreference pref, int defSummary) {
