@@ -67,10 +67,12 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     private static final String TOGGLE_ICON_ON_COLOR = "toggle_icon_color_on";
     private static final String TOGGLE_ICON_OFF_COLOR = "toggle_icon_color_off";
     private static final String KEY_NOTIFICATION_BEHAVIOUR = "notifications_behaviour";
+    private static final String PREF_NOTIFICATION_SHOW_WIFI_SSID = "notification_show_wifi_ssid";
 
     private CheckBoxPreference mPowerWidget;
     private CheckBoxPreference mPowerWidgetHideOnChange;
     private CheckBoxPreference mPowerWidgetHideScrollBar;
+    private CheckBoxPreference mShowWifiName;
     private ListPreference mPowerWidgetHapticFeedback;
     private CheckBoxPreference mEnableToggleColors;
     private CheckBoxPreference mEnableToggleBar;
@@ -128,6 +130,10 @@ public class PowerWidget extends SettingsPreferenceFragment implements
 	    mToggleIconOnColor = (Preference) prefSet.findPreference(TOGGLE_ICON_ON_COLOR);
             mToggleIconOffColor = (Preference) prefSet.findPreference(TOGGLE_ICON_OFF_COLOR);
 
+	    mShowWifiName = (CheckBoxPreference) findPreference(PREF_NOTIFICATION_SHOW_WIFI_SSID);
+            mShowWifiName.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.NOTIFICATION_SHOW_WIFI_SSID, 0) == 1);
+
 	    int CurrentBeh = Settings.System.getInt(mCr, Settings.System.NOTIFICATIONS_BEHAVIOUR, 0);
         mNotificationsBeh = (ListPreference) findPreference(KEY_NOTIFICATION_BEHAVIOUR);
         mNotificationsBeh.setValue(String.valueOf(CurrentBeh));
@@ -173,6 +179,10 @@ public class PowerWidget extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.EXPANDED_HIDE_SCROLLBAR,
                     value ? 1 : 0);
+	} else if (preference == mShowWifiName) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+Settings.System.NOTIFICATION_SHOW_WIFI_SSID,
+                    mShowWifiName.isChecked() ? 1 : 0);
 	} else if (preference == mEnableToggleColors) {
             value = mEnableToggleColors.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),

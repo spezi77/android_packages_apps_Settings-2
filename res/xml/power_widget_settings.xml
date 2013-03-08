@@ -70,6 +70,13 @@
             android:title="@string/notification_style_title"
             android:summary="@string/notification_style_summary" />
 
+	<CheckBoxPreference
+            android:key="notification_show_wifi_ssid"
+            android:icon="@drawable/ic_rb_notification"
+            android:title="@string/notification_show_wifi_ssid_title"
+            android:summary="@string/notification_show_wifi_ssid_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
