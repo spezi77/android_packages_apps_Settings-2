@@ -5821,9 +5821,8 @@ rience. Better keep it disabled on lower end devices.</string>
 
     <!-- Notification Behavior Preferences -->
    <string name="notification_behaviour_title">Notification behavior</string>
-   <string name="pref_low_battery_warning_policy_title">Low battery warning</string>
-   <string name="notification_show_wifi_ssid_title">Show Wifi network name</string>
-   <string name="notification_show_wifi_ssid_summary">Display the name of the currently connected Wifi network</string>
+
+    <string name="pref_low_battery_warning_policy_title">Low battery warning</string>
 
     <!-- Breathing Notifications -->
    <string name="mms_breath">Breathing SMS</string>
