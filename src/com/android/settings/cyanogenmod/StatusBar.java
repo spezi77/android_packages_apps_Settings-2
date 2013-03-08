@@ -80,6 +80,7 @@ public class StatusBar extends SettingsPreferenceFragment {
     private static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
     private static final String STATUS_BAR_DONOTDISTURB = "status_bar_donotdisturb";
+    private static final String KEY_MMS_BREATH = "mms_breath";
 
     private ColorPickerPreference mColorPicker;
     private CheckBoxPreference mStatusBarBrightnessControl;
@@ -87,6 +88,7 @@ public class StatusBar extends SettingsPreferenceFragment {
     private PreferenceScreen mClockStyle;
     private PreferenceCategory mPrefCategoryGeneral;
     private CheckBoxPreference mStatusBarDoNotDisturb;
+    private CheckBoxPreference mMMSBreath;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,10 @@ public class StatusBar extends SettingsPreferenceFragment {
         mStatusBarNotifCount = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_NOTIF_COUNT);
         mStatusBarNotifCount.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_NOTIF_COUNT, 0) == 1));
+
+	mMMSBreath = (CheckBoxPreference) findPreference(KEY_MMS_BREATH);
+        mMMSBreath.setChecked(Settings.System.getInt(resolver,
+                Settings.System.MMS_BREATH, 0) == 1);
 
         mPrefCategoryGeneral = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_GENERAL);
 
@@ -149,6 +155,9 @@ public class StatusBar extends SettingsPreferenceFragment {
                     Settings.System.STATUS_BAR_DONOTDISTURB,
                     mStatusBarDoNotDisturb.isChecked() ? 1 : 0);
             return true;
+	} else if (preference == mMMSBreath) {
+            Settings.System.putInt(mContext.getContentResolver(), Settings.System.MMS_BREATH, 
+                    mMMSBreath.isChecked() ? 1 : 0);
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

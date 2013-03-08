@@ -38,6 +38,13 @@
             android:fragment="com.android.settings.cyanogenmod.StatusBarSignal"
 	    android:title="@string/status_bar_signal_header" />
 
+	<CheckBoxPreference
+            android:key="mms_breath"
+            android:icon="@drawable/ic_rb_notification_wifi"
+            android:title="@string/mms_breath"
+            android:summary="@string/mms_breath_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
