@@ -29,6 +29,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.DialogInterface;
@@ -93,6 +94,7 @@ public class StatusBar extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+	ContentResolver resolver = getContentResolver();
 
         addPreferencesFromResource(R.xml.status_bar);
 
