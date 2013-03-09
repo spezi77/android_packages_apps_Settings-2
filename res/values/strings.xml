@@ -6026,4 +6026,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="pie_action_power">Screen Off</string>
     <string name="pie_action_notifications">Notifications</string>
     <string name="pie_action_none">None</string>
+
+    <!-- Permissions Management -->
+    <string name="permissions_settings_title">Permissions</string>
 </resources>
