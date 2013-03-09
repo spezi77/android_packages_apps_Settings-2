@@ -78,6 +78,8 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
     private boolean mIsScreenLarge;
 
+    private boolean mCheckPreferences;
+
     private Activity mActivity;
     private ContentResolver mResolver;
     private File wallpaperImage;
@@ -100,6 +102,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     }
 
     private PreferenceScreen createCustomLockscreenView() {
+	mCheckPreferences = false;
         PreferenceScreen prefs = getPreferenceScreen();
         if (prefs != null) {
             prefs.removeAll();
@@ -163,6 +166,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 
         setBatteryStatusSummary();
         updateCustomBackgroundSummary();
+	mCheckPreferences = true;
         return prefs;
     }
 
@@ -210,6 +214,9 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
 	boolean handled = false;
+	if (!mCheckPreferences) {
+            return false;
+        }
         if (preference == mLockscreenTextColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(objValue)));
             preference.setSummary(hex);
