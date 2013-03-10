@@ -5831,4 +5831,24 @@ rience. Better keep it disabled on lower end devices.</string>
    <string name="mms_breath">Breathing SMS</string>
    <string name="mms_breath_summary">Will give your sms notifications a breathing effect on the statusbar.</string>
 
+    <!-- About BeanStalk -->
+    <string name="about_beanstalk_settings_title">About BeanStalk</string>
+    <string name="about_beanstalk">About BeanStalk</string>
+    <string name="about_beanstalk_summary">@null</string>
+    <string name="app_name">BeanStalk</string>
+    <string name="devs">Developer</string>
+    <string name="donate_scotthartbti">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=HUUHRXDXNMZPU</string>
+    <string name="donate_cyanogenmod">http://forum.cyanogenmod.com/donate</string>
+    <string name="donate_aokp">http://aokp.co/</string>
+    <string name="beanstalk">BeanStalk Build</string>
+    <string name="beanstalk_website_title">BeanStalk Blog</string>
+    <string name="beanstalk_website_summary">Find latest news and updates about BeanStalk.</string>
+    <string name="beanstalk_source_title">BeanStalk Sources</string>
+    <string name="beanstalk_source_summary">BeanStalk source can be found at www.github.com/scotthartbti</string>
+    <string name="beanstalk_irc_title">Join me on IRC</string>
+    <string name="beanstalk_irc_summary">#aokp-sgs2 @ irc.freenode.net</string>
+    <string name="beanstalk_facebook_title">Facebook Page</string>
+    <string name="beanstalk_facebook_summary">Subscribe to BeanStalk Facebook page for updates.</string>
+    <string name="title_about">About BeanStalk</string>
+
 </resources>
