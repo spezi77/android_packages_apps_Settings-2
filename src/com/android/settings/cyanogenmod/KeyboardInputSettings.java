@@ -1,5 +1,6 @@
 package com.android.settings.cyanogenmod;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
