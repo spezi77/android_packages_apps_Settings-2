@@ -4588,6 +4588,9 @@
 
     <string name="dialog_indicator_color_title">Select color</string>
 
+    <string name="power_widget_longpress_qs_title">Longpress visibility toggle</string>
+    <string name="power_widget_longpress_qs_summary">Longpress QuickSettings flip button to toggle visibility</string>
+
     <!-- Profiles settings  -->
     <string name="profiles_settings_title">Profiles</string>
     <string name="profiles_general_title">General</string>

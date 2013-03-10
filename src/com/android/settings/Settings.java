@@ -872,6 +872,7 @@ public class Settings extends PreferenceActivity
     public static class WifiDisplaySettingsActivity extends Settings { /* empty */ }
     public static class ApnSettingsActivity extends Settings { /* empty */ }
     public static class ApnEditorActivity extends Settings { /* empty */ }
+    public static class QuickSettingsActivity extends Settings { /* empty */ }
     public static class ProfilesSettingsActivity extends Settings { /* empty */ }
     public static class ASSRamBarActivity extends Settings { /* empty */ }
     public static class DaydreamSettingsActivity extends Settings { /* empty */ }

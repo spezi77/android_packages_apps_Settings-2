@@ -62,6 +62,7 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     private static final String UI_EXP_WIDGET_HIDE_ONCHANGE = "expanded_hide_onchange";
     private static final String UI_EXP_WIDGET_HIDE_SCROLLBAR = "expanded_hide_scrollbar";
     private static final String UI_EXP_WIDGET_HAPTIC_FEEDBACK = "expanded_haptic_feedback";
+    private static final String LONGPRESS_QS_TOGGLE = "longpress_qs_toggle";
     private static final String ENABLE_TOGGLE_COLORS = "enable_toggle_colors";
     private static final String ENABLE_TOGGLE_BAR = "enable_toggle_bar";
     private static final String TOGGLE_ICON_ON_COLOR = "toggle_icon_color_on";
@@ -72,6 +73,7 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     private CheckBoxPreference mPowerWidgetHideOnChange;
     private CheckBoxPreference mPowerWidgetHideScrollBar;
     private ListPreference mPowerWidgetHapticFeedback;
+    private CheckBoxPreference mLongpressQSToggle;
     private CheckBoxPreference mEnableToggleColors;
     private CheckBoxPreference mEnableToggleBar;
     private ListPreference mNotificationsBeh;
@@ -102,6 +104,11 @@ public class PowerWidget extends SettingsPreferenceFragment implements
                     .findPreference(UI_EXP_WIDGET_HAPTIC_FEEDBACK);
             mPowerWidgetHapticFeedback.setOnPreferenceChangeListener(this);
             mPowerWidgetHapticFeedback.setSummary(mPowerWidgetHapticFeedback.getEntry());
+
+	    mLongpressQSToggle = (CheckBoxPreference) findPreference(LONGPRESS_QS_TOGGLE);
+            mLongpressQSToggle.setChecked((Settings.System.getInt(getActivity().getApplicationContext()
+                    .getContentResolver(),
+                    Settings.System.QS_LONGPRESS_PW_TOGGLE, 0) == 1));
 
 	    mEnableToggleColors = (CheckBoxPreference) prefSet.findPreference(ENABLE_TOGGLE_COLORS);
             mEnableToggleBar = (CheckBoxPreference) prefSet.findPreference(ENABLE_TOGGLE_BAR);
@@ -172,6 +179,11 @@ public class PowerWidget extends SettingsPreferenceFragment implements
             value = mPowerWidgetHideScrollBar.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.EXPANDED_HIDE_SCROLLBAR,
+                    value ? 1 : 0);
+	} else if (preference == mLongpressQSToggle) {
+            value = mLongpressQSToggle.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.QS_LONGPRESS_PW_TOGGLE,
                     value ? 1 : 0);
 	} else if (preference == mEnableToggleColors) {
             value = mEnableToggleColors.isChecked();

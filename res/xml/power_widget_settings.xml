@@ -119,6 +119,12 @@
             android:entryValues="@array/haptic_feedback_values"
             android:dependency="expanded_widget" />
 
+	<CheckBoxPreference
+            android:key="longpress_qs_toggle"
+            android:title="@string/power_widget_longpress_qs_title"
+            android:summary="@string/power_widget_longpress_qs_summary"
+            android:dependency="expanded_widget" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

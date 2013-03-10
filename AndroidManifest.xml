@@ -1630,6 +1630,18 @@
         <activity android:name=".cyanogenmod.PieColor" />
 	<activity android:name=".cyanogenmod.quicksettings.QuickSettingsTilesStyle" />
 
+	<!-- Pseudo-activity used to provide an intent-filter entry point to quick settings tiles config -->
+        <activity android:name="Settings$QuickSettingsActivity"
+                android:label="@string/quick_settings_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.settings.cyanogenmod.QuickSettings" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.cyanogenmod.QuickSettings" />
+        </activity>
+
         <activity
             android:name=".cyanogenmod.DensityChanger"
             android:label="@string/lcd_density_wizard" >
