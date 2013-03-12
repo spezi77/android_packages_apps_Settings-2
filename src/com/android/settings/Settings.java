@@ -631,7 +631,7 @@ public class Settings extends PreferenceActivity
             } else if (header.id == R.id.wifi_settings
                     || header.id == R.id.bluetooth_settings
                     || header.id == R.id.profiles_settings
-                    || header.id == R.id.trds_settings) { {
+                    || header.id == R.id.trds_settings) {
                 return HEADER_TYPE_SWITCH;
             } else {
                 return HEADER_TYPE_NORMAL;
@@ -786,9 +786,6 @@ public class Settings extends PreferenceActivity
             mProfileEnabler.pause();
 	    mTRDSEnabler.pause(); 
         }
-	if (header.id == R.id.trds_settings) {
-            mTRDSSwitch.toggle();
-        } 
     }
 
     @Override
@@ -805,6 +802,9 @@ public class Settings extends PreferenceActivity
         } else {
             mLastHeader = header;
         }
+	if (header.id == R.id.trds_settings) {
+            mTRDSSwitch.toggle();
+        } 
     }
 
     @Override
