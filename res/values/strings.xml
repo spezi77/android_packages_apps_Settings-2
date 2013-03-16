@@ -5862,7 +5862,7 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="title_about">About BeanStalk</string>
 
     <!-- TRDS Settings -->
-    <string name="trds_settings_title">Inverted Theme</string> 
+    <string name="trds_settings_title">Dark Stalk</string> 
 
     <!-- Status bar notification icon opacity -->
     <string name="status_bar_icon_opacity">Notification icon opacity</string>
