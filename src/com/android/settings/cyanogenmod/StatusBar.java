@@ -74,14 +74,16 @@ import com.android.settings.util.Helpers;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
-public class StatusBar extends SettingsPreferenceFragment {
+public class StatusBar extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String TAG = "StatusBar";
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
     private static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
     private static final String STATUS_BAR_DONOTDISTURB = "status_bar_donotdisturb";
+    private static final String STATUS_BAR_NOTIF_ICON_OPACITY = "status_bar_icon_opacity"; 
     private static final String KEY_MMS_BREATH = "mms_breath";
+    private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath"; 
 
     private ColorPickerPreference mColorPicker;
     private CheckBoxPreference mStatusBarBrightnessControl;
@@ -89,7 +91,9 @@ public class StatusBar extends SettingsPreferenceFragment {
     private PreferenceScreen mClockStyle;
     private PreferenceCategory mPrefCategoryGeneral;
     private CheckBoxPreference mStatusBarDoNotDisturb;
+    private ListPreference mStatusBarIconOpacity; 
     private CheckBoxPreference mMMSBreath;
+    private CheckBoxPreference mMissedCallBreath; 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,9 +122,19 @@ public class StatusBar extends SettingsPreferenceFragment {
         mStatusBarNotifCount.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_NOTIF_COUNT, 0) == 1));
 
+	mStatusBarIconOpacity = (ListPreference) prefSet.findPreference(STATUS_BAR_NOTIF_ICON_OPACITY);
+        int iconOpacity = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_NOTIF_ICON_OPACITY, 140);
+        mStatusBarIconOpacity.setValue(String.valueOf(iconOpacity));
+        mStatusBarIconOpacity.setOnPreferenceChangeListener(this); 
+
 	mMMSBreath = (CheckBoxPreference) findPreference(KEY_MMS_BREATH);
         mMMSBreath.setChecked(Settings.System.getInt(resolver,
                 Settings.System.MMS_BREATH, 0) == 1);
+
+	mMissedCallBreath = (CheckBoxPreference) findPreference(KEY_MISSED_CALL_BREATH);
+        mMissedCallBreath.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.MISSED_CALL_BREATH, 0) == 1); 
 
         mPrefCategoryGeneral = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_GENERAL);
 
@@ -137,6 +151,17 @@ public class StatusBar extends SettingsPreferenceFragment {
         mStatusBarDoNotDisturb.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.STATUS_BAR_DONOTDISTURB, 0) == 1));
 
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        boolean result = false;
+        if (preference == mStatusBarIconOpacity) {
+            int iconOpacity = Integer.valueOf((String) newValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NOTIF_ICON_OPACITY, iconOpacity);
+            return true;
+        }
+        return false;
     }
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -160,6 +185,11 @@ public class StatusBar extends SettingsPreferenceFragment {
 	} else if (preference == mMMSBreath) {
             Settings.System.putInt(mContext.getContentResolver(), Settings.System.MMS_BREATH, 
                     mMMSBreath.isChecked() ? 1 : 0);
+	    return true;
+	} else if (preference == mMissedCallBreath) {
+            Settings.System.putInt(mContext.getContentResolver(), Settings.System.MISSED_CALL_BREATH, 
+                    mMissedCallBreath.isChecked() ? 1 : 0);
+            return true; 
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
