@@ -1597,9 +1597,9 @@
         <item>@string/status_bar_battery_status_circle_percentage</item>
         <item>@string/status_bar_battery_status_dotted_circle</item>
 	<item>@string/status_bar_battery_status_dotted_circle_percentage</item>
-        <item>@string/status_bar_style_hidden</item>
 	<item>@string/status_bar_battery_status_gear</item>
 	<item>@string/status_bar_battery_status_square</item>
+        <item>@string/status_bar_style_hidden</item>
     </string-array>
 
     <string-array name="values_status_bar_battery" translatable="false">
