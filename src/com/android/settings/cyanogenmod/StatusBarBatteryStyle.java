@@ -293,7 +293,7 @@ public class StatusBarBatteryStyle extends SettingsPreferenceFragment implements
     }
 
     private void updateBatteryIconOptions(int batteryIconStat) {
-        if (batteryIconStat == 0 || batteryIconStat == 7 || batteryIconStat == 8 || batteryIconStat == 9) {
+        if (batteryIconStat == 0 || batteryIconStat == 7 || batteryIconStat == 8 || batteryIconStat == 9 || batteryIconStat == 10) {
             mCircleColor.setEnabled(false);
             mBatteryTextColor.setEnabled(false);
             mBatteryTextChargingColor.setEnabled(false);

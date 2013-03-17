@@ -1599,6 +1599,7 @@
 	<item>@string/status_bar_battery_status_dotted_circle_percentage</item>
 	<item>@string/status_bar_battery_status_gear</item>
 	<item>@string/status_bar_battery_status_square</item>
+	<item>@string/status_bar_battery_status_alt_circle</item>
         <item>@string/status_bar_style_hidden</item>
     </string-array>
 
@@ -1613,6 +1614,7 @@
         <item>7</item>
         <item>8</item>
         <item>9</item>
+        <item>10</item>
     </string-array>
 
     <string-array name="circle_battery_animation_speed_entries" >
