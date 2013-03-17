@@ -5087,7 +5087,8 @@
     <string name="status_bar_battery_status_icon_percentage">Icon with percentage</string>
     <string name="status_bar_battery_status_circle">Circle</string>
     <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
-    <string name="status_bar_battery_status_gear">Circle Gear</string> 
+    <string name="status_bar_battery_status_gear">Circle Gear</string>
+    <string name="status_bar_battery_status_square">Square</string>
 
     <!-- Status bar notification count -->
     <string name="status_bar_notif_count_title">Show notification count</string>
