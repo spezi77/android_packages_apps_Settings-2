@@ -175,7 +175,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 	mDualPanePrefs = (ListPreference) prefs.findPreference(DUAL_PANE_PREFS);
         mDualPanePrefs.setOnPreferenceChangeListener(this);
 
-	setHasOptionsMenu(true);
+	setHasOptionsMenu(true)
 	resetBootAnimation(); 
     }
 
