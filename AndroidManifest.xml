@@ -1214,13 +1214,6 @@
             </intent-filter>
         </receiver>
 
-	<receiver android:name=".service.CodeReceiver">
-            <intent-filter>
-                 <action android:name="android.provider.Telephony.SECRET_CODE" />
-                 <data android:scheme="android_secret_code" android:host="2657" />
-            </intent-filter>
-       </receiver> 
-
         <receiver
             android:name=".bluetooth.DockEventReceiver">
             <intent-filter>
@@ -1800,7 +1793,6 @@ android:value="com.android.settings.notificationshortcut.NotificationShortcuts" 
                 <category android:name="com.android.settings.SHORTCUT" />
              </intent-filter>
         </activity>
-	<service android:name=".service.ExternalCommandService"
-            android:exported="false" /> 
+
     </application>
 </manifest>
