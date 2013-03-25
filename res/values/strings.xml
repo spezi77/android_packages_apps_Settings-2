@@ -5723,6 +5723,9 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="swap_volume_buttons_title">Swap volume buttons</string>
     <string name="swap_volume_buttons_summary">Swap volume buttons when the screen is rotated by 90 or 180 degrees</string>
 
+    <!--  Display settings screen, summary fragment for screen saver options, activate when wirelessly charging -->
+    <string name="screensaver_settings_summary_wireless">While charging wirelessly</string> 
+
     <!-- Automatic brightness customization -->
     <string name="light_sensor_current_value">Current light sensor value: <xliff:g id="light_level">%d</xliff:g> lux</string>
     <string name="auto_brightness_dialog_title">Automatic brightness levels</string>
