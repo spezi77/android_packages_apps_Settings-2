@@ -1623,6 +1623,9 @@
         <activity android:name=".cyanogenmod.StatusBarClockStyle" />
 	<activity android:name=".cyanogenmod.NotificationDrawerStyle" />
 	<activity android:name=".cyanogenmod.RamBar" />
+	<activity android:name=".cyanogenmod.WidgetsConfiguration" />
+        <activity android:name=".cyanogenmod.WidgetsSettings" />
+        <activity android:name=".cyanogenmod.WidgetsStyle" /> 
 	<activity android:name=".cyanogenmod.StatusBarStyle" />
 	<activity android:name=".cyanogenmod.NavBarStyle" />
 	<activity android:name=".cyanogenmod.NavBarButtonStyle" />
