@@ -18,14 +18,18 @@ package com.android.settings.cyanogenmod;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.bluetooth.BluetoothAdapter; 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.nfc.NfcAdapter; 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.provider.Settings;
+import android.util.Log;
+import android.view.LayoutInflater; 
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,13 +40,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.android.internal.telephony.Phone; 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.cyanogenmod.QuickSettingsUtil; 
 import com.android.settings.cyanogenmod.QuickSettingsUtil.TileInfo;
 
 import java.util.ArrayList;
 
 public class QuickSettingsTiles extends Fragment {
+    private static final String TAG = "QuickSettingsTiles"; 
 
     private static final int MENU_RESET = Menu.FIRST;
 
@@ -84,6 +91,7 @@ public class QuickSettingsTiles extends Fragment {
             }
         }
         addTile(R.string.profiles_add, null, R.drawable.ic_menu_add, false);
+	removeUnsupportedTiles(); 
     }
 
     /**
@@ -113,6 +121,64 @@ public class QuickSettingsTiles extends Fragment {
         }
         mDragView.addView(v, newTile ? mDragView.getChildCount() - 1 : mDragView.getChildCount());
     }
+
+    public void removeUnsupportedTiles() {
+        PackageManager pm = getActivity().getPackageManager();
+        ContentResolver resolver = getActivity().getContentResolver();
+        // Don't show mobile data options if not supported
+        boolean isMobileData = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
+        if (!isMobileData) {
+            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_MOBILEDATA);
+            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_WIFIAP);
+            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_NETWORKMODE);
+            QuickSettingsUtil.TILES_DEFAULT.remove(QuickSettingsUtil.TILE_WIFIAP);
+            QuickSettingsUtil.TILES_DEFAULT.remove(QuickSettingsUtil.TILE_MOBILEDATA);
+            QuickSettingsUtil.TILES_DEFAULT.remove(QuickSettingsUtil.TILE_NETWORKMODE);
+        } else {
+            // We have telephony support however, some phones run on networks not supported
+            // by the networkmode tile so remove both it and the associated options list
+            int network_state = -99;
+            try {
+                network_state = Settings.Global.getInt(resolver,
+                        Settings.Global.PREFERRED_NETWORK_MODE);
+            } catch (Settings.SettingNotFoundException e) {
+                Log.e(TAG, "Unable to retrieve PREFERRED_NETWORK_MODE", e);
+            }
+
+            switch (network_state) {
+                // list of supported network modes
+                case Phone.NT_MODE_WCDMA_PREF:
+                case Phone.NT_MODE_WCDMA_ONLY:
+                case Phone.NT_MODE_GSM_UMTS:
+                case Phone.NT_MODE_GSM_ONLY:
+                    break;
+                default:
+                    QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_NETWORKMODE);
+                    break;
+            }
+        }
+
+        // Don't show the bluetooth options if not supported
+        if (BluetoothAdapter.getDefaultAdapter() == null) {
+            QuickSettingsUtil.TILES_DEFAULT.remove(QuickSettingsUtil.TILE_BLUETOOTH);
+        }
+
+        // Dont show the profiles tile if profiles are disabled
+        if (Settings.System.getInt(resolver, Settings.System.SYSTEM_PROFILES_ENABLED, 1) != 1) {
+            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_PROFILE);
+        }
+
+        // Dont show the NFC tile if not supported
+        if (NfcAdapter.getDefaultAdapter(getActivity()) == null) {
+            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_NFC);
+        }
+
+        // Dont show the torch tile if not supported
+        if (!getResources().getBoolean(R.bool.has_led_flash)) {
+            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_TORCH);
+        }
+
+    } 
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
