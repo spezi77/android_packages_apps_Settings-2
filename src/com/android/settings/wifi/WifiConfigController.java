@@ -72,7 +72,6 @@ public class WifiConfigController implements TextWatcher,
     private final AccessPoint mAccessPoint;
 
     private boolean mEdit;
-    private boolean mIbssSupported;
 
     private TextView mSsidView;
     private CheckBox mIbssView;
@@ -143,8 +142,7 @@ public class WifiConfigController implements TextWatcher,
     }
 
     public WifiConfigController(
-            WifiConfigUiBase parent, View view, AccessPoint accessPoint, boolean edit,
-            boolean ibssSupported) {
+            WifiConfigUiBase parent, View view, AccessPoint accessPoint, boolean edit) {
         mConfigUi = parent;
         mInXlSetupWizard = (parent instanceof WifiConfigUiForSetupWizardXL);
 
@@ -153,7 +151,6 @@ public class WifiConfigController implements TextWatcher,
         mAccessPointSecurity = (accessPoint == null) ? AccessPoint.SECURITY_NONE :
                 accessPoint.security;
         mEdit = edit;
-        mIbssSupported = ibssSupported;
 
         mTextViewChangedHandler = new Handler();
         final Context context = mConfigUi.getContext();
@@ -189,9 +186,7 @@ public class WifiConfigController implements TextWatcher,
             showProxyFields();
             mView.findViewById(R.id.wifi_advanced_toggle).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.wifi_advanced_togglebox).setOnClickListener(this);
-
-            if (mIbssSupported)
-                mView.findViewById(R.id.wifi_ibss_toggle).setVisibility(View.VISIBLE);
+            mView.findViewById(R.id.wifi_ibss_toggle).setVisibility(View.VISIBLE);
 
             mConfigUi.setSubmitButton(context.getString(R.string.wifi_save));
         } else {

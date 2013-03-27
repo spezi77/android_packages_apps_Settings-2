@@ -30,7 +30,6 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
     static final int BUTTON_FORGET = DialogInterface.BUTTON_NEUTRAL;
 
     private final boolean mEdit;
-    private final boolean mIbssSupported;
     private final DialogInterface.OnClickListener mListener;
     private final AccessPoint mAccessPoint;
 
@@ -38,10 +37,9 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
     private WifiConfigController mController;
 
     public WifiDialog(Context context, DialogInterface.OnClickListener listener,
-            AccessPoint accessPoint, boolean edit, boolean ibssSupported) {
+            AccessPoint accessPoint, boolean edit) {
         super(context, R.style.Theme_WifiDialog);
         mEdit = edit;
-        mIbssSupported = ibssSupported;
         mListener = listener;
         mAccessPoint = accessPoint;
     }
@@ -56,7 +54,7 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, null);
         setView(mView);
         setInverseBackgroundForced(true);
-        mController = new WifiConfigController(this, mView, mAccessPoint, mEdit, mIbssSupported);
+        mController = new WifiConfigController(this, mView, mAccessPoint, mEdit);
         super.onCreate(savedInstanceState);
         /* During creation, the submit button can be unavailable to determine
          * visibility. Right after creation, update button visibility */
