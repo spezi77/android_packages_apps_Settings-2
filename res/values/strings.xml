@@ -5907,4 +5907,8 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="status_bar_icon_opacity">Notification icon opacity</string>
     <string name="status_bar_icon_opacity_summary">Sets opacity of status bar notification icons</string>     
 
+    <!-- Lock volume keys -->
+    <string name="sound_lock_volume_keys_title">Lock volume keys</string>
+    <string name="sound_lock_volume_keys_summary">Prevents accidental unset of silent mode by pressing volume keys</string>
+
 </resources>

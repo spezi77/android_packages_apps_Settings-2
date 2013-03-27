@@ -73,6 +73,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_MUSICFX = "musicfx";
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
+    private static final String KEY_LOCK_VOLUME_KEYS = "lock_volume_keys"; 
     private static final String KEY_HAPTIC_FEEDBACK = "haptic_feedback";
     private static final String KEY_EMERGENCY_TONE = "emergency_tone";
     private static final String KEY_SOUND_SETTINGS = "sound_settings";
@@ -111,6 +112,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mHapticFeedback;
     private CheckBoxPreference mVolumeAdjustSounds;
+    private CheckBoxPreference mLockVolumeKeys;
     private Preference mMusicFx;
     private CheckBoxPreference mLockSounds;
     private CheckBoxPreference mVolBtnMusicCtrl;
@@ -213,6 +215,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mVibrateWhenRinging.setPersistent(false);
         mVibrateWhenRinging.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VIBRATE_WHEN_RINGING, 0) != 0);
+
+	mLockVolumeKeys = (CheckBoxPreference) findPreference(KEY_LOCK_VOLUME_KEYS);
+        mLockVolumeKeys.setChecked(Settings.System.getInt(resolver,
+                Settings.System.LOCK_VOLUME_KEYS, 0) != 0); 
 
         mDtmfTone = (CheckBoxPreference) findPreference(KEY_DTMF_TONE);
         mDtmfTone.setPersistent(false);
@@ -425,6 +431,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mDtmfTone) {
             Settings.System.putInt(getContentResolver(), Settings.System.DTMF_TONE_WHEN_DIALING,
                     mDtmfTone.isChecked() ? 1 : 0);
+
+	} else if (preference == mLockVolumeKeys) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCK_VOLUME_KEYS,
+                    mLockVolumeKeys.isChecked() ? 1 : 0); 
 
         } else if (preference == mSoundEffects) {
             if (mSoundEffects.isChecked()) {
