@@ -23,11 +23,6 @@ limitations under the License.
         android:fragment="com.android.settings.cyanogenmod.KeyboardInputSettings"
         android:title="@string/title_keyboard_input" />
 
-        <CheckBoxPreference
-            android:key="kill_app_longpress_back"
-            android:title="@string/kill_app_longpress_back"
-            android:summary="@string/kill_app_longpress_back_summary"/>
-
 	<CheckBoxPreference
             android:key="high_end_gfx"
             android:title="@string/high_end_gfx_title"
@@ -45,13 +40,6 @@ limitations under the License.
             android:entries="@array/pref_low_battery_warning_policy_entries"
             android:entryValues="@array/pref_low_battery_warning_policy_values"
             android:defaultValue="3" />
-
-     <ListPreference
-            android:key="kill_app_longpress_timeout"
-            android:title="@string/kill_app_longpress_timeout"
-            android:persistent="false"
-            android:entries="@array/kill_app_longpress_timeout_entries"
-            android:entryValues="@array/kill_app_longpress_timeout_values" />
 
      <PreferenceScreen
             android:key="recents_ram_bar"

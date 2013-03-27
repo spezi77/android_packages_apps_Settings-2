@@ -40,8 +40,6 @@ import com.android.settings.util.Helpers;
 import com.android.settings.util.CMDProcessor;
 
     public class MiscSettings extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
-    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
-    private static final String KEY_KILL_APP_LONGPRESS_TIMEOUT = "kill_app_longpress_timeout";
     private static final String KEY_HIGH_END_GFX = "high_end_gfx";
     private static final String USE_HIGH_END_GFX_PROP = "persist.sys.use_high_end_gfx";
     private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
@@ -49,8 +47,6 @@ import com.android.settings.util.CMDProcessor;
     private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
 
     private CheckBoxPreference mHighEndGfx;
-    private CheckBoxPreference mKillAppLongpressBack;
-    private ListPreference mKillAppLongpressTimeout;
     private Preference mRamBar;
     CheckBoxPreference mVibrateOnExpand;
     private ListPreference mLowBatteryWarning;
@@ -73,16 +69,6 @@ import com.android.settings.util.CMDProcessor;
                 mHighEndGfx.setChecked(SystemProperties.getBoolean(USE_HIGH_END_GFX_PROP,
 false));
             }
-
-        mKillAppLongpressBack = (CheckBoxPreference) findPreference(KILL_APP_LONGPRESS_BACK);
-
-        mKillAppLongpressTimeout = (ListPreference) findPreference(KEY_KILL_APP_LONGPRESS_TIMEOUT);
-        mKillAppLongpressTimeout.setOnPreferenceChangeListener(this);
-
-        int statusKillAppLongpressTimeout = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                 Settings.System.KILL_APP_LONGPRESS_TIMEOUT, 1500);
-        mKillAppLongpressTimeout.setValue(String.valueOf(statusKillAppLongpressTimeout));
-        mKillAppLongpressTimeout.setSummary(mKillAppLongpressTimeout.getEntry());
 
 	mLowBatteryWarning = (ListPreference) findPreference(KEY_LOW_BATTERY_WARNING_POLICY);
         int lowBatteryWarning = Settings.System.getInt(getActivity().getContentResolver(),
@@ -111,7 +97,6 @@ false));
     @Override
     public void onResume() {
         super.onResume();
-        updateKillAppLongpressBackOptions();
 	updateRamBar();
     }
 
@@ -121,26 +106,8 @@ false));
         updateRamBar();
      }
 
-    private void writeKillAppLongpressBackOptions() {
-        Settings.System.putInt(getActivity().getContentResolver(),
-                Settings.System.KILL_APP_LONGPRESS_BACK,
-                mKillAppLongpressBack.isChecked() ? 1 : 0);
-    }
-
-    private void updateKillAppLongpressBackOptions() {
-        mKillAppLongpressBack.setChecked(Settings.System.getInt(
-            getActivity().getContentResolver(), Settings.System.KILL_APP_LONGPRESS_BACK, 0) != 0);
-    }
-
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-if (preference == mKillAppLongpressTimeout) {
-            int statusKillAppLongpressTimeout = Integer.valueOf((String) objValue);
-            int index = mKillAppLongpressTimeout.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.KILL_APP_LONGPRESS_TIMEOUT, statusKillAppLongpressTimeout);
-            mKillAppLongpressTimeout.setSummary(mKillAppLongpressTimeout.getEntries()[index]);
-            return true;
-	} else if (preference == mLowBatteryWarning) {
+	if (preference == mLowBatteryWarning) {
             int lowBatteryWarning = Integer.valueOf((String) objValue);
             int index = mLowBatteryWarning.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getContentResolver(),
@@ -156,8 +123,6 @@ if (preference == mKillAppLongpressTimeout) {
         boolean value;
 if (preference == mHighEndGfx) {
 SystemProperties.set(USE_HIGH_END_GFX_PROP, mHighEndGfx.isChecked() ? "1" : "0");
-        } else if (preference == mKillAppLongpressBack) {
-            writeKillAppLongpressBackOptions();
 	} else if (preference == mVibrateOnExpand) {
             Settings.System.putBoolean(mContext.getContentResolver(),
                     Settings.System.VIBRATE_NOTIF_EXPAND,
