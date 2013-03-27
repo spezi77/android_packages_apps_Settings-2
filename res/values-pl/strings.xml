@@ -2231,7 +2231,7 @@
 
     <!-- Notification light dialogs -->
     <string name="edit_light_settings">Edytuj ustawienia diody</string>
-    <string name="pulse_sed_title">Długość impulsu i szybkość migania</string>
+    <string name="pulse_speed_title">Długość impulsu i szybkość migania</string>
     <string name="picker_arrow">→</string>
     <string name="default_time">Normalna</string>
     <string name="custom_time">Własna</string>
@@ -2593,6 +2593,11 @@
     <string name="navring_action_torch">Przełącznik latarki</string>
     <string name="navring_action_google_now">Google Now</string>
     <string name="navring_choose_action_title">Wybierz akcję</string>
+
+    <!-- Sound settings screen, setting check box label -->
+    <string name="volume_adjust_sounds_enable_title">Dźwięk regulacji głośności</string>
+    <!-- Sound settings screen, setting check box summary -->
+    <string name="volume_adjust_sounds_enable_summary">Odtwarzaj dźwięk podczas regulacji głośności za pomocą przycisków</string>
 
     <!-- **** CYANOGENMOD ADDITIONS END **** -->
 </resources>
