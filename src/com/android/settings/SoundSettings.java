@@ -42,6 +42,7 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
+import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
@@ -93,6 +94,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
     private static final String PREF_LESS_NOTIFICATION_SOUNDS = "less_notification_sounds";
 
+    private static final String KEY_CAMERA_SOUNDS = "camera_sounds";
+    private static final String PROP_CAMERA_SOUND = "persist.sys.camera-sound"; 
+
     private static final String RING_MODE_NORMAL = "normal";
     private static final String RING_MODE_VIBRATE = "vibrate";
     private static final String RING_MODE_MUTE = "mute";
@@ -136,6 +140,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     // To track whether a confirmation dialog was clicked.
     private boolean mDialogClicked;
     private Dialog mWaiverDialog;
+    private CheckBoxPreference mCameraSounds; 
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -215,6 +220,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mVibrateWhenRinging.setPersistent(false);
         mVibrateWhenRinging.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VIBRATE_WHEN_RINGING, 0) != 0);
+
+	mCameraSounds = (CheckBoxPreference) findPreference(KEY_CAMERA_SOUNDS);
+        mCameraSounds.setPersistent(false);
+        mCameraSounds.setChecked(SystemProperties.getBoolean(PROP_CAMERA_SOUND, true)); 
 
 	mLockVolumeKeys = (CheckBoxPreference) findPreference(KEY_LOCK_VOLUME_KEYS);
         mLockVolumeKeys.setChecked(Settings.System.getInt(resolver,
@@ -435,6 +444,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 	} else if (preference == mLockVolumeKeys) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCK_VOLUME_KEYS,
                     mLockVolumeKeys.isChecked() ? 1 : 0); 
+
+	} else if (preference == mCameraSounds) {
+            SystemProperties.set(PROP_CAMERA_SOUND, mCameraSounds.isChecked() ? "1" : "0"); 
 
         } else if (preference == mSoundEffects) {
             if (mSoundEffects.isChecked()) {
