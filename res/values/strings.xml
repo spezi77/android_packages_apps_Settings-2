@@ -4983,6 +4983,7 @@
     <string name="title_toggle_brightness">Toggle Brightness</string>
     <string name="title_toggle_sync">Toggle Sync</string>
     <string name="title_toggle_reboot">Toggle Reboot (LongPress to Recovery)</string>
+    <string name="title_toggle_fcharge">Toggle Fast Charge</string> 
     <string name="title_toggle_wifiap">Toggle Wi-Fi AP</string>
     <string name="title_toggle_screentimeout">Toggle Screen timeout</string>
     <string name="title_toggle_mobiledata">Toggle Mobile data</string>
@@ -5189,10 +5190,13 @@
     <string name="title_tile_wimax">WiMAX</string>
     <string name="title_tile_user">User switcher</string>
     <string name="title_tile_networkmode">Network mode</string>
+    <string name="title_tile_mobilenetwork">Mobile network</string>
     <string name="title_tile_nfc">NFC</string>
+    <string name="title_tile_expanded_desktop">Expanded desktop</string> 
     <string name="title_tile_screen_timeout">Screen timeout</string>
     <string name="title_toggle_favcontact">Toggle Favorite Contact</string>
     <string name="title_tile_favcontact">Favorite Contact</string>
+    <string name="title_tile_fcharge">Fast charge</string> 
     <string name="title_tile_usb_tether">USB Tether</string>
     <string name="title_tile_volume">Volume</string>
     <string name="title_tile_quiet_hours">Quiet hours</string>
@@ -5920,5 +5924,8 @@ rience. Better keep it disabled on lower end devices.</string>
     <!-- Lock volume keys -->
     <string name="sound_lock_volume_keys_title">Lock volume keys</string>
     <string name="sound_lock_volume_keys_summary">Prevents accidental unset of silent mode by pressing volume keys</string>
+
+    <string name="title_toggle_favcontact">Toggle Favorite Contact</string>
+    <string name="title_tile_favcontact">Favorite Contact</string>
 
 </resources>
