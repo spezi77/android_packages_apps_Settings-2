@@ -63,7 +63,6 @@ public class QuickSettingsUtil {
     public static final String TILE_QUIETHOURS = "toggleQuietHours";
     public static final String TILE_REBOOT = "toggleReboot"; 
     public static final String TILE_FAVCONTACT = "toggleFavoriteContact"; 
-    public static final String TILE_FCHARGE = "toggleFCharge";
     public static final String TILE_EXPANDED_DESKTOP = "toggleExpandedDesktop";
 
     private static final String TILE_DELIMITER = "|";
@@ -168,9 +167,6 @@ public class QuickSettingsUtil {
 	TILES.put(TILE_EXPANDED_DESKTOP, new QuickSettingsUtil.TileInfo(
                 TILE_EXPANDED_DESKTOP, R.string.title_tile_expanded_desktop,
                 "com.android.systemui:drawable/ic_qs_expanded_desktop_off", true));
-	TILES.put(TILE_FCHARGE, new QuickSettingsUtil.TileInfo(
-                TILE_FCHARGE, R.string.title_tile_fcharge,
-                "com.android.systemui:drawable/ic_qs_fcharge_off", true)); 
 	TILES.put(TILE_FAVCONTACT, new QuickSettingsUtil.TileInfo(
                 TILE_FAVCONTACT, R.string.title_tile_favcontact,
                 "com.android.systemui:drawable/ic_qs_fav_contact", false));  

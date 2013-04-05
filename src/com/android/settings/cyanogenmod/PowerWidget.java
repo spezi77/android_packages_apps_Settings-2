@@ -70,9 +70,6 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     private static final String TOGGLE_ICON_OFF_COLOR = "toggle_icon_color_off";
     private static final String KEY_NOTIFICATION_BEHAVIOUR = "notifications_behaviour";
 
-    public static final String FAST_CHARGE_DIR = "/sys/kernel/fast_charge";
-    public static final String FAST_CHARGE_FILE = "force_fast_charge"; 
-
     private CheckBoxPreference mPowerWidget;
     private CheckBoxPreference mPowerWidgetHideOnChange;
     private CheckBoxPreference mPowerWidgetHideScrollBar;
@@ -354,12 +351,6 @@ public class PowerWidget extends SettingsPreferenceFragment implements
                 PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_WIFIAP);
                 prefButtonsModes.removePreference(mNetworkMode);
             }
-
-	    // Dont show fast charge option if not supported
-            File fastcharge = new File(FAST_CHARGE_DIR, FAST_CHARGE_FILE);
-            if (!fastcharge.exists()) {
-                PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_FCHARGE);
-            } 
 
             // fill that checkbox map!
             for (PowerWidgetUtil.ButtonInfo button : PowerWidgetUtil.BUTTONS.values()) {
