@@ -65,6 +65,7 @@ public class QuickSettingsUtil {
     public static final String TILE_QUIETHOURS = "toggleQuietHours";
     public static final String TILE_REBOOT = "toggleReboot"; 
     public static final String TILE_FAVCONTACT = "toggleFavoriteContact"; 
+    public static final String TILE_FCHARGE = "toggleFCharge";
 
     private static final String TILE_DELIMITER = "|";
     protected static ArrayList<String> TILES_DEFAULT = new ArrayList<String>();
@@ -163,6 +164,9 @@ public class QuickSettingsUtil {
         TILES.put(TILE_DAYDREAM, new QuickSettingsUtil.TileInfo(
                 TILE_DAYDREAM, R.string.screensaver_settings_title,
                 "com.android.systemui:drawable/ic_qs_clock_circle"));
+	TILES.put(TILE_FCHARGE, new QuickSettingsUtil.TileInfo(
+                TILE_FCHARGE, R.string.title_tile_fcharge,
+                "com.android.systemui:drawable/ic_qs_fcharge_off", true)); 
 	TILES.put(TILE_FAVCONTACT, new QuickSettingsUtil.TileInfo(
                 TILE_FAVCONTACT, R.string.title_tile_favcontact,
                 "com.android.systemui:drawable/ic_qs_default_user")); 
