@@ -19,12 +19,19 @@ package com.android.settings.cyanogenmod;
 import android.content.ContentResolver;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.contact.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.util.Log; 
 import android.view.LayoutInflater;
 import android.provider.Settings;
 import android.view.Menu;
@@ -42,6 +49,8 @@ import com.android.settings.Utils;
 import com.android.settings.cyanogenmod.QuickSettingsUtil.TileInfo;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.StringTokenizer; 
 
 public class QuickSettingsTiles extends Fragment {
 
@@ -51,8 +60,11 @@ public class QuickSettingsTiles extends Fragment {
     private ViewGroup mContainer;
     LayoutInflater mInflater;
     Resources mSystemUiResources;
+    SharedPreferences prefs;
+    Resources res; 
     TileAdapter mTileAdapter;
     static ArrayList<String> curr; 
+    Context mContext; 
 
     private int mTileTextSize;
 
@@ -61,12 +73,16 @@ public class QuickSettingsTiles extends Fragment {
         mDragView = new DraggableGridView(getActivity(), null);
         mContainer = container;
         mInflater = inflater;
-        PackageManager pm = getActivity().getPackageManager();
+        mContext = getActivity();
+        PackageManager pm = mContext.getPackageManager();
+        res = mContext.getResources();
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if (pm != null) {
             try {
                 mSystemUiResources = pm.getResourcesForApplication("com.android.systemui");
             } catch (Exception e) {
                 mSystemUiResources = null;
+		Log.e("QuickSettingsTiles", "can't access systemui resources",e); 
             }
         }
         int colCount = Settings.System.getInt(getActivity().getContentResolver(),
@@ -75,16 +91,37 @@ public class QuickSettingsTiles extends Fragment {
         return mDragView;
     }
 
-    void genTiles() {
-        mDragView.removeAllViews();
-        ArrayList<String> tiles = QuickSettingsUtil.getTileListFromString(QuickSettingsUtil.getCurrentTiles(getActivity()));
-        for (String tileindex : tiles) {
-            QuickSettingsUtil.TileInfo tile = QuickSettingsUtil.TILES.get(tileindex);
-            if (tile != null) {
-                addTile(tile.getTitleResId(), tile.getIcon(), 0, false);
+    void cleanTilesContent(ArrayList<String> tiles){
+        Map<String, ?> allContacts = prefs.getAll();
+        for (String tileID : allContacts.keySet()){
+            if (!tiles.contains(tileID)){
+                prefs.edit().remove(tileID).apply();
             }
         }
-        addTile(R.string.profiles_add, null, R.drawable.ic_menu_add, false);
+    } 
+
+    void genTiles() {
+        mDragView.removeAllViews();
+        ArrayList<String> tiles = QuickSettingsUtil.getTileListFromString(QuickSettingsUtil.getCurrentTiles(mContext));
+        cleanTilesContent(tiles); 
+        for (String tileindex : tiles) {
+            StringTokenizer st = new StringTokenizer(tileindex,"+");
+            QuickSettingsUtil.TileInfo tile = QuickSettingsUtil.TILES.get(st.nextToken());
+            String tileID;
+            String tileString = res.getString(tile.getTitleResId());
+            if (st.hasMoreTokens()) {
+                tileID = st.nextToken();
+                if (tileindex.startsWith(QuickSettingsUtil.TILE_FAVCONTACT)){
+                    String newTileString = prefs.getString(tileindex, null);
+                    if (newTileString != null) tileString = newTileString;
+                    else tileString += " "+tileID;
+                }
+            } 
+            if (tile != null) {
+                addTile(tileString, tile.getIcon(), 0, false); 
+            }
+        }
+        addTile(res.getString(R.string.profiles_add), null, R.drawable.ic_menu_add, false); 
     }
 
     /**
@@ -94,7 +131,7 @@ public class QuickSettingsTiles extends Fragment {
      * @param iconRegId - resource id for icon in local package
      * @param newTile - whether a new tile is being added by user
      */
-    void addTile(int titleId, String iconSysId, int iconRegId, boolean newTile) {
+    void addTile(String titleId, String iconSysId, int iconRegId, boolean newTile) { 
         View v = (View) mInflater.inflate(R.layout.qs_tile, null, false);
         TextView name = (TextView) v.findViewById(R.id.qs_text);
         name.setText(titleId);
@@ -119,6 +156,8 @@ public class QuickSettingsTiles extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         genTiles();
+	SettingsObserver settingsObserver = new SettingsObserver(new Handler());
+        settingsObserver.observe(); 
         mDragView.setOnRearrangeListener(new OnRearrangeListener() {
             public void onRearrange(int oldIndex, int newIndex) {
                 ArrayList<String> tiles = QuickSettingsUtil.getTileListFromString(QuickSettingsUtil.getCurrentTiles(getActivity()));
@@ -145,15 +184,22 @@ public class QuickSettingsTiles extends Fragment {
                 builder.setTitle(R.string.tile_choose_title)
                 .setAdapter(mTileAdapter, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, final int position) {
+                        final TileInfo info = QuickSettingsUtil.TILES.get(mTileAdapter.getTileId(position)); 
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                curr.add(mTileAdapter.getTileId(position));
+                                int tileOccurencesCount=1;
+                                for (int i=0; i<curr.size();i++)
+                                    if (curr.get(i).startsWith(info.getId())) tileOccurencesCount++;
+                                info.setOccurences(tileOccurencesCount);
+                                if (!info.isSingleton()) curr.add(info.getId()"+"+tileOccurencesCount);
+                                else curr.add(info.getId()); 
                                 QuickSettingsUtil.saveCurrentTiles(getActivity(), QuickSettingsUtil.getTileStringFromList(curr));
                             }
                         }).start();
-                        TileInfo info = QuickSettingsUtil.TILES.get(mTileAdapter.getTileId(position));
-                        addTile(info.getTitleResId(), info.getIcon(), 0, true);
+                        String tileNameDisplay = res.getString(info.getTitleResId());
+                        if (!info.isSingleton()) tileNameDisplay += " "+info.getOccurences();
+                        addTile(tileNameDisplay, info.getIcon(), 0, true); 
                     }
                 });
                 builder.create().show();
@@ -263,4 +309,29 @@ public class QuickSettingsTiles extends Fragment {
         public abstract void onRearrange(int oldIndex, int newIndex);
         public abstract void onDelete(int index);
     }
+
+    class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QUICK_SETTINGS_TILE_CONTENT), false, this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            //null pointer exception here for the first contact. Needs more investigations
+            String tileContent = Settings.System.getString(
+                    mContext.getContentResolver(), Settings.System.QUICK_SETTINGS_TILE_CONTENT);
+            StringTokenizer st = new StringTokenizer(tileContent,"|");
+            String tile = st.nextToken();
+            String name = st.nextToken();
+            Log.e("QuickSettingsTiles","putting into prefs: "+tile+" , "+name);
+            prefs.edit().putString(tile, name).apply();
+            genTiles();
+        }
+    } 
 }

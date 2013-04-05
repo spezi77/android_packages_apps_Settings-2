@@ -20,9 +20,7 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 
 import android.content.Context;
-import android.net.wimax.WimaxHelper;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -168,7 +166,7 @@ public class QuickSettingsUtil {
                 "com.android.systemui:drawable/ic_qs_fcharge_off", true)); 
 	TILES.put(TILE_FAVCONTACT, new QuickSettingsUtil.TileInfo(
                 TILE_FAVCONTACT, R.string.title_tile_favcontact,
-                "com.android.systemui:drawable/ic_qs_default_user", false)); 
+                "com.android.systemui:drawable/ic_qs_fav_contact", false));  
 
 // These toggles are not available yet.  Comment out for now
 //        if(PhoneConstants.LTE_ON_CDMA_TRUE == TelephonyManager.getDefault().getLteOnCdmaMode() ||
@@ -247,6 +245,7 @@ public class QuickSettingsUtil {
         private int mTitleResId;
         private String mIcon;
 	private boolean mSingleton;
+	private int occurences = 0; 
 
         public TileInfo(String id, int titleResId, String icon, boolean singleton) {
             mId = id;
@@ -270,5 +269,13 @@ public class QuickSettingsUtil {
         public String getIcon() {
             return mIcon;
         }
+
+	public void setOccurences(int nb){
+            this.occurences = nb;
+        }
+
+        public int getOccurences(){
+            return occurences;
+        } 
     }
 }
