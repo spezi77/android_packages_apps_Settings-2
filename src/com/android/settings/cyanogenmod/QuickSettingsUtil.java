@@ -54,6 +54,7 @@ public class QuickSettingsUtil {
     public static final String TILE_AIRPLANE = "toggleAirplane";
     public static final String TILE_TORCH = "toggleFlashlight";
     public static final String TILE_SLEEP = "toggleSleepMode";
+    public static final String TILE_DAYDREAM = "toggleDaydream";
     public static final String TILE_LTE = "toggleLte";
     public static final String TILE_WIMAX = "toggleWimax";
     public static final String TILE_PROFILE = "toggleProfile";
@@ -106,6 +107,9 @@ public class QuickSettingsUtil {
         TILES.put(TILE_SLEEP, new QuickSettingsUtil.TileInfo(
                 TILE_SLEEP, R.string.title_tile_sleep,
                 "com.android.systemui:drawable/ic_qs_sleep", true));
+        TILES.put(TILE_DAYDREAM, new QuickSettingsUtil.TileInfo(
+                TILE_DAYDREAM, R.string.title_tile_daydream,
+                "com.android.systemui:drawable/ic_qs_daydream", true));
         TILES.put(TILE_GPS, new QuickSettingsUtil.TileInfo(
                 TILE_GPS, R.string.title_tile_gps,
                 "com.android.systemui:drawable/ic_qs_gps_neutral", true));
