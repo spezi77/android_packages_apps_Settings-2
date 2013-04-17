@@ -46,4 +46,10 @@ limitations under the License.
             android:fragment="com.android.settings.cyanogenmod.RamBar"
             android:title="@string/ram_bar" />
 
+     <CheckBoxPreference
+            android:key="classic_recents"
+            android:title="@string/show_classic_recents"
+            android:summary="@string/show_classic_recents_summary"
+            android:defaultValue="false" /> 
+
 </PreferenceScreen>

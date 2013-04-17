@@ -45,11 +45,13 @@ import com.android.settings.util.CMDProcessor;
     private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
     private static final String PREF_VIBRATE_NOTIF_EXPAND = "vibrate_notif_expand";
     private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
+    private static final String KEY_CLASSIC_RECENTS = "classic_recents";
 
     private CheckBoxPreference mHighEndGfx;
     private Preference mRamBar;
     CheckBoxPreference mVibrateOnExpand;
     private ListPreference mLowBatteryWarning;
+    private CheckBoxPreference mClassicRecents;
 
     private ContentResolver mContentResolver;
 
@@ -76,6 +78,12 @@ false));
         mLowBatteryWarning.setValue(String.valueOf(lowBatteryWarning));
         mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
         mLowBatteryWarning.setOnPreferenceChangeListener(this);
+
+	mClassicRecents = (CheckBoxPreference) findPreference(KEY_CLASSIC_RECENTS);
+        boolean classicRecents = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.CLASSIC_RECENTS_MENU, 0) == 1;
+        mClassicRecents.setChecked(classicRecents);
+        mClassicRecents.setOnPreferenceChangeListener(this); 
 
 	mVibrateOnExpand = (CheckBoxPreference) findPreference(PREF_VIBRATE_NOTIF_EXPAND);
         mVibrateOnExpand.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
@@ -114,6 +122,11 @@ false));
                     Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY, lowBatteryWarning);
             mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
             return true;
+	} else if (preference == mClassicRecents) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.CLASSIC_RECENTS_MENU,
+                    (Boolean) newValue ? 1 : 0);
+            mClassicRecents.setChecked((Boolean)newValue); 
         }
 
         return false;
