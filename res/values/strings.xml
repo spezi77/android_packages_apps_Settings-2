@@ -5071,6 +5071,8 @@
     <string name="pie_menu_summary">Whether or not the menu button will appear when unneeded</string>
     <string name="pie_search_title">Show Search Button</string>
     <string name="pie_search_summary">Access to GoogleNow via Pie</string>
+    <string name="pie_lastapp_title">Last App Button</string>
+    <string name="pie_lastapp_summary">Enable last app button on Pie</string>
     <string name="pie_stick_title">Prevent Rotation</string>
     <string name="pie_stick_summary">If checked Pie will stay in place no matter which orientation</string>
     <string name="all_color">Custom Colors</string>
