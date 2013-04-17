@@ -1644,8 +1644,6 @@
 	<activity android:name=".cyanogenmod.StatusBarStyle" />
 	<activity android:name=".cyanogenmod.NavBarStyle" />
 	<activity android:name=".cyanogenmod.NavBarButtonStyle" />
-	<activity android:name=".cyanogenmod.Pie" />
-        <activity android:name=".cyanogenmod.PieColor" />
 	<activity android:name=".cyanogenmod.quicksettings.QuickSettingsTilesStyle" />
 
 	<!-- Pseudo-activity used to provide an intent-filter entry point to quick settings tiles config -->
