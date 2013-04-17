@@ -60,7 +60,6 @@ public class QuickSettingsUtil {
     public static final String TILE_PROFILE = "toggleProfile";
     public static final String TILE_REBOOT = "toggleReboot";
     public static final String TILE_NFC = "toggleNfc";
-    public static final String TILE_FAVCONTACT = "toggleFavoriteContact";
     public static final String TILE_QUIETHOURS = "toggleQuietHours";
     public static final String TILE_VOLUME = "toggleVolume";
     public static final String TILE_EXPANDED_DESKTOP = "toggleExpandedDesktop";
@@ -101,9 +100,6 @@ public class QuickSettingsUtil {
         TILES.put(TILE_EXPANDED_DESKTOP, new QuickSettingsUtil.TileInfo(
                 TILE_EXPANDED_DESKTOP, R.string.title_tile_expanded_desktop,
                 "com.android.systemui:drawable/ic_qs_expanded_desktop_off", true));
-        TILES.put(TILE_FAVCONTACT, new QuickSettingsUtil.TileInfo(
-                TILE_FAVCONTACT, R.string.title_tile_favcontact,
-                "com.android.systemui:drawable/ic_qs_fav_contact", false));
         TILES.put(TILE_SLEEP, new QuickSettingsUtil.TileInfo(
                 TILE_SLEEP, R.string.title_tile_sleep,
                 "com.android.systemui:drawable/ic_qs_sleep", true));
