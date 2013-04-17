@@ -125,8 +125,8 @@ false));
 	} else if (preference == mClassicRecents) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.CLASSIC_RECENTS_MENU,
-                    (Boolean) newValue ? 1 : 0);
-            mClassicRecents.setChecked((Boolean)newValue); 
+                    (Boolean) objValue ? 1 : 0);
+            mClassicRecents.setChecked((Boolean)objValue); 
         }
 
         return false;
