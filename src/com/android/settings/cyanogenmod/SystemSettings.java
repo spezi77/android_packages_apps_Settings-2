@@ -39,6 +39,7 @@ public class SystemSettings extends SettingsPreferenceFragment {
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String KEY_HARDWARE_KEYS = "hardware_keys";
+    private static final String KEY_PIE_SETTINGS = "pie_settings";
     private static final String KEY_LOCK_CLOCK = "lock_clock";
 
     private PreferenceScreen mNotificationPulse;
@@ -74,6 +75,14 @@ public class SystemSettings extends SettingsPreferenceFragment {
                 updateBatteryPulseDescription();
             }
         }
+
+	final boolean hasSlimPieByDefault = getResources().getBoolean(
+                com.android.internal.R.bool.config_slimPie);
+
+        if (!hasSlimPieByDefault) {
+            // remove SlimPie entry if not supported
+            getPreferenceScreen().removePreference(findPreference(KEY_PIE_SETTINGS));
+        } 
 
         // Only show the hardware keys config on a device that does not have a navbar
         // Only show the navigation bar config on phones that has a navigation bar
