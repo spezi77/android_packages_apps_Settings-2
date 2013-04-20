@@ -868,6 +868,9 @@
     <!-- Title for preference that guides the user through creating an unlock password [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_password_summary">High security</string>
 
+    <!-- Lockscreen Camera widget toggle -->
+    <string name="lockscreen_camera_widget_title">Camera widget</string>
+
     <!-- Summary for preference that has been disabled by because of the DevicePolicyAdmin, or because device encryption is enabled, or because there are credentials in the credential storage [CHAR LIMIT=50] -->
     <string name="unlock_set_unlock_disabled_summary">Disabled by administrator, encryption policy, or credential storage</string>
 
