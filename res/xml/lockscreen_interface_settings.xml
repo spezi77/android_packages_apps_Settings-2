@@ -93,6 +93,10 @@
             android:title="@string/lockscreen_use_widget_container_carousel_title"
             android:summary="@string/lockscreen_use_widget_container_carousel_summary" />
 
+     <CheckBoxPreference
+        android:key="lockscreen_camera_widget"
+        android:title="@string/lockscreen_camera_widget_title" /> 
+
      <PreferenceCategory
         android:key="lockscreen"
         android:title="LockScreen Custom Apps">
@@ -115,9 +119,5 @@
         android:key="lockscreen_buttons"
         android:title="@string/lockscreen_buttons_title"
         android:summary="@string/lockscreen_buttons_summary" />
-
-     <CheckBoxPreference
-        android:key="lockscreen_camera_widget"
-        android:title="@string/lockscreen_camera_widget_title" /> 
 
 </PreferenceScreen>
