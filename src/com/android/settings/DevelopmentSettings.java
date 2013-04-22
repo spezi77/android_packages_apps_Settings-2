@@ -149,6 +149,8 @@ public class DevelopmentSettings extends PreferenceFragment
 
     private static final int RESULT_DEBUG_APP = 1000;
 
+    private static final String MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
+
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
     private DevicePolicyManager mDpm;
@@ -167,6 +169,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mEnforceReadExternal;
     private CheckBoxPreference mAllowMockLocation;
     private PreferenceScreen mPassword;
+    private ListPreference mMSOB;
 
     private String mDebugApp;
     private Preference mDebugAppPref;
@@ -246,6 +249,10 @@ public class DevelopmentSettings extends PreferenceFragment
             disableForUser(mPassword);
             disableForUser(mAdvancedReboot);
         }
+
+	mMSOB = (ListPreference) findPreference(MEDIA_SCANNER_ON_BOOT);
+        mAllPrefs.add(mMSOB);
+        mMSOB.setOnPreferenceChangeListener(this);
 
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
         mAllPrefs.add(mDebugAppPref);
@@ -489,6 +496,7 @@ public class DevelopmentSettings extends PreferenceFragment
         updateBugreportOptions();
         updateRootAccessOptions();
         updateAdvancedRebootOptions();
+	updateMSOBOptions();
     }
 
     private void resetAdvancedRebootOptions() {
@@ -505,6 +513,25 @@ public class DevelopmentSettings extends PreferenceFragment
     private void updateAdvancedRebootOptions() {
         mAdvancedReboot.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.ADVANCED_REBOOT, 0) != 0);
+    }
+
+    private void resetMSOBOptions() {
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.MEDIA_SCANNER_ON_BOOT, 0);
+    }
+
+    private void writeMSOBOptions(Object newValue) {
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.MEDIA_SCANNER_ON_BOOT,
+                Integer.valueOf((String) newValue));
+        updateMSOBOptions();
+    }
+
+    private void updateMSOBOptions() {
+        int value = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.MEDIA_SCANNER_ON_BOOT, 0);
+        mMSOB.setValue(String.valueOf(value));
+        mMSOB.setSummary(mMSOB.getEntry());
     }
 
     private void updateAdbOverNetwork() {
@@ -547,6 +574,7 @@ public class DevelopmentSettings extends PreferenceFragment
         resetDebuggerOptions();
         resetRootAccessOptions();
         resetAdvancedRebootOptions();
+	resetMSOBOptions();
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
@@ -1272,6 +1300,9 @@ public class DevelopmentSettings extends PreferenceFragment
             return true;
         } else if (preference == mOverlayDisplayDevices) {
             writeOverlayDisplayDevicesOptions(newValue);
+            return true;
+	} else if (preference == mMSOB) {
+            writeMSOBOptions(newValue);
             return true;
         } else if (preference == mOpenGLTraces) {
             writeOpenGLTracesOptions(newValue);
