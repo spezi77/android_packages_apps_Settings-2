@@ -4,6 +4,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/about_beanstalk_settings_title"
 xmlns:rb="http://schemas.android.com/apk/res/com.android.settings">
 
+<PreferenceScreen android:key="bs_logo"
+                 android:layout="@layout/logo_row" />
+
 <PreferenceCategory
 android:key="links"
 android:title="@string/beanstalk">
