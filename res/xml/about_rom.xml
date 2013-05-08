@@ -7,10 +7,6 @@ xmlns:rb="http://schemas.android.com/apk/res/com.android.settings">
 <PreferenceScreen android:key="bs_logo"
                  android:layout="@layout/logo_row" />
 
-<PreferenceCategory
-android:key="links"
-android:title="@string/beanstalk">
-
 <Preference
 android:key="beanstalk_source"
 android:title="@string/beanstalk_source_title"
@@ -20,7 +16,6 @@ android:summary="@string/beanstalk_source_summary" />
 android:key="beanstalk_facebook"
 android:title="@string/beanstalk_facebook_title"
 android:summary="@string/beanstalk_facebook_summary" />
-</PreferenceCategory>
 
 <PreferenceCategory
 android:key="devs"
