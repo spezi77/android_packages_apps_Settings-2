@@ -1578,6 +1578,7 @@
         <item>@string/hardware_keys_action_last_app</item>
         <item>@string/hardware_keys_action_custom_app</item>
 	<item>@string/hardware_keys_action_widgets</item>
+	<item>@string/hardware_keys_action_quicksettings</item>
     </string-array>
 
     <string-array name="hardware_keys_action_values" translatable="false">
@@ -1596,6 +1597,7 @@
         <item>12</item>
         <item>13</item>
         <item>14</item>
+	<item>15</item>
     </string-array>
 
     <string-array name="lockscreen_long_key_press_entries" translatable="false">
@@ -2057,6 +2059,7 @@
         <item>@string/notifications</item>
         <item>@string/open_ime_switcher</item>
         <item>@string/power</item>
+	<item>@string/quicksettings</item>
         <item>@string/recents</item>
         <item>@string/screenshot</item>
         <item>@string/search</item>
@@ -2074,6 +2077,7 @@
         <item>**notifications**</item>
         <item>**ime**</item>
         <item>**power**</item>
+	<item>**quicksettings**</item>
         <item>**recents**</item>
         <item>**screenshot**</item>
         <item>**search**</item>
@@ -2559,6 +2563,7 @@
         <item>@string/pie_action_ime</item>
         <item>@string/pie_action_recents</item>
         <item>@string/pie_action_power</item>
+	<item>@string/pie_action_quicksettings</item>
         <item>@string/pie_action_screenshot</item>
         <item>@string/pie_action_search</item>
         <item>@string/pie_action_widgets</item>
@@ -2576,6 +2581,7 @@
         <item>**ime**</item>
         <item>**recents**</item>
         <item>**power**</item>
+	<item>**quicksettings**</item>
         <item>**screenshot**</item>
         <item>**search**</item>
         <item>**widgets**</item>
