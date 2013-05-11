@@ -46,18 +46,4 @@ limitations under the License.
             android:fragment="com.android.settings.cyanogenmod.RamBar"
             android:title="@string/ram_bar" />
 
-     <CheckBoxPreference
-            android:key="hidden_statusbar_pulldown"
-            android:title="@string/hidden_statusbar_pulldown_title"
-            android:summary="@string/hidden_statusbar_pulldown_summary"
-            android:defaultValue="false" />
-
-     <ListPreference
-            android:key="hidden_statusbar_pulldown_timeout"
-            android:entries="@array/hidden_statusbar_pulldown_timeout_entries"
-            android:entryValues="@array/hidden_statusbar_pulldown_timeout_values"
-            android:title="@string/hidden_statusbar_pulldown_timeout_title"
-            android:summary="@string/hidden_statusbar_pulldown_timeout_summary"
-            android:dependency="hidden_statusbar_pulldown" />
-
 </PreferenceScreen>

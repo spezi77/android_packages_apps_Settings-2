@@ -45,16 +45,11 @@ import com.android.settings.util.CMDProcessor;
     private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
     private static final String PREF_VIBRATE_NOTIF_EXPAND = "vibrate_notif_expand";
     private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
-    private static final String HIDDEN_STATUSBAR_PULLDOWN = "hidden_statusbar_pulldown";
-    private static final String HIDDEN_STATUSBAR_PULLDOWN_TIMEOUT = "hidden_statusbar_pulldown_timeout";
 
     private CheckBoxPreference mHighEndGfx;
     private Preference mRamBar;
     CheckBoxPreference mVibrateOnExpand;
     private ListPreference mLowBatteryWarning;
-    CheckBoxPreference mHiddenStatusbarPulldown;
-    ListPreference mHiddenStatusbarPulldownTimeout;
-    
 
     private ContentResolver mContentResolver;
 
@@ -81,15 +76,6 @@ false));
         mLowBatteryWarning.setValue(String.valueOf(lowBatteryWarning));
         mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
         mLowBatteryWarning.setOnPreferenceChangeListener(this);
-
-	mHiddenStatusbarPulldown = (CheckBoxPreference) prefSet.findPreference(HIDDEN_STATUSBAR_PULLDOWN);
-        mHiddenStatusbarPulldown.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.HIDDEN_STATUSBAR_PULLDOWN, 0) == 1));
-
-	mHiddenStatusbarPulldownTimeout = (ListPreference) findPreference(HIDDEN_STATUSBAR_PULLDOWN_TIMEOUT);
-        mHiddenStatusbarPulldownTimeout.setOnPreferenceChangeListener(this);
-        mHiddenStatusbarPulldownTimeout.setValue(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.HIDDEN_STATUSBAR_PULLDOWN_TIMEOUT, 10000) + "");
 
 	mVibrateOnExpand = (CheckBoxPreference) findPreference(PREF_VIBRATE_NOTIF_EXPAND);
         mVibrateOnExpand.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
@@ -128,11 +114,6 @@ false));
                     Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY, lowBatteryWarning);
             mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
             return true;
-	} else if (preference == mHiddenStatusbarPulldownTimeout) {
-            int val = Integer.parseInt((String) objValue);
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.HIDDEN_STATUSBAR_PULLDOWN_TIMEOUT, val);
-            return true;
         }
 
         return false;
@@ -147,11 +128,6 @@ SystemProperties.set(USE_HIGH_END_GFX_PROP, mHighEndGfx.isChecked() ? "1" : "0")
                     Settings.System.VIBRATE_NOTIF_EXPAND,
                     ((CheckBoxPreference) preference).isChecked());
             Helpers.restartSystemUI();
-            return true;
-	} else if (preference == mHiddenStatusbarPulldown) {
-            value = mHiddenStatusbarPulldown.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.HIDDEN_STATUSBAR_PULLDOWN, value ? 1 : 0);
             return true;
         } else {
             // If we didn't handle it, let preferences handle it.

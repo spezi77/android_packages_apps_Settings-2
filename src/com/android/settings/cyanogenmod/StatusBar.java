@@ -85,6 +85,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String KEY_MMS_BREATH = "mms_breath";
     private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath"; 
     private static final String STATUS_BAR_AUTO_HIDE = "status_bar_auto_hide"; 
+    private static final String HIDDEN_STATUSBAR_PULLDOWN = "hidden_statusbar_pulldown";
+    private static final String HIDDEN_STATUSBAR_PULLDOWN_TIMEOUT = "hidden_statusbar_pulldown_timeout";
 
     private ColorPickerPreference mColorPicker;
     private CheckBoxPreference mStatusBarBrightnessControl;
@@ -96,6 +98,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private CheckBoxPreference mMMSBreath;
     private CheckBoxPreference mMissedCallBreath; 
     private CheckBoxPreference mStatusBarAutoHide;
+    CheckBoxPreference mHiddenStatusbarPulldown;
+    ListPreference mHiddenStatusbarPulldownTimeout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -142,6 +146,15 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarAutoHide.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.AUTO_HIDE_STATUSBAR, 0) == 1));
 
+	mHiddenStatusbarPulldown = (CheckBoxPreference) prefSet.findPreference(HIDDEN_STATUSBAR_PULLDOWN);
+        mHiddenStatusbarPulldown.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.HIDDEN_STATUSBAR_PULLDOWN, 0) == 1));
+
+	mHiddenStatusbarPulldownTimeout = (ListPreference) findPreference(HIDDEN_STATUSBAR_PULLDOWN_TIMEOUT);
+        mHiddenStatusbarPulldownTimeout.setOnPreferenceChangeListener(this);
+        mHiddenStatusbarPulldownTimeout.setValue(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.HIDDEN_STATUSBAR_PULLDOWN_TIMEOUT, 10000) + "");
+
         mPrefCategoryGeneral = (PreferenceCategory) findPreference(STATUS_BAR_CATEGORY_GENERAL);
 
 	mClockStyle = (PreferenceScreen) prefSet.findPreference("clock_style_pref");
@@ -165,6 +178,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             int iconOpacity = Integer.valueOf((String) newValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_NOTIF_ICON_OPACITY, iconOpacity);
+            return true;
+	} else if (preference == mHiddenStatusbarPulldownTimeout) {
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HIDDEN_STATUSBAR_PULLDOWN_TIMEOUT, val);
             return true;
         }
         return false;
@@ -200,7 +218,12 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             value = mStatusBarAutoHide.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.AUTO_HIDE_STATUSBAR, value ? 1 : 0);
-            return true; 
+            return true;
+	} else if (preference == mHiddenStatusbarPulldown) {
+            value = mHiddenStatusbarPulldown.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.HIDDEN_STATUSBAR_PULLDOWN, value ? 1 : 0);
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
