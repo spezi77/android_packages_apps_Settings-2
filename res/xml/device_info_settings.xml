@@ -43,6 +43,11 @@
                     android:targetClass="com.android.settings.deviceinfo.Status" />
         </PreferenceScreen>
 
+	<Preference
+            android:key="donate"
+            android:title="@string/donate_beanstalk_title"
+            android:summary="@string/donate_beanstalk_summary" />
+
         <!-- Legal Information -->
         <PreferenceScreen
                 android:key="container"
