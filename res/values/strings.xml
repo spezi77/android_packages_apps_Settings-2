@@ -6112,4 +6112,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Section title for list of downloaded apps [CHAR LIMIT=30] -->
     <string name="user_market_apps_heading">Installed apps</string>
+
+    <string name="show_enter_key_title">Show enter key</string>
+    <string name="show_enter_key_summary">Force keyboard to show enter instead of emoticon key</string>
 </resources>
