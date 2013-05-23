@@ -1668,6 +1668,8 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        
+        <activity android:name=".beanstalk.ExcludedAppsActivity" />
 
 	<activity android:name="Settings$PowerMenuSettingsActivity"
             android:label="@string/power_menu_title"
