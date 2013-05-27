@@ -1568,6 +1568,7 @@
         <item>@string/hardware_keys_action_nothing</item>
         <item>@string/hardware_keys_action_home</item>
         <item>@string/hardware_keys_action_back</item>
+	<item>@string/hardware_keys_action_camera</item>
         <item>@string/hardware_keys_action_menu</item>
         <item>@string/hardware_keys_action_app_switch</item>
         <item>@string/hardware_keys_action_search</item>
@@ -1587,6 +1588,7 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+	<item>16</item>
         <item>3</item>
         <item>4</item>
         <item>5</item>
