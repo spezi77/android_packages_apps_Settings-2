@@ -5077,8 +5077,14 @@
     <string name="status_bar_battery_status_circle">Circle</string>
     <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
     <string name="status_bar_battery_status_gear">Circle Gear</string>
-    <string name="status_bar_battery_status_square">Square</string>
-    <string name="status_bar_battery_status_alt_circle">Alt Circle</string>
+    <string name="status_bar_battery_status_square">Speedo</string>
+    <string name="status_bar_battery_status_alt_circle">Speedo 2</string>
+    <string name="status_bar_battery_status_racing">Racing</string>
+    <string name="status_bar_battery_status_gauge">Gauge</string>
+    <string name="status_bar_battery_status_slider">Slider</string>
+    <string name="status_bar_battery_status_brick">Brick</string>
+    <string name="status_bar_battery_status_planet">Planet</string>
+    <string name="status_bar_battery_status_rush">Rush</string>
 
     <!-- Status bar notification count -->
     <string name="status_bar_notif_count_title">Show notification count</string>

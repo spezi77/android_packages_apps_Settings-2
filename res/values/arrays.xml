@@ -1521,6 +1521,12 @@
 	<item>@string/status_bar_battery_status_gear</item>
 	<item>@string/status_bar_battery_status_square</item>
 	<item>@string/status_bar_battery_status_alt_circle</item>
+        <item>@string/status_bar_battery_status_racing</item>
+        <item>@string/status_bar_battery_status_gauge</item>
+	<item>@string/status_bar_battery_status_planet</item>
+	<item>@string/status_bar_battery_status_slider</item>
+	<item>@string/status_bar_battery_status_brick</item>
+	<item>@string/status_bar_battery_status_rush</item>
         <item>@string/status_bar_style_hidden</item>
     </string-array>
 
@@ -1536,6 +1542,12 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
+        <item>11</item>
+	<item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
     </string-array>
 
     <string-array name="circle_battery_animation_speed_entries" >
