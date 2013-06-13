@@ -18,6 +18,37 @@ limitations under the License.
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/misc_settings_title">
 
+       <PreferenceCategory
+        android:key="halo_options"
+        android:title="@string/halo_options_title">
+
+        <ListPreference
+            android:key="halo_state"
+            android:dialogTitle="@string/halo_state_title"
+            android:title="@string/halo_state_title"
+            android:summary="@string/halo_state_summary"
+            android:entries="@array/entries_halo_state"
+            android:entryValues="@array/values_halo_state" />
+
+        <CheckBoxPreference
+            android:key="halo_hide"
+            android:title="@string/halo_hide_title"
+            android:summary="@string/halo_hide_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="halo_reversed"
+            android:title="@string/halo_reversed_title"
+            android:summary="@string/halo_reversed_summary"
+            android:defaultValue="true" />
+
+	<CheckBoxPreference
+            android:key="halo_pause"
+            android:title="@string/halo_pause_title"
+            android:summary="@string/halo_pause_summary" />
+
+    </PreferenceCategory>
+
 	<PreferenceScreen
         android:key="keyboard_input_settings"
         android:fragment="com.android.settings.cyanogenmod.KeyboardInputSettings"
