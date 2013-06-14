@@ -46,10 +46,6 @@ import com.android.settings.util.CMDProcessor;
     private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
     private static final String PREF_VIBRATE_NOTIF_EXPAND = "vibrate_notif_expand";
     private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
-    private static final String KEY_HALO_STATE = "halo_state";
-    private static final String KEY_HALO_HIDE = "halo_hide";
-    private static final String KEY_HALO_REVERSED = "halo_reversed";
-    private static final String KEY_HALO_PAUSE = "halo_pause";
 
     private CheckBoxPreference mHighEndGfx;
     private Preference mRamBar;
@@ -57,11 +53,6 @@ import com.android.settings.util.CMDProcessor;
     private ListPreference mLowBatteryWarning;
 
     private ContentResolver mContentResolver;
-    private ListPreference mHaloState;
-    private CheckBoxPreference mHaloHide;
-    private CheckBoxPreference mHaloReversed;
-    private CheckBoxPreference mHaloPause;
-    private INotificationManager mNotificationManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,26 +78,6 @@ false));
         mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntry());
         mLowBatteryWarning.setOnPreferenceChangeListener(this);
 
-	mNotificationManager = INotificationManager.Stub.asInterface(
-                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
-
-	int isLowRAM = (ActivityManager.isLargeRAM()) ? 0 : 1;
-        mHaloPause = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_PAUSE);
-        mHaloPause.setChecked(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HALO_PAUSE, isLowRAM) == 1);
-
-        mHaloState = (ListPreference) prefSet.findPreference(KEY_HALO_STATE);
-        mHaloState.setValue(String.valueOf((isHaloPolicyBlack() ? "1" : "0")));
-        mHaloState.setOnPreferenceChangeListener(this);
-
-        mHaloHide = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_HIDE);
-        mHaloHide.setChecked(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HALO_HIDE, 0) == 1);
-
-        mHaloReversed = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_REVERSED);
-        mHaloReversed.setChecked(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HALO_REVERSED, 1) == 1);
-
 	mVibrateOnExpand = (CheckBoxPreference) findPreference(PREF_VIBRATE_NOTIF_EXPAND);
         mVibrateOnExpand.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
                 Settings.System.VIBRATE_NOTIF_EXPAND, true));
@@ -122,15 +93,6 @@ false));
             mRamBar.setSummary(getResources().getString(R.string.ram_bar_color_enabled));
         else
             mRamBar.setSummary(getResources().getString(R.string.ram_bar_color_disabled));
-    }
-
-    private boolean isHaloPolicyBlack() {
-        try {
-            return mNotificationManager.isHaloPolicyBlack();
-        } catch (android.os.RemoteException ex) {
-                // System dead
-        }
-        return true;
     }
 
     @Override
@@ -153,14 +115,6 @@ false));
                     Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY, lowBatteryWarning);
             mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
             return true;
-	} else if (preference == mHaloState) {
-            boolean state = Integer.valueOf((String) objValue) == 1;
-            try {
-                mNotificationManager.setHaloPolicyBlack(state);
-            } catch (android.os.RemoteException ex) {
-                // System dead
-            }
-            return true;
         }
         return false;
     }
@@ -175,21 +129,6 @@ SystemProperties.set(USE_HIGH_END_GFX_PROP, mHighEndGfx.isChecked() ? "1" : "0")
                     ((CheckBoxPreference) preference).isChecked());
             Helpers.restartSystemUI();
             return true;
-	} else if (preference == mHaloHide) {
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.HALO_HIDE,
-                    mHaloHide.isChecked() ? 1 : 0);  
-        } else if (preference == mHaloReversed) {
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.HALO_REVERSED,
-                    mHaloReversed.isChecked() ? 1 : 0);
-	} else if (preference == mHaloPause) {
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.HALO_PAUSE,
-                    mHaloPause.isChecked() ? 1 : 0);
-        } else {
-            // If we didn't handle it, let preferences handle it.
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return true;
     }

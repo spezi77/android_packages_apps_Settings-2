@@ -32,7 +32,12 @@
     <PreferenceScreen
         android:key="pie_settings"
         android:fragment="com.android.settings.beanstalk.PieControl"
-        android:title="@string/pie_control_title" /> 
+        android:title="@string/pie_control_title" />
+
+    <PreferenceScreen
+        android:key="halo_settings"
+        android:fragment="com.android.settings.beanstalk.Halo"
+        android:title="@string/halo_options_title" />
 
     <PreferenceScreen
         android:key="navbar_settings"
