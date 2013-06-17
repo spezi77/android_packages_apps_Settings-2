@@ -48,7 +48,7 @@ public class PowerMenu extends SettingsPreferenceFragment implements
     private CheckBoxPreference mRebootPref;
     private CheckBoxPreference mScreenshotPref;
     private ListPreference mExpandedDesktopPref;
-    private CheckBoxPreference mProfilesPref;
+    private ListPreference mProfilesPref;
     private CheckBoxPreference mAirplanePref;
     private CheckBoxPreference mUserPref;
     private CheckBoxPreference mSoundPref;
@@ -88,9 +88,12 @@ public class PowerMenu extends SettingsPreferenceFragment implements
             Log.e(TAG, "Error getting navigation bar status");
         } 
 
-        mProfilesPref = (CheckBoxPreference) findPreference(KEY_PROFILES);
-        mProfilesPref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_PROFILES_ENABLED, 1) == 1));
+        mProfilesPref = (ListPreference) findPreference(KEY_PROFILES);
+        mProfilesPref.setOnPreferenceChangeListener(this);
+        int mProfileShow = Settings.System.getInt(getContentResolver(),
+                Settings.System.POWER_MENU_PROFILES_ENABLED, 1);
+        mProfilesPref.setValue(String.valueOf(mProfileShow));
+        mProfilesPref.setSummary(mProfilesPref.getEntries()[mProfileShow]);
 
         // Only enable if System Profiles are also enabled
         boolean enabled = Settings.System.getInt(getContentResolver(),
@@ -134,6 +137,13 @@ public class PowerMenu extends SettingsPreferenceFragment implements
                     Settings.System.EXPANDED_DESKTOP_MODE, expandedDesktopValue);
             mExpandedDesktopPref.setSummary(mExpandedDesktopPref.getEntries()[index]);
             return true;
+        } else if (preference == mProfilesPref) {
+            int mProfileShow = Integer.valueOf((String) newValue);
+            int index = mProfilesPref.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_PROFILES_ENABLED, mProfileShow);
+            mProfilesPref.setSummary(mProfilesPref.getEntries()[index]);
+            return true;
         }
         return false;
     }
@@ -151,11 +161,6 @@ public class PowerMenu extends SettingsPreferenceFragment implements
             value = mRebootPref.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_REBOOT_ENABLED,
-                    value ? 1 : 0);
-        } else if (preference == mProfilesPref) {
-            value = mProfilesPref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_PROFILES_ENABLED,
                     value ? 1 : 0);
        } else if (preference == mAirplanePref) {
             value = mAirplanePref.isChecked();
