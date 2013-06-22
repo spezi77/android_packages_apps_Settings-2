@@ -38,6 +38,7 @@ import com.android.settings.SettingsPreferenceFragment;
 public class Halo extends SettingsPreferenceFragment
                         implements Preference.OnPreferenceChangeListener {
 
+    private static final String KEY_HALO_ENABLED = "halo_enabled"
     private static final String KEY_HALO_STATE = "halo_state";
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed";
@@ -45,6 +46,7 @@ public class Halo extends SettingsPreferenceFragment
 
     private ContentResolver mContentResolver;
     private ListPreference mHaloState;
+    private CheckBoxPreference mHaloEnabled;
     private CheckBoxPreference mHaloHide;
     private CheckBoxPreference mHaloReversed;
     private CheckBoxPreference mHaloPause;
@@ -65,6 +67,10 @@ public class Halo extends SettingsPreferenceFragment
         mHaloPause = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_PAUSE);
         mHaloPause.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HALO_PAUSE, isLowRAM) == 1);
+
+	mHaloEnabled = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_ENABLED);
+        mHaloEnabled.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HALO_ENABLED, 0) == 1);
 
         mHaloState = (ListPreference) prefSet.findPreference(KEY_HALO_STATE);
         mHaloState.setValue(String.valueOf((isHaloPolicyBlack() ? "1" : "0")));
@@ -104,7 +110,11 @@ public class Halo extends SettingsPreferenceFragment
 
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean value;
-	if (preference == mHaloHide) {
+	if  (preference == mHaloEnabled) {
+             Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HALO_ENABLED, mHaloEnabled.isChecked()
+                    ? 1 : 0);
+	} else if (preference == mHaloHide) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_HIDE,
                     mHaloHide.isChecked() ? 1 : 0);  
