@@ -6061,12 +6061,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Permissions Management -->
     <string name="permissions_settings_title">Permissions</string>
 
-    <!-- Hidden Statusbar Pulldown -->
-     <string name="hidden_statusbar_pulldown_title">Hidden Statusbar Pulldown</string>
-    <string name="hidden_statusbar_pulldown_summary">Allows Statusbar to be pulled down when hidden in fullscreen apps</string>
-    <string name="hidden_statusbar_pulldown_timeout_title">Hidden Statusbar Pulldown Timeout</string>
-    <string name="hidden_statusbar_pulldown_timeout_summary">Timeout for hidden Statusbar window</string>
-
     <!-- Category title for power sound notification specific Settings.
          [CHAR LIMIT=40] -->
     <string name="power_notifications_category_title">Power sounds</string>
@@ -6159,5 +6153,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="profile_trigger_connect">On connect</string>
     <string name="profile_trigger_disconnect">On disconnect</string>
     <string name="profile_trigger_notrigger">No trigger</string>
+
+    <!-- Statusbar Quick Peek -->
+    <string name="statusbar_quick_peek_title">Quick Peek</string>
+    <string name="statusbar_quick_peek_summary">Peek at statusbar by swiping from top edge of screen</string>
 
 </resources>
