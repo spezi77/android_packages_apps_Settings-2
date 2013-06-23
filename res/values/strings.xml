@@ -6162,4 +6162,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="statusbar_quick_peek_title">Quick Peek</string>
     <string name="statusbar_quick_peek_summary">Peek at statusbar by swiping from top edge of screen</string>
 
+    <!-- Clear Recents position -->
+    <string name="clear_recents_position_title">Clear recents position</string>
+    <string name="clear_recents_position_left">Left</string>
+    <string name="clear_recents_position_right">Right</string>
+
 </resources>

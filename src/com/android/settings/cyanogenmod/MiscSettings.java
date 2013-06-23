@@ -44,11 +44,13 @@ import com.android.settings.util.CMDProcessor;
     private static final String KEY_HIGH_END_GFX = "high_end_gfx";
     private static final String USE_HIGH_END_GFX_PROP = "persist.sys.use_high_end_gfx";
     private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
+    private static final String KEY_CLEAR_RECENTS_POSITION = "clear_recents_position";
     private static final String PREF_VIBRATE_NOTIF_EXPAND = "vibrate_notif_expand";
     private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
 
     private CheckBoxPreference mHighEndGfx;
     private Preference mRamBar;
+    ListPreference mClearPosition;
     CheckBoxPreference mVibrateOnExpand;
     private ListPreference mLowBatteryWarning;
 
@@ -84,6 +86,13 @@ false));
 
 	mRamBar = findPreference(KEY_RECENTS_RAM_BAR);
         updateRamBar();
+
+	mClearPosition = (ListPreference) findPreference(KEY_CLEAR_RECENTS_POSITION);
+        int ClearSide = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.CLEAR_RECENTS_POSITION, 0);
+        mClearPosition.setValue(String.valueOf(ClearSide));
+        mClearPosition.setSummary(mClearPosition.getEntry());
+        mClearPosition.setOnPreferenceChangeListener(this);
     }
 
     private void updateRamBar() {
@@ -114,6 +123,13 @@ false));
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.POWER_UI_LOW_BATTERY_WARNING_POLICY, lowBatteryWarning);
             mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
+            return true;
+	} else if (preference == mClearPosition) {
+            int side = Integer.valueOf((String) newValue);
+            int index = mClearPosition.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.CLEAR_RECENTS_POSITION, side);
+            mClearPosition.setSummary(mClearPosition.getEntries()[index]);
             return true;
         }
         return false;
