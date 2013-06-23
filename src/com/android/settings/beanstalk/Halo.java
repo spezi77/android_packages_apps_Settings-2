@@ -43,10 +43,12 @@ public class Halo extends SettingsPreferenceFragment
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed";
     private static final String KEY_HALO_PAUSE = "halo_pause";
+    private static final String PREF_HALO_STYLE = "halo_style";
 
     private ContentResolver mContentResolver;
     private ListPreference mHaloState;
     private CheckBoxPreference mHaloEnabled;
+    private ListPreference mHaloStyle;
     private CheckBoxPreference mHaloHide;
     private CheckBoxPreference mHaloReversed;
     private CheckBoxPreference mHaloPause;
@@ -83,6 +85,9 @@ public class Halo extends SettingsPreferenceFragment
         mHaloReversed = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_REVERSED);
         mHaloReversed.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HALO_REVERSED, 1) == 1);
+
+	mHaloStyle = (ListPreference) findPreference(PREF_HALO_STYLE);
+        mHaloStyle.setOnPreferenceChangeListener(this);
     }
 
     private boolean isHaloPolicyBlack() {
@@ -103,6 +108,12 @@ public class Halo extends SettingsPreferenceFragment
             } catch (android.os.RemoteException ex) {
                 // System dead
             }
+            return true;
+	} else if (preference == mHaloStyle) {
+            int val = Integer.valueOf((String) Value);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HALO_STYLE, val);
+            Helpers.restartSystemUI();
             return true;
         }
         return false;
