@@ -6156,7 +6156,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="halo_style_title">HALO style</string>
     <string name="halo_style_summary">Different style of HALO bubbles</string>
 
-    <string name="halo_blue">BeanStalk (default)</string>
+    <string name="halo_blue">Blue (default)</string>
     <string name="halo_green">Green</string>
     <string name="halo_white">White</string>
     <string name="halo_purple">Purple</string>

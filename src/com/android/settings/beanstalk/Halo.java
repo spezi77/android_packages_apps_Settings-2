@@ -31,6 +31,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.app.INotificationManager;
+import com.android.settings.util.Helpers;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -110,7 +111,7 @@ public class Halo extends SettingsPreferenceFragment
             }
             return true;
 	} else if (preference == mHaloStyle) {
-            int val = Integer.valueOf((String) Value);
+            int val = Integer.valueOf((String) objValue);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HALO_STYLE, val);
             Helpers.restartSystemUI();
