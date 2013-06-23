@@ -6190,4 +6190,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="privacy_guard_default_title">Privacy Guard</string>
     <string name="privacy_guard_default_summary">Enable Privacy Guard by default for newly-installed apps</string>
 
+    <!-- Profile network mode -->
+    <string name="profile_networkmode_2g">2G</string>
+    <string name="profile_networkmode_3g">3G</string>
+    <string name="profile_networkmode_2g3g">2G/3G</string>
 </resources>
