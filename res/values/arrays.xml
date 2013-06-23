@@ -2715,6 +2715,27 @@
         <item>1</item>
         <item>0</item>
     </string-array>
+
+    <string-array name="entries_halo_style">
+        <item>@string/halo_blue</item>
+        <item>@string/halo_green</item>
+        <item>@string/halo_white</item>
+        <item>@string/halo_purple</item>
+        <item>@string/halo_red</item>
+        <item>@string/halo_yellow</item>
+        <item>@string/halo_black</item>
+    </string-array>
+
+    <string-array name="values_halo_style" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
     <!--  Values for profile Wi-Fi triggers -->
     <string-array name="profile_trigger_wifi_options" translatable="false">
         <item>@string/profile_trigger_connect</item>
