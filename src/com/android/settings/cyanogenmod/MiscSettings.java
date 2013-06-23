@@ -125,8 +125,8 @@ false));
             mLowBatteryWarning.setSummary(mLowBatteryWarning.getEntries()[index]);
             return true;
 	} else if (preference == mClearPosition) {
-            int side = Integer.valueOf((String) newValue);
-            int index = mClearPosition.findIndexOfValue((String) newValue);
+            int side = Integer.valueOf((String) objValue);
+            int index = mClearPosition.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.CLEAR_RECENTS_POSITION, side);
             mClearPosition.setSummary(mClearPosition.getEntries()[index]);
