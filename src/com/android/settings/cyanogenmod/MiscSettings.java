@@ -145,6 +145,9 @@ SystemProperties.set(USE_HIGH_END_GFX_PROP, mHighEndGfx.isChecked() ? "1" : "0")
                     ((CheckBoxPreference) preference).isChecked());
             Helpers.restartSystemUI();
             return true;
+	} else {
+            // If we didn't handle it, let preferences handle it.
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return true;
     }
