@@ -6210,6 +6210,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- HALO -->
     <string name="halo_options_title">BeanStalk HALO</string>
     <string name="halo_enabled_title">Enable HALO</string>
+    <string name="halo_pie_only_title">Only with Pie</string>
+    <string name="halo_pie_only_summary">Only allow HALO to work when Pie is on</string>
     <string name="halo_enabled_summary">If checked enable HALO feature (floating window on recent apps would not be affected)</string>
     <string name="halo_hide_title">Hide HALO after activity</string>
     <string name="halo_hide_summary">HALO will appear for incoming tasks and scroll out of sight after a while</string>

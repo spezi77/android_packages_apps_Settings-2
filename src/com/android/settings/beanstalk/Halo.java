@@ -50,6 +50,7 @@ public class Halo extends SettingsPreferenceFragment
     private static final String PREF_HALO_EFFECT_COLOR = "halo_effect_color";
     private static final String PREF_HALO_BUBBLE_COLOR = "halo_bubble_color";
     private static final String PREF_HALO_BUBBLE_TEXT_COLOR = "halo_bubble_text_color";
+    private static final String KEY_HALO_PIE_ONLY = "halo_pie_only";
 
     private ContentResolver mContentResolver;
     private ListPreference mHaloState;
@@ -59,6 +60,7 @@ public class Halo extends SettingsPreferenceFragment
     private CheckBoxPreference mHaloPause;
     private INotificationManager mNotificationManager;
     private CheckBoxPreference mHaloColors;
+    private CheckBoxPreference mHaloPieOnly;
     private ColorPickerPreference mHaloCircleColor;
     private ColorPickerPreference mHaloEffectColor;
     private ColorPickerPreference mHaloBubbleColor;
@@ -91,6 +93,10 @@ public class Halo extends SettingsPreferenceFragment
         mHaloHide = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_HIDE);
         mHaloHide.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HALO_HIDE, 0) == 1);
+
+	mHaloPieOnly = (CheckBoxPreference) findPreference(KEY_HALO_PIE_ONLY);
+        mHaloPieOnly.setChecked((Settings.System.getInt(mContext.getContentResolver(),
+            Settings.System.HALO_PIE_ONLY, 1) == 1));
 
         mHaloReversed = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_REVERSED);
         mHaloReversed.setChecked(Settings.System.getInt(mContext.getContentResolver(),
@@ -178,7 +184,11 @@ public class Halo extends SettingsPreferenceFragment
 	} else if (preference == mHaloHide) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_HIDE,
-                    mHaloHide.isChecked() ? 1 : 0);  
+                    mHaloHide.isChecked() ? 1 : 0);
+	} else if (preference == mHaloPieOnly) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HALO_PIE_ONLY, mHaloPieOnly.isChecked()
+                    ? 1 : 0);
         } else if (preference == mHaloReversed) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_REVERSED,
