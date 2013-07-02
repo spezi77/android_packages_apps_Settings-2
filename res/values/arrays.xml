@@ -2136,7 +2136,9 @@
         <item>@string/google_now</item>
         <item>@string/kill_app</item>
         <item>@string/lastapp</item>
+        <item>@string/notifications</item>
         <item>@string/open_ime_switcher</item>
+        <item>@string/quicksettings</item>
         <item>@string/ring_silent</item>
         <item>@string/ring_vib</item>
         <item>@string/ring_vib_silent</item>
@@ -2151,7 +2153,9 @@
         <item>**assist**</item>
         <item>**kill**</item>
         <item>**lastapp**</item>
+        <item>**notifications**</item>
         <item>**ime**</item>
+        <item>**quicksettings**</item>
         <item>**ring_silent**</item>
         <item>**ring_vib**</item>
         <item>**ring_vib_silent**</item>
