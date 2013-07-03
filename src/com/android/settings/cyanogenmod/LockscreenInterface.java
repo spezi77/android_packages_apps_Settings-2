@@ -155,7 +155,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
             mMusicControls.setOnPreferenceChangeListener(this);
 
         if (mMusicControls != null) {
-            mMusicControls.setChecked(Settings.System.getInt(cr,
+            mMusicControls.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.LOCKSCREEN_MUSIC_CONTROLS, 1) == 1);
         }
 
@@ -253,7 +253,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
             return true;
 	} else if (preference == mMusicControls) {
             boolean value = (Boolean) objValue;
-            Settings.System.putInt(cr, Settings.System.LOCKSCREEN_MUSIC_CONTROLS, value ? 1 : 0);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), 			    Settings.System.LOCKSCREEN_MUSIC_CONTROLS, value ? 1 : 0);
             return true;
         } else if (preference == mCustomBackground) {
             int indexOf = mCustomBackground.findIndexOfValue(objValue.toString());
