@@ -4679,6 +4679,10 @@
     <string name="lockscreen_music_controls_title">Music controls</string>
     <string name="lockscreen_music_controls_summary">Show player controls while music is playing</string>
 
+    <!-- vibrate during phone calls -->
+    <string name="notification_vibrate_during_calls_title">Vibrate during call</string>
+    <string name="notification_vibrate_during_calls_summary">Incoming notifications will softly vibrate during phone calls</string>
+
     <!-- Profiles settings  -->
     <string name="profiles_settings_title">Profiles</string>
     <string name="profiles_general_title">General</string>
