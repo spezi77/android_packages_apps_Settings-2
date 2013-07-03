@@ -57,6 +57,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
     private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
     private static final String KEY_LOCKSCREEN_CAMERA_WIDGET = "lockscreen_camera_widget";
+    private static final String KEY_LOCKSCREEN_MUSIC_CONTROLS = "lockscreen_music_controls";
 
     private static final String KEY_BACKGROUND_PREF = "lockscreen_background";
     private static final String PREF_LOCKSCREEN_AUTO_ROTATE = "lockscreen_auto_rotate";
@@ -77,6 +78,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     CheckBoxPreference mLockscreenMinChallenge;
     ColorPickerPreference mLockscreenTextColor;
     private CheckBoxPreference mCameraWidget;
+    private CheckBoxPreference mMusicControls;
 
     private boolean mIsScreenLarge;
 
@@ -148,6 +150,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
 	mAllWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_ALL_WIDGETS);
         mAllWidgets.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.KG_ALL_WIDGETS, 1) == 1);
+
+	mMusicControls = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MUSIC_CONTROLS);
+            mMusicControls.setOnPreferenceChangeListener(this);
+
+        if (mMusicControls != null) {
+            mMusicControls.setChecked(Settings.System.getInt(cr,
+                Settings.System.LOCKSCREEN_MUSIC_CONTROLS, 1) == 1);
+        }
 
         mMaximizeWidgets = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
         if (!Utils.isPhone(getActivity())) {
@@ -240,6 +250,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_ALWAYS_SHOW_BATTERY, value);
             mBatteryStatus.setSummary(mBatteryStatus.getEntries()[index]);
+            return true;
+	} else if (preference == mMusicControls) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(cr, Settings.System.LOCKSCREEN_MUSIC_CONTROLS, value ? 1 : 0);
             return true;
         } else if (preference == mCustomBackground) {
             int indexOf = mCustomBackground.findIndexOfValue(objValue.toString());
