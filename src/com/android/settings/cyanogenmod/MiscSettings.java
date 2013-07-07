@@ -44,12 +44,14 @@ import com.android.settings.util.CMDProcessor;
     private static final String KEY_HIGH_END_GFX = "high_end_gfx";
     private static final String USE_HIGH_END_GFX_PROP = "persist.sys.use_high_end_gfx";
     private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
+    private static final String KEY_RECENTS_RAM_CIRCLE = "recents_ram_circle";
     private static final String KEY_CLEAR_RECENTS_POSITION = "clear_recents_position";
     private static final String PREF_VIBRATE_NOTIF_EXPAND = "vibrate_notif_expand";
     private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
 
     private CheckBoxPreference mHighEndGfx;
     private Preference mRamBar;
+    CheckBoxPreference mRamCircle;
     ListPreference mClearPosition;
     CheckBoxPreference mVibrateOnExpand;
     private ListPreference mLowBatteryWarning;
@@ -86,6 +88,10 @@ false));
 
 	mRamBar = findPreference(KEY_RECENTS_RAM_BAR);
         updateRamBar();
+
+	mRamCircle = (CheckBoxPreference) findPreference(KEY_RECENTS_RAM_CIRCLE);
+        mRamCircle.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.RECENTS_RAM_CIRCLE, false));
 
 	mClearPosition = (ListPreference) findPreference(KEY_CLEAR_RECENTS_POSITION);
         int ClearSide = Settings.System.getInt(getActivity().getContentResolver(),
@@ -144,6 +150,11 @@ SystemProperties.set(USE_HIGH_END_GFX_PROP, mHighEndGfx.isChecked() ? "1" : "0")
                     Settings.System.VIBRATE_NOTIF_EXPAND,
                     ((CheckBoxPreference) preference).isChecked());
             Helpers.restartSystemUI();
+            return true;
+	} else if (preference == mRamCircle) {
+            Settings.System.putBoolean(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_RAM_CIRCLE,
+                    ((CheckBoxPreference) preference).isChecked());
             return true;
 	} else {
             // If we didn't handle it, let preferences handle it.

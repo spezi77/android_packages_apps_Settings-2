@@ -5190,6 +5190,8 @@
     <!-- USB Mass Storage -->
     <string name="usb_mass_storage_title">Mass storage</string>
     <string name="usb_mass_storage_summary">Enable USB mass storage</string>
+    <string name="storage_rescan_media">Rescan media for the storage volume</string>
+    <string name="storage_rescan_media_complete">Scan completed</string>
 
     <!-- Android debugging over WiFi -->
     <string name="adb_over_network">ADB over network</string>
@@ -6278,4 +6280,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="profile_networkmode_2g">2G</string>
     <string name="profile_networkmode_3g">3G</string>
     <string name="profile_networkmode_2g3g">2G/3G</string>
+
+    <!-- Recents RAM circle -->
+    <string name="circle_ram_title">Recents RAM circle</string>
+    <string name="circle_ram_summary">Adds a circular meter surrounding the clear recents button</string>
 </resources>
