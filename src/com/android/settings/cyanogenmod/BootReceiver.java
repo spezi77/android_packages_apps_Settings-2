@@ -25,6 +25,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.beanstalk.autosms.MessagingHelper;
 import com.android.settings.Utils;
 
 import java.util.Arrays;
@@ -68,7 +69,8 @@ public class BootReceiver extends BroadcastReceiver {
 	if (Utils.fileExists(PerformanceSettings.VIBE_STR_FILE)
                 && intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
             configureVibe(ctx);
-        } 
+        }
+	MessagingHelper.scheduleService(ctx);
     }
 
     private void initFreqCapFiles(Context ctx)
