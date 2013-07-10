@@ -5150,6 +5150,7 @@
     <string name="status_bar_battery_status_icon_percentage">Icon with percentage</string>
     <string name="status_bar_battery_status_circle">Circle</string>
     <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
+    <string name="status_bar_battery_status_beanstalk_percentage">BeanStalk with percentage</string>
     <string name="status_bar_battery_status_gear">Circle Gear</string>
     <string name="status_bar_battery_status_square">Speedo</string>
     <string name="status_bar_battery_status_alt_circle">Speedo 2</string>
