@@ -1526,6 +1526,8 @@
         <item>@string/status_bar_battery_status_circle_percentage</item>
         <item>@string/status_bar_battery_status_dotted_circle</item>
 	<item>@string/status_bar_battery_status_dotted_circle_percentage</item>
+        <item>@string/status_bar_battery_status_beanstalk</item>
+        <item>@string/status_bar_battery_status_beanstalk_percentage</item>
 	<item>@string/status_bar_battery_status_gear</item>
 	<item>@string/status_bar_battery_status_square</item>
 	<item>@string/status_bar_battery_status_alt_circle</item>
@@ -1556,6 +1558,8 @@
         <item>14</item>
         <item>15</item>
         <item>16</item>
+        <item>17</item>
+        <item>18</item>
     </string-array>
 
     <string-array name="circle_battery_animation_speed_entries" >
