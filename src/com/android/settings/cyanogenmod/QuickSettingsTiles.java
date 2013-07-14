@@ -221,9 +221,24 @@ public class QuickSettingsTiles extends Fragment {
             QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_LTE);
         }
 
+
         // Dont show the torch tile if not supported
-        if (!mContext.getResources().getBoolean(R.bool.has_led_flash)) { 
+        if (!mContext.getResources().getBoolean(R.bool.has_led_flash)) {
             QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_TORCH);
+        }
+
+        // Dont show fast charge tile if not supported
+        boolean fchargeIsPossible = false;
+        String fchargePath = mContext.getResources()
+                .getString(com.android.internal.R.string.config_fastChargePath);
+        if (!fchargePath.isEmpty()) {
+            File fastcharge = new File(fchargePath);
+            if (fastcharge.exists()) {
+                fchargeIsPossible = true;
+            }
+        }
+        if (!fchargeIsPossible) {
+            QuickSettingsUtil.TILES.remove(QuickSettingsUtil.TILE_FCHARGE);
         }
 
     }

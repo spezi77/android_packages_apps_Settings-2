@@ -350,6 +350,20 @@ public class PowerWidget extends SettingsPreferenceFragment implements
                 prefButtonsModes.removePreference(mNetworkMode);
             }
 
+            // Dont show fast charge option if not supported
+            boolean fchargeIsPossible = false;
+            String fchargePath = getActivity().getApplicationContext().getResources()
+                    .getString(com.android.internal.R.string.config_fastChargePath);
+            if (!fchargePath.isEmpty()) {
+                File fastcharge = new File(fchargePath);
+                if (fastcharge.exists()) {
+                    fchargeIsPossible = true;
+                }
+            }
+            if (!fchargeIsPossible) {
+                PowerWidgetUtil.BUTTONS.remove(PowerWidgetUtil.BUTTON_FCHARGE);
+            }
+
             // fill that checkbox map!
             for (PowerWidgetUtil.ButtonInfo button : PowerWidgetUtil.BUTTONS.values()) {
                 // create a checkbox
