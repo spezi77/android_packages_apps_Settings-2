@@ -54,5 +54,7 @@
     <!-- GPS support. Some devices does not have GPS. -->
     <bool name="has_location_gps">true</bool>
 
-    <!-- **** CYANOGENMOD ADDITIONS END **** -->
+    <!-- TouchKey Duration Pref -->
+    <bool name="config_show_touchKeyDur">false</bool>
+
 </resources>
