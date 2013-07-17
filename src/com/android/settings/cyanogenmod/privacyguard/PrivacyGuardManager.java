@@ -21,7 +21,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -105,16 +104,6 @@ public class PrivacyGuardManager extends Fragment
         mPm = mActivity.getPackageManager();
 
         return inflater.inflate(R.layout.privacy_guard_manager, container, false);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        FragmentManager fm = getFragmentManager();
-        Fragment f = fm.findFragmentById(R.id.privacy_guard_prefs);
-        if (f != null && !fm.isDestroyed()) {
-            fm.beginTransaction().remove(f).commit();
-        }
     }
 
     @Override
