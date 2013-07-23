@@ -66,11 +66,16 @@ public class BootReceiver extends BroadcastReceiver {
                 SystemProperties.set(KSM_SETTINGS_PROP, "false");
             }
         }
+
 	if (Utils.fileExists(PerformanceSettings.VIBE_STR_FILE)
                 && intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
             configureVibe(ctx);
         }
 	MessagingHelper.scheduleService(ctx);
+
+        /* Restore the hardware tunable values */
+        DisplayColor.restore(ctx);
+        VibratorIntensity.restore(ctx);
     }
 
     private void initFreqCapFiles(Context ctx)

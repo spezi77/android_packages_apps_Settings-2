@@ -44,6 +44,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 import com.android.internal.view.RotationPolicy;
+import com.android.settings.cyanogenmod.DisplayColor;
 import com.android.settings.cyanogenmod.DisplayRotation;
 import com.android.settings.Utils;
 import com.android.settings.SettingsPreferenceFragment;
@@ -69,6 +70,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
     private static final String KEY_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
+    private static final String KEY_DISPLAY_COLOR = "color_calibration";
 
     // Strings used for building the summary
     private static final String ROTATION_ANGLE_0 = "0";
@@ -213,6 +215,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 	mWakeUpWhenPluggedOrUnplugged = (CheckBoxPreference) findPreference(KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
         mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                         Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, 1) == 1);
+
+        if (!DisplayColor.isSupported()) {
+            removePreference(KEY_DISPLAY_COLOR);
+        }
     }
 
     private void updateDisplayRotationPreferenceDescription() {
