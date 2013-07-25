@@ -38,9 +38,8 @@
     </PreferenceCategory>
 
         <com.android.settings.BrightnessPreference
-                android:key="brightness"
                 android:title="@string/brightness"
-                android:dialogTitle="@string/brightness" />
+                android:persistent="false"/>
 
         <PreferenceScreen
                 android:key="wallpaper"
