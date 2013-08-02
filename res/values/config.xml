@@ -51,9 +51,6 @@
          Setting to false will disable Home button Wake support -->
     <bool name="config_show_homeWake">false</bool>
 
-    <!-- GPS support. Some devices does not have GPS. -->
-    <bool name="has_location_gps">true</bool>
-
     <!-- TouchKey Duration Pref -->
     <bool name="config_show_touchKeyDur">false</bool>
 

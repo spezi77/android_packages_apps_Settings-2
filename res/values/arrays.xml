@@ -2957,14 +2957,6 @@
         <item>@string/profile_trigger_filter_bluetooth</item>
     </string-array>
 
-<!-- GPS source selection -->
-   <string-array name="location_entries_gps_source">
-       <item>Use Internal GPS</item>
-   </string-array>
-   <string-array name="location_values_gps_source" translatable="false">
-       <item>0</item>
-   </string-array>
-
    <!-- TouchKey Light Timeout -->
     <string-array name="entries_touchkey_timeout">
         <item>@string/touchkey_timeout_1s</item>
@@ -2983,5 +2975,4 @@
         <item>5</item>
         <item>6</item>
     </string-array>
-
 </resources>
