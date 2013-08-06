@@ -350,7 +350,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         }
 
         if (!available) {
-            parent.removePreference(preference);
+//            parent.removePreference(preference);
             return true;
         }
 
