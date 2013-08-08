@@ -56,7 +56,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private static final String KEY_ALWAYS_BATTERY_PREF = "lockscreen_battery_status";
     private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
     private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
-    private static final String KEY_LOCK_CLOCK = "lock_clock";
     private static final String KEY_LOCKSCREEN_CAMERA_WIDGET = "lockscreen_camera_widget";
     private static final String KEY_LOCKSCREEN_MUSIC_CONTROLS = "lockscreen_music_controls";
 
@@ -102,9 +101,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         mResolver = mActivity.getContentResolver();
 
         mIsScreenLarge = Utils.isTablet(getActivity());
-
-	// Don't display the lock clock preference if its not installed
-        removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
 
         createCustomLockscreenView();
     }
