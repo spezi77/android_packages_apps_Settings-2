@@ -19,11 +19,6 @@
             android:entries="@array/entries_touchkey_timeout"
             android:entryValues="@array/values_touchkey_timeout" />	
 
-	<Preference
-            android:key="scroll_setup"
-            android:title="@string/scroll_title"
-            android:summary="@string/scroll_summary" />
-
         <CheckBoxPreference
             android:key="use_alt_resolver"
             android:title="@string/alt_resolver"

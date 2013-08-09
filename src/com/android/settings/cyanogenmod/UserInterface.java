@@ -90,7 +90,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private Preference mCustomLabel;
     CheckBoxPreference mDisableBootAnimation;
     private ListPreference mDualPanePrefs;
-    Preference mScroller;
+
     private ListPreference mTouchKeyLights;
 
     private Random randomGenerator = new Random();
@@ -102,7 +102,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
     private String mCustomLabelText = null;
     DensityChanger densityFragment;
-    Scroller scrollerFragment;
 
     private Context mContext;
 
@@ -150,9 +149,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
         mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
 
-	mScroller = findPreference("scroll_setup");
-        mScroller.setSummary(R.string.scroll_summary);
-
 	mDisableBootAnimation = (CheckBoxPreference)findPreference("disable_bootanimation");
         mDisableBootAnimation.setChecked(!new File("/system/media/bootanimation.zip").exists());
         if (mDisableBootAnimation.isChecked()) {
@@ -192,10 +188,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         if (preference == mLcdDensity) {
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);
-            return true;
-        } else if (preference == mScroller) {
-            ((PreferenceActivity) getActivity())
-                    .startPreferenceFragment(new Scroller(), true);
             return true;
         } else if (preference == mUseAltResolver) {
 		Settings.System.putInt(getActivity().getContentResolver(),

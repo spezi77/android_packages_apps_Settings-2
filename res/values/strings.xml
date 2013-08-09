@@ -5891,15 +5891,6 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="status_bar_battery_icon_style_reset">Reset icon colors</string>
     <string name="status_bar_battery_bar_style_reset">Reset battery bar colors</string>
 
-    <!-- Scroller options -->
-  <string name="scroller_options">Scroller options</string>
-        <string name="scroll">Scroller</string>
-  <string name="scroll_title">Scroller options</string>
-  <string name="scroll_summary">Adjust feel of your scroller</string>
-
-  <string name="scroll_friction_title">Scroll friction</string>
-  <string name="custom_fling_velocity_title">Scroll fling velocity</string>
-
     <!-- Do not disturb -->
   <string name="status_bar_donotdisturb_title">Do not disturb</string>
   <string name="status_bar_donotdisturb_summary">Disable ticker animation for incoming notifications</string>
