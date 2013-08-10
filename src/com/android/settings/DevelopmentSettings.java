@@ -70,8 +70,6 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.android.settings.SettingsPreferenceFragment;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -79,7 +77,7 @@ import java.util.List;
 /*
  * Displays preferences for application developers.
  */
-public class DevelopmentSettings extends SettingsPreferenceFragment
+public class DevelopmentSettings extends PreferenceFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
                 OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "DevelopmentSettings";
@@ -343,9 +341,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         }
 
         mDevelopmentTools = (PreferenceScreen) findPreference(DEVELOPMENT_TOOLS);
-        if (!removePreferenceIfPackageNotInstalled(mDevelopmentTools)) {
-            mAllPrefs.add(mDevelopmentTools);
-        }
+        mAllPrefs.add(mDevelopmentTools);
     }
 
     private ListPreference addListPreference(String prefKey) {
