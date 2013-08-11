@@ -287,7 +287,8 @@ public class DevelopmentSettings extends PreferenceFragment
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
         mAllPrefs.add(mDebugAppPref);
         mWaitForDebugger = findAndInitCheckboxPref(WAIT_FOR_DEBUGGER_KEY);
-        mVerifyAppsOverUsb = findAndInitCheckboxPref(VERIFY_APPS_OVER_USB_KEY);
+        mVerifyAppsOverUsb = (CheckBoxPreference) findPreference(VERIFY_APPS_OVER_USB_KEY);
+	mAllPrefs.add(mVerifyAppsOverUsb);
         if (!showVerifierSetting()) {
             PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
                     findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
@@ -327,6 +328,17 @@ public class DevelopmentSettings extends PreferenceFragment
                 SHOW_ALL_ANRS_KEY);
         mAllPrefs.add(mShowAllANRs);
         mResetCbPrefs.add(mShowAllANRs);
+
+	if (WebViewFactory.isExperimentalWebViewAvailable()) {
+            mExperimentalWebView = findAndInitCheckboxPref(WEBVIEW_EXPERIMENTAL_KEY);
+        } else {
+            Preference experimentalWebView = findPreference(WEBVIEW_EXPERIMENTAL_KEY);
+            PreferenceGroup debugApplicationsCategory = (PreferenceGroup)
+                    findPreference(DEBUG_APPLICATIONS_CATEGORY_KEY);
+            if (debugApplicationsCategory != null) {
+                debugApplicationsCategory.removePreference(experimentalWebView);
+            }
+        }
 
         Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
         if (hdcpChecking != null) {
@@ -607,6 +619,8 @@ public class DevelopmentSettings extends PreferenceFragment
         resetRootAccessOptions();
         resetAdvancedRebootOptions();
 	resetMSOBOptions();
+	resetAdbNotifyOptions();
+        resetVerifyAppsOverUsbOptions();
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
@@ -655,6 +669,11 @@ public class DevelopmentSettings extends PreferenceFragment
                     Settings.Secure.ADB_ENABLED, 1);
         }
         updateRootAccessOptions();
+    }
+
+    private void resetAdbNotifyOptions() {
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.ADB_NOTIFY, 1);
     }
 
     private void updateHdcpValues() {
@@ -726,6 +745,11 @@ public class DevelopmentSettings extends PreferenceFragment
             mDebugAppPref.setSummary(getResources().getString(R.string.debug_app_not_set));
             mWaitForDebugger.setEnabled(false);
         }
+    }
+
+    private void resetVerifyAppsOverUsbOptions() {
+        Settings.Global.putInt(getActivity().getContentResolver(),
+              Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, 1);
     }
 
     private void updateVerifyAppsOverUsbOptions() {
