@@ -353,11 +353,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         if (!removeRootOptionsIfRequired()) {
             mAllPrefs.add(mRootAccess);
         }
-
-        mDevelopmentTools = (PreferenceScreen) findPreference(DEVELOPMENT_TOOLS);
-        if (!removePreferenceIfPackageNotInstalled(mDevelopmentTools)) {
-            mAllPrefs.add(mDevelopmentTools);
-        }
     }
 
     private ListPreference addListPreference(String prefKey) {
