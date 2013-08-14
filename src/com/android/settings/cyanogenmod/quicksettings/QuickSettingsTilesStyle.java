@@ -38,6 +38,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.util.Helpers;
 import com.android.settings.widget.SeekBarPreference;
+import com.android.settings.Utils;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
@@ -49,6 +50,7 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
     private static final String PREF_QUICK_TILES_BG_COLOR = "quick_tiles_bg_color";
     private static final String PREF_QUICK_TILES_BG_PRESSED_COLOR = "quick_tiles_bg_pressed_color";
     private static final String PREF_QUICK_TILES_TEXT_COLOR = "quick_tiles_text_color";
+    private static final String PREF_ADDITIONAL_OPTIONS = "quicksettings_tiles_style_additional_options";
 
     private static final int DEFAULT_QUICK_TILES_BG_COLOR = 0xff161616;
     private static final int DEFAULT_QUICK_TILES_BG_PRESSED_COLOR = 0xff212121;
@@ -124,6 +126,11 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
         mDuplicateColumnsLandscape.setChecked(Settings.System.getInt(
                 getActivity().getContentResolver(),
                 Settings.System.QUICK_TILES_PER_ROW_DUPLICATE_LANDSCAPE, 1) == 1);
+
+        PreferenceCategory additionalOptions = (PreferenceCategory) findPreference(PREF_ADDITIONAL_OPTIONS);
+        if (!Utils.isPhone(getActivity())) {
+            additionalOptions.removePreference(findPreference(PREF_TILES_PER_ROW_DUPLICATE_LANDSCAPE));
+        }
 
         setHasOptionsMenu(true);
         mCheckPreferences = true;
