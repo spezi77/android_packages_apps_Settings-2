@@ -86,14 +86,18 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath";
     private static final String STATUS_BAR_AUTO_HIDE = "status_bar_auto_hide";
     private static final String STATUS_BAR_QUICK_PEEK = "status_bar_quick_peek";
+    private static final String STATUS_BAR_NETWORK_STATS = "status_bar_show_network_stats";
+    private static final String STATUS_BAR_NETWORK_STATS_UPDATE = "status_bar_network_status_update";
 
     private ColorPickerPreference mColorPicker;
     private CheckBoxPreference mStatusBarBrightnessControl;
     private CheckBoxPreference mStatusBarNotifCount;
+    private ListPreference mStatusBarNetStatsUpdate;
     private PreferenceScreen mClockStyle;
     private PreferenceCategory mPrefCategoryGeneral;
     private CheckBoxPreference mStatusBarDoNotDisturb;
     private ListPreference mStatusBarIconOpacity;
+    private CheckBoxPreference mStatusBarNetworkStats;
     private CheckBoxPreference mMMSBreath;
     private CheckBoxPreference mMissedCallBreath;
     private ListPreference mStatusBarAutoHide;
@@ -132,9 +136,15 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarIconOpacity.setValue(String.valueOf(iconOpacity));
         mStatusBarIconOpacity.setOnPreferenceChangeListener(this);
 
+	mStatusBarNetworkStats = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_NETWORK_STATS);
+	mStatusBarNetStatsUpdate = (ListPreference) prefSet.findPreference(STATUS_BAR_NETWORK_STATS_UPDATE);
+
 	mMMSBreath = (CheckBoxPreference) findPreference(KEY_MMS_BREATH);
         mMMSBreath.setChecked(Settings.System.getInt(resolver,
                 Settings.System.MMS_BREATH, 0) == 1);
+
+	mStatusBarNetworkStats.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_NETWORK_STATS, 0) == 1));
 
 	mMissedCallBreath = (CheckBoxPreference) findPreference(KEY_MISSED_CALL_BREATH);
         mMissedCallBreath.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -146,6 +156,12 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarAutoHide.setValue(String.valueOf(statusBarAutoHideValue));
         updateStatusBarAutoHideSummary(statusBarAutoHideValue);
         mStatusBarAutoHide.setOnPreferenceChangeListener(this);
+
+	long statsUpdate = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, 500);
+        mStatusBarNetStatsUpdate.setValue(String.valueOf(statsUpdate));
+        mStatusBarNetStatsUpdate.setSummary(mStatusBarNetStatsUpdate.getEntry());
+        mStatusBarNetStatsUpdate.setOnPreferenceChangeListener(this);
 
 	mStatusBarQuickPeek = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_QUICK_PEEK);
         mStatusBarQuickPeek.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -181,6 +197,13 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                     Settings.System.AUTO_HIDE_STATUSBAR, statusBarAutoHideValue);
             updateStatusBarAutoHideSummary(statusBarAutoHideValue);
             return true;
+	} else if (preference == mStatusBarNetStatsUpdate) {
+            long updateInterval = Long.valueOf((String) newValue);
+            int index = mStatusBarNetStatsUpdate.findIndexOfValue((String) newValue);
+            Settings.System.putLong(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NETWORK_STATS_UPDATE_INTERVAL, updateInterval);
+            mStatusBarNetStatsUpdate.setSummary(mStatusBarNetStatsUpdate.getEntries()[index]);
+            return true;
         }
         return false;
     }
@@ -202,6 +225,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_DONOTDISTURB,
                     mStatusBarDoNotDisturb.isChecked() ? 1 : 0);
+            return true;
+	} else if (preference == mStatusBarNetworkStats) {
+            value = mStatusBarNetworkStats.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_NETWORK_STATS, value ? 1 : 0);
             return true;
 	} else if (preference == mMMSBreath) {
             Settings.System.putInt(mContext.getContentResolver(), Settings.System.MMS_BREATH, 
