@@ -166,7 +166,6 @@ public class Halo extends SettingsPreferenceFragment
             int intHex = ColorPickerPreference.convertToColorInt(hex);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HALO_EFFECT_COLOR, intHex);
-            Helpers.restartSystemUI();
             return true;
 	} else if (preference == mHaloBubbleColor) {
             String hex = ColorPickerPreference.convertToARGB(
@@ -210,7 +209,6 @@ public class Halo extends SettingsPreferenceFragment
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_COLORS, mHaloColors.isChecked()
                     ? 1 : 0);
-            Helpers.restartSystemUI();
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
