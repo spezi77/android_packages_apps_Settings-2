@@ -20,7 +20,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import com.android.settings.DisplaySettings;
 import android.os.SystemProperties;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -79,7 +78,6 @@ public class BootReceiver extends BroadcastReceiver {
         VibratorIntensity.restore(ctx);
 	ButtonBacklightBrightness.restore(ctx);
         KeyboardBacklightBrightness.restore(ctx);
-	DisplaySettings.restore(ctx);
     }
 
     private void initFreqCapFiles(Context ctx)
