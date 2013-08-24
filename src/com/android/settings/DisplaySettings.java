@@ -101,6 +101,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private WifiDisplayStatus mWifiDisplayStatus;
     private Preference mWifiDisplayPreference;
+    private Preference backlightCategory;
 
     private CheckBoxPreference mCrtOff;
 
@@ -131,8 +132,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
 	PreferenceScreen prefSet = getPreferenceScreen();
 
-	final PreferenceCategory backlightCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_BACKLIGHT);
+        backlightCategory = (Preference)findPreference(CATEGORY_BACKLIGHT);
 
         mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
 
@@ -175,7 +175,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 removePreference(KEY_KEYBOARD_BACKLIGHT);
             }
         } else {
-            prefScreen.removePreference(backlightCategory);
+            getPreferenceScreen().removePreference(backlightCategory);
         }
 
 	// Start the wake-up category handling
