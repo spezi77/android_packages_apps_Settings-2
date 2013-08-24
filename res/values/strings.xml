@@ -6519,6 +6519,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="vibrator_intensity_title">Vibrator intensity</string>
     <string name="vibrator_warning">Values higher than %1$d are not recommended</string>
 
+    <!-- Hardware tunables - Key backlight -->
+    <string name="key_backlight_title">Backlight</string>
+    <string name="button_backlight_title">Button backlight brightness</string>
+    <string name="keyboard_backlight_title">Keyboard backlight brightness</string>
+
     <!-- Hardware tunables - Color calibration -->
     <string name="color_calibration_title">Color calibration</string>
     <string name="color_calibration_summary">Calibrate on-screen colors</string>

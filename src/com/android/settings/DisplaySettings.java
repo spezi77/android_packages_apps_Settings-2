@@ -46,6 +46,8 @@ import android.util.Log;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.cyanogenmod.DisplayColor;
 import com.android.settings.cyanogenmod.DisplayRotation;
+import com.android.settings.cyanogenmod.ButtonBacklightBrightness;
+import com.android.settings.cyanogenmod.KeyboardBacklightBrightness;
 import com.android.settings.Utils;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
@@ -71,6 +73,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
     private static final String KEY_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
     private static final String KEY_DISPLAY_COLOR = "color_calibration";
+    private static final String KEY_BUTTON_BACKLIGHT = "button_backlight";
+    private static final String KEY_KEYBOARD_BACKLIGHT = "keyboard_backlight";
+    private static final String CATEGORY_BACKLIGHT = "key_backlight";
 
     // Strings used for building the summary
     private static final String ROTATION_ANGLE_0 = "0";
@@ -126,6 +131,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
 	PreferenceScreen prefSet = getPreferenceScreen();
 
+	final PreferenceCategory backlightCategory =
+                (PreferenceCategory) prefScreen.findPreference(CATEGORY_BACKLIGHT);
+
         mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
@@ -156,6 +164,18 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 == WifiDisplayStatus.FEATURE_STATE_UNAVAILABLE) {
             getPreferenceScreen().removePreference(mWifiDisplayPreference);
             mWifiDisplayPreference = null;
+        }
+
+	if (ButtonBacklightBrightness.isSupported() || KeyboardBacklightBrightness.isSupported()) {
+            if (!ButtonBacklightBrightness.isSupported()) {
+                removePreference(KEY_BUTTON_BACKLIGHT);
+            }
+
+            if (!KeyboardBacklightBrightness.isSupported()) {
+                removePreference(KEY_KEYBOARD_BACKLIGHT);
+            }
+        } else {
+            prefScreen.removePreference(backlightCategory);
         }
 
 	// Start the wake-up category handling

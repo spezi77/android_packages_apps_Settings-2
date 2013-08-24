@@ -84,6 +84,24 @@
                 android:summary="@string/color_calibration_summary"
                 android:persistent="false" />
 
+    <PreferenceCategory
+        android:key="key_backlight"
+        android:title="@string/key_backlight_title" >
+
+            <com.android.settings.cyanogenmod.ButtonBacklightBrightness
+                android:key="button_backlight"
+                android:title="@string/button_backlight_title"
+                android:dialogTitle="@string/button_backlight_title"
+                android:persistent="false" />
+
+            <com.android.settings.cyanogenmod.KeyboardBacklightBrightness
+                android:key="keyboard_backlight"
+                android:title="@string/keyboard_backlight_title"
+                android:dialogTitle="@string/keyboard_backlight_title"
+                android:persistent="false" />
+
+    </PreferenceCategory>
+
         <PreferenceCategory
             android:key="category_wakeup_options"
             android:title="@string/display_category_wakeup_options_title"/>
