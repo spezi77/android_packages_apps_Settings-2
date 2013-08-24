@@ -6525,4 +6525,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Show 4G icon instead of LTE. User defined settings -->
     <string name="show_lte_or_fourgee_title">Show 4G network</string>
     <string name="show_lte_or_fourgee_summary">This will allow you to show you 4G instead of LTE</string>
+
+     <!-- Backlight brightness settings screen -->
+    <string name="adaptive_backlight_title">Adaptive backlight</string>
+    <string name="adaptive_backlight_summary">Intelligently vary the backlight brightness of the display and help maximize battery life</string>
 </resources>
