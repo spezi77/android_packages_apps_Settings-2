@@ -59,11 +59,6 @@
         android:title="@string/status_bar_general_title">
 
 	<CheckBoxPreference
-            android:key="tablet_statusbar"
-            android:title="@string/tablet_statusbar_title"
-            android:summary="@string/tablet_statusbar_summary" />
-
-	<CheckBoxPreference
             android:key="missed_call_breath"
             android:title="@string/missed_call_breath"
             android:summary="@string/missed_call_breath_summary"

@@ -6529,8 +6529,4 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <!-- Backlight brightness settings screen -->
     <string name="adaptive_backlight_title">Adaptive backlight</string>
     <string name="adaptive_backlight_summary">Intelligently vary the backlight brightness of the display and help maximize battery life</string>
-
-    <string name="tablet_statusbar_title">Tablet style statusbar</string>
-    <string name="tablet_statusbar_summary">Pull down 2 separate statusbars like tablets have</string>
-
 </resources>

@@ -82,7 +82,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
     private static final String STATUS_BAR_DONOTDISTURB = "status_bar_donotdisturb";
     private static final String STATUS_BAR_NOTIF_ICON_OPACITY = "status_bar_icon_opacity";
-    private static final String TABLET_STATUSBAR = "tablet_statusbar";
     private static final String KEY_MMS_BREATH = "mms_breath";
     private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath";
     private static final String STATUS_BAR_AUTO_HIDE = "status_bar_auto_hide";
@@ -95,7 +94,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private PreferenceCategory mPrefCategoryGeneral;
     private CheckBoxPreference mStatusBarDoNotDisturb;
     private ListPreference mStatusBarIconOpacity;
-    private CheckBoxPreference mStatusbar;
     private CheckBoxPreference mMMSBreath;
     private CheckBoxPreference mMissedCallBreath;
     private ListPreference mStatusBarAutoHide;
@@ -134,14 +132,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarIconOpacity.setValue(String.valueOf(iconOpacity));
         mStatusBarIconOpacity.setOnPreferenceChangeListener(this);
 
-	mStatusbar = (CheckBoxPreference) findPreference(TABLET_STATUSBAR);
-        if (Utils.isPhone(getActivity())) {
-            getPreferenceScreen().removePreference(mStatusbar);
-        } else {
-            mStatusbar.setChecked(Settings.System.getInt(mContentResolver,
-                Settings.System.TABLET_STATUSBAR, 0) == 1);
-        }
-
 	mMMSBreath = (CheckBoxPreference) findPreference(KEY_MMS_BREATH);
         mMMSBreath.setChecked(Settings.System.getInt(resolver,
                 Settings.System.MMS_BREATH, 0) == 1);
@@ -176,17 +166,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarDoNotDisturb.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.STATUS_BAR_DONOTDISTURB, 0) == 1));
 
-            checkUI();
-    }
-
-    private void checkUI() {
-boolean mode = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.USER_UI_MODE, 0) == 1;
-        if (mode) {
-            mStatusbar.setEnabled(false);
-        } else {
-            mStatusbar.setEnabled(true);
-        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -219,13 +198,7 @@ boolean mode = Settings.System.getInt(mContext.getContentResolver(),
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_NOTIF_COUNT, value ? 1 : 0);
             return true;
-	} else if (preference == mStatusbar) {
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.TABLET_STATUSBAR,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
-                    Helpers.restartSystemUI();
-            return true;
-	} else if (preference == mStatusBarDoNotDisturb) {
+	}else if (preference == mStatusBarDoNotDisturb) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_DONOTDISTURB,
                     mStatusBarDoNotDisturb.isChecked() ? 1 : 0);
