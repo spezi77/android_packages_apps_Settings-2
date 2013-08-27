@@ -59,13 +59,6 @@
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
 
-	<CheckBoxPreference
-                android:key="adaptive_backlight"
-                android:title="@string/adaptive_backlight_title"
-                android:summary="@string/adaptive_backlight_summary"
-                android:defaultValue="true" />
-
-
         <PreferenceScreen
                 android:key="screensaver"
                 android:title="@string/screensaver_settings_title"
@@ -83,31 +76,6 @@
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
-
-        <com.android.settings.cyanogenmod.DisplayColor
-                android:key="color_calibration"
-                android:title="@string/color_calibration_title"
-                android:dialogTitle="@string/color_calibration_title"
-                android:summary="@string/color_calibration_summary"
-                android:persistent="false" />
-
-    <PreferenceCategory
-        android:key="key_backlight"
-        android:title="@string/key_backlight_title" >
-
-            <com.android.settings.cyanogenmod.ButtonBacklightBrightness
-                android:key="button_backlight"
-                android:title="@string/button_backlight_title"
-                android:dialogTitle="@string/button_backlight_title"
-                android:persistent="false" />
-
-            <com.android.settings.cyanogenmod.KeyboardBacklightBrightness
-                android:key="keyboard_backlight"
-                android:title="@string/keyboard_backlight_title"
-                android:dialogTitle="@string/keyboard_backlight_title"
-                android:persistent="false" />
-
-    </PreferenceCategory>
 
         <PreferenceCategory
             android:key="category_wakeup_options"

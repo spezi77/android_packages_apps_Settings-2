@@ -82,6 +82,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final int REQUEST_PICK_BOOT_ANIMATION = 203;
     private static final String DUAL_PANE_PREFS = "dual_pane_prefs";
+    private static final String KEY_TOUCHKEY_LIGHT = "touchkey_light_timeout";
 
     Preference mCustomBootAnimation;
     Preference mLcdDensity;
@@ -89,6 +90,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private Preference mCustomLabel;
     CheckBoxPreference mDisableBootAnimation;
     private ListPreference mDualPanePrefs;
+
+    private ListPreference mTouchKeyLights;
 
     private Random randomGenerator = new Random();
     // previous random; so we don't repeat
@@ -123,6 +126,19 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 	mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
 
+	mTouchKeyLights = (ListPreference) getPreferenceScreen().findPreference(KEY_TOUCHKEY_LIGHT);
+        if (getResources().getBoolean(R.bool.config_show_touchKeyDur) == false) {
+            if (mTouchKeyLights != null) {
+                getPreferenceScreen().removePreference(mTouchKeyLights);
+            }
+        } else {
+            int touchKeyLights = Settings.System.getInt(getActivity().getContentResolver(),
+                    Settings.System.TOUCHKEY_LIGHT_DUR, 5000);
+            mTouchKeyLights.setValue(String.valueOf(touchKeyLights));
+            mTouchKeyLights.setSummary(mTouchKeyLights.getEntry());
+            mTouchKeyLights.setOnPreferenceChangeListener(this);
+        }
+
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
         try {
@@ -154,6 +170,13 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.DUAL_PANE_PREFS, value);
             getActivity().recreate();
+            return true;
+	} else if (preference == mTouchKeyLights) {
+            int touchKeyLights = Integer.valueOf((String) newValue);
+            int index = mTouchKeyLights.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.TOUCHKEY_LIGHT_DUR, touchKeyLights);
+            mTouchKeyLights.setSummary(mTouchKeyLights.getEntries()[index]);
             return true;
         }
         return false;

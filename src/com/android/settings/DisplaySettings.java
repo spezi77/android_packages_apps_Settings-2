@@ -41,20 +41,13 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.preference.PreferenceManager;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.android.internal.view.RotationPolicy;
-import com.android.settings.cyanogenmod.DisplayColor;
 import com.android.settings.cyanogenmod.DisplayRotation;
-import com.android.settings.cyanogenmod.ButtonBacklightBrightness;
-import com.android.settings.cyanogenmod.KeyboardBacklightBrightness;
 import com.android.settings.Utils;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
-
-import org.cyanogenmod.hardware.AdaptiveBacklight;
 
 import java.util.ArrayList;
 
@@ -69,7 +62,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
-    private static final String KEY_ADAPTIVE_BACKLIGHT = "adaptive_backlight";
     private static final String KEY_DISPLAY_ROTATION = "display_rotation";
     private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
@@ -77,10 +69,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
     private static final String KEY_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
-    private static final String KEY_DISPLAY_COLOR = "color_calibration";
-    private static final String KEY_BUTTON_BACKLIGHT = "button_backlight";
-    private static final String KEY_KEYBOARD_BACKLIGHT = "keyboard_backlight";
-    private static final String CATEGORY_BACKLIGHT = "key_backlight";
 
     // Strings used for building the summary
     private static final String ROTATION_ANGLE_0 = "0";
@@ -91,7 +79,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
     private DisplayManager mDisplayManager;
-    private CheckBoxPreference mAdaptiveBacklight;
 
     private CheckBoxPreference mVolumeWake;
     private PreferenceScreen mDisplayRotationPreference;
@@ -107,7 +94,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private WifiDisplayStatus mWifiDisplayStatus;
     private Preference mWifiDisplayPreference;
-    private Preference backlightCategory;
 
     private CheckBoxPreference mCrtOff;
 
@@ -137,8 +123,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.display_settings);
 
 	PreferenceScreen prefSet = getPreferenceScreen();
-
-        backlightCategory = (Preference)findPreference(CATEGORY_BACKLIGHT);
 
         mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
 
@@ -170,24 +154,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 == WifiDisplayStatus.FEATURE_STATE_UNAVAILABLE) {
             getPreferenceScreen().removePreference(mWifiDisplayPreference);
             mWifiDisplayPreference = null;
-        }
-
-	if (ButtonBacklightBrightness.isSupported() || KeyboardBacklightBrightness.isSupported()) {
-            if (!ButtonBacklightBrightness.isSupported()) {
-                removePreference(KEY_BUTTON_BACKLIGHT);
-            }
-
-            if (!KeyboardBacklightBrightness.isSupported()) {
-                removePreference(KEY_KEYBOARD_BACKLIGHT);
-            }
-        } else {
-            getPreferenceScreen().removePreference(backlightCategory);
-        }
-
-	mAdaptiveBacklight = (CheckBoxPreference) findPreference(KEY_ADAPTIVE_BACKLIGHT);
-        if (!AdaptiveBacklight.isSupported()) {
-            getPreferenceScreen().removePreference(mAdaptiveBacklight);
-            mAdaptiveBacklight = null;
         }
 
 	// Start the wake-up category handling
@@ -247,10 +213,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 	mWakeUpWhenPluggedOrUnplugged = (CheckBoxPreference) findPreference(KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
         mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                         Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, 1) == 1);
-
-        if (!DisplayColor.isSupported()) {
-            removePreference(KEY_DISPLAY_COLOR);
-        }
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -409,10 +371,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mWifiDisplayStatus = mDisplayManager.getWifiDisplayStatus();
         }
 
-	if (mAdaptiveBacklight != null) {
-            mAdaptiveBacklight.setChecked(AdaptiveBacklight.isEnabled());
-        }
-
         updateState();
     }
 
@@ -506,8 +464,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF,
                     mCrtOff.isChecked() ? 1 : 0);
             return true;
-	} else if (preference == mAdaptiveBacklight) {
-            return AdaptiveBacklight.setEnabled(mAdaptiveBacklight.isChecked());
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -559,21 +515,5 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
         }
         return false;
-    }
-
-    /**
-     * Restore the properties associated with this preference on boot
-     * @param ctx A valid context
-     */
-    public static void restore(Context ctx) {
-        if (AdaptiveBacklight.isSupported()) {
-            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-            final boolean enabled = prefs.getBoolean(KEY_ADAPTIVE_BACKLIGHT, true);
-            if (!AdaptiveBacklight.setEnabled(enabled)) {
-                Log.e(TAG, "Failed to restore adaptive backlight settings.");
-            } else {
-                Log.d(TAG, "Adaptive backlight settings restored.");
-            }
-        }
     }
 }

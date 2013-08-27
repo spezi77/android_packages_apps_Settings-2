@@ -6432,6 +6432,15 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="circle_ram_title">Recents RAM circle</string>
     <string name="circle_ram_summary">Adds a circular meter surrounding the clear recents button</string>
 
+    <!-- Touckey Light Timeout -->
+    <string name="touchkey_timeout_title">TouchKey Light Timeout</string>
+    <string name="touchkey_timeout_1s">1 second</string>
+    <string name="touchkey_timeout_2s">2 seconds</string>
+    <string name="touchkey_timeout_5s">5 seconds</string>
+    <string name="touchkey_timeout_10s">10 seconds</string>
+    <string name="touchkey_timeout_alwayson">Always On</string>
+    <string name="touchkey_timeout_alwaysoff">Always Off</string>
+
     <!-- User app limits screen title [CHAR LIMIT=35] -->
     <string name="user_restrictions_title">Application and content restrictions</string>
     <!-- User limits screen, user name rename text [CHAR LIMIT=15] -->
@@ -6509,29 +6518,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="remove_blacklist_entry">Do you want to remove this blacklist entry?</string>
     <string name="select_contact">Select contact</string>
 
-    <!-- Hardware tunables - Vibrator intensity -->
-    <string name="vibrator_intensity_title">Vibrator intensity</string>
-    <string name="vibrator_warning">Values higher than %1$d are not recommended</string>
-
-    <!-- Hardware tunables - Key backlight -->
-    <string name="key_backlight_title">Backlight</string>
-    <string name="button_backlight_title">Button backlight brightness</string>
-    <string name="keyboard_backlight_title">Keyboard backlight brightness</string>
-
-    <!-- Hardware tunables - Color calibration -->
-    <string name="color_calibration_title">Color calibration</string>
-    <string name="color_calibration_summary">Calibrate on-screen colors</string>
-    <string name="color_red_title">Red</string>
-    <string name="color_green_title">Green</string>
-    <string name="color_blue_title">Blue</string>
-
     <!-- Show 4G icon instead of LTE. User defined settings -->
     <string name="show_lte_or_fourgee_title">Show 4G network</string>
     <string name="show_lte_or_fourgee_summary">This will allow you to show you 4G instead of LTE</string>
-
-     <!-- Backlight brightness settings screen -->
-    <string name="adaptive_backlight_title">Adaptive backlight</string>
-    <string name="adaptive_backlight_summary">Intelligently vary the backlight brightness of the display and help maximize battery life</string>
 
     <!-- Whether to allow mock SMS -->
     <string name="allow_mock_sms">Allow mock SMS</string>

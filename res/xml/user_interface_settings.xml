@@ -12,6 +12,13 @@
             android:title="@string/lcd_density_title"
             android:summary="@string/lcd_density_summary" />
 
+	<ListPreference
+            android:key="touchkey_light_timeout"
+            android:dialogTitle="@string/touchkey_timeout_title"
+            android:title="@string/touchkey_timeout_title"
+            android:entries="@array/entries_touchkey_timeout"
+            android:entryValues="@array/values_touchkey_timeout" />	
+
         <CheckBoxPreference
             android:key="use_alt_resolver"
             android:title="@string/alt_resolver"
