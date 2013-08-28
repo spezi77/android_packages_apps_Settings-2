@@ -83,6 +83,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final int REQUEST_PICK_BOOT_ANIMATION = 203;
     private static final String DUAL_PANE_PREFS = "dual_pane_prefs";
     private static final String KEY_TOUCHKEY_LIGHT = "touchkey_light_timeout";
+    private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
+    private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
 
     Preference mCustomBootAnimation;
     Preference mLcdDensity;
@@ -90,6 +92,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private Preference mCustomLabel;
     CheckBoxPreference mDisableBootAnimation;
     private ListPreference mDualPanePrefs;
+    private ListPreference mListViewAnimation;
+    private ListPreference mListViewInterpolator;
 
     private ListPreference mTouchKeyLights;
 
@@ -139,6 +143,21 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             mTouchKeyLights.setOnPreferenceChangeListener(this);
         }
 
+	//ListView Animations
+        mListViewAnimation = (ListPreference) findPreference(KEY_LISTVIEW_ANIMATION);
+        int listviewanimation = Settings.System.getInt(getActivity().getContentResolver(),
+            Settings.System.LISTVIEW_ANIMATION, 1);
+        mListViewAnimation.setValue(String.valueOf(listviewanimation));
+        mListViewAnimation.setSummary(mListViewAnimation.getEntry());
+        mListViewAnimation.setOnPreferenceChangeListener(this);
+
+        mListViewInterpolator = (ListPreference) findPreference(KEY_LISTVIEW_INTERPOLATOR);
+        int listviewinterpolator = Settings.System.getInt(getActivity().getContentResolver(),
+            Settings.System.LISTVIEW_INTERPOLATOR, 0);
+        mListViewInterpolator.setValue(String.valueOf(listviewinterpolator));
+        mListViewInterpolator.setSummary(mListViewInterpolator.getEntry());
+        mListViewInterpolator.setOnPreferenceChangeListener(this);
+
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
         try {
@@ -177,6 +196,22 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.TOUCHKEY_LIGHT_DUR, touchKeyLights);
             mTouchKeyLights.setSummary(mTouchKeyLights.getEntries()[index]);
+            return true;
+	if (preference == mListViewAnimation) {
+            int listviewanimation = Integer.valueOf((String) newValue);
+            int index = mListViewAnimation.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LISTVIEW_ANIMATION,
+                    listviewanimation);
+            mListViewAnimation.setSummary(mListViewAnimation.getEntries()[index]);
+            return true;
+        } else if (preference == mListViewInterpolator) {
+            int listviewinterpolator = Integer.valueOf((String) newValue);
+            int index = mListViewInterpolator.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LISTVIEW_INTERPOLATOR,
+                    listviewinterpolator);
+            mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[index]);
             return true;
         }
         return false;
