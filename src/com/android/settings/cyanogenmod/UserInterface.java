@@ -197,7 +197,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     Settings.System.TOUCHKEY_LIGHT_DUR, touchKeyLights);
             mTouchKeyLights.setSummary(mTouchKeyLights.getEntries()[index]);
             return true;
-	if (preference == mListViewAnimation) {
+	}else if (preference == mListViewAnimation) {
             int listviewanimation = Integer.valueOf((String) newValue);
             int index = mListViewAnimation.findIndexOfValue((String) newValue);
             Settings.System.putInt(getActivity().getContentResolver(),
