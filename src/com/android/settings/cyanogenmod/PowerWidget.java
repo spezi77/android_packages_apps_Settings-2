@@ -69,6 +69,7 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     private static final String TOGGLE_ICON_ON_COLOR = "toggle_icon_color_on";
     private static final String TOGGLE_ICON_OFF_COLOR = "toggle_icon_color_off";
     private static final String KEY_NOTIFICATION_BEHAVIOUR = "notifications_behaviour";
+    private static final String PREF_BRIGHTNESS_LOC = "brightness_location";
 
     private CheckBoxPreference mPowerWidget;
     private CheckBoxPreference mPowerWidgetHideOnChange;
@@ -82,6 +83,7 @@ public class PowerWidget extends SettingsPreferenceFragment implements
     CheckBoxPreference mSettingsBtn; 
     private Preference mToggleIconOnColor;
     private Preference mToggleIconOffColor;
+    private ListPreference mBrightnessLocation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -128,7 +130,7 @@ public class PowerWidget extends SettingsPreferenceFragment implements
                     Settings.System.ENABLE_TOGGLE_BAR, 0) == 1));
 
 	    mToggleIconOnColor = (Preference) prefSet.findPreference(TOGGLE_ICON_ON_COLOR);
-            mToggleIconOffColor = (Preference) prefSet.findPreference(TOGGLE_ICON_OFF_COLOR);
+            mToggleIconOffColor = (Preference) prefSet.findPreference(TOGGLE_ICON_OFF_COLOR);	
 
 	mSettingsBtn = (CheckBoxPreference) findPreference(PREF_NOTIFICATION_SETTINGS_BTN);
         mSettingsBtn.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
@@ -139,6 +141,13 @@ public class PowerWidget extends SettingsPreferenceFragment implements
         mNotificationsBeh.setValue(String.valueOf(CurrentBeh));
                 mNotificationsBeh.setSummary(mNotificationsBeh.getEntry());
         mNotificationsBeh.setOnPreferenceChangeListener(this);
+	
+	mBrightnessLocation = (ListPreference) findPreference(PREF_BRIGHTNESS_LOC);
+            mBrightnessLocation.setOnPreferenceChangeListener(this);
+            mBrightnessLocation.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                    .getContentResolver(), Settings.System.STATUSBAR_TOGGLES_BRIGHTNESS_LOC, 3)));
+            mBrightnessLocation.setSummary(mBrightnessLocation.getEntry());
+
         }
     }
 
@@ -156,6 +165,13 @@ public class PowerWidget extends SettingsPreferenceFragment implements
             Integer.valueOf(val));
             int index = mNotificationsBeh.findIndexOfValue(val);
             mNotificationsBeh.setSummary(mNotificationsBeh.getEntries()[index]);
+            return true;
+	} else if (preference == mBrightnessLocation) {
+            int val = Integer.parseInt((String) newValue);
+            int index = mBrightnessLocation.findIndexOfValue((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+            Settings.System.STATUSBAR_TOGGLES_BRIGHTNESS_LOC, val);
+            mBrightnessLocation.setSummary(mBrightnessLocation.getEntries()[index]);
             return true;
         }
         return false;
