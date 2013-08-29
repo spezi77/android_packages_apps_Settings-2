@@ -46,8 +46,8 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:layout_below="@+id/container"
-                settings:min="0.85"
-                settings:max="1.30"
+                settings:minl="0.85"
+                settings:maxl="1.30"
                 settings:defaultValue="1.00"
                 settings:digits="2" />
 
