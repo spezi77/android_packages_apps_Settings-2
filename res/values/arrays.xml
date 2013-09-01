@@ -1089,18 +1089,6 @@
         <item>0</item>
     </string-array>
 
-    <string-array name="dithering_entries" translatable="false">
-        <item>@string/dithering_no_dither</item>
-        <item>@string/dithering_color_banding</item>
-        <item>@string/dithering_blur_effect</item>
-    </string-array>
-
-    <string-array name="dithering_values" translatable="false">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
     <string-array name="lockscreen_background_entries">
         <item>@string/lockscreen_background_color_fill</item>
         <item>@string/lockscreen_background_custom_image</item>
