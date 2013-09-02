@@ -190,7 +190,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     @Override
     public void onResume() {
         super.onResume();
-        createCustomLockscreenView();
+        updateCustomBackgroundSummary();
     }
 
     @Override
