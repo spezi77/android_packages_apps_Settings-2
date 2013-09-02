@@ -90,15 +90,16 @@
             android:title="@string/enable_toggle_bar_title"
             android:defaultValue="false" />
 
-    <PreferenceScreen
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="toggle_icon_color_on"
-            android:title="@string/toggle_icon_color_on_title">
-        </PreferenceScreen>
+            android:title="@string/toggle_icon_color_on_title"
+            android:defaultValue="0xFF33B5E5" />
 
-        <PreferenceScreen
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="toggle_icon_color_off"
-            android:title="@string/toggle_icon_color_off_title">
-        </PreferenceScreen>
+            android:title="@string/toggle_icon_color_off_title"
+            android:defaultValue="0xFFFFBB33" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
