@@ -50,11 +50,7 @@ import com.android.settings.util.CMDProcessor;
     private static final String KEY_CLEAR_RECENTS_POSITION = "clear_recents_position";
     private static final String PREF_VIBRATE_NOTIF_EXPAND = "vibrate_notif_expand";
     private static final String KEY_LOW_BATTERY_WARNING_POLICY = "pref_low_battery_warning_policy";
-    private static final String PREF_NOTIFICATION_SHOW_WIFI_SSID = "notification_show_wifi_ssid";
-    private static final String PREF_NOTIFICATION_OPTIONS = "options";
- 
-    private PreferenceCategory mAdditionalOptions;
-    private CheckBoxPreference mShowWifiName;
+
     private CheckBoxPreference mHighEndGfx;
     private Preference mRamBar;
     CheckBoxPreference mRamCircle;
@@ -105,18 +101,6 @@ false));
         mClearPosition.setValue(String.valueOf(ClearSide));
         mClearPosition.setSummary(mClearPosition.getEntry());
         mClearPosition.setOnPreferenceChangeListener(this);
-
-	mShowWifiName = (CheckBoxPreference) findPreference(PREF_NOTIFICATION_SHOW_WIFI_SSID);
-        mShowWifiName.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.NOTIFICATION_SHOW_WIFI_SSID, 0) == 1);
-
-        PackageManager pm = getPackageManager();
-        boolean isMobileData = pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
-
-        if (!Utils.isPhone(getActivity()) || !isMobileData) {
-            // Nothing for tablets, large screen devices and non Wifi devices remove options
-            prefSet.removePreference(mShowWifiName);
-        }
     }
 
     private void updateRamBar() {
@@ -173,11 +157,6 @@ SystemProperties.set(USE_HIGH_END_GFX_PROP, mHighEndGfx.isChecked() ? "1" : "0")
             Settings.System.putBoolean(getActivity().getContentResolver(),
                     Settings.System.RECENTS_RAM_CIRCLE,
                     ((CheckBoxPreference) preference).isChecked());
-            return true;
-	} else if (preference == mShowWifiName) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NOTIFICATION_SHOW_WIFI_SSID,
-                    mShowWifiName.isChecked() ? 1 : 0);
             return true;
 	} else {
             // If we didn't handle it, let preferences handle it.
