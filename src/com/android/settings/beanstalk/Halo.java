@@ -182,11 +182,13 @@ public class Halo extends SettingsPreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (preference == mHaloState) {
             boolean state = Integer.valueOf((String) objValue) == 1;
+	    int index = mHaloState.findIndexOfValue((String) Value);
             try {
                 mNotificationManager.setHaloPolicyBlack(state);
             } catch (android.os.RemoteException ex) {
                 // System dead
             }
+	    mHaloState.setSummary(mHaloState.getEntries()[index]);
             return true;
 	} else if (preference == mHaloSize) {
             float haloSize = Float.valueOf((String) objValue);
@@ -196,14 +198,18 @@ public class Halo extends SettingsPreferenceFragment
             mHaloSize.setSummary(mHaloSize.getEntries()[index]);
             return true;
 	} else if (preference == mHaloMsgAnimate) {
-            int haloMsgAnimation = Integer.valueOf((String) objValue);
+            int haloMsgAnimation = Integer.valueOf((String) Value);
+            int index = mHaloMsgAnimate.findIndexOfValue((String) Value);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HALO_MSGBOX_ANIMATION, haloMsgAnimation);
+	    mHaloMsgAnimate.setSummary(mHaloMsgAnimate.getEntries()[index]);
             return true;
         } else if (preference == mHaloNotifyCount) {
-            int haloNotifyCount = Integer.valueOf((String) objValue);
+            int haloNotifyCount = Integer.valueOf((String) Value);
+            int index = mHaloNotifyCount.findIndexOfValue((String) Value);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HALO_NOTIFY_COUNT, haloNotifyCount);
+	    mHaloNotifyCount.setSummary(mHaloNotifyCount.getEntries()[index]);
             return true;
 	} else if (preference == mHaloCircleColor) {
             String hex = ColorPickerPreference.convertToARGB(
