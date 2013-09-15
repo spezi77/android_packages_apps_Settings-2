@@ -31,6 +31,8 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.app.INotificationManager;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 
