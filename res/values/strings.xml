@@ -6589,4 +6589,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
         sliding your finger across the Statusbar. Note: Will not be active when auto-brightness is on
     </string>
 
+    <!-- GPS Source selection -->
+    <string name="location_gps_source_title">GPS source</string>
+    <string name="location_gps_source_summary">Choose to use either an external bluetooth GPS or internal GPS as location provider</string>
+    <string name="location_gps_source_notification_title">Alert</string>
+    <string name="location_gps_source_notification">The GPS source has been switched! GPS will be disabled. Please re-enable before use!</string>
+
 </resources>
