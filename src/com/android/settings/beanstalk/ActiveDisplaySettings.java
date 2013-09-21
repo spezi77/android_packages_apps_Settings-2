@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.chameleonos;
+package com.android.settings.beanstalk;
 
 import android.content.Context;
 import android.hardware.SensorManager;

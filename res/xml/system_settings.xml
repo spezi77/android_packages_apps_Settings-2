@@ -72,7 +72,7 @@
     <!-- Active display -->
     <PreferenceScreen
         android:key="active_display"
-        android:fragment="com.android.settings.chameleonos.ActiveDisplaySettings"
+        android:fragment="com.android.settings.beanstalk.ActiveDisplaySettings"
         android:title="@string/ad_settings_title"
         android:summary="@string/ad_settings_summary">
     </PreferenceScreen>
