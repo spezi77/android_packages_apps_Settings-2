@@ -55,6 +55,12 @@
         android:title="@string/notification_drawer_title" />
 
     <PreferenceScreen
+        android:id="@+id/animations"  
+        android:title="@string/title_animation_controls"  
+        android:summary="@string/header_summary_animation"  
+        android:fragment="com.android.settings.cyanogenmod.fragments.AnimationControls" />
+
+    <PreferenceScreen
         android:key="misc_menu"
         android:fragment="com.android.settings.cyanogenmod.MiscSettings"
         android:title="@string/misc_settings_title" />

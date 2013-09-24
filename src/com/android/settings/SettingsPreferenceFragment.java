@@ -52,14 +52,19 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
 
     protected Context mContext;
 
+    // Need to use AOKP Custom system animation
+    protected ContentResolver mContentRes;  
+
     // Cache the content resolver for async callbacks
     private ContentResolver mContentResolver;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+	mContext = getActivity().getApplicationContext();
 
-        mContext = getActivity().getApplicationContext();
+	// Need to use AOKP Custom system animation
+	mContentRes = getActivity().getContentResolver(); 
 
         // Prepare help url and enable menu if necessary
         int helpResource = getHelpResource();
@@ -331,4 +336,8 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Di
         }
     }
 
+    // Need to AOKP Custom system animation
+    public void setTitle(int resId) {
+        getActivity().setTitle(resId);
+    }	
 }
