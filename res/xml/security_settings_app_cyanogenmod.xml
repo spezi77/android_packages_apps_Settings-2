@@ -39,7 +39,8 @@
 
 	<Preference
         android:id="@+id/permissions_settings"
-        android:title="@string/permissions_settings_title">
+        android:title="@string/permissions_settings_title"
+        android:summary="@string/permissions_summary">
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="org.chameleonos.permissionsmanager"
