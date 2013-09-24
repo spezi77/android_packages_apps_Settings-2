@@ -650,8 +650,6 @@ public class WifiSettings extends SettingsPreferenceFragment
                         ap = new AccessPoint(getActivity(), mAccessPointSavedState);
                         // For repeated orientation changes
                         mDlgAccessPoint = ap;
-                        // Reset the saved access point data
-                        mAccessPointSavedState = null;
                     }
                 }
                 // If it's still null, fine, it's for Add Network
@@ -670,11 +668,8 @@ public class WifiSettings extends SettingsPreferenceFragment
                                     new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Activity activity = getActivity();
-                                    if (activity != null) {
-                                        activity.setResult(RESULT_SKIP);
-                                        activity.finish();
-                                    }
+                                    getActivity().setResult(RESULT_SKIP);
+                                    getActivity().finish();
                                 }
                             })
                             .setPositiveButton(R.string.wifi_dont_skip,
@@ -692,11 +687,8 @@ public class WifiSettings extends SettingsPreferenceFragment
                                     new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Activity activity = getActivity();
-                                    if (activity != null) {
-                                        activity.setResult(RESULT_SKIP);
-                                        activity.finish();
-                                    }
+                                    getActivity().setResult(RESULT_SKIP);
+                                    getActivity().finish();
                                 }
                             })
                             .setPositiveButton(R.string.wifi_dont_skip,
