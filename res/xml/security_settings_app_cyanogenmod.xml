@@ -37,6 +37,15 @@
             android:title="@string/appops_settings_title"
             android:summary="@string/appops_settings_summary"/>
 
+	<Preference
+        android:id="@+id/permissions_settings"
+        android:title="@string/permissions_settings_title">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="org.chameleonos.permissionsmanager"
+            android:targetClass="org.chameleonos.permissionsmanager.activity.PermissionManagerActivity" />
+	</Preference>
+
         <ListPreference
             android:key="sms_security_check_limit"
             android:dialogTitle="@string/sms_security_check_limit_title"

@@ -92,19 +92,19 @@
             android:entries="@array/entries_halo_size"
             android:entryValues="@array/values_halo_size" />
 
-	 <CheckBoxPreference
-            android:key="halo_colors"
-            android:title="@string/halo_colors_title"
-            android:summary="@string/halo_colors_summary"
-            android:dependency="halo_enabled"
-            android:defaultValue="false" />
-
 	<CheckBoxPreference
 	    android:key="halo_unlock_ping"
 	    android:title="@string/halo_unlock_ping_title"
 	    android:summary="@string/halo_unlock_ping_summary"
 	    android:dependency="halo_enabled"
 	    android:defaultValue="false" />
+
+	 <CheckBoxPreference
+            android:key="halo_colors"
+            android:title="@string/halo_colors_title"
+            android:summary="@string/halo_colors_summary"
+            android:dependency="halo_enabled"
+            android:defaultValue="false" />
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="halo_circle_color"

@@ -6307,7 +6307,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="pie_action_none">None</string>
 
     <!-- Permissions Management -->
-    <string name="permissions_settings_title">Permissions</string>
+    <string name="permissions_settings_title">Permissions Manager</string>
 
     <!-- Category title for Charging sounds (Power state change) specific Settings.
          [CHAR LIMIT=40] -->
