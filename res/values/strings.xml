@@ -713,7 +713,11 @@
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
     <string name="security_settings_title">Security</string>
 
-    <!-- Main Settings screen setting option summary text for the item to take you to the security and location screen -->
+    <!-- App Ops -->
+    <string name="appops_settings_title">App privacy</string>
+    <string name="appops_settings_summary">App Ops: App Permission Manager, control permissions for individual apps</string>
+
+    <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
     <!-- Main Settings screen setting option summary text for the item to take you to the CDMA security and location screen -->
     <string name="cdma_security_settings_summary">Set My Location, screen unlock, credential storage lock</string>
@@ -5175,6 +5179,7 @@
     <string name="hardware_keys_action_widgets">Widgets viewpager</string> 
     <string name="hardware_keys_action_quicksettings">Quicksettings panel</string>
     <string name="hardware_keys_action_camera">Camera</string>
+    <string name="hardware_keys_action_sleep">Sleep</string>
     <string name="key_menu_enabled">Menu Key Enabled</string>
     <string name="key_back_enabled">Back Key Enabled</string>
     <string name="key_home_enabled">Home Key Enabled</string>
