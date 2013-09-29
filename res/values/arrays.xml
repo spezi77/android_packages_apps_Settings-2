@@ -1799,7 +1799,6 @@
         <item>@string/hardware_keys_action_custom_app</item>
 	<item>@string/hardware_keys_action_widgets</item>
 	<item>@string/hardware_keys_action_quicksettings</item>
-        <item>@string/hardware_keys_action_sleep</item>
     </string-array>
 
     <string-array name="hardware_keys_action_values" translatable="false">
@@ -1820,7 +1819,6 @@
         <item>13</item>
         <item>14</item>
 	<item>15</item>
-	<item>17</item>
     </string-array>
 
     <string-array name="lockscreen_long_key_press_entries" translatable="false">
