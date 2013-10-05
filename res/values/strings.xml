@@ -6667,4 +6667,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="location_gps_source_notification_title">Alert</string>
     <string name="location_gps_source_notification">The GPS source has been switched! GPS will be disabled. Please re-enable before use!</string>
 
+    <!-- GPS download data over wi-fi only -->
+    <string name="gps_download_data_wifi_only">Download GPS assisted data only over Wi-Fi networks</string>
+
 </resources>

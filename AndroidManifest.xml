@@ -1986,5 +1986,12 @@ android:value="com.android.settings.notificationshortcut.NotificationShortcuts" 
              </intent-filter>
         </activity>
 
+        <!-- Lto Service -->
+        <service android:label="LtoService"
+            android:enabled="true"
+            android:exported="false"
+            android:name=".cyanogenmod.LtoService">
+        </service>
+
     </application>
 </manifest>
