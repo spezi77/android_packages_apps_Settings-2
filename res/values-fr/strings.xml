@@ -2180,23 +2180,16 @@
     <string name="cpu_min_freq_summary">%s</string>
     <string name="cpu_max_freq_title">Fréquence maximale</string>
     <string name="cpu_max_freq_summary">%s</string>
-    <string name="cpu_set_on_boot">Appliquer au démarrage</string>
-    <string name="cpu_set_on_boot_summary">Modifie les fréquences du CPU au démarrage du système</string>
 
     <!-- Performance Settings : I/O scheduler settings title -->
     <string name="io_scheds_title">Horloge I/O</string>
-    <!-- Performance Settings : I/O scheduler settings summary. -->
-    <string name="io_scheds_summary">Changer l\'horloge I/O</string>
 
     <!-- Performance Settings : I/O scheduler settings sub items -->
     <string name="io_sched_title">Horloge I/O</string>
     <string name="io_sched_summary">%S</string>
-    <string name="io_sched_set_on_boot">Appliquer au démarrage</string>
-    <string name="io_sched_set_on_boot_summary">Restaurer les paramètres d\'horloge au démarrage</string>
 
     <!-- Memory Management -->
     <string name="memory_management_title">Gestion de la mémoire</string>
-    <string name="memory_management_summary">Options de gestion de la mémoire pour optimiser les performances</string>
     <!-- zRam -->
     <string name="pref_zram_title">Utiliser zRam</string>
     <string name="pref_zram_summary">Compresser la mémoire pour augmenter virtuellement sa capacité (nécessite un redémarrage)</string>

@@ -2144,8 +2144,6 @@
     <!-- Performance Settings : Processor Settings -->
     <!-- Performance Settings : Processor settings title -->
     <string name="processor_title">Procesorius</string>
-    <!-- Performance Settings : Processor settings summary. -->
-    <string name="processor_summary">Keisti proc. valdymą bei dažnį</string>
 
     <!-- Performance Settings : Processor settings sub items -->
     <string name="cpu_cur_freq_title">Esamas proc. dažnis</string>
@@ -2155,23 +2153,16 @@
     <string name="cpu_min_freq_summary">%s</string>
     <string name="cpu_max_freq_title">Maksimalus proc. dažnis</string>
     <string name="cpu_max_freq_summary">%s</string>
-    <string name="cpu_set_on_boot">Įjungti startuojant</string>
-    <string name="cpu_set_on_boot_summary">Nepasirinkus atstato proc. nustatymus startuojant</string>
 
     <!-- Performance Settings : I/O scheduler settings title -->
     <string name="io_scheds_title">I/O valdymas</string>
-    <!-- Performance Settings : I/O scheduler settings summary. -->
-    <string name="io_scheds_summary">Keisti I/O valdymą</string>
 
     <!-- Performance Settings : I/O scheduler settings sub items -->
     <string name="io_sched_title">I/O valdymas</string>
     <string name="io_sched_summary">%S</string>
-    <string name="io_sched_set_on_boot">Įjungti startuojant</string>
-    <string name="io_sched_set_on_boot_summary">Atstatyti I/O valdymo nustatymus startuojant</string>
 
     <!-- Memory Management -->
     <string name="memory_management_title">Atminties valdymas</string>
-    <string name="memory_management_summary">Keisti atminties naudojimą</string>
     <!-- zRam -->
     <string name="pref_zram_title">zRam</string>
     <string name="pref_zram_summary">Spausti atmintį virtualios talpos didinimui</string>

@@ -2156,8 +2156,6 @@
     <!-- Performance Settings : Processor Settings -->
     <!-- Performance Settings : Processor settings title -->
     <string name="processor_title">Επεξεργαστής</string>
-    <!-- Performance Settings : Processor settings summary. -->
-    <string name="processor_summary">Αλλαγή CPU governor και clock speed</string>
 
     <!-- Performance Settings : Processor settings sub items -->
     <string name="cpu_cur_freq_title">Τρέχουσα συχνότητα CPU</string>
@@ -2167,23 +2165,16 @@
     <string name="cpu_min_freq_summary">%s</string>
     <string name="cpu_max_freq_title">Μέγιστη συχνότητα CPU</string>
     <string name="cpu_max_freq_summary">%s</string>
-    <string name="cpu_set_on_boot">Εφαρμογή κατά την εκκίνηση</string>
-    <string name="cpu_set_on_boot_summary">Επαναφορά ρυθμίσεων επεξεργαστή κατά την εκκίνηση</string>
 
     <!-- Performance Settings : I/O scheduler settings title -->
     <string name="io_scheds_title">I/O scheduler</string>
-    <!-- Performance Settings : I/O scheduler settings summary. -->
-    <string name="io_scheds_summary">Αλλαγή I/O scheduler</string>
 
     <!-- Performance Settings : I/O scheduler settings sub items -->
     <string name="io_sched_title">I/O scheduler</string>
     <string name="io_sched_summary">%S</string>
-    <string name="io_sched_set_on_boot">Εφαρμογή κατά την εκκίνηση</string>
-    <string name="io_sched_set_on_boot_summary">Επαναφορά ρυθμίσεων I/O scheduler κατά την εκκίνηση</string>
 
     <!-- Memory Management -->
     <string name="memory_management_title">Διαχείριση μνήμης</string>
-    <string name="memory_management_summary">Προσαρμογή χρήσης μνήμης για μεταβολή των επιδόσεων του συστήματος</string>
     <!-- zRam -->
     <string name="pref_zram_title">zRam</string>
     <string name="pref_zram_summary">Συμπίεση μνήμης για αυξημένη εικονική χωρητικότητα (απαιτεί επανεκκίνηση)</string>

@@ -2141,30 +2141,21 @@ limitations under the License.
     <!-- Performance Settings : Processor Settings -->
     <!-- Performance Settings : Processor settings title -->
     <string name="processor_title">Процесор</string>
-    <!-- Performance Settings : Processor settings summary. -->
-    <string name="processor_summary">Зміна режимів та частот ЦП</string>
 
     <!-- Performance Settings : Processor settings sub items -->
     <string name="cpu_cur_freq_title">Поточна частота ЦП</string>
     <string name="cpu_governors_title">Режим ЦП</string>
     <string name="cpu_min_freq_title">Мінімальна частота ЦП</string>
     <string name="cpu_max_freq_title">Максимальна частота ЦП</string>
-    <string name="cpu_set_on_boot">Виставляти при завантаженні</string>
-    <string name="cpu_set_on_boot_summary">Застосувати поточні налаштування ЦП при завантаженні</string>
 
     <!-- Performance Settings : I/O scheduler settings title -->
     <string name="io_scheds_title">Планувальник I/O</string>
-    <!-- Performance Settings : I/O scheduler settings summary. -->
-    <string name="io_scheds_summary">Змінити режим планувальника I/O (вводу/виводу)</string>
 
     <!-- Performance Settings : I/O scheduler settings sub items -->
     <string name="io_sched_title">Планувальник I/O</string>
-    <string name="io_sched_set_on_boot">Застосовувати при завантаженні</string>
-    <string name="io_sched_set_on_boot_summary">Застосовувати поточні значення планувальника I/O при завантаженні</string>
 
     <!-- Memory Management -->
     <string name="memory_management_title">Керування пам’яттю</string>
-    <string name="memory_management_summary">Налаштування використання пам’яті для зміни продуктивності системи</string>
     <!-- zRam -->
     <string name="pref_zram_title">zRam</string>
     <string name="pref_zram_summary">Стиснення пам’яті для збільшення ємності (потрібне перезавантаження)</string>
