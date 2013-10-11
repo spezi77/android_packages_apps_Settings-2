@@ -98,6 +98,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String HOME_UNLOCK_PREF = "home_unlock";
     private static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "quick_unlock_control";
     private static final String LOCK_BEFORE_UNLOCK = "lock_before_unlock";
+    private static final String LOCK_NUMPAD_RANDOM = "lock_numpad_random";
     private static final String KEY_VIBRATE_PREF = "lockscreen_vibrate";
     private static final String KEY_SMS_SECURITY_CHECK_PREF = "sms_security_check_limit";
     private static final String LOCK_SYNC_ENCRYPTION_PASSWORD = "lock_sync_encryption_password";
@@ -142,6 +143,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private CheckBoxPreference mHomeUnlock;
     private CheckBoxPreference mQuickUnlockScreen;
     private CheckBoxPreference mLockBeforeUnlock;
+    private ListPreference mLockNumpadRandom;
     private ListPreference mSmsSecurityCheck;
     private PreferenceScreen mBlacklist;
 
@@ -297,6 +299,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mLockBeforeUnlock.setChecked(Settings.Secure.getInt(resolver,
                     Settings.Secure.LOCK_BEFORE_UNLOCK, 0) == 1);
 
+            // Lock Numpad Random
+            mLockNumpadRandom = (ListPreference) root.findPreference(LOCK_NUMPAD_RANDOM);
+            mLockNumpadRandom.setValue(String.valueOf(Settings.Secure.getInt(resolver,
+                    Settings.Secure.LOCK_NUMPAD_RANDOM, 0)));
+            mLockNumpadRandom.setSummary(mLockNumpadRandom.getEntry());
+            mLockNumpadRandom.setOnPreferenceChangeListener(this);
+
             // Menu Unlock
             mMenuUnlock = (CheckBoxPreference) root.findPreference(MENU_UNLOCK_PREF);
             mMenuUnlock.setChecked(Settings.System.getInt(resolver,
@@ -321,11 +330,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 mMenuUnlock.setEnabled(false);
                 mHomeUnlock.setEnabled(false);
                 mVibratePref.setEnabled(false);
-                if (mLockPatternUtils.isLockPatternEnabled()) {
-                    mLockBeforeUnlock.setEnabled(true);
-                } else {
-                    mLockBeforeUnlock.setEnabled(false);
-                }
+                mLockNumpadRandom.setEnabled(false);
+                mLockBeforeUnlock.setEnabled(mLockPatternUtils.isLockPatternEnabled());
             // disable menu unlock and vibrate on unlock options if
             // using PIN/password as primary lock screen or as
             // backup to biometric
@@ -335,11 +341,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 mMenuUnlock.setEnabled(false);
                 mHomeUnlock.setEnabled(false);
                 mVibratePref.setEnabled(false);
+                mLockNumpadRandom.setEnabled(mLockPatternUtils.isLockNumericPasswordEnabled());
             // Disable the quick unlock if its not using PIN/password
             // as a primary lock screen or as a backup to biometric
             } else {
                 mQuickUnlockScreen.setEnabled(false);
                 mLockBeforeUnlock.setEnabled(false);
+                mLockNumpadRandom.setEnabled(false);
             }
 
             // Disable the MenuUnlock setting if no menu button is available
@@ -870,6 +878,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
             Settings.Global.putInt(getContentResolver(), Settings.Global.SMS_OUTGOING_CHECK_MAX_COUNT,
                      smsSecurityCheck);
             updateSmsSecuritySummary(smsSecurityCheck);
+        } else if (preference == mLockNumpadRandom) {
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.LOCK_NUMPAD_RANDOM,
+                    Integer.valueOf((String) value));
+            mLockNumpadRandom.setValue(String.valueOf(value));
+            mLockNumpadRandom.setSummary(mLockNumpadRandom.getEntry());
         }
         return true;
     }
