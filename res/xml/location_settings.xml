@@ -57,11 +57,4 @@
         android:summary="@string/location_gps_source_summary"
         android:entries="@array/location_entries_gps_source"
         android:entryValues="@array/location_values_gps_source" />
-
-        <com.android.settings.WrappingCheckBoxPreference
-            android:key="gps_download_data_wifi_only"
-            android:title="@string/gps_download_data_wifi_only"
-            android:dependency="location_toggle"
-            android:defaultValue="true" />
-
 </PreferenceScreen>

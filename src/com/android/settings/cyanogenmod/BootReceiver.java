@@ -24,7 +24,7 @@ import android.content.res.Resources;
 import android.os.SystemProperties;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import com.android.settings.LocationSettings;
+
 import com.android.settings.R;
 import com.android.settings.beanstalk.autosms.MessagingHelper;
 import com.android.settings.Utils;
@@ -77,7 +77,6 @@ public class BootReceiver extends BroadcastReceiver {
             }
         }
 	MessagingHelper.scheduleService(ctx);
-        LocationSettings.restore(ctx);
     }
 
     private void initFreqCapFiles(Context ctx)
