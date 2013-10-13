@@ -5280,7 +5280,10 @@
     <string name="status_bar_network_color_reset">Reset network color</string>
     <string name="status_bar_icon_color_reset">Reset icon color</string>
     <string name="status_bar_show_network_stats_title">Show network speeds</string>
+    <string name="status_bar_show_network_stats_summary">Show network speed in statusbar (ChaOS)</string>
     <string name="status_bar_network_stats_update_title">Update frequency</string>
+    <string name="show_network_speed">Network speed indicator</string>
+    <string name="show_network_speed_summary">Show network speed in statusbar (Thinking Bridge)</string>
     <string name="status_bar_battery_title">Battery status style</string>
     <string name="status_bar_toggle_brightness">Brightness control</string>
     <string name="status_bar_toggle_brightness_summary">Adjust brightness by sliding across status bar</string>

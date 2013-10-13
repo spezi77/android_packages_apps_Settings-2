@@ -82,6 +82,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_CATEGORY_GENERAL = "status_bar_general";
     private static final String STATUS_BAR_DONOTDISTURB = "status_bar_donotdisturb";
     private static final String STATUS_BAR_NOTIF_ICON_OPACITY = "status_bar_icon_opacity";
+    private static final String KEY_STATUS_BAR_TRAFFIC = "status_bar_traffic";
     private static final String KEY_MMS_BREATH = "mms_breath";
     private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath";
     private static final String STATUS_BAR_AUTO_HIDE = "status_bar_auto_hide";
@@ -98,6 +99,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private PreferenceCategory mPrefCategoryGeneral;
     private CheckBoxPreference mStatusBarDoNotDisturb;
     private ListPreference mStatusBarIconOpacity;
+    private CheckBoxPreference mStatusBarTraffic;
     private CheckBoxPreference mStatusBarNetworkStats;
     private ColorPickerPreference mNetworkColor;
     private CheckBoxPreference mMMSBreath;
@@ -131,6 +133,10 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarNotifCount = (CheckBoxPreference) prefSet.findPreference(STATUS_BAR_NOTIF_COUNT);
         mStatusBarNotifCount.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_NOTIF_COUNT, 0) == 1));
+
+	mStatusBarTraffic = (CheckBoxPreference) findPreference(KEY_STATUS_BAR_TRAFFIC);
+        mStatusBarTraffic.setChecked(Settings.System.getBoolean(mContentAppRes,
+                Settings.System.STATUS_BAR_TRAFFIC, false));
 
 	mStatusBarIconOpacity = (ListPreference) prefSet.findPreference(STATUS_BAR_NOTIF_ICON_OPACITY);
         int iconOpacity = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -267,6 +273,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             value = mStatusBarNotifCount.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_NOTIF_COUNT, value ? 1 : 0);
+            return true;
+	} else if (preference == mStatusBarTraffic) {
+            Settings.System.putBoolean(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_TRAFFIC,
+                    mStatusBarTraffic.isChecked());
             return true;
 	}else if (preference == mStatusBarDoNotDisturb) {
             Settings.System.putInt(getActivity().getContentResolver(),
