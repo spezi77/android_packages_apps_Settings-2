@@ -5276,6 +5276,9 @@
     <string name="status_bar_title">Status bar</string>
     <string name="status_bar_general_title">General</string>
     <string name="status_bar_network_title">Network traffic</string>
+    <string name="status_bar_network_color_title">Network color</string>
+    <string name="status_bar_network_color_reset">Reset network color</string>
+    <string name="status_bar_icon_color_reset">Reset icon color</string>
     <string name="status_bar_show_network_stats_title">Show network speeds</string>
     <string name="status_bar_network_stats_update_title">Update frequency</string>
     <string name="status_bar_battery_title">Battery status style</string>

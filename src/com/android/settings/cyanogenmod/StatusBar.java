@@ -87,6 +87,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_AUTO_HIDE = "status_bar_auto_hide";
     private static final String STATUS_BAR_QUICK_PEEK = "status_bar_quick_peek";
     private static final String STATUS_BAR_NETWORK_STATS = "status_bar_show_network_stats";
+    private static final String STATUS_BAR_NETWORK_COLOR = "status_bar_network_color";
     private static final String STATUS_BAR_NETWORK_STATS_UPDATE = "status_bar_network_status_update";
 
     private ColorPickerPreference mColorPicker;
@@ -98,6 +99,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private CheckBoxPreference mStatusBarDoNotDisturb;
     private ListPreference mStatusBarIconOpacity;
     private CheckBoxPreference mStatusBarNetworkStats;
+    private ColorPickerPreference mNetworkColor;
     private CheckBoxPreference mMMSBreath;
     private CheckBoxPreference mMissedCallBreath;
     private ListPreference mStatusBarAutoHide;
@@ -150,6 +152,20 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mMissedCallBreath.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.MISSED_CALL_BREATH, 0) == 1);
 
+	mNetworkColor = (ColorPickerPreference) findPreference(STATUS_BAR_NETWORK_COLOR);
+        mNetworkColor.setOnPreferenceChangeListener(this);
+        int intNetworkColor = Settings.System.getInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_NETWORK_COLOR, -2);
+        if (intNetworkColor == -2) {
+            intNetworkColor = getResources().getColor(
+                    com.android.internal.R.color.holo_blue_light);
+            mNetworkColor.setSummary(getResources().getString(R.string.color_default));
+        } else {
+            String hexColor = String.format("#%08x", (0xffffffff & intNetworkColor));
+            mNetworkColor.setSummary(hexColor);
+        }
+        mNetworkColor.setNewPreviewColor(intNetworkColor);
+
 	mStatusBarAutoHide = (ListPreference) prefSet.findPreference(STATUS_BAR_AUTO_HIDE);
         int statusBarAutoHideValue = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.AUTO_HIDE_STATUSBAR, 0);
@@ -182,7 +198,30 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarDoNotDisturb.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.STATUS_BAR_DONOTDISTURB, 0) == 1));
 
+	setHasOptionsMenu(true);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.status_bar_general, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.reset_status_color:
+                Settings.System.putInt(getActivity().getContentResolver(),
+                        Settings.System.STATUS_ICON_COLOR, 0xFF33B5E5); 
+                break;               
+            case R.id.reset_network_color:
+                Settings.System.putInt(getActivity().getContentResolver(),
+                        Settings.System.STATUSBAR_NETWORK_COLOR, -2);
+             default:
+                return super.onContextItemSelected(item);
+        }
+        return true;
+     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean result = false;
@@ -196,6 +235,14 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.AUTO_HIDE_STATUSBAR, statusBarAutoHideValue);
             updateStatusBarAutoHideSummary(statusBarAutoHideValue);
+            return true;
+	} else if (preference == mNetworkColor) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_NETWORK_COLOR, intHex);
             return true;
 	} else if (preference == mStatusBarNetStatsUpdate) {
             long updateInterval = Long.valueOf((String) newValue);
