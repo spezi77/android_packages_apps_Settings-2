@@ -852,4 +852,9 @@
     <string name="advanced">Advanced</string>
     <string name="link_volume_option_title">Link ringtone &amp; notification volumes</string>
     <string name="lcd_density_prompt_message">Some apps may not function at non-standard dpi.\n\nThis will restart your phone.</string>
+
+    <!-- UI debug setting: show CPU info? [CHAR LIMIT=25] -->
+    <string name="show_cpu_info">Show CPU info</string>
+    <!-- UI debug setting: show cpu usage summary [CHAR LIMIT=50] -->
+    <string name="show_cpu_info_summary">Screen overlay showing current CPU info</string>
 </resources>
