@@ -6704,4 +6704,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="summary_animation_no_override">Prevent apps from overriding transitions.</string>  
     <string name="animation_duration_default">Default</string>
     <string name="header_summary_animation">@null</string>
+
+    <!--CPU info-->
+    <string name="show_cpu_info">Show CPU info</string>
+    <string name="show_cpu_info_summary">Screen overlay showing current CPU info</string>
 </resources>
