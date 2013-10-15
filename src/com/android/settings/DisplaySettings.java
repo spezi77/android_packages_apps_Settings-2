@@ -71,6 +71,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
     private static final String KEY_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
+    private static final String PREF_SMART_COVER_CATEGORY = "smart_cover_category";
+    private static final String PREF_SMART_COVER_WAKE = "smart_cover_wake";
 
     // Strings used for building the summary
     private static final String ROTATION_ANGLE_0 = "0";
@@ -97,8 +99,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private WifiDisplayStatus mWifiDisplayStatus;
     private Preference mWifiDisplayPreference;
-
     private CheckBoxPreference mCrtOff;
+    private CheckBoxPreference mSmartCoverWake;
 
     private boolean mIsCrtOffChecked = false;
 
@@ -220,6 +222,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 	mWakeUpWhenPluggedOrUnplugged = (CheckBoxPreference) findPreference(KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
         mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                         Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, 1) == 1);
+
+        mSmartCoverWake = (CheckBoxPreference) findPreference(PREF_SMART_COVER_WAKE);
+        mSmartCoverWake.setOnPreferenceChangeListener(this);
+        if(!getResources().getBoolean(com.android.internal.R.bool.config_lidControlsSleep)) {
+            PreferenceCategory smartCoverOptions = (PreferenceCategory)
+                    getPreferenceScreen().findPreference(PREF_SMART_COVER_CATEGORY);
+            getPreferenceScreen().removePreference(smartCoverOptions);
+        }
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -474,6 +484,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     Settings.System.SYSTEM_POWER_CRT_MODE, crtMode);
             mCrtMode.setSummary(mCrtMode.getEntries()[index]);
         }
+	if (preference == mSmartCoverWake) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.LOCKSCREEN_LID_WAKE, (Boolean) objValue ? 1 : 0);
+            return true;
+	}
         if (KEY_SCREEN_TIMEOUT.equals(key)) {
             int value = Integer.parseInt((String) objValue);
             try {
