@@ -5404,6 +5404,8 @@
     <string name="ad_timeout_10s">10 seconds</string>
     <string name="ad_timeout_15s">15 seconds</string>
     <string name="ad_timeout_25s">25 seconds</string>
+    <string name="ad_excluded_apps_title">Excluded applications</string>
+    <string name="ad_excluded_apps_summary">Excluded applications will not show up in active display</string>
 
     <!-- Quick settings panel  -->
     <string name="quick_settings_panel_title">Quick Settings panel</string>
