@@ -65,6 +65,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     private static final String PREF_LOCKSCREEN_MINIMIZE_CHALLENGE = "lockscreen_minimize_challenge";
     private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
     private static final String PREF_LOCKSCREEN_TEXT_COLOR = "lockscreen_text_color";
+    private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
 
     CheckBoxPreference mLockscreenAutoRotate;
     private ListPreference mBatteryStatus;
@@ -79,6 +80,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
     ColorPickerPreference mLockscreenTextColor;
     private CheckBoxPreference mCameraWidget;
     private CheckBoxPreference mMusicControls;
+    private CheckBoxPreference mLockRingBattery;
 
     private boolean mIsScreenLarge;
 
@@ -142,6 +144,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
         mBgAlpha.setInitValue((int) (bgAlpha * 100));
         mBgAlpha.setProperty(Settings.System.LOCKSCREEN_ALPHA);
         mBgAlpha.setOnPreferenceChangeListener(this);
+
+	mLockRingBattery = (CheckBoxPreference) findPreference(BATTERY_AROUND_LOCKSCREEN_RING);
+        mLockRingBattery.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, 0) == 1);
 
 	mCameraWidget = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_CAMERA_WIDGET);
         mCameraWidget.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -213,6 +219,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements P
             Settings.System.putBoolean(mContext.getContentResolver(),
                     Settings.System.LOCKSCREEN_AUTO_ROTATE,
                     ((CheckBoxPreference) preference).isChecked());
+            return true;
+	} else if (preference == mLockRingBattery) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, mLockRingBattery.isChecked()
+                    ? 1 : 0);
             return true;
 	} else if (preference == mCameraWidget) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
