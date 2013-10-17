@@ -220,11 +220,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             final Preference preference) {
-        if (preference == mLcdDensity) {
-            ((PreferenceActivity) getActivity())
-            .startPreferenceFragment(new DensityChanger(), true);
-            return true;
-        } else if (preference == mUseAltResolver) {
+        if (preference == mUseAltResolver) {
 		Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.ACTIVITY_RESOLVER_USE_ALT,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);

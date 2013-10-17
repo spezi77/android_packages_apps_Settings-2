@@ -7,7 +7,8 @@
         android:fragment="com.android.settings.cyanogenmod.WidgetsSettings"
         android:title="@string/navbar_widgets_title" /> 
 
-        <Preference
+        <PreferenceScreen
+           android:fragment="com.android.settings.cyanogenmod.DensityChanger" 
             android:key="lcd_density_setup"
             android:title="@string/lcd_density_title"
             android:summary="@string/lcd_density_summary" />
