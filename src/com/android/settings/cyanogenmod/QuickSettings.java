@@ -66,6 +66,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
     private static final String STATIC_TILES = "static_tiles";
     private static final String DYNAMIC_TILES = "pref_dynamic_tiles";
     private static final String FLOATING_WINDOW ="floating_window";
+    private static final String PREF_FLIP_QS_TILES = "flip_qs_tiles";
 
     MultiSelectListPreference mRingMode;
     ListPreference mNetworkMode;
@@ -82,6 +83,7 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
     PreferenceCategory mGeneralSettings;
     PreferenceCategory mStaticTiles;
     PreferenceCategory mDynamicTiles;
+    CheckBoxPreference mFlipQsTiles;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,6 +120,10 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
             mNoNotificationsPulldown.setValue(String.valueOf(noNotificationsPulldownValue));
             updateNoNotificationsPulldownSummary(noNotificationsPulldownValue);
         }
+
+	mFlipQsTiles = (CheckBoxPreference) findPreference(PREF_FLIP_QS_TILES);
+        mFlipQsTiles.setChecked(Settings.System.getInt(resolver,
+                Settings.System.QUICK_SETTINGS_TILES_FLIP, 1) == 1);
 
         mCollapsePanel = (CheckBoxPreference) prefSet.findPreference(COLLAPSE_PANEL);
         mCollapsePanel.setChecked(Settings.System.getInt(resolver, Settings.System.QS_COLLAPSE_PANEL, 0) == 1);
@@ -184,6 +190,11 @@ public class QuickSettings extends SettingsPreferenceFragment implements OnPrefe
         } else if (preference == mDynamicBugReport) {
             Settings.System.putInt(resolver, Settings.System.QS_DYNAMIC_BUGREPORT,
                     mDynamicBugReport.isChecked() ? 1 : 0);
+            return true;
+	} else if (preference == mFlipQsTiles) {
+            Settings.System.putInt(resolver,
+                    Settings.System.QUICK_SETTINGS_TILES_FLIP,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
         } else if (preference == mDynamicIme) {
             Settings.System.putInt(resolver, Settings.System.QS_DYNAMIC_IME,
