@@ -46,6 +46,7 @@ public class Halo extends SettingsPreferenceFragment
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed";
     private static final String KEY_HALO_PAUSE = "halo_pause";
+    private static final String KEY_WE_WANT_POPUPS = "show_popup";
     private static final String KEY_HALO_SIZE = "halo_size";
     private static final String KEY_HALO_NINJA = "halo_ninja";
     private static final String KEY_HALO_MSGBOX = "halo_msgbox";
@@ -63,6 +64,7 @@ public class Halo extends SettingsPreferenceFragment
     private ListPreference mHaloSize;
     private ListPreference mHaloNotifyCount;
     private ListPreference mHaloMsgAnimate;
+    private CheckBoxPreference mWeWantPopups;
 
     private CheckBoxPreference mHaloNinja;
     private CheckBoxPreference mHaloMsgBox;
@@ -107,6 +109,11 @@ public class Halo extends SettingsPreferenceFragment
 	mHaloEnabled = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_ENABLED);
         mHaloEnabled.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HALO_ENABLED, 0) == 1);
+
+	int showPopups = Settings.System.getInt(getContentResolver(), Settings.System.WE_WANT_POPUPS, 1);
+        mWeWantPopups = (CheckBoxPreference) findPreference(KEY_WE_WANT_POPUPS);
+        mWeWantPopups.setOnPreferenceChangeListener(this);
+        mWeWantPopups.setChecked(showPopups > 0);
 
         mHaloState = (ListPreference) prefSet.findPreference(KEY_HALO_STATE);
         mHaloState.setValue(String.valueOf((isHaloPolicyBlack() ? "1" : "0")));
@@ -196,6 +203,11 @@ public class Halo extends SettingsPreferenceFragment
             Settings.System.putFloat(getActivity().getContentResolver(),
                     Settings.System.HALO_SIZE, haloSize);
             mHaloSize.setSummary(mHaloSize.getEntries()[index]);
+            return true;
+	} else if (preference == mWeWantPopups) {
+            boolean checked = (Boolean) objValue; 
+                    Settings.System.putBoolean(getActivity().getContentResolver(),
+                       Settings.System.WE_WANT_POPUPS, checked);
             return true;
 	} else if (preference == mHaloMsgAnimate) {
             int haloMsgAnimation = Integer.valueOf((String) objValue);

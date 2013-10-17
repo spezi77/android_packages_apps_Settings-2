@@ -6472,6 +6472,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="halo_notification_count_individual">Per app</string>
     <string name="halo_notification_count_both">Both</string>
 
+    <string name="popups_title">Allow floating windows</string>
+    <string name="popups_summary">Controls whether you want floating windows from notification panel</string>
+
     <string name="halo_msgbox_animation_title">Message box animation</string>
     <string name="halo_msgbox_animation_summary">Halo message box animation for incoming notifications</string>
     <string name="halo_msgbox_animation_none">None</string>
