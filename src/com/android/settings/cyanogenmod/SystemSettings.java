@@ -41,9 +41,11 @@ public class SystemSettings extends SettingsPreferenceFragment {
     private static final String KEY_HARDWARE_KEYS = "hardware_keys";
     private static final String KEY_PIE_SETTINGS = "pie_settings";
     private static final String KEY_LOCK_CLOCK = "lock_clock";
+    private static final String KEY_SCREEN_ON_NOTIFICATION_LED = "screen_on_notification_led";
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
+    private CheckBoxPreference mScreenOnNotificationLed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,12 @@ public class SystemSettings extends SettingsPreferenceFragment {
 
             }
         }
+
+	int statusScreenOnNotificationLed = Settings.System.getInt(getContentResolver(),
+                Settings.System.SCREEN_ON_NOTIFICATION_LED, 1);
+        mScreenOnNotificationLed = (CheckBoxPreference) findPreference(KEY_SCREEN_ON_NOTIFICATION_LED);
+        mScreenOnNotificationLed.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.SCREEN_ON_NOTIFICATION_LED, 0) == 1);	
 
         // Battery lights
         mBatteryPulse = (PreferenceScreen) findPreference(KEY_BATTERY_LIGHT);
@@ -111,6 +119,16 @@ public class SystemSettings extends SettingsPreferenceFragment {
        //     getPreferenceScreen().removePreference(findPreference(KEY_NAVIGATION_BAR));
      //   }
 
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mScreenOnNotificationLed) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SCREEN_ON_NOTIFICATION_LED,
+                    mScreenOnNotificationLed.isChecked() ? 1 : 0);
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     private void updateLightPulseDescription() {

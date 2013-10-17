@@ -5859,6 +5859,10 @@ rience. Better keep it disabled on lower end devices.</string>
     <string name="custom_density_dialog_button_reboot">Reboot now</string>
     <string name="select_custom_app_title">Select custom application</string>
 
+    <!-- Screen-On Notification Light -->
+    <string name="screen_on_notification_led_title">Screen-On Notification Light</string>
+    <string name="screen_on_notification_led_summary">Enable Notification Light even when screen is on</string>
+
     <!-- Shortcut picker -->
     <string name="use_custom_app_title">Use custom application</string>
     <string name="use_custom_app_summary">Use custom application instead of the recent applications dialog</string>
