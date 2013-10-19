@@ -29,6 +29,7 @@ import android.provider.Settings;
 import android.text.TextUtils; 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.cyanogenmod.AppMultiSelectListPreference;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -65,6 +66,7 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
     private ListPreference mRedisplayPref;
     private SeekBarPreference mBrightnessLevel;
     private ListPreference mDisplayTimeout;
+    private AppMultiSelectListPreference mExcludedAppsPref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
