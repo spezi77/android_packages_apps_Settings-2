@@ -35,6 +35,7 @@ import net.margaritov.preference.colorpicker.ColorPickerPreference;
 public class Halo extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
+    private static final String KEY_HALO_ACTIVE = "halo_active";
     private static final String KEY_HALO_STATE = "halo_state";
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed";
@@ -50,6 +51,7 @@ public class Halo extends SettingsPreferenceFragment
     private ListPreference mHaloState;
     private ListPreference mHaloSize;
     private ColorPickerPreference mHaloColor;
+    private CheckBoxPreference mHaloActive;
     private CheckBoxPreference mHaloHide;
     private CheckBoxPreference mHaloReversed;
     private CheckBoxPreference mHaloPause;
@@ -75,6 +77,10 @@ public class Halo extends SettingsPreferenceFragment
 
 	mHaloColor = (ColorPickerPreference) prefSet.findPreference(KEY_HALO_COLOR);
         mHaloColor.setOnPreferenceChangeListener(this);
+
+        mHaloActive = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_ACTIVE);
+        mHaloActive.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HALO_ACTIVE, 0) == 1);
 
         mHaloState = (ListPreference) prefSet.findPreference(KEY_HALO_STATE);
         mHaloState.setValue(String.valueOf((isHaloPolicyBlack() ? "1" : "0")));
@@ -154,6 +160,10 @@ public class Halo extends SettingsPreferenceFragment
         } else if (preference == mHaloReversed) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_REVERSED, mHaloReversed.isChecked()
+                    ? 1 : 0);
+        } else if  (preference == mHaloActive) {
+             Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HALO_ACTIVE, mHaloActive.isChecked()
                     ? 1 : 0);
         } else if (preference == mHaloPause) {
             Settings.System.putInt(mContext.getContentResolver(),
