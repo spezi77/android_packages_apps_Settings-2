@@ -58,7 +58,7 @@
 
     <!-- Lockscreen Wallpaper -->
     <Preference
-        android:id="@+id/lockscreen_wallpaper_settings"
+        android:key="@+id/lockscreen_wallpaper_settings"
         android:title="@string/lockscreen_wallpaper_settings_title"
         android:icon="@drawable/prd_ic_lockscreen_wallpapers">
         <intent android:targetPackage="com.android.wallpapercropper"
