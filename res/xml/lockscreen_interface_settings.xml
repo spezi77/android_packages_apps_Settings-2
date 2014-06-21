@@ -56,6 +56,11 @@
         android:fragment="com.android.settings.beanstalk.LockscreenStyle"
         android:title="@string/lockscreen_style_title"/>
 
+    <CheckBoxPreference
+            android:key="notification_peek"
+            android:title="@string/notification_peek_title"
+            android:summary="@string/notification_peek_summary" />
+
         <PreferenceScreen
             android:key="lockscreen_misc"
             android:fragment="com.android.settings.beanstalk.LockscreenMisc"

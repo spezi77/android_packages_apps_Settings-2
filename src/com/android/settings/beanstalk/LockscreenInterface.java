@@ -21,7 +21,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -47,11 +50,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
     private static final String PREF_LOCKSCREEN_SHORTCUTS = "lockscreen_shortcuts";
     private static final String PREF_LOCKSCREEN_TORCH = "lockscreen_torch";
+    private static final String KEY_PEEK = "notification_peek";
 
     private CheckBoxPreference mLockscreenEightTargets;
     private CheckBoxPreference mGlowpadTorch;
     private Preference mShortcuts;
     private Preference mButtons;
+    private CheckBoxPreference mNotificationPeek;
 
     private boolean mCheckPreferences;
 
@@ -107,6 +112,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 
         mCheckPreferences = true;
         return prefs;
+
+	mNotificationPeek = (CheckBoxPreference) findPreference(KEY_PEEK);
+        mNotificationPeek.setPersistent(false);
+
+        updatePeekCheckbox();
     }
 
     @Override
@@ -118,6 +128,12 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    private void updatePeekCheckbox() {
+        boolean enabled = Settings.System.getInt(getContentResolver(),
+                Settings.System.PEEK_STATE, 0) == 1;
+        mNotificationPeek.setChecked(enabled);
     }
 
     @Override
@@ -216,4 +232,12 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         }
     }
 
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mNotificationPeek) {
+            Settings.System.putInt(getContentResolver(), Settings.System.PEEK_STATE,
+                    mNotificationPeek.isChecked() ? 1 : 0);
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
 }

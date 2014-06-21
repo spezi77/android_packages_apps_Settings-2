@@ -1880,4 +1880,8 @@
     <string name="app_moving_reboot_disabled_desc">Successfully disabled application moving.\n\nThe device needs to be rebooted for the setting to take effect.</string>
     <string name="app_moving_reboot_now_button">Reboot now</string>
     <string name="app_moving_reboot_later_button">Reboot later</string>
+
+    <!--Notification peek-->
+    <string name="notification_peek_title">Notification peek</string>
+    <string name="notification_peek_summary">Show latest notification after picking up your device</string>
 </resources>
