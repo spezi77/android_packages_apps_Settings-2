@@ -1887,4 +1887,8 @@
 
     <string name="halo_color_title">Halo color</string>
     <string name="halo_color_summary">Defines what color the Halo bubble is</string>
+
+    <!-- QuickSettings haptic feedback -->
+    <string name="haptic_qs_tiles_title">Vibrate on touch</string>
+    <string name="haptic_qs_tiles_summary">Vibrate when touching tiles</string>
 </resources>
