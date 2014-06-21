@@ -72,6 +72,12 @@
                 android:entryValues="@array/entryvalues_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
+	<CheckBoxPreference
+		android:key="disable_immersive_message"
+		android:title="@string/disable_immersive_message_title"
+		android:summary="@string/disable_immersive_message_summary"
+		android:persistent="false" />
+
         <PreferenceScreen
                 android:key="display_rotation"
                 android:fragment="com.android.settings.slim.DisplayRotation"

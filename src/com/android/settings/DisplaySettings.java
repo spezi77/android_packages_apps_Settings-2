@@ -86,6 +86,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_WAKEUP_CATEGORY = "category_wakeup_options";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
+    private static final String DISABLE_IMMERSIVE_MESSAGE = "disable_immersive_message";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -108,6 +109,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mLiftToWakePreference;
     private SwitchPreference mDozePreference;
     private SwitchPreference mAutoBrightnessPreference;
+    private CheckBoxPreference mDisableIM;
     private SwitchPreference mTapToWake;
     private SwitchPreference mVolumeWake;
 
@@ -143,6 +145,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mScreenTimeoutPreference.setOnPreferenceChangeListener(this);
         disableUnusableTimeouts(mScreenTimeoutPreference);
         updateTimeoutPreferenceDescription(currentTimeout);
+
+        mDisableIM = (CheckBoxPreference) findPreference(DISABLE_IMMERSIVE_MESSAGE);
+        mDisableIM.setChecked((Settings.System.getInt(resolver,
+                Settings.System.DISABLE_IMMERSIVE_MESSAGE, 0) == 1));
 
         mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
@@ -467,8 +473,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mTapToWake) {
             return TapToWake.setEnabled(mTapToWake.isChecked());
+        ) else if  (preference == mDisableIM) {
+            boolean checked = ((CheckBoxPreference)preference).isChecked();
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.DISABLE_IMMERSIVE_MESSAGE, checked ? 1:0);
+            return true;
         }
-
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
