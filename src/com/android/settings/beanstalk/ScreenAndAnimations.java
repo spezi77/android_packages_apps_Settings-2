@@ -13,9 +13,13 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
+import com.android.settings.beanstalk.AppMultiSelectListPreference;
+import com.android.internal.util.beanstalk.DeviceUtils;
 
 public class ScreenAndAnimations extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -25,11 +29,13 @@ public class ScreenAndAnimations extends SettingsPreferenceFragment implements
     private static final String KEY_LISTVIEW_INTERPOLATOR = "listview_interpolator";
     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
     private static final String KEY_TOAST_ANIMATION = "toast_animation";
+    private static final String PREF_INCLUDE_APP_CIRCLE_BAR_KEY = "app_circle_bar_included_apps";
 
     private ListPreference mToastAnimation;
     private ListPreference mCrtMode;
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
+    private AppMultiSelectListPreference mIncludedAppCircleBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +91,11 @@ public class ScreenAndAnimations extends SettingsPreferenceFragment implements
 	mToastAnimation.setSummary(mToastAnimation.getEntries()[CurrentToastAnimation]);
 	mToastAnimation.setOnPreferenceChangeListener(this);
 
+	mIncludedAppCircleBar = (AppMultiSelectListPreference) findPreference(PREF_INCLUDE_APP_CIRCLE_BAR_KEY);
+        Set<String> includedApps = getIncludedApps();
+        if (includedApps != null) mIncludedAppCircleBar.setValues(includedApps);
+        mIncludedAppCircleBar.setOnPreferenceChangeListener(this);
+
     }
 
     @Override
@@ -103,6 +114,11 @@ public class ScreenAndAnimations extends SettingsPreferenceFragment implements
                     value);
             mCrtMode.setSummary(mCrtMode.getEntries()[index]);
         }
+
+	if (preference == mIncludedAppCircleBar) {
+            storeIncludedApps((Set<String>) newValue);
+            return true;
+	}
 
 	if (preference == mToastAnimation) {
             int index = mToastAnimation.findIndexOfValue((String) newValue);
@@ -130,5 +146,26 @@ public class ScreenAndAnimations extends SettingsPreferenceFragment implements
             mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[index]);
         }
         return false;
+    }
+
+    private Set<String> getIncludedApps() {
+        String included = Settings.System.getString(getContentResolver(),
+                Settings.System.WHITELIST_APP_CIRCLE_BAR);
+        if (TextUtils.isEmpty(included)) {
+            return null;
+        }
+        return new HashSet<String>(Arrays.asList(included.split("\\|")));
+    }
+
+    private void storeIncludedApps(Set<String> values) {
+        StringBuilder builder = new StringBuilder();
+        String delimiter = "";
+        for (String value : values) {
+            builder.append(delimiter);
+            builder.append(value);
+            delimiter = "|";
+        }
+        Settings.System.putString(getContentResolver(),
+                Settings.System.WHITELIST_APP_CIRCLE_BAR, builder.toString());
     }
 }
