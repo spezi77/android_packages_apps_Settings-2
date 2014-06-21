@@ -23,9 +23,11 @@ import static com.android.internal.util.beanstalk.QSConstants.TILE_AIRPLANE;
 import static com.android.internal.util.beanstalk.QSConstants.TILE_ALARM;
 import static com.android.internal.util.beanstalk.QSConstants.TILE_AUTOROTATE;
 import static com.android.internal.util.beanstalk.QSConstants.TILE_BATTERY;
+import static com.android.internal.util.beanstalk.QSConstants.TILE_BATTERYSAVER;
 import static com.android.internal.util.beanstalk.QSConstants.TILE_BLUETOOTH;
 import static com.android.internal.util.beanstalk.QSConstants.TILE_BRIGHTNESS;
 import static com.android.internal.util.beanstalk.QSConstants.TILE_BUGREPORT;
+import static com.android.internal.util.beanstalk.QSConstants.TILE_CAMERA;
 import static com.android.internal.util.beanstalk.QSConstants.TILE_CONTACT;
 import static com.android.internal.util.beanstalk.QSConstants.TILE_CUSTOM;
 import static com.android.internal.util.beanstalk.QSConstants.TILE_CUSTOM_KEY;
@@ -92,12 +94,18 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_BATTERY, R.string.title_tile_battery,
                 "com.android.systemui:drawable/ic_qs_battery_neutral"));
+	registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_BATTERYSAVER, R.string.title_tile_batterysaver,
+                "com.android.systemui:drawable/ic_qs_battery_saver_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_BLUETOOTH, R.string.title_tile_bluetooth,
                 "com.android.systemui:drawable/ic_qs_bluetooth_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_BRIGHTNESS, R.string.title_tile_brightness,
                 "com.android.systemui:drawable/ic_qs_brightness_auto_off"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+        	    TILE_CAMERA, R.string.title_tile_camera,
+        	    "com.android.systemui:drawable/ic_qs_camera"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_EXPANDEDDESKTOP, R.string.title_tile_expanded_desktop,
                 "com.android.systemui:drawable/ic_qs_expanded_desktop_on"));
@@ -237,6 +245,11 @@ public class QuickSettingsUtil {
         // Don't show the Fast charge tile if not supported by kernel
         if (!DeviceUtils.fchargeEnabled(context)) {
             removeTile(TILE_FCHARGE);
+        }
+
+	// Don't show the Camera tile if the device has no cameras
+        if (!DeviceUtils.deviceSupportsCamera()) {
+        	removeTile(TILE_CAMERA);
         }
 
     }
