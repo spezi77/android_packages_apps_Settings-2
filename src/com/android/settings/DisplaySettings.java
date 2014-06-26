@@ -76,6 +76,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_COLOR_ENHANCEMENT = "color_enhancement";
     private static final String KEY_ADVANCED_DISPLAY_SETTINGS = "advanced_display_settings";
     private static final String KEY_TAP_TO_WAKE = "double_tap_wake_gesture";
+    private static final String KEY_PROXIMITY_WAKE = "proximity_on_wake";
 
     private static final String CATEGORY_LIGHTS = "lights_prefs";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
@@ -217,6 +218,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mTapToWake = (CheckBoxPreference) findPreference(KEY_TAP_TO_WAKE);
 	    mCategory.removePreference(mTapToWake);
             mTapToWake = null;
+        } else {
+            advancedPrefs.removePreference(findPreference(KEY_PROXIMITY_WAKE));
+            Settings.System.putInt(getContentResolver(), Settings.System.PROXIMITY_ON_WAKE, 1);
         }
 
 	if (mTapToWake != null) {
