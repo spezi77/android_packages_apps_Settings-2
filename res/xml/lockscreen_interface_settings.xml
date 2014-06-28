@@ -72,6 +72,7 @@
             android:title="@string/lockscreen_misc_title"/>
 
 	<PreferenceScreen
+	    settings:excludeFromSearch="true"
             android:fragment="com.android.settings.beanstalk.LockscreenButtons"
             android:key="lockscreen_buttons"
             android:title="@string/lockscreen_buttons_title"
