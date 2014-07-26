@@ -2097,6 +2097,8 @@
    <string name="heads_up_time_out_10sec">10 seconds</string>
    <string name="heads_up_time_out_never">Never</string>
    <string name="heads_up_switch_label">Enable heads up notification</string>
+   <string name="heads_up_gravity_title">Show at the bottom</string>
+   <string name="heads_up_gravity_summary">Show heads up notification at the bottom of the screen</string>
 
     <!-- Weather -->
     <string name="weather_settings_title">Weather</string>
