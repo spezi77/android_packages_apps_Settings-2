@@ -76,6 +76,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED = "wake_when_plugged_or_unplugged";
     private static final String STATUS_BAR_BRIGHTNESS = "statusbar_brightness_slider";
     private static final String KEY_SCREEN_COLOR_SETTINGS = "screencolor_settings";
+    private static final String KEY_SCREEN_OFF_GESTURE_SETTINGS = "screen_off_gesture_settings";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -194,6 +195,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (!isPostProcessingSupported()) {
             getPreferenceScreen().removePreference(mScreenColorSettings);
         }
+
+	 Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
+		getPreferenceScreen(), KEY_SCREEN_OFF_GESTURE_SETTINGS);
     }
 
     private void updateDisplayRotationPreferenceDescription() {

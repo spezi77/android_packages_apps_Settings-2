@@ -78,6 +78,16 @@
                 android:summary="@string/adaptive_backlight_summary"
                 android:defaultValue="true" />
 
+	<!-- DeviceHandler device specific screen off gesture settings -->
+	<Preference
+		android:key="screen_off_gesture_settings"
+		android:title="@string/screen_off_gesture_settings_title">
+	<intent
+		android:action="com.slim.action.LAUNCH_SCREEN_OFF_GESTURE_SETTINGS"
+		android:targetPackage="com.slim.device"
+		android:targetClass="com.slim.device.settings.ScreenOffGestureSettings" />
+	</Preference>
+
         <!-- DeviceParts Device Specific Display settings -->
         <Preference
             android:key="advanced_display_settings"
