@@ -70,6 +70,13 @@
         android:fragment="com.android.settings.beanstalk.PieControl"
         android:title="@string/pie_control_title" />
 
+    <!-- PA Pie control -->
+    <PreferenceScreen
+	android:key="pa_pie_control"
+	android:fragment="com.android.settings.liquid.Pie"
+	android:summary="@string/pa_pie_controls_summary"
+	android:title="@string/pa_pie_controls_title" />
+
     <PreferenceScreen
         android:key="shake_events"
         android:fragment="com.android.settings.beanstalk.ShakeEvents"
