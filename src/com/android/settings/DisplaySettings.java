@@ -172,10 +172,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 (CheckBoxPreference) findPreference(KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED);
 
         if (!DisplayColor.isSupported()) {
-            advancedPrefs.removePreference(findPreference(KEY_DISPLAY_COLOR));
+            getPreferenceScreen().removePreference(findPreference(KEY_DISPLAY_COLOR));
         }
         if (!DisplayGamma.isSupported()) {
-            advancedPrefs.removePreference(findPreference(KEY_DISPLAY_GAMMA));
+            getPreferenceScreen().removePreference(findPreference(KEY_DISPLAY_GAMMA));
         }
 
         boolean hasNotificationLed = res.getBoolean(
