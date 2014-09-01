@@ -51,7 +51,6 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
     private static final String KEY_EXPANDED_VIEW = "expanded_view";
     private static final String KEY_FORCE_EXPANDED_VIEW = "force_expanded_view";
     private static final String KEY_WAKE_ON_NOTIFICATION = "wake_on_notification";
-    private static final String KEY_DISABLE_HEADS_UP = "disable_heads_up";
     private static final String KEY_NOTIFICATIONS_HEIGHT = "notifications_height";
     private static final String KEY_PRIVACY_MODE = "privacy_mode";
     private static final String KEY_DYNAMIC_WIDTH = "dynamic_width";
@@ -72,7 +71,6 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
     private CheckBoxPreference mPocketMode;
     private CheckBoxPreference mShowAlways;
     private CheckBoxPreference mWakeOnNotification;
-    private CheckBoxPreference mDisableHeadsup;
     private CheckBoxPreference mHideLowPriority;
     private CheckBoxPreference mHideNonClearable;
     private CheckBoxPreference mDismissAll;
@@ -137,11 +135,6 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
         mLockscreenNotifications.setChecked(Settings.System.getInt(cr,
                 Settings.System.LOCKSCREEN_NOTIFICATIONS, 0) == 1);
 
-	mDisableHeadsup = (CheckBoxPreference) prefs.findPreference(KEY_DISABLE_HEADS_UP);
-	mDisableHeadsup.setChecked(Settings.System.getInt(cr,
-		Settings.System.LOCKSCREEN_NOTIFICATIONS_DISABLE_HEADS_UP, 0) == 1);
-	mDisableHeadsup.setEnabled(mWakeOnNotification.isChecked() && mWakeOnNotification.isEnabled());
-
         mPocketMode = (CheckBoxPreference) prefs.findPreference(KEY_POCKET_MODE);
         mPocketMode.setChecked(Settings.System.getInt(cr,
                 Settings.System.LOCKSCREEN_NOTIFICATIONS_POCKET_MODE, 1) == 1);
@@ -155,10 +148,7 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
         mWakeOnNotification = (CheckBoxPreference) prefs.findPreference(KEY_WAKE_ON_NOTIFICATION);
         mWakeOnNotification.setChecked(Settings.System.getInt(cr,
                 Settings.System.LOCKSCREEN_NOTIFICATIONS_WAKE_ON_NOTIFICATION, 0) == 1);
-        if (mDisableHeadsup != null) {
-	    mWakeOnNotification.setEnabled(mLockscreenNotifications.isChecked());
-	    mDisableHeadsup.setEnabled(mWakeOnNotification.isChecked() && mWakeOnNotification.isEnabled());
-	}
+        mWakeOnNotification.setEnabled(mLockscreenNotifications.isChecked());
 
         mHideLowPriority = (CheckBoxPreference) prefs.findPreference(KEY_HIDE_LOW_PRIORITY);
         mHideLowPriority.setChecked(Settings.System.getInt(cr,
@@ -318,10 +308,6 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
         } else if (preference == mWakeOnNotification) {
             Settings.System.putInt(cr, Settings.System.LOCKSCREEN_NOTIFICATIONS_WAKE_ON_NOTIFICATION,
                     mWakeOnNotification.isChecked() ? 1 : 0);
-	    mDisableHeadsup.setEnabled(mWakeOnNotification.isChecked());
-	} else if (preference == mDisableHeadsup) {
-	    Settings.System.putInt(cr, Settings.System.LOCKSCREEN_NOTIFICATIONS_DISABLE_HEADS_UP,
-		    mDisableHeadsup.isChecked() ? 1 : 0);
         } else if (preference == mHideLowPriority) {
             Settings.System.putInt(cr, Settings.System.LOCKSCREEN_NOTIFICATIONS_HIDE_LOW_PRIORITY,
                     mHideLowPriority.isChecked() ? 1 : 0);
