@@ -2109,6 +2109,8 @@
    <string name="heads_up_gravity_summary">Show heads up notification at the bottom of the screen</string>
    <string name="heads_up_floating_window_title">Launch floating window</string>
    <string name="heads_up_floating_window_summary">Open heads up in floating window</string>
+   <string name="heads_up_exclude_from_lock_screen_title">Disable on lock screen</string>
+   <string name="heads_up_exclude_from_lock_screen_summary">Hide notifications on lock screen</string>
 
     <!-- Weather -->
     <string name="weather_settings_title">Weather</string>

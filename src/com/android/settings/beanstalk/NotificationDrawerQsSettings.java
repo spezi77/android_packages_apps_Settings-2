@@ -59,6 +59,7 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment
             "heads_up_show_update";
     private static final String PREF_HEADS_UP_GRAVITY =
             "heads_up_gravity";
+    private static final String PREF_HEADS_UP_EXCLUDE_FROM_LOCK_SCREEN = "heads_up_exclude_from_lock_screen";
     private static final String PREF_HEADS_UP_FLOATING_WINDOW =
 	    "heads_up_floating_window";
     private static final String PREF_NOTIFICATION_HIDE_LABELS =
@@ -107,6 +108,7 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment
     CheckBoxPreference mHeadsUpShowUpdates;
     CheckBoxPreference mHeadsUpGravity;
     CheckBoxPreference mHeadsUpFloatingWindow;
+    CheckBoxPreference mHeadsExcludeFromLockscreen;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -248,6 +250,11 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment
 		Settings.System.HEADS_UP_FLOATING_WINDOW, 0, UserHandle.USER_CURRENT) == 1);
 	mHeadsUpFloatingWindow.setOnPreferenceChangeListener(this);
 
+	mHeadsExcludeFromLockscreen = (CheckBoxPreference) findPreference(PREF_HEADS_UP_EXCLUDE_FROM_LOCK_SCREEN);
+	mHeadsExcludeFromLockscreen.setChecked(Settings.System.getIntForUser(getContentResolver(),
+	Settings.System.HEADS_UP_EXCLUDE_FROM_LOCK_SCREEN, 0, UserHandle.USER_CURRENT) == 1);
+	mHeadsExcludeFromLockscreen.setOnPreferenceChangeListener(this);
+
         mHeadsUpSnoozeTime = (ListPreference) findPreference(PREF_HEADS_UP_SNOOZE_TIME);
         mHeadsUpSnoozeTime.setOnPreferenceChangeListener(this);
         int headsUpSnoozeTime = Settings.System.getInt(getContentResolver(),
@@ -365,6 +372,11 @@ public class NotificationDrawerQsSettings extends SettingsPreferenceFragment
                     Settings.System.HEADS_UP_GRAVITY_BOTTOM,
                     (Boolean) newValue ? 1 : 0, UserHandle.USER_CURRENT);
             return true;
+	} else if (preference == mHeadsExcludeFromLockscreen) {
+	    Settings.System.putIntForUser(getContentResolver(),
+		    Settings.System.HEADS_UP_EXCLUDE_FROM_LOCK_SCREEN,
+		    (Boolean) newValue ? 1 : 0, UserHandle.USER_CURRENT);
+	    return true;
         } else if (preference == mReminder) {
             Settings.System.putIntForUser(getContentResolver(),
                     Settings.System.REMINDER_ALERT_ENABLED,
