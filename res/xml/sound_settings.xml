@@ -130,6 +130,11 @@
             android:entryValues="@array/camera_sounds_values" 
             android:defaultValue="1" />
 
+    <CheckBoxPreference
+	    android:key="disable_bootaudio"
+	    android:title="@string/disable_bootaudio_title"
+	    android:persistent="false" />
+
     <PreferenceCategory
             android:title="@string/sound_category_system_title"/>
 
