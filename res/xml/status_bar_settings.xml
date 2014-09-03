@@ -63,12 +63,6 @@
             android:title="@string/hide_signal_title"
             android:summary="@string/hide_signal_summary" />
 
-         <CheckBoxPreference
-	    android:key="statusbar_6bar_signal"
-	    android:title="@string/status_bar_six_bar_signal_title"
-	    android:summary="@string/status_bar_six_bar_signal_summary"
-	    android:defaultValue="false" />
-
     </PreferenceCategory>
 
     <!-- Status bar brightness control -->
