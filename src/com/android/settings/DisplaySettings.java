@@ -107,6 +107,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mAdaptiveBacklight;
     private CheckBoxPreference mSunlightEnhancement;
     private CheckBoxPreference mColorEnhancement;
+    private Preference mDisplayColor;
+    private Preference mDisplayGamma;
+    private Preference mScreenOffGestures;
     private CheckBoxPreference mTapToWake;
 
     private ContentObserver mAccelerometerRotationObserver =
@@ -159,43 +162,74 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mStatusbarSliderPreference.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUSBAR_BRIGHTNESS_SLIDER, 0) == 1));
 
-        mAdaptiveBacklight = (CheckBoxPreference) findPreference(KEY_ADAPTIVE_BACKLIGHT);
-        if (!isAdaptiveBacklightSupported()) {
-            getPreferenceScreen().removePreference(mAdaptiveBacklight);
-            mAdaptiveBacklight = null;
-        }
+	PreferenceCategory mCategory = (PreferenceCategory) findPreference("advanced_display_prefs");
 
-        mSunlightEnhancement = (CheckBoxPreference) findPreference(KEY_SUNLIGHT_ENHANCEMENT);
-        if (!isSunlightEnhancementSupported()) {
-            getPreferenceScreen().removePreference(mSunlightEnhancement);
-            mSunlightEnhancement = null;
-        }
+	if (!DisplayColor.isSupported()) {
+	    mDisplayColor = (Preference) findPreference(KEY_DISPLAY_COLOR);
+	    mCategory.removePreference(mDisplayColor);
+	}
+	if (!DisplayGamma.isSupported()) {
+	    mDisplayGamma = (Preference) findPreference(KEY_DISPLAY_GAMMA);
+	    mCategory.removePreference(mDisplayGamma);
+	}
 
-        mColorEnhancement = (CheckBoxPreference) findPreference(KEY_COLOR_ENHANCEMENT);
+	if (!isPostProcessingSupported()) {
+	    mScreenColorSettings = (PreferenceScreen) findPreference(KEY_SCREEN_COLOR_SETTINGS);
+	    mCategory.removePreference(mScreenColorSettings);
+	}
+
+	if (!isAdaptiveBacklightSupported()) {
+	    mAdaptiveBacklight = (CheckBoxPreference) findPreference(KEY_ADAPTIVE_BACKLIGHT);
+	    mCategory.removePreference(mAdaptiveBacklight);
+	    mAdaptiveBacklight = null;
+	}
+
+	if (mAdaptiveBacklight != null) {
+	    mAdaptiveBacklight.setChecked(AdaptiveBacklight.isEnabled());
+	}
+
+	if (!isSunlightEnhancementSupported()) {
+	    mSunlightEnhancement = (CheckBoxPreference) findPreference(KEY_SUNLIGHT_ENHANCEMENT);
+	    mCategory.removePreference(mSunlightEnhancement);
+	    mSunlightEnhancement = null;
+	}
+
+	if (mSunlightEnhancement != null) {
+	    if (SunlightEnhancement.isAdaptiveBacklightRequired() &&
+	    	!AdaptiveBacklight.isEnabled()) {
+	    	mSunlightEnhancement.setEnabled(false);
+	    } else {
+	    	mSunlightEnhancement.setChecked(SunlightEnhancement.isEnabled());
+	    }
+	}
+
         if (!isColorEnhancementSupported()) {
-            getPreferenceScreen().removePreference(mColorEnhancement);
+            mColorEnhancement = (CheckBoxPreference) findPreference(KEY_COLOR_ENHANCEMENT);
+            mCategory.removePreference(mColorEnhancement);
             mColorEnhancement = null;
         }
 
-        mTapToWake = (CheckBoxPreference) findPreference(KEY_TAP_TO_WAKE);
+	if (mColorEnhancement != null) {
+	    mColorEnhancement.setChecked(ColorEnhancement.isEnabled());
+	}
+
         if (!isTapToWakeSupported()) {
-            getPreferenceScreen().removePreference(mTapToWake);
+            mTapToWake = (CheckBoxPreference) findPreference(KEY_TAP_TO_WAKE);
+	    mCategory.removePreference(mTapToWake);
             mTapToWake = null;
         }
 
+	if (mTapToWake != null) {
+	    mTapToWake.setChecked(TapToWake.isEnabled());
+	}
 
-        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
-                getPreferenceScreen(), KEY_ADVANCED_DISPLAY_SETTINGS);
+	if (!isDeviceHandlerInstalled()) {
+	    mScreenOffGestures = (Preference) findPreference(KEY_SCREEN_OFF_GESTURE_SETTINGS);
+	    mCategory.removePreference(mScreenOffGestures);
+	}
 
         mWakeWhenPluggedOrUnplugged =
                 (CheckBoxPreference) findPreference(KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED);
-
-        if (!DisplayColor.isSupported()) {
-            getPreferenceScreen().removePreference(findPreference(KEY_DISPLAY_COLOR));
-        }
-        if (!DisplayGamma.isSupported()) {
-            getPreferenceScreen().removePreference(findPreference(KEY_DISPLAY_GAMMA));
-        }
 
         boolean hasNotificationLed = res.getBoolean(
                 com.android.internal.R.bool.config_intrusiveNotificationLed);
@@ -220,14 +254,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } else {
             getPreferenceScreen().removePreference(lightPrefs);
         }
-
-        mScreenColorSettings = (PreferenceScreen) findPreference(KEY_SCREEN_COLOR_SETTINGS);
-        if (!isPostProcessingSupported()) {
-            getPreferenceScreen().removePreference(mScreenColorSettings);
-        }
-
-	 Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
-		getPreferenceScreen(), KEY_SCREEN_OFF_GESTURE_SETTINGS);
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -631,5 +657,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             // Hardware abstraction framework not installed
             return false;
         }
+    }
+
+    private boolean isDeviceHandlerInstalled() {
+    boolean ret = true;
+	final PackageManager pm = getPackageManager();
+	try {
+	    pm.getPackageInfo("com.slim.device", PackageManager.GET_META_DATA);
+	} catch (NameNotFoundException e) {
+	    ret = false;
+	}
+	return ret;
     }
 }
