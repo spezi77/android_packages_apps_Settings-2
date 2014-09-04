@@ -30,6 +30,7 @@
 
     <PreferenceScreen
         android:key="recents_view_settings"
+        android:summary="@string/recents_view_settings_summary"
         android:fragment="com.android.settings.beanstalk.RamSettings"
         android:title="@string/recents_view_settings" />
 

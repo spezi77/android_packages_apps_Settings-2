@@ -1214,8 +1214,9 @@
     <string name="recents_memory_indicator_location_title">Memory indicator position</string>
     <string name="recents_memory_indicator_location_summary">Choose position of the memory indicator</string>
 
-    <string name="bars_and_menus_category_recent_panel_title" >Recents view</string>
+    <string name="bars_and_menus_category_recent_panel_title" >Stock recents view</string>
     <string name="recents_view_settings" >Recents view settings</string>
+    <string name="recents_view_settings_summary" >Both stock and slim recents view settings</string>
 
     <!-- How to show rambar memory -->
     <string name="show_rambar_gb_title">Show rambar memory in GB</string>
@@ -1866,7 +1867,7 @@
     <string name="ime_duration_title">IME Duration</string>
 
     <!-- Recent panel -->
-    <string name="recent_panel_category">Recent apps panel</string>
+    <string name="recent_panel_category">Slim recent apps panel</string>
     <string name="recent_panel_scale_title">Size</string>
     <string name="recent_panel_scale_summary">Recent apps panel size in percent.</string>
     <string name="recent_panel_100">100% (default)</string>
