@@ -395,6 +395,7 @@ public class Settings extends PreferenceActivity
         ProfilesSettings.class.getName(),
         PolicyNativeFragment.class.getName(),
         com.android.settings.cyanogenmod.PrivacySettings.class.getName(),
+	ThemeSettings.class.getName(),
         ShakeEvents.class.getName()
     };
 
