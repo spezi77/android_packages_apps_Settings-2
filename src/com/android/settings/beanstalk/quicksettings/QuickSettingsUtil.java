@@ -333,13 +333,14 @@ public class QuickSettingsUtil {
                 disableTile(TILE_NETWORKMODE);
                 break;
         }
-    }
 
     // Don't show the Network ADB tile if adb debugging is disabled
     if (DeviceUtils.adbEnabled(resolver)) {
 	enableTile(TILE_NETWORKADB);
     } else {
 	disableTile(TILE_NETWORKADB);
+    }
+
     }
 
     public static synchronized void updateAvailableTiles(Context context) {
