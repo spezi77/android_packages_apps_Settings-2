@@ -31,7 +31,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -40,7 +39,6 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.security.KeyStore;
@@ -52,14 +50,6 @@ import com.android.internal.util.beanstalk.DeviceUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 
-import com.android.settings.beanstalk.backup.BackupService;
-import com.android.settings.beanstalk.preference.NumberPickerPreference;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,7 +107,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     // MULTIUSER
     public static final String ALLOW_MULTIUSER = "allow_multiuser";
-    private static final String KEY_BACKUP_CATEGORY = "backup_category";
 
     private PackageManager mPM;
     private DevicePolicyManager mDPM;

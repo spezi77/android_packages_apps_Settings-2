@@ -74,7 +74,6 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_BLACKLIST" />
     <uses-permission android:name="android.permission.CHANGE_PHONE_BLACKLIST" />
-    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SYSTEM_NOTIFICATION_LISTENER" />
     <uses-permission android:name="android.permission.CHANGE_HEADS_UP_STATE" />
@@ -2297,22 +2296,6 @@
 
         <service android:name=".chameleonos.labs.identicons.IdenticonRemovalService"
                  android:exported="false" />
-
-        <service
-            android:name="com.android.settings.beanstalk.backup.BackupService" />
-
-        <activity
-            android:name="com.android.settings.beanstalk.backup.ManageBackupsActivity"
-            android:label="@string/manage_backups_activity_title"
-            android:taskAffinity="com.android.settings"
-            android:theme="@android:style/Theme.Holo.DialogWhenLarge"
-            android:launchMode="singleTask" />
-
-        <activity
-               android:name="com.android.settings.beanstalk.backup.BackupSettings"
-               android:label="@string/backups_title"
-               android:taskAffinity="com.android.settings"
-               android:launchMode="singleTask" />
 
     </application>
 </manifest>
