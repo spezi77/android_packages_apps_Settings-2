@@ -62,6 +62,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     private static final String PREF_CLOCK_DATE_FORMAT = "clock_date_format";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String CLOCK_USE_SECOND = "clock_use_second";
+    private static final String STATUS_BAR_FORCE_CLOCK_LOCKSCREEN = "status_bar_force_clock_lockscreen";
 
     public static final int CLOCK_DATE_STYLE_LOWERCASE = 1;
     public static final int CLOCK_DATE_STYLE_UPPERCASE = 2;
@@ -80,6 +81,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     private ListPreference mClockDateFormat;
     private CheckBoxPreference mStatusBarClock;
     private CheckBoxPreference mClockUseSecond;
+    private CheckBoxPreference mForceClockLockscreen;
 
     private boolean mCheckPreferences;
 
@@ -181,6 +183,11 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
                 Settings.System.STATUS_BAR_CLOCK, 1) == 1));
         mStatusBarClock.setOnPreferenceChangeListener(this);
 
+	mForceClockLockscreen = (CheckBoxPreference) findPreference(STATUS_BAR_FORCE_CLOCK_LOCKSCREEN);
+	mForceClockLockscreen.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+		Settings.System.STATUS_BAR_FORCE_CLOCK_LOCKSCREEN, 0) != 0);
+	mForceClockLockscreen.setOnPreferenceChangeListener(this);
+
         boolean mClockDateToggle = Settings.System.getInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_CLOCK_DATE_DISPLAY, 0) != 0;
         if (!mClockDateToggle) {
@@ -213,6 +220,10 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
                     Settings.System.STATUSBAR_CLOCK_STYLE, val);
             mClockStyle.setSummary(mClockStyle.getEntries()[index]);
             return true;
+	} else if (preference == mForceClockLockscreen) {
+	    Settings.System.putInt(getActivity().getContentResolver(),
+		    Settings.System.STATUS_BAR_FORCE_CLOCK_LOCKSCREEN, (Boolean) newValue ? 1 : 0);
+	    return true;
         } else if (preference == mColorPicker) {
             String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
                     .valueOf(newValue)));
