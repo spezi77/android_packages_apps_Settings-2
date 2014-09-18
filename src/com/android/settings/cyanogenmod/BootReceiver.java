@@ -16,18 +16,19 @@ import com.android.settings.hardware.DisplayColor;
 import com.android.settings.hardware.DisplayGamma;
 import com.android.settings.hardware.VibratorIntensity;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.beanstalk.service.QuietHoursController;
 
 public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context ctx, Intent intent) {
 
-	ContentResolver resolver = context.getContentResolver();
+	ContentResolver resolver = ctx.getContentResolver();
 
  	if (Settings.System.getInt(resolver,
  		Settings.System.QUIET_HOURS_REQUIRE_CHARGING, 0) != 0) {
  	    IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
- 	    Intent batteryStatus = context.registerReceiver(null, ifilter);
+ 	    Intent batteryStatus = ctx.registerReceiver(null, ifilter);
  	    final int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
  	    final boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
  	    	status == BatteryManager.BATTERY_STATUS_FULL;
