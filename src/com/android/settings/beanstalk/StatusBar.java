@@ -86,6 +86,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String KEY_SMS_BREATH = "sms_breath";
     private static final String KEY_MISSED_CALL_BREATH = "missed_call_breath";
     private static final String KEY_VOICEMAIL_BREATH = "voicemail_breath";
+    private static final String TOGGLE_CARRIER_LOGO = "toggle_carrier_logo";
 
     private ColorPickerPreference mColorPicker;
     private PreferenceScreen mClockStyle;
@@ -93,6 +94,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private CheckBoxPreference mSMSBreath;
     private CheckBoxPreference mMissedCallBreath;
     private CheckBoxPreference mVoicemailBreath;
+    private CheckBoxPreference mToggleCarrierLogo;
 
     ListPreference mDbmStyletyle;
     CheckBoxPreference mHideSignal;
@@ -139,6 +141,10 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mMissedCallBreath = (CheckBoxPreference) prefSet.findPreference(KEY_MISSED_CALL_BREATH);
         mVoicemailBreath = (CheckBoxPreference) prefSet.findPreference(KEY_VOICEMAIL_BREATH);
 
+	mToggleCarrierLogo = (CheckBoxPreference) findPreference(TOGGLE_CARRIER_LOGO);
+	mToggleCarrierLogo.setChecked((Settings.System.getInt(getContentResolver(),
+		Settings.System.TOGGLE_CARRIER_LOGO, 1) == 1));
+
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -177,6 +183,10 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.KEY_MISSED_CALL_BREATH, value ? 1 : 0);
             return true;
+	} else if (preference == mToggleCarrierLogo) {
+	    Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), 			    Settings.System.TOGGLE_CARRIER_LOGO,
+		    mToggleCarrierLogo.isChecked() ? 1 : 0);
+	    return true;
         } else if (preference == mVoicemailBreath) {
             value = mVoicemailBreath.isChecked();
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),

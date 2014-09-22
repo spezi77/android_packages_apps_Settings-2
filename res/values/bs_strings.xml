@@ -1179,10 +1179,11 @@
     <string name="quick_pulldown_left">Left</string>
     <string name="quick_pulldown_right">Right</string>
 
-    <!-- custom carrier text -->
+    <!-- custom carrier options -->
     <string name="custom_carrier_label_title">Custom carrier label</string>
     <string name="custom_carrier_label_explain">Please enter a new label. Enter an empty label to revert to stock label.</string>
     <string name="custom_carrier_label_notset">Custom label currently not set</string>
+    <string name="disable_carrier_logo">Disable Carrier Logo</string>
 
     <!-- QuickSettings fliptiles -->
     <string name="flip_qs_tiles_title">Flip tiles</string>
