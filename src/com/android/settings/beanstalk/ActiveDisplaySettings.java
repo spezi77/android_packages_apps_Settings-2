@@ -33,7 +33,6 @@ import android.text.format.DateFormat;
 import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.cyanogenmod.SystemCheckBoxPreference;
 
 import com.android.internal.util.beanstalk.DeviceUtils;
 
