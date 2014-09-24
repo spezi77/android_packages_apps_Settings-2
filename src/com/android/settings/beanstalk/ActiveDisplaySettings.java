@@ -39,6 +39,7 @@ import com.android.internal.util.beanstalk.DeviceUtils;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import android.util.Log;
 
 public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
@@ -57,9 +58,6 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_TIMEOUT = "ad_timeout";
     private static final String KEY_THRESHOLD = "ad_threshold";
     private static final String KEY_TURNOFF_MODE = "ad_turnoff_mode";
-    private static final String KEY_SHAKE_THRESHOLD = "ad_shake_threshold";
-    private static final String KEY_SHAKE_LONGTHRESHOLD = "ad_shake_long_threshold";
-    private static final String KEY_SHAKE_TIMEOUT = "ad_shake_timeout";
 
     private ContentResolver mResolver;
     private Context mContext;
@@ -73,9 +71,6 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mTurnOffModePref;
     private SeekBarPreferenceChOS mBrightnessLevel;
     private SeekBarPreferenceChOS mAnnoyingNotification;
-    private SeekBarPreferenceChOS mShakeThreshold;
-    private SeekBarPreferenceChOS mShakeLongThreshold;
-    private SeekBarPreferenceChOS mShakeTimeout;
     private ListPreference mDisplayTimeout;
     private ListPreference mPocketModePref;
     private ListPreference mProximityThreshold;
@@ -148,21 +143,6 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
         mAnnoyingNotification.setValue(Settings.System.getInt(mResolver,
                 Settings.System.ACTIVE_DISPLAY_ANNOYING, 0));
         mAnnoyingNotification.setOnPreferenceChangeListener(this);
-
-        mShakeThreshold = (SeekBarPreferenceChOS) prefSet.findPreference(KEY_SHAKE_THRESHOLD);
-        mShakeThreshold.setValue(Settings.System.getInt(mResolver,
-                Settings.System.ACTIVE_DISPLAY_SHAKE_THRESHOLD, 10));
-        mShakeThreshold.setOnPreferenceChangeListener(this);
-
-        mShakeLongThreshold = (SeekBarPreferenceChOS) prefSet.findPreference(KEY_SHAKE_LONGTHRESHOLD);
-        mShakeLongThreshold.setValue(Settings.System.getInt(mResolver,
-                Settings.System.ACTIVE_DISPLAY_SHAKE_LONGTHRESHOLD, 2));
-        mShakeLongThreshold.setOnPreferenceChangeListener(this);
-
-        mShakeTimeout = (SeekBarPreferenceChOS) prefSet.findPreference(KEY_SHAKE_TIMEOUT);
-        mShakeTimeout.setValue(Settings.System.getInt(mResolver,
-                Settings.System.ACTIVE_DISPLAY_SHAKE_TIMEOUT, 10));
-        mShakeTimeout.setOnPreferenceChangeListener(this);
 
         mExcludedAppsPref = (AppMultiSelectListPreference) prefSet.findPreference(KEY_EXCLUDED_APPS);
         Set<String> excludedApps = getExcludedApps();
@@ -242,21 +222,6 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
             int annoying = ((Integer)newValue).intValue();
             Settings.System.putInt(mResolver,
                     Settings.System.ACTIVE_DISPLAY_ANNOYING, annoying);
-            return true;
-        } else if (preference == mShakeThreshold) {
-            int threshold = ((Integer)newValue).intValue();
-            Settings.System.putInt(mResolver,
-                    Settings.System.ACTIVE_DISPLAY_SHAKE_THRESHOLD, threshold);
-            return true;
-        } else if (preference == mShakeLongThreshold) {
-            int longThreshold = ((Integer)newValue).intValue();
-            Settings.System.putInt(mResolver,
-                    Settings.System.ACTIVE_DISPLAY_SHAKE_LONGTHRESHOLD, longThreshold);
-            return true;
-        } else if (preference == mShakeTimeout) {
-            int timeout = ((Integer)newValue).intValue();
-            Settings.System.putInt(mResolver,
-                    Settings.System.ACTIVE_DISPLAY_SHAKE_TIMEOUT, timeout);
             return true;
         } else if (preference == mBrightnessLevel) {
             int brightness = ((Integer)newValue).intValue();
