@@ -14,6 +14,9 @@
 
  package com.android.settings.beanstalk;
   
+  import android.app.AlertDialog;
+  import android.app.Dialog;
+  import android.content.DialogInterface;
   import android.content.pm.PackageManager;
   import android.content.res.Resources;
   import android.media.Ringtone;
@@ -30,12 +33,17 @@
   import android.preference.SlimSeekBarPreference;
   import android.provider.Settings;
   import android.os.UserHandle;
-  
+  import android.view.Menu;
+  import android.view.MenuItem;
+  import android.view.MenuInflater;
+
   import com.android.internal.util.beanstalk.DeviceUtils;
   
   import com.android.settings.SettingsPreferenceFragment;
   import com.android.settings.beanstalk.quicksettings.QuickSettingsUtil;
   import com.android.settings.R;
+
+  import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class HeadsUp extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -50,6 +58,8 @@ public class HeadsUp extends SettingsPreferenceFragment implements
     private static final String PREF_HEADS_UP_SHOW_UPDATE = "heads_up_show_update";
     private static final String PREF_HEADS_UP_GRAVITY = "heads_up_gravity";
     private static final String PREF_HEADS_UP_EXCLUDE_FROM_LOCK_SCREEN = "heads_up_exclude_from_lock_screen";
+    private static final String HEADS_UP_BG_COLOR = "heads_up_bg_color";
+    private static final String HEADS_UP_TEXT_COLOR = "heads_up_text_color";
 
     ListPreference mHeadsUpSnoozeTime;
     ListPreference mHeadsUpTimeOut;
@@ -58,6 +68,13 @@ public class HeadsUp extends SettingsPreferenceFragment implements
     CheckBoxPreference mHeadsUpShowUpdates;
     CheckBoxPreference mHeadsUpGravity;
     CheckBoxPreference mHeadsExcludeFromLockscreen;
+
+    private ColorPickerPreference mHeadsUpBgColor;
+    private ColorPickerPreference mHeadsUpTextColor;
+
+    private static final int MENU_RESET = Menu.FIRST;
+    private static final int DEFAULT_BACKGROUND_COLOR = 0x00ffffff;
+    private static final int DEFAULT_TEXT_COLOR = 0xffffffff;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,6 +133,35 @@ public class HeadsUp extends SettingsPreferenceFragment implements
                 Settings.System.HEADS_UP_NOTIFCATION_DECAY, defaultTimeOut);
         mHeadsUpTimeOut.setValue(String.valueOf(headsUpTimeOut));
         updateHeadsUpTimeOutSummary(headsUpTimeOut);
+
+        // Heads Up background color
+        mHeadsUpBgColor =
+                (ColorPickerPreference) findPreference(HEADS_UP_BG_COLOR);
+        mHeadsUpBgColor.setOnPreferenceChangeListener(this);
+        final int intColor = Settings.System.getInt(getContentResolver(),
+                Settings.System.HEADS_UP_BG_COLOR, 0x00ffffff);
+        String hexColor = String.format("#%08x", (0x00ffffff & intColor));
+        if (hexColor.equals("#00ffffff")) {
+            mHeadsUpBgColor.setSummary("TRDS default");
+        } else {
+            mHeadsUpBgColor.setSummary(hexColor);
+        }
+        mHeadsUpBgColor.setNewPreviewColor(intColor);
+
+        // Heads Up text color
+        mHeadsUpTextColor =
+                (ColorPickerPreference) findPreference(HEADS_UP_TEXT_COLOR);
+        mHeadsUpTextColor.setOnPreferenceChangeListener(this);
+        final int intTextColor = Settings.System.getInt(getContentResolver(),
+                Settings.System.HEADS_UP_TEXT_COLOR, 0x00000000);
+        String hexTextColor = String.format("#%08x", (0x00000000 & intTextColor));
+        if (hexTextColor.equals("#00000000")) {
+            mHeadsUpTextColor.setSummary("TRDS default");
+        } else {
+            mHeadsUpTextColor.setSummary(hexTextColor);
+        }
+        mHeadsUpTextColor.setNewPreviewColor(intTextColor);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -169,6 +215,32 @@ public class HeadsUp extends SettingsPreferenceFragment implements
                     Settings.System.HEADS_UP_EXCLUDE_FROM_LOCK_SCREEN,
                     (Boolean) newValue ? 1 : 0, UserHandle.USER_CURRENT);
             return true;
+        } else if (preference == mHeadsUpBgColor) {
+            String hex = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(newValue)));
+            if (hex.equals("#00ffffff")) {
+                preference.setSummary("TRDS default");
+            } else {
+                preference.setSummary(hex);
+            }
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.HEADS_UP_BG_COLOR,
+                    intHex);
+            return true;
+        } else if (preference == mHeadsUpTextColor) {
+            String hexText = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(newValue)));
+            if (hexText.equals("#00000000")) {
+                preference.setSummary("TRDS default");
+            } else {
+                preference.setSummary(hexText);
+            }
+            int intHexText = ColorPickerPreference.convertToColorInt(hexText);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.HEADS_UP_TEXT_COLOR,
+                    intHexText);
+            return true;
         }
         return false;
     }
@@ -194,5 +266,47 @@ public class HeadsUp extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(0, MENU_RESET, 0, R.string.reset_default_message)
+                .setIcon(R.drawable.ic_settings_backup)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_RESET:
+                resetToDefault();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void resetToDefault() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        alertDialog.setTitle(R.string.shortcut_action_reset);
+        alertDialog.setMessage(R.string.qs_style_reset_message);
+        alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                resetValues();
+            }
+        });
+        alertDialog.setNegativeButton(R.string.cancel, null);
+        alertDialog.create().show();
+    }
+
+    private void resetValues() {
+        Settings.System.putInt(getContentResolver(),
+                Settings.System.HEADS_UP_BG_COLOR, DEFAULT_BACKGROUND_COLOR);
+        mHeadsUpBgColor.setNewPreviewColor(DEFAULT_BACKGROUND_COLOR);
+        mHeadsUpBgColor.setSummary("TRDS default");
+        Settings.System.putInt(getContentResolver(),
+                Settings.System.HEADS_UP_TEXT_COLOR, 0);
+        mHeadsUpTextColor.setNewPreviewColor(DEFAULT_TEXT_COLOR);
+        mHeadsUpTextColor.setSummary("TRDS default");
     }
 }
