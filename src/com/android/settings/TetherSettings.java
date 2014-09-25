@@ -16,6 +16,9 @@
 
 package com.android.settings;
 
+import com.android.settings.wifi.WifiApEnabler;	
+import com.android.settings.wifi.WifiApDialog;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
@@ -76,6 +79,10 @@ public class TetherSettings extends SettingsPreferenceFragment {
 
     private String[] mSecurityType;
     private Preference mCreateNetwork;
+
+    private WifiApDialog mWifiDialog;
+    private WifiManager mWifiManager;
+    private WifiConfiguration mWifiConfig = null;
 
     private boolean mUsbConnected;
     private boolean mMassStorageActive;
@@ -238,10 +245,6 @@ public class TetherSettings extends SettingsPreferenceFragment {
         activity.registerReceiver(mTetherChangeReceiver, filter);
 
         if (intent != null) mTetherChangeReceiver.onReceive(activity, intent);
-
-        if (mUsbNetList != null) {
-            mUsbNetList.setOnPreferenceChangeListener(this);
-        }
 
         setUsbNetwork(null, null);
 
@@ -436,14 +439,6 @@ public class TetherSettings extends SettingsPreferenceFragment {
         }
 
         mUsbNetList.setSummary(summary);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object value) {
-        if (preference == mUsbNetList) {
-            setUsbNetwork(preference, value);
-        }
-        return false;
     }
 
     boolean isProvisioningNeeded() {
