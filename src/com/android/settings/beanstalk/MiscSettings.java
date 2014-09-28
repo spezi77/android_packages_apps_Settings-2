@@ -50,12 +50,14 @@ public class MiscSettings extends SettingsPreferenceFragment
 
     private static final String PREF_MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
+    private static final String NO_KEYGUARD_CARRIER = "no_carrier_label";
     private static final String PREF_VIBRATE_NOTIF_EXPAND = "vibrate_notif_expand";
     private static final String PREF_DISABLE_FC_NOTIFICATIONS = "disable_fc_notifications";
 
     private ListPreference mMsob;
     private Preference mCustomLabel;
     private String mCustomLabelText = null;
+    CheckBoxPreference mNoKeyguardCarrier;
     CheckBoxPreference mVibrateOnExpand;
     CheckBoxPreference mDisableFC;
 
@@ -82,6 +84,12 @@ public class MiscSettings extends SettingsPreferenceFragment
 	mDisableFC = (CheckBoxPreference) findPreference(PREF_DISABLE_FC_NOTIFICATIONS);
         mDisableFC.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
                 Settings.System.DISABLE_FC_NOTIFICATIONS, true));
+
+        // Hide Carrier Label in keyguard
+        mNoKeyguardCarrier = (CheckBoxPreference) mPrefSet.findPreference(
+                NO_KEYGUARD_CARRIER);
+        mNoKeyguardCarrier.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.NO_CARRIER_LABEL, true));
     }
 
     @Override
@@ -110,6 +118,11 @@ public class MiscSettings extends SettingsPreferenceFragment
 	} else if (preference == mDisableFC) {
             Settings.System.putBoolean(mContext.getContentResolver(),
                     Settings.System.DISABLE_FC_NOTIFICATIONS,
+                    ((CheckBoxPreference) preference).isChecked());
+            return true;
+	} else if (preference == mNoKeyguardCarrier) {
+            Settings.System.putBoolean(mContext.getContentResolver(),
+                    Settings.System.NO_CARRIER_LABEL,
                     ((CheckBoxPreference) preference).isChecked());
             return true;
         } else if (preference == mCustomLabel) {
