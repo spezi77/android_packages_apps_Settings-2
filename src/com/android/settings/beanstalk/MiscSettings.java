@@ -86,8 +86,7 @@ public class MiscSettings extends SettingsPreferenceFragment
                 Settings.System.DISABLE_FC_NOTIFICATIONS, true));
 
         // Hide Carrier Label in keyguard
-        mNoKeyguardCarrier = (CheckBoxPreference) mPrefSet.findPreference(
-                NO_KEYGUARD_CARRIER);
+        mNoKeyguardCarrier = (CheckBoxPreference) findPreference(NO_KEYGUARD_CARRIER);
         mNoKeyguardCarrier.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
                 Settings.System.NO_CARRIER_LABEL, true));
     }
