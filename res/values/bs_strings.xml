@@ -2233,4 +2233,12 @@
     <string name="status_bar_six_bar_signal_summary">Enable to show six bar signal in statusbar/qs</string>
 
     <string name="advanced_controls_title">Advanced system controls</string>
+
+    <!-- Quick ribbon -->
+    <string name="category_quick_access">Quick ribbon</string>
+    <string name="title_quick_access">Show in drawer</string>
+    <string name="title_quick_access_linked">Linked layout</string>
+    <string name="summary_quick_access_linked">Use the select tiles from quick settings</string>
+    <string name="ribbon_picker_title">Ribbon and layout</string>
+    <string name="ribbon_picker_summary">View, select or change the ribbon widgets</string>
 </resources>
