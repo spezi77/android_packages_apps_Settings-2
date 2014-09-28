@@ -45,8 +45,8 @@ import com.android.settings.Utils;
 
 import java.util.List;
 
-public class MiscSettings extends SettingsPreferenceFragment
-        implements OnPreferenceChangeListener {
+public class MiscSettings extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener {
 
     private static final String PREF_MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
@@ -57,16 +57,15 @@ public class MiscSettings extends SettingsPreferenceFragment
     private ListPreference mMsob;
     private Preference mCustomLabel;
     private String mCustomLabelText = null;
-    CheckBoxPreference mNoKeyguardCarrier;
-    CheckBoxPreference mVibrateOnExpand;
-    CheckBoxPreference mDisableFC;
+    private CheckBoxPreference mNoKeyguardCarrier;
+    private CheckBoxPreference mVibrateOnExpand;
+    private CheckBoxPreference mDisableFC;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.misc_settings);
-	PreferenceScreen prefScreen = getPreferenceScreen();
 
 	mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         mMsob = (ListPreference) findPreference(PREF_MEDIA_SCANNER_ON_BOOT);
@@ -78,16 +77,19 @@ public class MiscSettings extends SettingsPreferenceFragment
 	updateCustomLabelTextSummary();
 
 	mVibrateOnExpand = (CheckBoxPreference) findPreference(PREF_VIBRATE_NOTIF_EXPAND);
-        mVibrateOnExpand.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
-                Settings.System.VIBRATE_NOTIF_EXPAND, true));
+        mVibrateOnExpand.setChecked(Settings.System.getInt(
+                getActivity().getContentResolver(),
+                Settings.System.VIBRATE_NOTIF_EXPAND, 0) == 1);
 
 	mDisableFC = (CheckBoxPreference) findPreference(PREF_DISABLE_FC_NOTIFICATIONS);
-        mDisableFC.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+        mDisableFC.setChecked(Settings.System.getInt(
+                getActivity().getContentResolver(),
                 Settings.System.DISABLE_FC_NOTIFICATIONS, 0) == 1);
 
         // Hide Carrier Label in keyguard
         mNoKeyguardCarrier = (CheckBoxPreference) findPreference(NO_KEYGUARD_CARRIER);
-        mNoKeyguardCarrier.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+        mNoKeyguardCarrier.setChecked(Settings.System.getInt(
+                getActivity().getContentResolver(),
                 Settings.System.NO_CARRIER_LABEL, 0) == 1);
     }
 
@@ -109,18 +111,18 @@ public class MiscSettings extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 	if (preference == mVibrateOnExpand) {
-            Settings.System.putBoolean(mContext.getContentResolver(),
+            Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.VIBRATE_NOTIF_EXPAND,
-                    ((CheckBoxPreference) preference).isChecked());
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
          //   Helpers.restartSystemUI();
             return true;
 	} else if (preference == mDisableFC) {
-            Settings.System.putBoolean(mContext.getContentResolver(),
+            Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.DISABLE_FC_NOTIFICATIONS,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
 	} else if (preference == mNoKeyguardCarrier) {
-            Settings.System.putBoolean(mContext.getContentResolver(),
+            Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NO_CARRIER_LABEL,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
