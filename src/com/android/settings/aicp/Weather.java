@@ -133,17 +133,14 @@ public class Weather extends SettingsPreferenceFragment implements
             Settings.System.putBoolean(resolver,
                     Settings.System.SYSTEMUI_WEATHER_HEADER_VIEW,
                     ((Boolean) objValue) ? true : false);
-            Helpers.restartSystemUI();
         } else if (preference == mWeatherNotification) {
             Settings.System.putBoolean(resolver,
                     Settings.System.SYSTEMUI_WEATHER_NOTIFICATION,
                     ((Boolean) objValue) ? true : false);
-            openWeatherWarning();
         } else if (preference == mWeatherIcon) {
             Settings.System.putBoolean(resolver,
                     Settings.System.SYSTEMUI_WEATHER_ICON,
                     ((Boolean) objValue) ? true : false);
-            openWeatherWarning();
         }
 
         return true;
@@ -152,29 +149,5 @@ public class Weather extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceClick(Preference preference) {
         return false;
-    }
-
-    private void openWeatherWarning() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                .setTitle(getResources().getString(R.string.weather_alert_title))
-                .setMessage(getResources().getString(R.string.weather_alert_message))
-                .setIconAttribute(android.R.attr.alertDialogIcon)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            Handler handle = new Handler();
-                            // Allow statusbar to collapse if desired
-                            handle.postDelayed(new Runnable() {
-                                public void run() {
-                                    PowerManager pm =
-                                            (PowerManager) Weather.this.getSystemService(
-                                            Context.POWER_SERVICE);
-                                    pm.reboot("");
-                                    Weather.this.finish();
-                               }
-                            }, 500);
-                        }
-                }).setNegativeButton(android.R.string.cancel, null);
-        builder.show();
     }
 }
