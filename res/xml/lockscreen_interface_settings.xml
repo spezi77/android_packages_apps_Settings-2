@@ -47,9 +47,9 @@
     </PreferenceScreen>
 
     <PreferenceScreen
-        android:id="@+id/lockscreen_notifcation_settings"
+        android:title="@string/notifications_on_lockscreen"
         android:fragment="com.android.settings.beanstalk.LockscreenNotifications"
-        android:title="@string/lockscreen_notifications" />
+        android:summary="@string/notifications_on_lockscreen_summary" />
 
     <PreferenceScreen
         android:key="keyguard_style"
@@ -76,11 +76,6 @@
             android:key="lockscreen_buttons"
             android:title="@string/lockscreen_buttons_title"
             android:summary="@string/lockscreen_buttons_summary" />
-
-        <PreferenceScreen
-            android:title="@string/notifications_on_lockscreen"
-            android:fragment="com.android.settings.beanstalk.LockscreenNotifications"
-            android:summary="@string/notifications_on_lockscreen_summary" />
 
     <PreferenceCategory
         android:title="@string/lockscreen_widgets_title"
