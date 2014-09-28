@@ -47,14 +47,15 @@
         android:entryValues="@array/media_scanner_on_boot_values" />
 
     <CheckBoxPreference
-            android:key="vibrate_notif_expand"
-            android:title="@string/vibrate_notif_expand_title"
-            android:summary="@string/vibrate_notif_expand_summary" />
+        android:key="vibrate_notif_expand"
+        android:title="@string/vibrate_notif_expand_title"
+        android:summary="@string/vibrate_notif_expand_summary" />
 
     <CheckBoxPreference
-            android:key="disable_fc_notifications"
-            android:title="@string/disable_fc_notifications_title"
-            android:summary="@string/disable_fc_notifications_summary" />
+        android:key="disable_fc_notifications"
+        android:title="@string/disable_fc_notifications_title"
+        android:summary="@string/disable_fc_notifications_summary"
+        android:defaultValue="false" />
 
     <PreferenceScreen
 	android:key="lcd_density_setup"
@@ -68,7 +69,8 @@
 
     <CheckBoxPreference
 	android:key="no_carrier_label"
-    	android:title="@string/no_carrier_on_keyguard_title" />
+    	android:title="@string/no_carrier_on_keyguard_title"
+        android:defaultValue="false" />
 
     </PreferenceCategory>
 

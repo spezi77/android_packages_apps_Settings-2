@@ -83,12 +83,12 @@ public class MiscSettings extends SettingsPreferenceFragment
 
 	mDisableFC = (CheckBoxPreference) findPreference(PREF_DISABLE_FC_NOTIFICATIONS);
         mDisableFC.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
-                Settings.System.DISABLE_FC_NOTIFICATIONS, true));
+                Settings.System.DISABLE_FC_NOTIFICATIONS, 0) == 1);
 
         // Hide Carrier Label in keyguard
         mNoKeyguardCarrier = (CheckBoxPreference) findPreference(NO_KEYGUARD_CARRIER);
         mNoKeyguardCarrier.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
-                Settings.System.NO_CARRIER_LABEL, true));
+                Settings.System.NO_CARRIER_LABEL, 0) == 1);
     }
 
     @Override
@@ -117,12 +117,12 @@ public class MiscSettings extends SettingsPreferenceFragment
 	} else if (preference == mDisableFC) {
             Settings.System.putBoolean(mContext.getContentResolver(),
                     Settings.System.DISABLE_FC_NOTIFICATIONS,
-                    ((CheckBoxPreference) preference).isChecked());
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
 	} else if (preference == mNoKeyguardCarrier) {
             Settings.System.putBoolean(mContext.getContentResolver(),
                     Settings.System.NO_CARRIER_LABEL,
-                    ((CheckBoxPreference) preference).isChecked());
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
         } else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
