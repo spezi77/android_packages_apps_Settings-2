@@ -52,6 +52,12 @@
             android:key="signal_style"
             android:title="@string/signal_style" />
 
+	<CheckBoxPreference
+	    android:key="statusbar_6bar_signal"
+	    android:title="@string/status_bar_six_bar_signal_title"
+	    android:summary="@string/status_bar_six_bar_signal_summary"
+  	    android:persistent="false" />
+
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="signal_color"
             android:title="@string/signal_color_title"
