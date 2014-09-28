@@ -85,7 +85,6 @@ limitations under the License.
         android:ringtoneType="all"
         android:showSilent="false"
         android:dependency="noti_reminder_enabled" />
-    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/category_quick_access" >
