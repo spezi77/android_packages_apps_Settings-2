@@ -2231,4 +2231,6 @@
     <!-- Status bar | 6 bars signal -->
     <string name="status_bar_six_bar_signal_title">Enable Six Bar Signal</string>
     <string name="status_bar_six_bar_signal_summary">Enable to show six bar signal in statusbar/qs</string>
+
+    <string name="advanced_controls_title">Advanced system controls</string>
 </resources>

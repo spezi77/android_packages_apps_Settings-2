@@ -69,22 +69,6 @@
         android:fragment="com.android.settings.beanstalk.InterfaceSettings"
         android:title="@string/interface_settings_title" />
 
-    <!-- HALO -->
-    <header
-        settings:includeXmlForSearch="@xml/halo_settings"
-        android:id="@+id/halo_settings"
-        android:fragment="com.android.settings.beanstalk.Halo"
-        android:icon="@drawable/ic_settings_halo" 
-        android:title="@string/halo_settings_title" />
-
-    <!-- Hover -->
-    <header
-        settings:includeXmlForSearch="@xml/hover_settings"
-        android:id="@+id/hover_settings"
-        android:icon="@drawable/ic_settings_hover"
-        android:fragment="com.android.settings.beanstalk.HoverSettings"
-        android:title="@string/hover_settings_title" />
-
     <!-- TRDS -->
     <header
         android:id="@+id/trds_settings"
