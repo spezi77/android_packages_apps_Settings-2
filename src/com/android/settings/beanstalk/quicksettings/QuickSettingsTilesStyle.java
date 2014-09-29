@@ -55,8 +55,8 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
             "tiles_per_row_duplicate_landscape";
     private static final String PREF_QUICK_TILES_BG_COLOR =
             "quick_tiles_bg_color";
-    private static final String PREF_QUICK_TILES_BG_PRESSED_COLOR =
-            "quick_tiles_bg_pressed_color";
+ //   private static final String PREF_QUICK_TILES_BG_PRESSED_COLOR =
+ //           "quick_tiles_bg_pressed_color";
     private static final String PREF_QUICK_TILES_ALPHA =
             "quick_tiles_alpha";
     private static final String PREF_QUICK_TILES_TEXT_COLOR =
@@ -74,7 +74,7 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
     private ListPreference mTilesPerRow;
     private CheckBoxPreference mDuplicateColumnsLandscape;
     private ColorPickerPreference mQuickTilesBgColor;
-    private ColorPickerPreference mQuickTilesBgPressedColor;
+//    private ColorPickerPreference mQuickTilesBgPressedColor;
     private ColorPickerPreference mQuickTilesTextColor;
     private SeekBarPreference mQsTileAlpha;
     private CheckBoxPreference mFlipQsTiles;
@@ -125,20 +125,20 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
         }
         mQuickTilesBgColor.setNewPreviewColor(intColor);
 
-        mQuickTilesBgPressedColor =
-                (ColorPickerPreference) findPreference(PREF_QUICK_TILES_BG_PRESSED_COLOR);
-        mQuickTilesBgPressedColor.setOnPreferenceChangeListener(this);
-        intColor = Settings.System.getInt(getActivity().getContentResolver(),
-                    Settings.System.QUICK_TILES_BG_PRESSED_COLOR, -2);
-        if (intColor == -2) {
-            intColor = systemUiResources.getColor(systemUiResources.getIdentifier(
-                    "com.android.systemui:color/qs_background_pressed_color", null, null));
-            mQuickTilesBgPressedColor.setSummary(getResources().getString(R.string.default_string));
-        } else {
-            hexColor = String.format("#%08x", (0xffffffff & intColor));
-            mQuickTilesBgPressedColor.setSummary(hexColor);
-        }
-        mQuickTilesBgPressedColor.setNewPreviewColor(intColor);
+ //       mQuickTilesBgPressedColor =
+ //               (ColorPickerPreference) findPreference(PREF_QUICK_TILES_BG_PRESSED_COLOR);
+ //       mQuickTilesBgPressedColor.setOnPreferenceChangeListener(this);
+ //       intColor = Settings.System.getInt(getActivity().getContentResolver(),
+ //                   Settings.System.QUICK_TILES_BG_PRESSED_COLOR, -2);
+ //       if (intColor == -2) {
+ //           intColor = systemUiResources.getColor(systemUiResources.getIdentifier(
+ //                   "com.android.systemui:color/qs_background_pressed_color", null, null));
+ //           mQuickTilesBgPressedColor.setSummary(getResources().getString(R.string.default_string));
+ //       } else {
+ //           hexColor = String.format("#%08x", (0xffffffff & intColor));
+ //           mQuickTilesBgPressedColor.setSummary(hexColor);
+ //       }
+ //      mQuickTilesBgPressedColor.setNewPreviewColor(intColor);
 
         mQuickTilesTextColor = (ColorPickerPreference) findPreference(PREF_QUICK_TILES_TEXT_COLOR);
         mQuickTilesTextColor.setOnPreferenceChangeListener(this);
@@ -249,15 +249,15 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
                     Settings.System.QUICK_TILES_BG_COLOR,
                     intHex);
             return true;
-        } else if (preference == mQuickTilesBgPressedColor) {
-            String hex = ColorPickerPreference.convertToARGB(
-                    Integer.valueOf(String.valueOf(newValue)));
-            preference.setSummary(hex);
-            int intHex = ColorPickerPreference.convertToColorInt(hex);
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.QUICK_TILES_BG_PRESSED_COLOR,
-                    intHex);
-            return true;
+//        } else if (preference == mQuickTilesBgPressedColor) {
+//            String hex = ColorPickerPreference.convertToARGB(
+//                    Integer.valueOf(String.valueOf(newValue)));
+//            preference.setSummary(hex);
+//            int intHex = ColorPickerPreference.convertToColorInt(hex);
+//            Settings.System.putInt(getActivity().getContentResolver(),
+//                    Settings.System.QUICK_TILES_BG_PRESSED_COLOR,
+//                    intHex);
+//            return true;
         } else if (preference == mQuickTilesTextColor) {
             String hex = ColorPickerPreference.convertToARGB(
                     Integer.valueOf(String.valueOf(newValue)));
@@ -315,8 +315,8 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
                         public void onClick(DialogInterface dialog, int which) {
                             Settings.System.putInt(getActivity().getContentResolver(),
                                     Settings.System.QUICK_TILES_BG_COLOR, -2);
-                            Settings.System.putInt(getActivity().getContentResolver(),
-                                    Settings.System.QUICK_TILES_BG_PRESSED_COLOR, -2);
+         //                   Settings.System.putInt(getActivity().getContentResolver(),
+         //                           Settings.System.QUICK_TILES_BG_PRESSED_COLOR, -2);
                             Settings.System.putInt(getActivity().getContentResolver(),
                                     Settings.System.QUICK_TILES_TEXT_COLOR, -2);
                             getOwner().refreshSettings();

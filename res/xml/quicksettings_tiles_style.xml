@@ -21,27 +21,35 @@ limitations under the License.
     <PreferenceCategory
         android:title="@string/quicksettings_tiles_style">
 
+	<com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+	     android:key="quick_tiles_custom_color"
+	     android:title="@string/quick_tiles_color_title"
+	     android:summary="@string/quick_tiles_color_summary" />
+
         <net.margaritov.preference.colorpicker.ColorPickerPreference
              android:key="quick_tiles_bg_color"
              android:title="@string/quick_tiles_bg_color_title"
              android:defaultValue="0xff161616"
-	     hexValue="true" />
+	     hexValue="true"
+	     android:dependency="quick_tiles_custom_color" />
 
-        <net.margaritov.preference.colorpicker.ColorPickerPreference
+        <!-- <net.margaritov.preference.colorpicker.ColorPickerPreference
              android:key="quick_tiles_bg_pressed_color"
              android:title="@string/quick_tiles_bg_pressed_color_title"
              android:defaultValue="0xff212121"
-	     hexValue="true" />
+	     hexValue="true" /> -->
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
              android:key="quick_tiles_text_color"
              android:title="@string/quick_tiles_text_color_title"
              android:defaultValue="0xffcccccc"
-	     hexValue="true" />
+	     hexValue="true"
+  	     android:dependency="quick_tiles_custom_color" />
 
         <com.android.settings.beanstalk.SeekBarPreference
              android:key="quick_tiles_alpha"
-             android:title="@string/quick_tiles_alpha_title" />
+             android:title="@string/quick_tiles_alpha_title"
+	     android:dependency="quick_tiles_custom_color" />
 
     </PreferenceCategory>
 
