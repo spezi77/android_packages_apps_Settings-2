@@ -82,10 +82,4 @@
         android:fragment="com.android.settings.beanstalk.ShakeEvents"
         android:title="@string/shake_events_title" />
 
-    <!-- Weather -->
-    <PreferenceScreen
-	android:id="@+id/weather"
-	android:title="@string/weather_settings_title"
-	android:fragment="com.android.settings.aicp.Weather" />
-
 </PreferenceScreen>
