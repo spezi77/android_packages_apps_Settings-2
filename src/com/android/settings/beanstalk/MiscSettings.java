@@ -79,7 +79,7 @@ public class MiscSettings extends SettingsPreferenceFragment implements
 	mVibrateOnExpand = (CheckBoxPreference) findPreference(PREF_VIBRATE_NOTIF_EXPAND);
         mVibrateOnExpand.setChecked(Settings.System.getInt(
                 getActivity().getContentResolver(),
-                Settings.System.VIBRATE_NOTIF_EXPAND, 0) == 1);
+                Settings.System.VIBRATE_NOTIF_EXPAND, 1) == 1);
 
 	mDisableFC = (CheckBoxPreference) findPreference(PREF_DISABLE_FC_NOTIFICATIONS);
         mDisableFC.setChecked(Settings.System.getInt(
