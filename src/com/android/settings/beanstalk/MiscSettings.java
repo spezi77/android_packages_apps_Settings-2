@@ -53,6 +53,7 @@ public class MiscSettings extends SettingsPreferenceFragment implements
     private static final String NO_KEYGUARD_CARRIER = "no_carrier_label";
     private static final String PREF_VIBRATE_NOTIF_EXPAND = "vibrate_notif_expand";
     private static final String PREF_DISABLE_FC_NOTIFICATIONS = "disable_fc_notifications";
+   private static final String PREF_FORCE_EXPANDED_NOTIFICATIONS = "force_expanded_notifications";
 
     private ListPreference mMsob;
     private Preference mCustomLabel;
@@ -60,12 +61,15 @@ public class MiscSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mNoKeyguardCarrier;
     private CheckBoxPreference mVibrateOnExpand;
     private CheckBoxPreference mDisableFC;
+    private CheckBoxPreference mForceExpandedNotifications;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+	ContentResolver resolver = getActivity().getContentResolver();
 
         addPreferencesFromResource(R.xml.misc_settings);
+ 	PreferenceScreen prefSet = getPreferenceScreen();
 
 	mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         mMsob = (ListPreference) findPreference(PREF_MEDIA_SCANNER_ON_BOOT);
@@ -91,6 +95,11 @@ public class MiscSettings extends SettingsPreferenceFragment implements
         mNoKeyguardCarrier.setChecked(Settings.System.getInt(
                 getActivity().getContentResolver(),
                 Settings.System.NO_CARRIER_LABEL, 0) == 1);
+
+	// Force Expanded Notifications
+	mForceExpandedNotifications = (CheckBoxPreference) prefSet.findPreference(PREF_FORCE_EXPANDED_NOTIFICATIONS);
+	mForceExpandedNotifications.setChecked((Settings.System.getInt(resolver,
+		Settings.System.FORCE_EXPANDED_NOTIFICATIONS, 0) == 1));
     }
 
     @Override
@@ -110,6 +119,8 @@ public class MiscSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+	ContentResolver resolver = getActivity().getContentResolver();
+	boolean value;
 	if (preference == mVibrateOnExpand) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.VIBRATE_NOTIF_EXPAND,
@@ -121,6 +132,10 @@ public class MiscSettings extends SettingsPreferenceFragment implements
                     Settings.System.DISABLE_FC_NOTIFICATIONS,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
+	} else if (preference == mForceExpandedNotifications) {
+	    value = mForceExpandedNotifications.isChecked();
+	    Settings.System.putInt(resolver,
+		    Settings.System.FORCE_EXPANDED_NOTIFICATIONS, value ? 1 : 0);
 	} else if (preference == mNoKeyguardCarrier) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NO_CARRIER_LABEL,

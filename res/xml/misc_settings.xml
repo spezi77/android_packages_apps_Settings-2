@@ -52,6 +52,12 @@
         android:summary="@string/vibrate_notif_expand_summary" />
 
     <CheckBoxPreference
+	android:key="force_expanded_notifications"
+	android:title="@string/notification_force_expand_title"
+	android:summary="@string/notification_force_expand_summary"
+	android:defaultValue="false" />
+
+    <CheckBoxPreference
         android:key="disable_fc_notifications"
         android:title="@string/disable_fc_notifications_title"
         android:summary="@string/disable_fc_notifications_summary"

@@ -2236,4 +2236,8 @@
     <string name="summary_quick_access_linked">Use the select tiles from quick settings</string>
     <string name="ribbon_picker_title">Ribbon and layout</string>
     <string name="ribbon_picker_summary">View, select or change the ribbon widgets</string>
+
+    <!-- Force expand notifications -->
+    <string name="notification_force_expand_title">Force expanded notification</string>
+    <string name="notification_force_expand_summary">Force expanded notifications on all apps that support it</string>
 </resources>
