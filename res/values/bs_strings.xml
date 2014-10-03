@@ -1182,6 +1182,7 @@
     <string name="custom_carrier_label_explain">Please enter a new label. Enter an empty label to revert to stock label.</string>
     <string name="custom_carrier_label_notset">Custom label currently not set</string>
     <string name="no_carrier_on_keyguard_title">Hide carrier in lockscreen</string>
+    <string name="disable_carrier_logo">Enable/disable Carrier Logo</string>
 
     <!-- QuickSettings fliptiles -->
     <string name="flip_qs_tiles_title">Flip tiles</string>
