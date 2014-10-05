@@ -40,11 +40,6 @@
 	    android:fragment="com.android.settings.beanstalk.Traffic"
 	    android:title="@string/network_traffic_title" />
 
-	<CheckBoxPreference
-	    android:key="toggle_carrier_logo"
-	    android:title="@string/disable_carrier_logo"
-	    android:defaultValue="true" />
-
     </PreferenceCategory>
 
     <PreferenceCategory
