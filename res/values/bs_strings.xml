@@ -2255,4 +2255,8 @@
     <string name="custom_color_summary">Override the system color of the System UI</string>
     <string name="custom_status_bar_apply_title">Apply</string>
     <string name="custom_status_bar_apply_summary">Restart SystemUI to apply the changes</string>
+
+    <!-- Disable immersive mode navbar when ime is showing -->
+    <string name="disable_ime_navbar_title">Disable IME navigation bar</string>
+    <string name="disable_ime_navbar_summary">Disable navigation bar when ime shows in immersive mode</string>
 </resources>
