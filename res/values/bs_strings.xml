@@ -2259,4 +2259,8 @@
     <!-- Disable immersive mode navbar when ime is showing -->
     <string name="disable_ime_navbar_title">Disable IME navigation bar</string>
     <string name="disable_ime_navbar_summary">Disable navigation bar when ime shows in immersive mode</string>
+
+    <!-- Statusbar carrier logo-->
+    <string name="disable_carrier_logo">Enable carrier logo</string>
+    <string name="carrier_logo_summary">Shows carrier logo in status bar</string>
 </resources>

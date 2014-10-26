@@ -29,6 +29,12 @@
             android:key="battery_style_pref"
             android:title="@string/battery_icon_title" />
 
+	<CheckBoxPreference
+	    android:key="toggle_carrier_logo"
+	    android:summary="@string/carrier_logo_summary"
+	    android:title="@string/disable_carrier_logo"
+	    android:defaultValue="true" />
+
 	<PreferenceScreen
 	    android:key="statusbar_color_pref"
 	    android:fragment="com.android.settings.beanstalk.StatusBarColor"
