@@ -635,7 +635,7 @@
 
     <!--  development shortcut -->
     <string name="development_shortcut_title">Development shortcut</string>
-    <string name="development_shortcut_summary">Enable \'wipe data\' and \'force close\' options in notification area and recent apps list</string>
+    <string name="development_shortcut_summary">Enable application management shortcuts in notification area and recent apps list</string>
 
     <!-- Power Widget  -->
     <string name="power_widget_title">Power widget</string>
