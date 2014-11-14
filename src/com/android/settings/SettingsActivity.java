@@ -41,6 +41,7 @@ import android.os.INetworkManagementService;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
@@ -1205,6 +1206,13 @@ public class SettingsActivity extends Activity
                     boolean hasDeviceKeys = getResources().getInteger(
                             com.android.internal.R.integer.config_deviceHardwareKeys) != 0;
                     if (!hasDeviceKeys) {
+                        removeTile = true;
+                    }
+                } else if (id == R.id.superuser) {
+                    String value = SystemProperties.get(
+                            DevelopmentSettings.ROOT_ACCESS_PROPERTY, "0");
+                    if (Integer.valueOf(value) == 0 || um.hasUserRestriction(
+                            UserManager.DISALLOW_DEBUGGING_FEATURES)) {
                         removeTile = true;
                     }
                 }
