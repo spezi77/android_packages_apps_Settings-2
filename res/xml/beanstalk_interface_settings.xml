@@ -24,4 +24,11 @@
         android:fragment="com.android.settings.beanstalk.QsSettings"
         android:title="@string/qs_title" />
 
+    <!-- Density Changer -->
+	<PreferenceScreen
+        android:key="density_changer"
+        android:title="@string/lcd_density_title"
+        android:fragment="com.android.settings.beanstalk.Density"
+		android:icon="@drawable/ic_dt_density_teal" />
+
 </PreferenceScreen>
