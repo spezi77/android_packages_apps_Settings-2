@@ -312,4 +312,7 @@
     <string name="lock_numpad_random_always">Always</string>
     <string name="lock_numpad_random_on_request">On request</string>
 
+    <!-- Main list strings -->
+    <string name="performance_settings">Performance</string>
+
 </resources>
