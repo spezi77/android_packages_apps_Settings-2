@@ -22,6 +22,7 @@ import com.android.settings.DateTimeSettings;
 import com.android.settings.DevelopmentSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
+import com.android.settings.beanstalk.MainSettings;
 import com.android.settings.HomeSettings;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.PrivacySettings;
@@ -75,6 +76,7 @@ public final class Ranking {
     public static final int RANK_PRINTING = 19;
     public static final int RANK_DEVELOPEMENT = 20;
     public static final int RANK_DEVICE_INFO = 21;
+    public static final int RANK_BEANSTALK = 22;
 
     public static final int RANK_UNDEFINED = -1;
     public static final int RANK_OTHERS = 1024;
@@ -106,6 +108,9 @@ public final class Ranking {
 
         // Home
         sRankMap.put(HomeSettings.class.getName(), RANK_HOME);
+
+	// BeanStalk
+	sRankMap.put(MainSettings.class.getName(), RANK_BEANSTALK);
 
         // Display
         sRankMap.put(DisplaySettings.class.getName(), RANK_DISPLAY);

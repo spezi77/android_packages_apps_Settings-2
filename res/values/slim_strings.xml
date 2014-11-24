@@ -136,4 +136,6 @@
     <string name="screenshot_sound_title">Screenshot sound</string>
     <string name="screenshot_sound_summary">Plays sound effect when screenshot is taken</string>
 
+    <string name="beanstalk_settings_title">BeanStalk options</string>
+
 </resources>
