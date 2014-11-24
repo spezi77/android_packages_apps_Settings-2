@@ -245,6 +245,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private PreferenceScreen mProcessStats;
 
+    private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
+
     private final ArrayList<CheckBoxPreference> mResetCbPrefs
             = new ArrayList<CheckBoxPreference>();
 

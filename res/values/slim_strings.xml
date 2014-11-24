@@ -186,4 +186,6 @@
     <string name="advanced_reboot_hide_on_keyguard">Hide on lock screen</string>
     <string name="advanced_reboot_show_always">Show always</string>
 
+    <string name="status_bar_general_category">Status bar options</string>
+    <string name="status_bar_title">Status bar</string>
 </resources>

@@ -238,8 +238,7 @@ public class SettingsActivity extends Activity
             R.id.nfc_payment_settings,
             R.id.home_settings,
             R.id.dashboard,
-            R.id.privacy_settings_cyanogenmod,
-	    R.id.beanstalk_settings
+            R.id.privacy_settings_cyanogenmod
     };
 
     private static final String[] ENTRY_FRAGMENTS = {
@@ -1211,20 +1210,6 @@ public class SettingsActivity extends Activity
                     if (!hasDeviceKeys) {
                         removeTile = true;
                     }
-                } else if (id == R.id.superuser) {
-                    String value = SystemProperties.get(
-                            DevelopmentSettings.ROOT_ACCESS_PROPERTY, "0");
-                    if (Integer.valueOf(value) == 0 || um.hasUserRestriction(
-                            UserManager.DISALLOW_DEBUGGING_FEATURES)) {
-                        removeTile = true;
-                    }
-                }
-
-                    }
-                    if (!supported) {
-                        removeTile = true;
-                    }
-                }
                 } else if (id == R.id.equalizer_settings) {
                 // Embedding into Settings only if app exists (user could manually remove it)
                 boolean supported = false;
@@ -1236,7 +1221,7 @@ public class SettingsActivity extends Activity
                     if (!supported) {
                         removeTile = true;
                     }
-                }
+		}
                 if (UserHandle.MU_ENABLED && UserHandle.myUserId() != 0
                         && !ArrayUtils.contains(SETTINGS_FOR_RESTRICTED, id)) {
                     removeTile = true;
