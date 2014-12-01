@@ -50,6 +50,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
@@ -192,7 +193,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             removePreference(KEY_DISPLAY_ROTATION);
         }
 
-        PreferenceScreen advancedPrefs = (PreferenceScreen) findPreference(CATEGORY_ADVANCED);
+        PreferenceCategory advancedPrefs = (PreferenceCategory) findPreference(CATEGORY_ADVANCED);
 
         mTapToWake = (SwitchPreference) findPreference(KEY_TAP_TO_WAKE);
         if (!isTapToWakeSupported()) {
