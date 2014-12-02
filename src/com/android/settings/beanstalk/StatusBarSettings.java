@@ -28,6 +28,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.beanstalk_statusbar_settings);
 
+	PreferenceScreen prefSet = getPreferenceScreen();
+
 	mClockStyle = (PreferenceScreen) prefSet.findPreference(KEY_STATUS_BAR_CLOCK);
 	updateClockStyleDescription();
     }
