@@ -111,7 +111,7 @@
     <attr name="preferenceBackgroundColor" format="color" />
 
     <declare-styleable name="IntervalSeekBar">
-        <attr name="min" format="float" />
+        <attr name="min2" format="float" />
         <attr name="max" format="float" />
         <attr name="defaultValue" format="float" />
         <attr name="digits" format="integer" />
