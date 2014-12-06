@@ -25,10 +25,16 @@
         android:title="@string/qs_title" />
 
     <!-- Density Changer -->
-	<PreferenceScreen
+    <PreferenceScreen
         android:key="density_changer"
         android:title="@string/lcd_density_title"
         android:fragment="com.android.settings.beanstalk.Density"
-		android:icon="@drawable/ic_dt_density_teal" />
+	android:icon="@drawable/ic_dt_density_teal" />
+
+    <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+	android:key="recents_show_hide_search_bar"
+	android:title="@string/recents_show_searchbar"
+	android:summary="@string/recents_show_searchbar_summary"
+	android:defaultValue="false" />
 
 </PreferenceScreen>
