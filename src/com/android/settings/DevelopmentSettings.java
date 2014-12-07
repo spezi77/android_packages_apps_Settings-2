@@ -375,7 +375,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mOverlayDisplayDevices = addListPreference(OVERLAY_DISPLAY_DEVICES_KEY);
         mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
-        mUseNuplayer = findAndInitSwitchPref(USE_NUPLAYER_KEY);
+        mUseNuplayer = (CheckBoxPreference) findPreference(USE_NUPLAYER_KEY);
+        mAllPrefs.add(mUseNuplayer);
         mUSBAudio = findAndInitSwitchPref(USB_AUDIO_KEY);
 
         mImmediatelyDestroyActivities = (SwitchPreference) findPreference(
@@ -668,6 +669,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         resetAdbNotifyOptions();
         resetVerifyAppsOverUsbOptions();
         resetDevelopmentShortcutOptions();
+        resetUseNuplayerOptions();
         writeAnimationScaleOption(0, mWindowAnimationScale, null);
         writeAnimationScaleOption(1, mTransitionAnimationScale, null);
         writeAnimationScaleOption(2, mAnimatorDurationScale, null);
@@ -720,6 +722,10 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private void resetAdbNotifyOptions() {
         Settings.Secure.putInt(getActivity().getContentResolver(),
                 Settings.Secure.ADB_NOTIFY, 1);
+    }
+
+    private void resetUseNuplayerOptions() {
+        SystemProperties.set(USE_AWESOMEPLAYER_PROPERTY, "0");
     }
 
     private void updateHdcpValues() {
