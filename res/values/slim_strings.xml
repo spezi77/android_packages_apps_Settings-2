@@ -40,7 +40,6 @@
     <string name="display_rotation_270_title">270 degrees</string>
 
     <!-- Sound settings -->
-    <string name="advanced_sound_title">Advanced options</string>
     <string name="sound_title">Sound</string>
 
     <!-- Camera sound switch -->

@@ -19,16 +19,6 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/beanstalk_settings_title" >
 
-    <!-- Equalizer -->
-    <Preference
-        android:id="@+id/equalizer_settings"
-        android:title="@string/equalizer_settings_title" >
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetClass="com.vipercn.viper4android_v2.activity.ViPER4Android"
-            android:targetPackage="com.vipercn.viper4android_v2" /> 
-    </Preference>
-
     <!-- Interface -->
     <PreferenceScreen
         android:id="@+id/interface_settings"
@@ -46,6 +36,12 @@
         android:id="@+id/bsdisplay_settings"
         android:title="@string/bs_display_settings_title"
         android:fragment="com.android.settings.beanstalk.BSDisplaySettings" />
+
+    <!-- Sound settings -->
+    <PreferenceScreen
+        android:id="@+id/bs_sound_settings"
+        android:title="@string/sound_title"
+        android:fragment="com.android.settings.beanstalk.SoundSettings" />
 
     <!-- Misc settings -->
     <PreferenceScreen

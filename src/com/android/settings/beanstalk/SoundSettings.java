@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.slim;
+package com.android.settings.beanstalk;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -58,7 +58,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.slim_sound_settings);
+        addPreferencesFromResource(R.xml.beanstalk_sound_settings);
 
         mSafeHeadsetVolume = (SwitchPreference) findPreference(KEY_SAFE_HEADSET_VOLUME);
         mSafeHeadsetVolume.setChecked(Settings.System.getInt(getContentResolver(),

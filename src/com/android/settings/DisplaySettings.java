@@ -63,7 +63,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.settings.slim.DisplayRotation;
+import com.android.settings.beanstalk.DisplayRotation;
 
 
 import java.util.ArrayList;

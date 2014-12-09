@@ -19,6 +19,15 @@
     android:title="@string/sound_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <Preference
+        android:id="@+id/equalizer_settings"
+        android:title="@string/equalizer_settings_title" >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.vipercn.viper4android_v2.activity.ViPER4Android"
+            android:targetPackage="com.vipercn.viper4android_v2" /> 
+    </Preference>
+
     <SwitchPreference
         android:key="camera_sounds"
         android:title="@string/camera_sounds_title"
