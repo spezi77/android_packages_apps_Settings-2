@@ -983,11 +983,18 @@
     <!-- Force expand notifications -->
     <string name="notification_force_expand_title">Force expanded notification</string>
     <string name="notification_force_expand_summary">Force expanded notifications on all apps that support it</string>
+    <string name="help">Help</string>
 
     <!-- Slim Shortcuts -->
     <string name="slim_shortcut_picker">Slim Actions</string>
     <string name="qs_tile_slimaction">SlimAction</string>
     <string name="qs_slim_action_summary">Add and set the order of SlimActions for SlimAction tile</string>
     <string name="qs_slim_action_title">SlimActions</string>
+
+    <!-- Lockscreen Shortcuts -->
+    <string name="lockscreen_shortcuts_title">Shortcuts</string>
+    <string name="lockscreen_shortcuts_summary">View or change custom lock screen shortcuts</string>
+    <string name="lockscreen_shorcuts_longpress_title">Shortcuts longpress</string>
+    <string name="lockscreen_shorcuts_longpress_summary">Open custom lock screen shortcuts on longpress</string>
 
 </resources>
