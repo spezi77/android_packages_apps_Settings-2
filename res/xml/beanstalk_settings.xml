@@ -22,8 +22,7 @@
     <!-- Equalizer -->
     <Preference
         android:id="@+id/equalizer_settings"
-        android:title="@string/equalizer_settings_title"
-        android:icon="@drawable/ic_liquid_equalizer" >
+        android:title="@string/equalizer_settings_title" >
         <intent
             android:action="android.intent.action.MAIN"
             android:targetClass="com.vipercn.viper4android_v2.activity.ViPER4Android"
@@ -34,66 +33,25 @@
     <PreferenceScreen
         android:id="@+id/interface_settings"
         android:title="@string/interface_settings_title"
-        android:fragment="com.android.settings.beanstalk.InterfaceSettings"
-        android:icon="@drawable/ic_beanstalk_interface_teal" /> 
-
-    <!-- Lock screen
-    <PreferenceScreen
-        android:id="@+id/lockscreen_settings"
-        android:title="@string/lockscreen_settings_title"
-        android:fragment="com.android.settings.liquid.LockscreenSettings"
-        android:icon="@drawable/ic_liquid_lockscreen" /> -->
-
-    <!-- Navigation
-    <PreferenceScreen
-        android:id="@+id/navigation_settings"
-        android:title="@string/navigation_settings_title"
-        android:fragment="com.android.settings.liquid.NavigationSettings"
-        android:icon="@drawable/ic_liquid_navigation" /> -->
-
-    <!-- Notifications
-    <PreferenceScreen
-        android:id="@+id/notification_settings"
-        android:icon="@drawable/ic_settings_notifications"
-        android:title="@string/notification_settings_title"
-        android:fragment="com.android.settings.liquid.NotificationSettings" /> -->
+        android:fragment="com.android.settings.beanstalk.InterfaceSettings" /> 
 
     <!-- Status bar -->
     <PreferenceScreen
         android:id="@+id/statusbar_settings"
         android:title="@string/statusbar_settings_title"
-        android:fragment="com.android.settings.beanstalk.StatusBarSettings"
-        android:icon="@drawable/ic_beanstalk_statusbar" /> 
+        android:fragment="com.android.settings.beanstalk.StatusBarSettings" />
 
     <!-- Display settings -->
     <PreferenceScreen
         android:id="@+id/bsdisplay_settings"
         android:title="@string/bs_display_settings_title"
-        android:fragment="com.android.settings.beanstalk.BSDisplaySettings"/>
+        android:fragment="com.android.settings.beanstalk.BSDisplaySettings" />
 
     <!-- Misc settings -->
     <PreferenceScreen
         android:id="@+id/bs_misc_settings"
         android:title="@string/bs_misc_settings_title"
-        android:fragment="com.android.settings.beanstalk.Misc"/>
-
-    <!-- Kernel Tweaker
-    <Preference
-        android:id="@+id/kernel_tweaker"
-        android:title="@string/kernel_tweaker_title"
-        android:icon="@drawable/ic_liquid_performance" >
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetClass="com.dsht.kerneltweaker.MainActivity"
-            android:targetPackage="com.dsht.kerneltweaker" />
-    </Preference>-->
-
-    <!-- Advanced options
-    <PreferenceScreen
-        android:id="@+id/advanced_options_settings"
-        android:fragment="com.android.settings.liquid.AdvancedSettings"
-        android:icon="@drawable/ic_settings_advanced"
-        android:title="@string/advanced_category_title" /> -->
+        android:fragment="com.android.settings.beanstalk.Misc" />
 
     <PreferenceScreen
         android:key="hfm_settings"

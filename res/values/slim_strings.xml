@@ -316,10 +316,10 @@
     <string name="performance_settings">Performance</string>
 
     <!-- BeanStalk display settings -->
-    <string name="bs_display_settings_title">BeanStalk display features</string>
+    <string name="bs_display_settings_title">Display</string>
 
     <!-- BeanStalk misc settings -->
-    <string name="bs_misc_settings_title">BeanStalk misc features</string>
+    <string name="bs_misc_settings_title">Misc features</string>
 
     <!-- Navigation Bar Height -->
     <string name="navigation_bar_height">Navigation bar height</string>
