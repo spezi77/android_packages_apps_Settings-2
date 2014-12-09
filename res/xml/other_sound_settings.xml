@@ -19,6 +19,14 @@
         android:key="other_sound_settings"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <!-- Screenshot sound -->
+    <SwitchPreference
+            android:key="screenshot_sound"
+            android:title="@string/screenshot_sound_title"
+            android:switchTextOff=""
+            android:switchTextOn=""
+            android:persistent="false" />
+
     <!-- Dial pad tones -->
     <SwitchPreference
             android:key="dial_pad_tones"
