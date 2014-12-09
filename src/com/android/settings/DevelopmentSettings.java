@@ -375,7 +375,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mOverlayDisplayDevices = addListPreference(OVERLAY_DISPLAY_DEVICES_KEY);
         mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
-        mUseNuplayer = (CheckBoxPreference) findPreference(USE_NUPLAYER_KEY);
+        mUseNuplayer = (SwitchPreference) findPreference(USE_NUPLAYER_KEY);
         mAllPrefs.add(mUseNuplayer);
         mUSBAudio = findAndInitSwitchPref(USB_AUDIO_KEY);
 
