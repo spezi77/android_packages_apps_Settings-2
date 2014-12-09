@@ -69,7 +69,13 @@
     <PreferenceScreen
         android:id="@+id/bsdisplay_settings"
         android:title="@string/bs_display_settings_title"
-        android:fragment="com.android.settings.beanstalk.BSDisplaySettings"/> 
+        android:fragment="com.android.settings.beanstalk.BSDisplaySettings"/>
+
+    <!-- Misc settings -->
+    <PreferenceScreen
+        android:id="@+id/bs_misc_settings"
+        android:title="@string/bs_misc_settings_title"
+        android:fragment="com.android.settings.beanstalk.Misc"/>
 
     <!-- Kernel Tweaker
     <Preference
