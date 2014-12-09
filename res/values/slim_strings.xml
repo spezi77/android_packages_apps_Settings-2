@@ -315,4 +315,7 @@
     <!-- Main list strings -->
     <string name="performance_settings">Performance</string>
 
+    <!-- BeanStalk display settings -->
+    <string name="bs_display_settings_title">BeanStalk display features</string>
+
 </resources>

@@ -65,6 +65,12 @@
         android:fragment="com.android.settings.beanstalk.StatusBarSettings"
         android:icon="@drawable/ic_beanstalk_statusbar" /> 
 
+    <!-- Display settings -->
+    <PreferenceScreen
+        android:id="@+id/bsdisplay_settings"
+        android:title="@string/bs_display_settings_title"
+        android:fragment="com.android.settings.beanstalk.BSDisplaySettings"/> 
+
     <!-- Kernel Tweaker
     <Preference
         android:id="@+id/kernel_tweaker"

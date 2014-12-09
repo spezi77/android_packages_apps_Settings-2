@@ -48,6 +48,11 @@
                 android:entryValues="@array/screen_timeout_values" />
 
         <PreferenceScreen
+                android:key="display_rotation"
+                android:fragment="com.android.settings.slim.DisplayRotation"
+                android:title="@string/display_rotation_title" />
+
+        <PreferenceScreen
                 android:key="screensaver"
                 android:title="@string/screensaver_settings_title"
                 android:fragment="com.android.settings.DreamSettings" />
@@ -69,24 +74,6 @@
                 settings:keywords="@string/keywords_display_font_size"
                 android:summary="@string/summary_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
-
-	<CheckBoxPreference
-		android:key="disable_immersive_message"
-		android:title="@string/disable_immersive_message_title"
-		android:summary="@string/disable_immersive_message_summary"
-		android:persistent="false" />
-
-        <ListPreference
-                android:key="toast_animation"
-                android:title="@string/toast_animation_title"
-                android:entries="@array/toast_animation_entries"
-                android:entryValues="@array/toast_animation_values"
-                android:persistent="false" />
-
-        <PreferenceScreen
-                android:key="display_rotation"
-                android:fragment="com.android.settings.slim.DisplayRotation"
-                android:title="@string/display_rotation_title" />
 
         <PreferenceScreen
                 android:key="wifi_display"
