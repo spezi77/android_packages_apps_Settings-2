@@ -31,6 +31,11 @@
         android:title="@string/statusbar_settings_title"
         android:fragment="com.android.settings.beanstalk.StatusBarSettings" />
 
+    <PreferenceScreen
+            android:key="navigation_bar"
+            android:fragment="com.android.settings.beanstalk.navbar.NavbarTabHostFragment"
+            android:title="@string/category_navbar" />
+
     <!-- Display settings -->
     <PreferenceScreen
         android:id="@+id/bsdisplay_settings"

@@ -33,7 +33,23 @@ public class MainSettings extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         addPreferencesFromResource(R.xml.beanstalk_settings);
+        PreferenceScreen prefSet = getPreferenceScreen();
+
+        try {
+            boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
+
+            // Hide navigation bar category on devices without navigation bar
+            if (!hasNavBar) {
+                prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
+            }
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error getting navigation bar status");
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 }
