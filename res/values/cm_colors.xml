@@ -84,4 +84,7 @@ limitations under the License.
     <color name="external_tile_icon_tint_color">?android:attr/colorAccent</color>
     <!-- Fingerprint Checkmark Tint-->
     <color name="fingerprint_enrollment_checkmark_tint">?android:attr/textColorPrimary</color>
+
+    <!-- Gesture Anywhere -->
+    <color name="ga_gesture_color">@android:color/holo_blue_light</color>
 </resources>
