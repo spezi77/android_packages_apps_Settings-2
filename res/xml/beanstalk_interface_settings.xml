@@ -24,6 +24,12 @@
         android:fragment="com.android.settings.beanstalk.QsSettings"
         android:title="@string/qs_title" />
 
+    <!-- Gesture anywhere -->
+    <PreferenceScreen
+	android:key="gesture_anywhere"
+	android:fragment="com.android.settings.beanstalk.gestureanywhere.GestureAnywhereSettings"
+	android:title="@string/gesture_anywhere_title" />
+
     <!-- Density Changer -->
     <PreferenceScreen
         android:key="density_changer"
