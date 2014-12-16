@@ -561,6 +561,9 @@
     <!-- Summary for "Configure lockscreen" when security gesture is enabled [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_gesture">Gesture</string>
 
+    <string name="status_bar_ticker_title">Notification Ticker</string>
+    <string name="status_bar_ticker_summary">Notification text animation in the statusbar</string>
+
     <!-- ListView animation -->
     <string name="interface_settings_animation_title">Animation options</string>
     <string name="listview_animation_title">ListView animation</string>
