@@ -31,6 +31,12 @@
 	android:fragment="com.android.settings.beanstalk.AppCircleBar"
 	android:title="@string/app_circle_bar_title" />
 
+    <!-- Wakelock blocker -->
+    <PreferenceScreen
+	android:key="wakelock_blocker"
+	android:fragment="com.android.settings.beanstalk.WakeLockBlocker"
+	android:title="@string/wakelock_blocker_title" />
+
     <!-- Density Changer -->
     <PreferenceScreen
         android:key="density_changer"
