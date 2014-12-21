@@ -173,6 +173,12 @@
                 android:key="advanced_display_prefs"
                 android:title="@string/advanced_settings">
 
+		<!-- Circle app bar -->
+    		<PreferenceScreen
+        	    android:key="app_circle_bar"
+        	    android:fragment="com.android.settings.cyanogenmod.AppCircleBar"
+        	    android:title="@string/app_circle_bar_title"/>
+
                 <SwitchPreference
                     android:key="wake_when_plugged_or_unplugged"
                     android:title="@string/wake_when_plugged_or_unplugged_title"
