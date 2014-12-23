@@ -34,14 +34,13 @@
     <PreferenceScreen
 	android:key="app_circle_bar"
 	android:fragment="com.android.settings.beanstalk.AppCircleBar"
-	android:title="@string/app_circle_bar_title"/>
+	android:title="@string/app_circle_bar_title" />
 
     <!-- Density Changer -->
     <PreferenceScreen
         android:key="density_changer"
         android:title="@string/lcd_density_title"
-        android:fragment="com.android.settings.beanstalk.Density"
-	android:icon="@drawable/ic_dt_density_teal" />
+        android:fragment="com.android.settings.beanstalk.Density" />
 
     <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
 	android:key="recents_show_hide_search_bar"
