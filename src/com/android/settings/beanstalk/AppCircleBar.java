@@ -50,9 +50,9 @@ import java.util.ArrayList;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.util.CMDProcessor;
-import com.android.settings.util.Helpers;
-import com.android.settings.util.AppMultiSelectListPreference;
+import com.android.settings.beanstalk.util.CMDProcessor;
+import com.android.settings.beanstalk.util.Helpers;
+import com.android.settings.beanstalk.util.AppMultiSelectListPreference;
 import com.android.settings.widget.SeekBarPreferenceCham;
 
 import java.io.File;
