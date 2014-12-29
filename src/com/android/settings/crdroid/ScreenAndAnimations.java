@@ -17,7 +17,7 @@ import com.android.internal.logging.MetricsLogger;
 public class ScreenAndAnimations extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "ScreenAndAnimations";
+    private static final String TAG = "AnimationSettings";
 
     private static final String KEY_TOAST_ANIMATION = "toast_animation";
 
@@ -33,7 +33,7 @@ public class ScreenAndAnimations extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.screen_and_animations);
+        addPreferencesFromResource(R.xml.animation_settings);
 
         ContentResolver resolver = getActivity().getContentResolver();
 
