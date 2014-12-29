@@ -2,17 +2,17 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/bs_display_settings_title" >
 
-	<CheckBoxPreference
-		android:key="disable_immersive_message"
-		android:title="@string/disable_immersive_message_title"
-		android:summary="@string/disable_immersive_message_summary"
-		android:persistent="false" />
-
 	<!-- Recents panel settings -->
 	<PreferenceScreen
 		android:id="@+id/recents_panel_settings"
 		android:title="@string/recents_panel_settings"
 		android:fragment="com.android.settings.beanstalk.RecentsPanelSettings" />
+
+	<PreferenceScreen
+		android:key="aokp_animation"
+		android:title="@string/aokp_animation_title"
+		android:summary="@string/aokp_animation_summary"
+		android:fragment="com.android.settings.beanstalk.fragments.AnimationControls" />
 
         <ListPreference
                 android:key="toast_animation"
@@ -36,5 +36,11 @@
             	android:entries="@array/listview_interpolator_entries"
             	android:entryValues="@array/listview_interpolator_values"
             	android:defaultValue="0" />
+
+	<CheckBoxPreference
+		android:key="disable_immersive_message"
+		android:title="@string/disable_immersive_message_title"
+		android:summary="@string/disable_immersive_message_summary"
+		android:persistent="false" />
 
 </PreferenceScreen>
