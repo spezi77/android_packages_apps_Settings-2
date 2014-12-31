@@ -314,9 +314,6 @@
     <string name="lock_numpad_random_always">Always</string>
     <string name="lock_numpad_random_on_request">On request</string>
 
-    <!-- Main list strings -->
-    <string name="performance_settings">Performance</string>
-
     <!-- BeanStalk display settings -->
     <string name="bs_display_settings_title">Display</string>
 
@@ -624,5 +621,4 @@
     <string name="trigger_top_summary">Adjust the vertical postion of the trigger area</string>
     <string name="trigger_bottom_title">Trigger height</string>
     <string name="trigger_bottom_summary">Adjust the height of the trigger area</string>
-
 </resources>
