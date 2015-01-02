@@ -16,8 +16,11 @@
 package com.android.settings.cyanogenmod;
 
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.SwitchPreference;
+import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -26,14 +29,33 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment
 
     private static final String TAG = "NotificationDrawer";
 
+    private static final String TOGGLE_MAIN_TILES = "qs_main_tiles";
+
+    SwitchPreference mToggleMainTiles;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.notification_drawer_settings);
+
+        mToggleMainTiles = (SwitchPreference) findPreference(TOGGLE_MAIN_TILES);
+        mToggleMainTiles.setOnPreferenceChangeListener(this);
+
+        boolean useMainTiles = Settings.Secure.getIntForUser(
+                getActivity().getContentResolver(), Settings.Secure.QS_USE_MAIN_TILES,
+                1, UserHandle.myUserId()) == 1;
+
+        mToggleMainTiles.setChecked(useMainTiles);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if(preference == mToggleMainTiles) {
+            Settings.Secure.putIntForUser(
+                    getActivity().getContentResolver(), Settings.Secure.QS_USE_MAIN_TILES,
+                    ((Boolean) newValue) ? 1 : 0, UserHandle.myUserId());
+            return true;
+        }
         return false;
     }
 
