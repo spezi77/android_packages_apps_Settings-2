@@ -74,6 +74,9 @@
     <!-- Heads up -->
     <uses-permission android:name="android.permission.CHANGE_HEADS_UP_STATE" />
 
+    <!-- Vanir feature permissions -->
+    <uses-permission android:name="android.permission.GET_TOP_ACTIVITY_INFO"/>
+
     <permission
         android:name="cyanogenmod.permission.PROTECTED_APP"
         android:protectionLevel="signatureOrSystem" />
@@ -2126,6 +2129,8 @@
             </intent-filter>
         </receiver>
 
+	<activity android:name=".beanstalk.navbar.NavbarTabHostFragment" />
+
         <receiver android:name=".cyanogenmod.BootReceiver" android:enabled="true">
             <intent-filter android:priority="2147483647">
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -2224,6 +2229,93 @@
             <intent-filter>
                 <action android:name=".applications.LockPatternActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.android.settings.beanstalk.CreateShortcut"
+            android:label="@string/shortcut_label"
+            android:icon="@drawable/vanir_actions">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.android.settings.beanstalk.activities.FlushMemory"
+            android:label="@string/toggle_flushmemory"
+            android:icon="@drawable/vanir_flush_memory"
+            android:theme="@android:style/Theme.Holo.Panel"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="com.android.settings.beanstalk.INTENT_FLUSHMEMORY_TOGGLE" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.systemui.SHORTCUT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.android.settings.beanstalk.activities.ProfileActivity"
+            android:label="@string/toggle_profile"
+            android:icon="@drawable/ic_sysbar_profile"
+            android:theme="@android:style/Theme.Holo.Panel"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.systemui.SHORTCUT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.android.settings.beanstalk.activities.StartDreamActivity"
+            android:label="@string/toggle_dream"
+            android:icon="@drawable/ic_sysbar_dream"
+            android:theme="@android:style/Theme.Holo.Panel"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.systemui.SHORTCUT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.android.settings.beanstalk.activities.RingVibToggle"
+            android:label="@string/toggle_ring_vib"
+            android:icon="@drawable/ic_lockscreen_vib"
+            android:theme="@android:style/Theme.Holo.Panel"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="com.android.settings.beanstalk.INTENT_RING_VIB_TOGGLE" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.systemui.SHORTCUT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.android.settings.beanstalk.activities.RingSilentToggle"
+            android:label="@string/toggle_ring_silent"
+            android:icon="@drawable/ic_lockscreen_silent"
+            android:theme="@android:style/Theme.Holo.Panel"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="com.android.settings.beanstalk.INTENT_RING_SILENT_TOGGLE" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.systemui.SHORTCUT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.android.settings.beanstalk.activities.RingVibSilentToggle"
+            android:label="@string/toggle_ring_vib_silent"
+            android:icon="@drawable/ic_lockscreen_soundon"
+            android:theme="@android:style/Theme.Holo.Panel"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="com.android.settings.beanstalk.INTENT_RING_VIB_SILENT_TOGGLE" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.systemui.SHORTCUT" />
             </intent-filter>
         </activity>
 
