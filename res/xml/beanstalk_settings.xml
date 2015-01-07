@@ -48,12 +48,6 @@
         android:title="@string/sound_title"
         android:fragment="com.android.settings.beanstalk.SoundSettings" />
 
-    <!-- Misc settings -->
-    <PreferenceScreen
-        android:id="@+id/bs_misc_settings"
-        android:title="@string/bs_misc_settings_title"
-        android:fragment="com.android.settings.beanstalk.Misc" />
-
     <PreferenceScreen
         android:key="hfm_settings"
         android:title="@string/hfm_pref_screen_title"
