@@ -2235,7 +2235,7 @@
         <activity
             android:name="com.android.settings.beanstalk.CreateShortcut"
             android:label="@string/shortcut_label"
-            android:icon="@drawable/vanir_actions">
+            android:icon="@drawable/beanstalk_actions">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <action android:name="android.intent.action.MAIN" />
