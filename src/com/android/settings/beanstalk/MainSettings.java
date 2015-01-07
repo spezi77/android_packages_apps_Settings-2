@@ -16,19 +16,33 @@
 
 package com.android.settings.beanstalk;
 
+import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
+import android.text.Spannable;
+import android.util.Log;
+import android.view.WindowManagerGlobal;
+import android.widget.EditText;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import java.util.List;
 
 public class MainSettings extends SettingsPreferenceFragment {
+    private static final String TAG = "SystemSettings";
+    private static final String CATEGORY_NAVBAR = "navigation_bar";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

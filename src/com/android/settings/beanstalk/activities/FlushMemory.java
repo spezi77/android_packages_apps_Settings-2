@@ -20,9 +20,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.android.settings.beanstalk.util.CMDProcessor;
-import com.android.settings.beanstalk.util.CMDProcessor.CommandResult;
-import com.android.settings.beanstalk.util.Helpers;
+import com.vanir.util.CMDProcessor;
+import com.vanir.util.CMDProcessor.CommandResult;
+import com.vanir.util.Helpers;
 
 public class FlushMemory extends Activity {
 
