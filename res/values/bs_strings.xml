@@ -122,5 +122,10 @@
     <string name="recents_searchbar_summary">Show Google search bar in the recents screen</string>
     <string name="recents_show_fullscreen">Fullscreen Recents</string>
     <string name="recents_fullscreen_summary">Enable immersive mode for recents screen</string>
+
+    <!-- Sound & Notification Settings -->
+    <!-- Linked / unlinked notification volume -->
+    <string name="link_volume_option_title">Link ring and notification volumes</string>
+    <string name="notification_volume_option_title">Notification volume</string>
 </resources>
 
