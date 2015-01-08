@@ -32,9 +32,9 @@
         android:fragment="com.android.settings.beanstalk.StatusBarSettings" />
 
     <PreferenceScreen
-            android:key="navigation_bar"
-            android:fragment="com.android.settings.beanstalk.navbar.NavbarTabHostFragment"
-            android:title="@string/category_navbar" />
+        android:key="navigation_bar"
+        android:fragment="com.android.settings.beanstalk.navbar.NavbarTabHostFragment"
+        android:title="@string/category_navbar" />
 
     <!-- Display settings -->
     <PreferenceScreen
@@ -52,5 +52,10 @@
         android:key="hfm_settings"
         android:title="@string/hfm_pref_screen_title"
         android:fragment="com.android.settings.beanstalk.hfm.HfmSettings" />
+
+    <PreferenceScreen
+	android:id="@+id/performance_controls"
+	android:fragment="com.brewcrewfoo.performance.activities.MainActivity"
+	android:title="@string/performance_settings" />
 
 </PreferenceScreen>
