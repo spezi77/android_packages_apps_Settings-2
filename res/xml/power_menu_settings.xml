@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2014-2015 The CyanogenMod Project
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@
         android:defaultValue="true" />
 
     <CheckBoxPreference
-        android:key="screenshot"
-        android:title="@string/power_menu_screenshot_title"
-        android:defaultValue="false" />
+        android:key="airplane"
+        android:title="@string/power_menu_airplane_title"
+        android:defaultValue="true" />
 
     <CheckBoxPreference
         android:key="profile"
@@ -40,23 +40,8 @@
         android:defaultValue="false" />
 
     <CheckBoxPreference
-        android:key="airplane"
-        android:title="@string/power_menu_airplane_title"
-        android:defaultValue="true" />
-
-    <CheckBoxPreference
         android:key="users"
         android:title="@string/power_menu_users_title"
-        android:defaultValue="false" />
-
-    <CheckBoxPreference
-        android:key="settings"
-        android:title="@string/power_menu_settings_title"
-        android:defaultValue="false" />
-
-    <CheckBoxPreference
-        android:key="lockdown"
-        android:title="@string/power_menu_lockdown_title"
         android:defaultValue="false" />
 
     <CheckBoxPreference
