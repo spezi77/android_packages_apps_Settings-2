@@ -714,4 +714,6 @@
     <string name="powermenu_soundpanel">Sound Panel</string>
     <string name="powermenu_screenrecord">Screen Record</string>
 
+    <string name="alarm_ringtone_title">Default alarm ringtone</string>
+
 </resources>
