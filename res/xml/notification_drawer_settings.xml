@@ -23,6 +23,7 @@
         android:summary="@string/qs_order_summary"
         android:fragment="com.android.settings.cyanogenmod.qs.QSTiles" />
 
+<<<<<<< HEAD
     <SwitchPreference
         android:key="qs_main_tiles"
         android:title="@string/qs_main_tiles_title"
@@ -36,4 +37,6 @@
         android:summary="@string/qs_advanced_location_summary"
         android:defaultValue="false" />
 
+=======
+>>>>>>> parent of 840ecca... *UPDATED*  Add customization for Quick Settings [2/2]
 </PreferenceScreen>
