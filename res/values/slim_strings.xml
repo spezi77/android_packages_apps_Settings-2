@@ -179,14 +179,7 @@
     <string name="network_traffic_autohide_summary">Hide the traffic monitor when there is no activity</string>
     <string name="network_traffic_autohide_threshold">Inactivity threshold</string> 
 
-    <!-- Advanced reboot options -->
-    <string name="advanced_reboot_title">Advanced reboot</string>
-    <string name="advanced_reboot_summary">Include options in the power menu for rebooting into recovery and bootloader</string>
-    <string name="advanced_reboot_dialog_title">Advanced reboot menu</string>
-    <string name="advanced_reboot_disabled">Disable</string>
-    <string name="advanced_reboot_hide_on_keyguard">Hide on secured lockscreen</string>
-    <string name="advanced_reboot_show_always">Show always</string>
-
+    <!-- Per app controls for LP keyguard notifications -->
     <string name="app_notification_show_on_keyguard_title">Show on lockscreen</string>
     <string name="app_notification_show_on_keyguard_summary">Show notifications from this app on the lockscreen</string>
     <string name="app_notification_no_ongoing_on_keyguard_title">Disable ongoing on lockscreen</string>
