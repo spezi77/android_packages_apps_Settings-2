@@ -47,6 +47,12 @@
         android:title="@string/bs_display_settings_title"
         android:fragment="com.android.settings.beanstalk.BSDisplaySettings" />
 
+    <!-- Lockscreen settings -->
+    <PreferenceScreen
+	android:id="@+id/bs_lockscreen_settings"
+	android:title="@string/bs_lockscreen_title"
+	android:fragment="com.android.settings.beanstalk.BSLockscreen" />
+
     <!-- Sound settings -->
     <PreferenceScreen
         android:id="@+id/bs_sound_settings"
