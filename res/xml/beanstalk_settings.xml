@@ -59,12 +59,6 @@
         android:title="@string/sound_title"
         android:fragment="com.android.settings.beanstalk.SoundSettings" />
 
-    <!-- Power menu settings -->
-    <PreferenceScreen
-	android:id="@+id/power_menu_settings"
-	android:title="@string/power_menu_settings"
-	android:fragment="com.android.settings.beanstalk.PowerMenuSettings" />
-
     <PreferenceScreen
         android:key="hfm_settings"
         android:title="@string/hfm_pref_screen_title"
