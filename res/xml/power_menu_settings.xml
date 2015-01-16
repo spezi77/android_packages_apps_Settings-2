@@ -32,17 +32,17 @@
     <CheckBoxPreference
         android:key="screenshot"
         android:title="@string/power_menu_screenshot_title"
-        android:defaultValue="false" />
+        android:defaultValue="true" />
 
     <CheckBoxPreference
         android:key="screenrecord"
         android:title="@string/power_menu_screenrecord_title"
-        android:defaultValue="false" />
+        android:defaultValue="true" />
 
     <CheckBoxPreference
         android:key="profile"
         android:title="@string/power_menu_profiles_title"
-        android:defaultValue="false" />
+        android:defaultValue="true" />
 
     <CheckBoxPreference
         android:key="airplane"
