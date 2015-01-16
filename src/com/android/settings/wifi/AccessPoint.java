@@ -103,8 +103,6 @@ class AccessPoint extends Preference {
     int networkId = -1;
     boolean wpsAvailable = false;
     boolean showSummary = true;
-    boolean isIBSS = false;
-    int frequency;
 
     PskType pskType = PskType.UNKNOWN;
 
@@ -233,8 +231,6 @@ class AccessPoint extends Preference {
         bssid = config.BSSID;
         security = getSecurity(config);
         networkId = config.networkId;
-        isIBSS = config.isIBSS;
-        frequency = config.frequency;
         mConfig = config;
     }
 
@@ -243,8 +239,6 @@ class AccessPoint extends Preference {
         bssid = result.BSSID;
         security = getSecurity(result);
         wpsAvailable = security != SECURITY_EAP && result.capabilities.contains("WPS");
-        isIBSS = result.capabilities.contains("[IBSS]");
-        frequency = result.frequency;
         if (security == SECURITY_PSK)
             pskType = getPskType(result);
         mRssi = result.level;
@@ -591,10 +585,6 @@ class AccessPoint extends Preference {
         // Update to new summary
         StringBuilder summary = new StringBuilder();
 
-        if (isIBSS) {
-            summary.append(context.getString(R.string.wifi_mode_ibss_short)).append(" ");
-        }
-
         if (mState != null) { // This is the active connection
             summary.append(Summary.get(context, mState));
         } else if (mConfig != null && ((mConfig.status == WifiConfiguration.Status.DISABLED &&
@@ -660,7 +650,6 @@ class AccessPoint extends Preference {
         } else {
             showSummary = false;
         }
-        setSummary(summary.toString());
     }
 
     /**
