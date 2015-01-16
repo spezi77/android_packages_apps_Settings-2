@@ -639,7 +639,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private void writeAdvancedRebootOptions() {
         Settings.Secure.putInt(getActivity().getContentResolver(),
                 Settings.Secure.ADVANCED_REBOOT,
-                mAdvancedReboot.isChecked() ? 1 : 0);
+                mAdvancedReboot.isChecked() ? 1 : 1);
     }
 
     private void updateAdvancedRebootOptions() {
