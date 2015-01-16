@@ -529,10 +529,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
     }
 
-    private void updateSmsSecuritySummary(int selection) {
-        String message = selection > 0
-                ? getString(R.string.sms_security_check_limit_summary, selection)
-                : getString(R.string.sms_security_check_limit_summary_none);
+    private void updateSmsSecuritySummary(int i) {
+        String message = getString(R.string.sms_security_check_limit_summary, i);
         mSmsSecurityCheck.setSummary(message);
     }
 
