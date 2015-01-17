@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
@@ -64,6 +65,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String FILENAME_PROC_CPUINFO = "/proc/cpuinfo";
 
     private static final String KEY_CONTAINER = "container";
+    private static final String KEY_BS_DONATE= "donate";
     private static final String KEY_REGULATORY_INFO = "regulatory_info";
     private static final String KEY_TERMS = "terms";
     private static final String KEY_LICENSE = "license";
@@ -193,6 +195,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 getPreferenceScreen().removePreference(pref);
             }
         }
+
+	getPreferenceScreen().findPreference(KEY_BS_DONATE).setWidgetLayoutResource(R.layout.donate);
     }
 
     @Override
@@ -216,6 +220,10 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         } else if (prefKey.equals(KEY_KERNEL_VERSION)) {
             setStringSummary(KEY_KERNEL_VERSION, getKernelVersion());
             return true;
+	} else if (preference.getKey().equals(KEY_BS_DONATE)) {
+	    Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+		Uri.parse(getActivity().getString(R.string.donate_link)));
+	    startActivity(browserIntent);
         } else if (preference.getKey().equals(KEY_MOD_VERSION)) {
             System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
             mHits[mHits.length-1] = SystemClock.uptimeMillis();

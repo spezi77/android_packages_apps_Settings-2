@@ -17,6 +17,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/about_settings">
 
+	<PreferenceScreen
+		android:key="bs_logo"
+		android:layout="@layout/logo_row" />
+
+	<Preference
+		android:key="donate"
+		android:title="@string/donate_beanstalk_title"
+		android:summary="@string/donate_beanstalk_summary" />
+
         <!-- Device status - launches activity -->
         <PreferenceScreen android:key="status_info"
                 android:title="@string/device_status" 
