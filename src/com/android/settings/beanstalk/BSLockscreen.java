@@ -40,6 +40,8 @@ public class BSLockscreen extends SettingsPreferenceFragment implements
     private SwitchPreference mDialerWidgetHide;
     private PreferenceScreen mBeanstalkLockscreen;
 
+    private Context mContext;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,7 @@ public class BSLockscreen extends SettingsPreferenceFragment implements
 	PreferenceScreen prefSet = getPreferenceScreen();
 	PackageManager pm = getPackageManager();
         Resources res = getResources();
+	mContext = getActivity();
 
 	mBeanstalkLockscreen = (PreferenceScreen) findPreference("beanstalk_lockscreen_screen");
 
@@ -70,7 +73,7 @@ public class BSLockscreen extends SettingsPreferenceFragment implements
         mDialerWidgetHide.setChecked(Settings.System.getIntForUser(resolver,
             Settings.System.DIALER_WIDGET_HIDE, 0, UserHandle.USER_CURRENT) == 1);
         mDialerWidgetHide.setOnPreferenceChangeListener(this);
-        if (!Utils.isVoiceCapable(getActivity())){
+        if ((!Utils.isVoiceCapable(mContext) || Utils.isWifiOnly(mContext))) {
             mBeanstalkLockscreen.removePreference(mDialerWidgetHide);
         }
     }
