@@ -32,6 +32,8 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 
+import com.android.internal.util.cm.ScreenType;
+
 import android.util.Log;
 import android.view.IWindowManager;
 import android.view.KeyCharacterMap;
@@ -334,7 +336,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar()
                     || forceNavbar;
 
-            if (!Utils.isPhone(getActivity())) {
+            if (!ScreenType.isPhone(getActivity())) {
                 mNavigationPreferencesCat.removePreference(mNavigationBarLeftPref);
             }
 
