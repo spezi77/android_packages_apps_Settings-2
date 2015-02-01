@@ -41,6 +41,11 @@
         android:fragment="com.android.settings.beanstalk.navbar.NavbarTabHostFragment"
         android:title="@string/category_navbar" />
 
+    <PreferenceScreen
+	android:key="navigation_bar_ring"
+	android:fragment="com.android.settings.cyanogenmod.NavRing"
+	android:title="@string/navigation_ring_title" />
+
     <!-- Display settings -->
     <PreferenceScreen
         android:id="@+id/bsdisplay_settings"
