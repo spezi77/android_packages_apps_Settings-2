@@ -827,4 +827,8 @@
     <string name="error_creating_preview">Error creating preview</string>
     <string name="install_file_manager_error">No application found to pick the zip file. Please install a filemanager.</string>
     <string name="apply">Apply</string>
+
+    <!-- QuickSettings collapse panel -->
+    <string name="quick_settings_collapse_title">Auto close panel</string>
+    <string name="quick_settings_collapse_summary">Close the Quick Settings panel upon toggle</string>
 </resources>
