@@ -74,7 +74,7 @@ public class BSDisplaySettings extends SettingsPreferenceFragment implements
     private static final String PREF_CUSTOM_BOOTANIM = "custom_bootanimation";
     private static final String BOOTANIMATION_SYSTEM_PATH = "/system/media/bootanimation.zip";
     private static final String BACKUP_PATH = new File(Environment
-	    .getExternalStorageDirectory(), "").getAbsolutePath();
+	    .getExternalStorageDirectory(), "/BeanStalk").getAbsolutePath();
 
     private ListPreference mListViewAnimation;
     private ListPreference mListViewInterpolator;
@@ -98,6 +98,12 @@ public class BSDisplaySettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.beanstalk_display);
 
 	PreferenceScreen prefSet = getPreferenceScreen();
+
+	//create the BeanStalk folder if it has not yet been created
+	File BEANSTALK_FOLDER = new File(BACKUP_PATH);
+	if (!BEANSTALK_FOLDER.exists()) {
+	    BEANSTALK_FOLDER.mkdir();
+	}
 
         mToastAnimation = (ListPreference) prefSet.findPreference(KEY_TOAST_ANIMATION);
         mToastAnimation.setSummary(mToastAnimation.getEntry());
