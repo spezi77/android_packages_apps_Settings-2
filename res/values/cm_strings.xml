@@ -889,13 +889,6 @@
     <string name="quick_settings_vibrate_title">Vibrate on touch</string>
     <string name="quick_settings_vibrate_summary">Vibrate when touching tiles</string>
 
-    <!-- Doze pulse (ambient display) notification timeout -->
-    <string name="doze_timeout_title">Ambient display timeout</string>
-    <string name="doze_timeout_summary">Time that the screen stays on for notification pulse</string>
-
-    <!-- Doze (ambient display) preference category -->
-    <string name="display_category_doze_options_title">Ambient display options</string>
-
     <string name="link_volume_option_title">Link ringtone &amp; notification volumes</string>
     <string name="notification_volume_option_title">Notification volume</string>
 
