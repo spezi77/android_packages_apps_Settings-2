@@ -137,6 +137,10 @@ public class QSTileHolder {
                 resourceName = "ic_qs_visualizer_static";
                 stringId = R.string.qs_tile_visualizer;
                 break;
+	    case QSConstants.TILE_SCREENSHOT:
+		resourceName = "ic_qs_screenshot";
+		stringId = R.string.qs_screenshot_tile;
+	     	break;
             case QSConstants.TILE_SYNC:
                 resourceName = "ic_qs_sync_on";
                 stringId = R.string.qs_sync_tile;
