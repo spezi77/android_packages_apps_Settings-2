@@ -23,10 +23,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     private static final String TAG = "StatusBarSettings";
     private static final String KEY_STATUS_BAR_CLOCK = "clock_style_pref";
-    private static final String KEY_STATUS_BAR_TICKER = "status_bar_ticker_enabled";
 
     private PreferenceScreen mClockStyle;
-    private SwitchPreference mTicker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,23 +45,9 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
 	mClockStyle = (PreferenceScreen) prefSet.findPreference(KEY_STATUS_BAR_CLOCK);
 	updateClockStyleDescription();
-
-	mTicker = (SwitchPreference) prefSet.findPreference(KEY_STATUS_BAR_TICKER);
-	final boolean tickerEnabled = systemUiResources.getBoolean(systemUiResources.getIdentifier(
-		"com.android.systemui:bool/enable_ticker", null, null));
-	mTicker.setChecked(Settings.System.getInt(getContentResolver(),
-		Settings.System.STATUS_BAR_TICKER_ENABLED, tickerEnabled ? 1 : 0) == 1);
-	mTicker.setOnPreferenceChangeListener(this);
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-	if (preference == mTicker) {
-	    Settings.System.putInt(getContentResolver(),
-		Settings.System.STATUS_BAR_TICKER_ENABLED,
-		(Boolean) objValue ? 1 : 0);
-	    return true;
-	}
-        return false;
     }
 
     @Override
