@@ -823,6 +823,7 @@
 
     <!-- QuickSettings tiles -->
     <string name="qs_screenshot_tile">Screenshot</string>
+    <string name="qs_screenrecord_tile">Screenrecord</string>
 
     <!-- Heads Up -->
     <string name="heads_up_title">Heads up notification</string>
