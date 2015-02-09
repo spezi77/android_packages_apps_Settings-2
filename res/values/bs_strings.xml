@@ -811,7 +811,6 @@
     <!-- QS Tiles -->
     <string name="qs_main_tiles_summary_off2">Three or four tiles on each row</string>
     <string name="qs_four_columns_title">Show four tiles per row</string>
-    <string name="qs_sync_tile">Sync</string>
 
     <!-- Doze options -->
     <string name="display_category_doze_options_title">Ambient display (doze) options</string>
@@ -824,6 +823,8 @@
     <!-- QuickSettings tiles -->
     <string name="qs_screenshot_tile">Screenshot</string>
     <string name="qs_screenrecord_tile">Screenrecord</string>
+    <string name="qs_sync_tile">Sync</string>
+    <string name="qs_tile_powermenu">Power Menu</string>
 
     <!-- Heads Up -->
     <string name="heads_up_title">Heads up notification</string>
