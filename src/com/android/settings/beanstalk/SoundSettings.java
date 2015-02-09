@@ -22,6 +22,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.hardware.CmHardwareManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.ListPreference;
@@ -46,6 +47,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOL_MEDIA = "volume_keys_control_media_stream";
     private static final String KEY_CAMERA_SOUNDS = "camera_sounds";
     private static final String PROP_CAMERA_SOUND = "persist.sys.camera-sound";
+    private static final String KEY_VIBRATION_INTENSITY = "vibration_intensity";
 
     private SwitchPreference mSafeHeadsetVolume;
     private ListPreference mAnnoyingNotifications;
@@ -57,6 +59,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.beanstalk_sound_settings);
+	PreferenceScreen prefSet = getPreferenceScreen();
 
         mSafeHeadsetVolume = (SwitchPreference) findPreference(KEY_SAFE_HEADSET_VOLUME);
         mSafeHeadsetVolume.setChecked(Settings.System.getInt(getContentResolver(),
@@ -78,6 +81,15 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mCameraSounds = (SwitchPreference) findPreference(KEY_CAMERA_SOUNDS);
         mCameraSounds.setChecked(SystemProperties.getBoolean(PROP_CAMERA_SOUND, true));
         mCameraSounds.setOnPreferenceChangeListener(this);
+
+	CmHardwareManager cmHardwareManager =
+		(CmHardwareManager) getSystemService(Context.CMHW_SERVICE);
+	if (!cmHardwareManager.isSupported(CmHardwareManager.FEATURE_VIBRATOR)) {
+	    Preference preference = prefSet.findPreference(KEY_VIBRATION_INTENSITY);
+	    if (preference != null) {
+		prefSet.removePreference(preference);
+	    }
+	}
     }
 
     @Override
