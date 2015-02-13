@@ -641,6 +641,7 @@
     </string-array>
 
     <string-array name="heads_up_time_out_entries">
+	<item>@string/heads_up_time_out_0sec</item>
         <item>@string/heads_up_time_out_4sec</item>
         <item>@string/heads_up_time_out_6sec</item>
         <item>@string/heads_up_time_out_8sec</item>
@@ -648,6 +649,7 @@
     </string-array>
 
     <string-array name="heads_up_time_out_values" translatable="false">
+	<item>1</item>
         <item>4000</item>
         <item>6000</item>
         <item>8000</item>
