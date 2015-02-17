@@ -42,6 +42,7 @@ import android.text.TextUtils;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
+import com.android.settings.cyanogenmod.SecureSettingSwitchPreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Index;
 import com.android.settings.search.Indexable;
@@ -88,6 +89,10 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_MOD_BUILD_DATE = "build_date";
     private static final String KEY_DEVICE_CPU = "device_cpu";
     private static final String KEY_DEVICE_MEMORY = "device_memory";
+
+    public static final String KEY_ADVANCED_MODE = "advanced_mode";
+
+    SecureSettingSwitchPreference mAdvancedSettings;
 
     long[] mHits = new long[3];
 
@@ -195,6 +200,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 getPreferenceScreen().removePreference(pref);
             }
         }
+        mAdvancedSettings = (SecureSettingSwitchPreference) findPreference(KEY_ADVANCED_MODE);
 
 	getPreferenceScreen().findPreference(KEY_BS_DONATE).setWidgetLayoutResource(R.layout.donate);
     }
