@@ -163,7 +163,7 @@
 
         <PreferenceScreen
                 android:key="animation_settings"
-                android:fragment="com.android.settings.crdroid.ScreenAndAnimations"
+                android:fragment="com.android.settings.cyanogenmod.animation.AnimationSettings"
                 android:title="@string/screen_and_animations_title"/>
 
         <PreferenceScreen
