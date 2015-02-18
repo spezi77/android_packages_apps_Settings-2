@@ -43,7 +43,7 @@ import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference;
+import com.android.settings.beanstalk.SystemCheckBoxPreference;
 import com.android.settings.beanstalk.sensor.ShakeSensorManager;
 
 import java.util.ArrayList;
