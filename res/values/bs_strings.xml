@@ -874,12 +874,11 @@
     <string name="doze_list_mode_title">Doze mode</string>
     <string name="doze_list_mode_summary">Option to configure doze mode</string>
 
-    <string name="doze_time_category_title">Time:</string>
-
+    <string name="doze_pulse_title">Time settings</string>
     <string name="doze_pulse_duration_in_title">Fade in</string>
     <string name="doze_pulse_duration_in_summary"></string>
 
-    <string name="doze_pulse_duration_visible_title">Visible</string>
+    <string name="doze_pulse_duration_visible_title">Visible duration</string>
     <string name="doze_pulse_duration_visible_summary"></string>
 
     <string name="doze_pulse_duration_out_title">Fade out</string>
@@ -888,6 +887,7 @@
     <string name="doze_pulse_on_notifications_title">Pulse doze</string>
     <string name="doze_pulse_on_notifications_summary">Pulse display on pending notifications</string>
 
+    <string name="doze_shake_title">Shake settings</string>
     <string name="doze_shake_mode_title">Shake mode</string>
     <string name="doze_shake_mode_summary">Use shake sensor value to trigger activation</string>
     <string name="doze_shake_mode_test_summary">Do you want to test shake sensor?</string>
