@@ -39,7 +39,6 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -61,6 +60,7 @@ public class AmbientSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOZE_PULSE_OUT = "doze_pulse_out";
     private static final String KEY_DOZE_LIST_MODE = "doze_list_mode";
     private static final String KEY_DOZE_PULSE_MODE = "doze_pulse_on_notifications";
+    private static final String KEY_DOZE_SHAKE_CATEGORY = "doze_shake_category";
     private static final String KEY_DOZE_SHAKE_THRESHOLD = "doze_shake_threshold";
     private static final String KEY_DOZE_TIME_MODE = "doze_time_mode";
 
@@ -81,7 +81,6 @@ public class AmbientSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Activity activity = getActivity();
-        final ContentResolver resolver = activity.getContentResolver();
 
         addPreferencesFromResource(R.xml.ambient_settings);
 
@@ -111,6 +110,7 @@ public class AmbientSettings extends SettingsPreferenceFragment implements
             removePreference(KEY_DOZE_LIST_MODE);
             removePreference(KEY_DOZE_TIME_MODE);
             removePreference(KEY_DOZE_SHAKE_THRESHOLD);
+            removePreference(KEY_DOZE_SHAKE_CATEGORY);
         }
         updateDozeListMode();
         updateDozeOptions();

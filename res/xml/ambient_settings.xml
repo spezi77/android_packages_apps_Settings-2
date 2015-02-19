@@ -87,7 +87,7 @@
             </PreferenceCategory>
 
             <PreferenceCategory
-                    android:key="doze_shale_category"
+                    android:key="doze_shake_category"
                     android:title="@string/doze_shake_title" >
 
                 <ListPreference

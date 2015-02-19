@@ -770,7 +770,6 @@
         <item>10000</item>
     </string-array>
 
-    <!-- Doze pulse (ambient display) options -->
     <string-array name="doze_pulse_duration_in_entries" translatable="false">
         <item>@string/twohundred_ms</item>
         <item>@string/fivehundred_ms</item>
