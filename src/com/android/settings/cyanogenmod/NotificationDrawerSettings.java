@@ -40,12 +40,14 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
     private static final String PREF_CUSTOM_HEADER = "status_bar_custom_header";
     private static final String PREF_CUSTOM_HEADER_DEFAULT = "status_bar_custom_header_default";
     private static final String PREF_SMART_PULLDOWN = "smart_pulldown";
+    private static final String STATUS_BAR_QUICK_QS_PULLDOWN = "qs_quick_pulldown";
 
     private SwitchPreference mCustomHeader;
     private SwitchPreference mCustomHeaderDefault;
     private SwitchPreference mEnableTaskManager;
     private ListPreference mSmartPulldown;
-    
+    private ListPreference mQuickPulldown;
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -53,6 +55,9 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
         
         PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
+	Resources res = getResources();
+
+	mQuickPulldown = (ListPreference) findPreference(STATUS_BAR_QUICK_QS_PULLDOWN);
 
 	mCustomHeader = (SwitchPreference) prefSet.findPreference(PREF_CUSTOM_HEADER);
         mCustomHeader.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
@@ -76,6 +81,21 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
         mSmartPulldown.setValue(String.valueOf(smartPulldown));
         updateSmartPulldownSummary(smartPulldown);
 
+ 	int quickPulldown = CMSettings.System.getInt(resolver,
+                CMSettings.System.STATUS_BAR_QUICK_QS_PULLDOWN, 1);
+        mQuickPulldown.setValue(String.valueOf(quickPulldown));
+        if (quickPulldown == 0) {
+            // quick pulldown deactivated
+            mQuickPulldown.setSummary(res.getString(R.string.status_bar_quick_qs_pulldown_off));
+        } else {
+            String direction = res.getString(quickPulldown == 2
+                    ? R.string.status_bar_quick_qs_pulldown_left
+                    : R.string.status_bar_quick_qs_pulldown_right);
+            mQuickPulldown.setSummary(
+                    res.getString(R.string.status_bar_quick_qs_pulldown_summary, direction));
+        }
+        mQuickPulldown.setOnPreferenceChangeListener(this);
+
     }
 
     @Override
@@ -91,6 +111,7 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
+	Resources res = getResources();
 	if (preference == mEnableTaskManager) {
             boolean value = ((SwitchPreference)preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
@@ -112,6 +133,21 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
             Settings.System.putInt(getContentResolver(), Settings.System.QS_SMART_PULLDOWN,
                     smartPulldown);
             updateSmartPulldownSummary(smartPulldown);
+            return true;
+        } else if (preference == mQuickPulldown) {
+            int quickPulldown = Integer.valueOf((String) newValue);
+            CMSettings.System.putInt(resolver, CMSettings.System.STATUS_BAR_QUICK_QS_PULLDOWN,
+                    quickPulldown);
+            if (quickPulldown == 0) {
+                // quick pulldown deactivated
+                mQuickPulldown.setSummary(res.getString(R.string.status_bar_quick_qs_pulldown_off));
+            } else {
+                String direction = res.getString(quickPulldown == 2
+                        ? R.string.status_bar_quick_qs_pulldown_left
+                        : R.string.status_bar_quick_qs_pulldown_right);
+                mQuickPulldown.setSummary(
+                        res.getString(R.string.status_bar_quick_qs_pulldown_summary, direction));
+            }
             return true;
 	}
 
