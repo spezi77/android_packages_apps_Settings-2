@@ -131,11 +131,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mLiftToWakePreference;
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mTapToWake;
-
-    private PreferenceCategory mDozeCategory;
-    private SwitchPreference mDozePreference;
-    private SlimSeekBarPreference mDozeTimeout;
-    private SwitchPreference mDozeTriggerMotion;
+    private PreferenceScreen mDozeFragement;
 
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
