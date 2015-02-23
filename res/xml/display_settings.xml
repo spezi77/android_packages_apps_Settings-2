@@ -119,13 +119,11 @@
 
                 <SwitchPreference
                     android:key="sweep_wake_gesture"
-                    android:title="@string/sweep_to_wake_title"
-                    android:summary="@string/sweep_to_wake_summary" />
+                    android:title="@string/sweep_to_wake_title" />
 
                 <SwitchPreference
                     android:key="sweep_sleep_gesture"
-                    android:title="@string/sweep_to_sleep_title"
-                    android:summary="@string/sweep_to_sleep_summary" />
+                    android:title="@string/sweep_to_sleep_title" />
 
                 <SwitchPreference
                     android:key="adaptive_backlight"
