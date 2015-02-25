@@ -23,8 +23,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 
     private static final String TAG = "StatusBarSettings";
     private static final String KEY_STATUS_BAR_CLOCK = "clock_style_pref";
+    private static final String KEY_CARRIERLABEL_PREFERENCE = "carrier_options";
 
     private PreferenceScreen mClockStyle;
+    private PreferenceScreen mCarrierLabel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,11 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 	} catch (Exception e) {
 	    Log.e(TAG, "can't access systemui resources",e);
 	    return;
+	}
+
+	mCarrierLabel = (PreferenceScreen) prefSet.findPreference(KEY_CARRIERLABEL_PREFERENCE);
+	if (Utils.isWifiOnly(getActivity())) {
+		prefSet.removePreference(mCarrierLabel);
 	}
 
 	mClockStyle = (PreferenceScreen) prefSet.findPreference(KEY_STATUS_BAR_CLOCK);

@@ -17,6 +17,11 @@
 		android:summary="@string/status_bar_show_weather_summary"
 		android:defaultValue="true" />
 
+	<PreferenceScreen
+		android:key="carrier_options"
+		android:fragment="com.android.settings.beanstalk.CarrierLabel"
+		android:title="@string/carrier_options" />
+
         <PreferenceScreen
 	        android:key="network_traffic_state"
 	        android:fragment="com.android.settings.beanstalk.NetworkTraffic"
