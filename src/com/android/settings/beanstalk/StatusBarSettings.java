@@ -69,7 +69,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 	if (preference == mNetworkArrows) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.STATUS_BAR_SHOW_NETWORK_ACTIVITY,
-                    (Boolean) newValue ? 1 : 0);
+                    (Boolean) objValue ? 1 : 0);
             int networkArrows = Settings.System.getInt(getContentResolver(),
                     Settings.System.STATUS_BAR_SHOW_NETWORK_ACTIVITY, 1);
             updateNetworkArrowsSummary(networkArrows);
