@@ -943,4 +943,7 @@
     <string name="status_bar_bs_logo_title">BeanStalk logo</string>
     <string name="status_bar_bs_logo_summary">Enable to show BeanStalk logo on the left side of statusbar</string>
 
+    <!-- Data activity icons -->
+    <string name="status_bar_show_network_activity_title">Network activity arrows</string>
+
 </resources>
