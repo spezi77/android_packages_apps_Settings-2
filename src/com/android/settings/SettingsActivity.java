@@ -88,6 +88,7 @@ import com.android.settings.dashboard.NoHomeDialogFragment;
 import com.android.settings.dashboard.SearchResultsSummary;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
+import com.android.settings.aicp.AmbientSettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.livedisplay.LiveDisplay;
@@ -323,7 +324,8 @@ public class SettingsActivity extends Activity
 	    MainSettings.class.getName(),
             QSTiles.class.getName(),
             DisplayRotation.class.getName(),
-            LiveDisplay.class.getName()
+            LiveDisplay.class.getName(),
+            AmbientSettings.class.getName()
     };
 
 
