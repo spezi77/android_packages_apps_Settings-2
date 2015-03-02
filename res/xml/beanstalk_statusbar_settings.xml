@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/status_bar_title" >
 
     <PreferenceCategory
@@ -55,5 +56,4 @@
                 android:persistent="false" />
 
     </PreferenceCategory>
-
 </PreferenceScreen>

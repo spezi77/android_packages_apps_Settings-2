@@ -101,7 +101,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
             updateNetworkArrowsSummary(networkArrows);
             return true;
 	} else if (preference == mStatusBarGreetingTimeout) {
-	    int timeout = (Integer) newValue;
+	    int timeout = (Integer) objValue;
 	    Settings.System.putInt(getActivity().getContentResolver(),
 		Settings.System.STATUS_BAR_GREETING_TIMEOUT, timeout * 1);
 	    return true;
