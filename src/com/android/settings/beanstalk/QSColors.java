@@ -33,7 +33,7 @@ import android.view.MenuItem;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.cyanogenmod.qs.QSTiles;
-import com.android.settings.util.Helpers;
+import com.android.settings.beanstalk.util.Helpers;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
