@@ -58,14 +58,14 @@
 
     <PreferenceCategory
             android:key="calibration"
-            android:title="@string/category_calibration">
+            android:title="@string/category_calibration" >
 
         <!-- screen color -->
         <PreferenceScreen
                 android:persistent="false"
                 android:key="screencolor_settings"
                 android:title="@string/screencolor"
-                android:summary="@string/screencolor_summary">
+                android:summary="@string/screencolor_summary" >
             <intent
                     android:action="com.qualcomm.display.PPService"
                     android:targetPackage="com.android.settings"
@@ -77,14 +77,14 @@
                 android:title="@string/color_calibration_title"
                 android:dialogTitle="@string/color_calibration_title"
                 android:summary="@string/color_calibration_summary"
-                android:persistent="false"/>
+                android:persistent="false" />
 
         <com.android.settings.livedisplay.DisplayGamma
                 android:key="gamma_tuning"
                 android:title="@string/gamma_tuning_title_head"
                 android:dialogTitle="@string/gamma_tuning_title_head"
                 android:summary="@string/gamma_tuning_summary_head"
-                android:persistent="false"/>
+                android:persistent="false" />
 
     </PreferenceCategory>
 
