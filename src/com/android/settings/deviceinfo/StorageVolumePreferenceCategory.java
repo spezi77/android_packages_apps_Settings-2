@@ -32,12 +32,9 @@ import android.os.RemoteException;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.text.format.Formatter;
 
 import com.android.settings.MediaFormat;
@@ -50,10 +47,8 @@ import com.google.android.collect.Lists;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-public class StorageVolumePreferenceCategory extends PreferenceCategory implements OnPreferenceClickListener {
+public class StorageVolumePreferenceCategory extends PreferenceCategory {
     public static final String KEY_CACHE = "cache";
 
     private static final int ORDER_USAGE_BAR = -2;
@@ -71,7 +66,6 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
     private Preference mMountTogglePreference;
     private Preference mFormatPreference;
     private Preference mStorageLow;
-    private CheckBoxPreference mMountNotification;
 
     private StorageItemPreference mItemTotal;
     private StorageItemPreference mItemAvailable;
@@ -207,7 +201,6 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
         final boolean isRemovable = mVolume != null ? mVolume.isRemovable() : false;
         // Always create the preference since many code rely on it existing
         mMountTogglePreference = new Preference(context);
-        mMountNotification = new CheckBoxPreference(context);
 
         // resource IDs that are loaded appropriately based on the storage
         // volume type
@@ -234,22 +227,6 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
             mMountTogglePreference.setSummary(summaryResId);
 
             addPreference(mMountTogglePreference);
-
-            mMountNotification.setTitle(R.string.mount_notification_title);
-            mMountNotification.setSummary(R.string.mount_notification_summary);
-            String volumePath = mVolume.getPath();
-            String notificationConfig = android.provider.Settings.System.getString(getContext().getContentResolver(),
-                    android.provider.Settings.System.STORAGE_MOUNT_NOTIFICATION);
-            boolean checked = false;
-            if (notificationConfig != null && notificationConfig.length() != 0) {
-                String[] pathArray = notificationConfig.split("\\|\\|");
-                if (Arrays.asList(pathArray).contains(volumePath)) {
-                    checked = true;
-                }
-            }
-            mMountNotification.setChecked(checked);
-            mMountNotification.setOnPreferenceClickListener(this);
-            addPreference(mMountNotification);
         }
 
         final boolean allowFormat = mVolume != null;
@@ -602,39 +579,5 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
             }
         }
         return users;
-    }
-
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        if (preference == mMountNotification) {
-            boolean checked = ((CheckBoxPreference)preference).isChecked();
-
-            String volumePath = mVolume.getPath();
-            String notificationConfig = android.provider.Settings.System.getString(getContext().getContentResolver(),
-                    android.provider.Settings.System.STORAGE_MOUNT_NOTIFICATION);
-            List<String> pathList = new ArrayList<String>();
-            if (notificationConfig != null) {
-                String[] pathArray = notificationConfig.split("\\|\\|");
-                pathList.addAll(Arrays.asList(pathArray));
-            }
-            if (checked) {
-                if (!pathList.contains(volumePath)) {
-                    pathList.add(volumePath);
-                }
-            } else {
-                if (pathList.contains(volumePath)) {
-                    pathList.remove(volumePath);
-                }
-            }
-            if (pathList.size() != 0) {
-                notificationConfig = TextUtils.join("||", pathList);
-            } else {
-                notificationConfig = null;
-            }
-            android.provider.Settings.System.putString(getContext().getContentResolver(),
-                    android.provider.Settings.System.STORAGE_MOUNT_NOTIFICATION, notificationConfig);
-            return true;
-        }
-        return false;
     }
 }
