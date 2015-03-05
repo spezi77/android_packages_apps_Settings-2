@@ -76,6 +76,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private static final String KEY_INCREASING_RING_VOLUME = "increasing_ring_volume";
     private static final String KEY_NOTIFICATION_LIGHT = "notification_light";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
+    private static final String KEY_MUSIC_INTERRUPTIONS = "music_interruptions";
     private static final String KEY_VOLUME_PANEL_TIMEOUT = "volume_panel_time_out";
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
@@ -168,6 +169,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                 Settings.System.VOLUME_PANEL_TIMEOUT, 3000);
         mVolumePanelTimeOut.setValue(String.valueOf(volumePanelTimeOut));
         updateVolumePanelTimeOutSummary(volumePanelTimeOut);
+
+	final Preference musicNotifications = PREF_ZEN_MUSIC_NOTIFICATIONS.init(this);
 
     }
 
@@ -611,5 +614,20 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
             }
             return rt;
         }
+    };
+
+    private static final SettingPrefWithCallback PREF_ZEN_MUSIC_NOTIFICATIONS =
+	    new SettingPrefWithCallback(SettingPref.TYPE_GLOBAL, KEY_MUSIC_INTERRUPTIONS,
+		    Global.ZEN_DISABLE_DUCKING_DURING_MEDIA_PLAYBACK, 0, 1) {
+	protected String getCaption(Resources res, int value) {
+	    switch (value) {
+		case Global.ZEN_MODE_NO_INTERRUPTIONS:
+		    return res.getString(R.string.zen_mode_option_no_interruptions);
+		case Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
+		    return res.getString(R.string.zen_mode_option_important_interruptions);
+		default:
+		    return res.getString(R.string.zen_mode_option_off);
+	    }
+	}
     };
 }
