@@ -280,10 +280,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private void updateHeadsUpTimeOutSummary(int value) {
         String summary = getResources().getString(R.string.heads_up_time_out_summary,
                 value / 1000);
-        if (value == 0) {
-            mHeadsUpTimeOut.setSummary(
-                    getResources().getString(R.string.heads_up_time_out_never_summary));
-        } else if (value == 1) {
+        if (value == 1) {
             mHeadsUpTimeOut.setSummary(
                     getResources().getString(R.string.heads_up_time_out_zero));
         } else {
