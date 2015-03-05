@@ -33,12 +33,14 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     private static final String KEY_STATUS_BAR_NETWORK_ARROWS= "status_bar_show_network_activity";
     private static final String KEY_STATUS_BAR_GREETING = "status_bar_greeting";
     private static final String KEY_STATUS_BAR_GREETING_TIMEOUT = "status_bar_greeting_timeout";
+    private static final String KEY_STATUS_BAR_TICKER = "status_bar_ticker_enabled";
 
     private PreferenceScreen mClockStyle;
     private PreferenceScreen mCarrierLabel;
     private SwitchPreference mNetworkArrows;
     private SwitchPreference mStatusBarGreeting;
     private SeekBarPreferenceCham mStatusBarGreetingTimeout;
+    private SwitchPreference mTicker;
 
     private String mCustomGreetingText = "";
 
@@ -76,6 +78,13 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
 	mClockStyle = (PreferenceScreen) prefSet.findPreference(KEY_STATUS_BAR_CLOCK);
 	updateClockStyleDescription();
 
+	mTicker = (SwitchPreference) prefSet.findPreference(KEY_STATUS_BAR_TICKER);
+	final boolean tickerEnabled = systemUiResources.getBoolean(systemUiResources.getIdentifier(
+		"com.android.systemui:bool/enable_ticker", null, null));
+	mTicker.setChecked(Settings.System.getInt(getContentResolver(),
+		Settings.System.STATUS_BAR_TICKER_ENABLED, tickerEnabled ? 1 : 0) == 1);
+	mTicker.setOnPreferenceChangeListener(this);
+
         // Greeting
         mStatusBarGreeting = (SwitchPreference) prefSet.findPreference(KEY_STATUS_BAR_GREETING);
         mCustomGreetingText = Settings.System.getString(getActivity().getContentResolver(),
@@ -100,6 +109,11 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
                     Settings.System.STATUS_BAR_SHOW_NETWORK_ACTIVITY, 1);
             updateNetworkArrowsSummary(networkArrows);
             return true;
+	} else 	if (preference == mTicker) {
+	    Settings.System.putInt(getContentResolver(),
+		Settings.System.STATUS_BAR_TICKER_ENABLED,
+		(Boolean) objValue ? 1 : 0);
+	    return true;
 	} else if (preference == mStatusBarGreetingTimeout) {
 	    int timeout = (Integer) objValue;
 	    Settings.System.putInt(getActivity().getContentResolver(),

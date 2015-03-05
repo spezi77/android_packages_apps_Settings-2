@@ -71,6 +71,9 @@
     <uses-permission android:name="android.permission.OEM_UNLOCK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- Heads up -->
+    <uses-permission android:name="android.permission.CHANGE_HEADS_UP_STATE" />
+
     <!-- Vanir feature permissions -->
     <uses-permission android:name="android.permission.GET_TOP_ACTIVITY_INFO"/>
 
@@ -1750,8 +1753,7 @@
             android:theme="@style/CryptKeeperBlankTheme"
         />
 
-	<activity android:name=".headsup.HeadsUpSettings" />
-
+        <!-- CyanogenMod activities Start -->
         <activity android:name="Settings$VoiceWakeupSettingsActivity"
                 android:label="@string/voice_wakeup_settings_title"
                 android:taskAffinity=""
