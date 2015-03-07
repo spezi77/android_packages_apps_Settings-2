@@ -52,8 +52,6 @@
         </PreferenceScreen>
 
         <PreferenceScreen
-<<<<<<< HEAD
-=======
             android:key="lockscreen_shortcuts_settings"
             android:fragment="com.android.settings.cyanogenmod.LockscreenShortcuts"
             android:title="@string/lockscreen_targets_message" />
@@ -64,16 +62,10 @@
             android:summary="@string/longpress_lock_icon_to_sleep_summary" />
 
         <PreferenceScreen
->>>>>>> d3a8285... Settings: long press lock screen lock icon to sleep (2/2)
             android:key="owner_info_settings"
             android:fragment="com.android.settings.OwnerInfoSettings"
             android:title="@string/owner_info_settings_title"
             android:summary="@string/owner_info_settings_summary"/>
-
-        <PreferenceScreen
-            android:key="lockscreen_shortcuts_settings"
-            android:fragment="com.android.settings.cyanogenmod.LockscreenShortcuts"
-            android:title="@string/lockscreen_targets_message" />
 
     </PreferenceCategory>
 
