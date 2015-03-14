@@ -162,4 +162,15 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+		android:key="heads_up_notification"
+		android:title="@string/heads_up_title" >
+
+	<!-- Heads up notifications -->
+	<Preference
+		android:key="heads_up_enabled"
+		android:fragment="com.android.settings.beanstalk.HeadsUpSettings"
+		android:title="@string/category_heads_up" />
+
+    </PreferenceCategory>
 </PreferenceScreen>
