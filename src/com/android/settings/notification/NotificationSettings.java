@@ -111,7 +111,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private int mLockscreenSelectedValue;
     private Preference mAlarmRingtonePreference;
     private ListPreference mVolumePanelTimeOut;
-    private Preference mHeadsUp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -167,8 +166,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                 Settings.System.VOLUME_PANEL_TIMEOUT, 3000);
         mVolumePanelTimeOut.setValue(String.valueOf(volumePanelTimeOut));
         updateVolumePanelTimeOutSummary(volumePanelTimeOut);
-
-	mHeadsUp = findPreference(Settings.System.HEADS_UP_NOTIFICATION);
     }
 
     @Override
@@ -178,10 +175,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         lookupRingtoneNames();
         updateNotificationPreferenceState();
         mSettingsObserver.register(true);
-	boolean headsUpEnabled = Settings.System.getInt(
-	    getContentResolver(), Settings.System.HEADS_UP_NOTIFICATION, 1) != 0;
-	mHeadsUp.setSummary(headsUpEnabled
-	    ? R.string.summary_heads_up_enabled : R.string.summary_heads_up_disabled);
     }
 
     @Override

@@ -1779,7 +1779,6 @@
         />
 
         <!-- CyanogenMod activities Start -->
-
         <activity android:name="Settings$VoiceWakeupSettingsActivity"
                 android:label="@string/voice_wakeup_settings_title"
                 android:taskAffinity=""
@@ -2294,8 +2293,9 @@
                 android:value="com.android.settings.beanstalk.MainSettings" />
         </activity>
 
-        <activity android:name=".beanstalk.MainSettings" />
-        <activity android:name=".beanstalk.HeadsUpSettings" />
+        <activity
+             android:name=".beanstalk.MainSettings" />
+
         <activity android:name=".beanstalk.gestureanywhere.GestureAnywhereBuilderActivity" />
         <activity android:name=".beanstalk.gestureanywhere.GestureAnywhereCreateGestureActivity" />
 
