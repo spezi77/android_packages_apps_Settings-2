@@ -1348,4 +1348,12 @@
     <string name="setup_lock_pattern_size_title">Pattern complexity</string>
     <string name="setup_lock_pattern_size_details">How many nodes would you like to use with your pattern? The more nodes, the more complex the pattern can be.</string>
 
+    <!-- GCC version info -->
+    <string name="sm_android">GCC Android version</string>
+    <string name="sm_android_default">Stock</string>
+
+    <!-- GCC build flags info -->
+    <string name="sm_flags">Optimizations</string>
+    <string name="sm_flags_default">None</string>
+
 </resources>
