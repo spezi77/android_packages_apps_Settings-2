@@ -161,6 +161,13 @@
             android:key="interface"
             android:title="@string/category_interface">
 
+	<!--PA Pie Control -->
+        <PreferenceScreen
+             android:key="pa_pie_control"
+             android:title="@string/pa_pie_control_title"
+             android:fragment="com.android.settings.paranoid.PieControl"
+             android:layout="@layout/preference_benzoextra_papie"/>
+
         <PreferenceScreen
                 android:key="animation_settings"
                 android:fragment="com.android.settings.cyanogenmod.animation.AnimationSettings"
