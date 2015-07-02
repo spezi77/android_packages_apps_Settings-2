@@ -109,6 +109,12 @@
             android:summary="@string/lockscreen_enable_power_menu_summary"
             android:defaultValue="true" />
 
+        <!-- SELinux changer -->
+        <SwitchPreference
+                android:key="selinux"
+                android:title="@string/selinux_title"
+                android:defaultValue="false" />
+
         <ListPreference
                 android:key="sms_security_check_limit"
                 android:dialogTitle="@string/sms_security_check_limit_title"
