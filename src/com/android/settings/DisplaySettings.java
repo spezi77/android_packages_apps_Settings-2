@@ -115,6 +115,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOZE_CATEGORY = "category_doze_options";
     private static final String KEY_DOZE = "doze";
     private static final String KEY_ADVANCED_DOZE_OPTIONS = "advanced_doze_options";
+    private static final String ROTATION_LOCKSCREEN = "Lockscreen";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -376,6 +377,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         ArrayList<String> rotationList = new ArrayList<String>();
         String delim = "";
 
+	if (lockScreenRotationEnabled) {
+            rotationList.add(ROTATION_LOCKSCREEN);
+        }
         if ((mode & DisplayRotation.ROTATION_0_MODE) != 0) {
             rotationList.add("0");
         }
