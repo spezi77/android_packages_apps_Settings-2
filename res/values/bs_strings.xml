@@ -44,5 +44,13 @@
     <string name="recents_show_membar_title">RAM memory bar</string>
     <string name="recents_show_membar_summary_on">Available RAM memory bar will be displayed on recents view</string>
     <string name="recents_show_membar_summary_off">Toggle to display available RAM memory bar on recents view</string>
+
+    <!-- Scrolling Cache -->
+    <string name="pref_scrollingcache_title">Scrolling cache</string>
+    <string name="pref_scrollingcache_summary">Scrolling cache may improve scrolling performance at the cost of memory</string>
+    <string name="pref_scrollingcache_force_enable">Force enable</string>
+    <string name="pref_scrollingcache_default_enable">Default enable</string>
+    <string name="pref_scrollingcache_default_disable">Default disable</string>
+    <string name="pref_scrollingcache_force_disable">Force disable</string>
 </resources>
 

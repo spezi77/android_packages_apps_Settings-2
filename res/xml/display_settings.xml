@@ -56,6 +56,14 @@
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
 
+	<ListPreference
+	        android:key="pref_scrollingcache"
+	        android:dialogTitle="@string/pref_scrollingcache_title"
+	        android:title="@string/pref_scrollingcache_title"
+	        android:summary="@string/pref_scrollingcache_summary"
+	        android:entries="@array/entries_scrollingcache"
+	        android:entryValues="@array/values_scrollingcache" />
+
         <SwitchPreference
                 android:key="camera_gesture"
                 android:title="@string/camera_gesture_title"
