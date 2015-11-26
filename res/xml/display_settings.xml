@@ -117,6 +117,17 @@
                 android:summary="@string/double_tap_to_sleep_summary"
                 android:defaultValue="true" />
 
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+	        android:key="disable_immersive_message"
+        	android:title="@string/disable_immersive_message_title"
+        	android:summary="@string/disable_immersive_message_summary" />
+
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+	        android:key="disable_fc_notifications"
+	        android:title="@string/disable_fc_notifications_title"
+	        android:summary="@string/disable_fc_notifications_summary"
+	        android:defaultValue="false" />
+
         <ListPreference
                 android:key="lcd_density"
                 android:title="@string/lcd_density"
