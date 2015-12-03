@@ -155,20 +155,6 @@
                     android:title="@string/power_menu_expanded_desktop"
                     android:fragment="com.android.settings.applications.ExpandedDesktopPreferenceFragment" />
 
-            <!-- Search in Recents -->
-            <com.android.settings.cyanogenmod.CMSystemSettingSwitchPreference
-                    android:key="recents_show_search_bar"
-                    android:title="@string/recents_show_searchbar"
-                    android:defaultValue="true" />
-
-            <!-- RAM Memory bar -->
-            <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
-                    android:key="systemui_recents_mem_display"
-                    android:title="@string/recents_show_membar_title"
-                    android:summaryOn="@string/recents_show_membar_summary_on"
-                    android:summaryOff="@string/recents_show_membar_summary_off"
-                    android:defaultValue="false" />
-
             <PreferenceScreen
                     android:key="recents_settings"
                     android:title="@string/recents_title"

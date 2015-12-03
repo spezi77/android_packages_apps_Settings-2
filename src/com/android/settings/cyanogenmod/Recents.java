@@ -24,13 +24,17 @@ import android.os.UserHandle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.SettingsPreferenceFragment;
+import com.android.internal.logging.MetricsLogger;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 
-public class Recents extends SettingsPreferenceFragment
-        implements OnPreferenceChangeListener {
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.R;
+
+public class Recents extends SettingsPreferenceFragment implements
+        OnPreferenceChangeListener {
 
     private static final String SHOW_CLEAR_ALL_RECENTS = "show_clear_all_recents";
     private static final String RECENTS_CLEAR_ALL_LOCATION = "recents_clear_all_location";
@@ -52,6 +56,12 @@ public class Recents extends SettingsPreferenceFragment
         mRecentsClearAllLocation.setValue(String.valueOf(location));
         mRecentsClearAllLocation.setSummary(mRecentsClearAllLocation.getEntry());
         mRecentsClearAllLocation.setOnPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        // todo add a constant in MetricsLogger.java
+        return MetricsLogger.MAIN_SETTINGS;
     }
 
     @Override
