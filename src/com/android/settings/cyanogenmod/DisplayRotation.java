@@ -32,7 +32,8 @@ import com.android.settings.SettingsPreferenceFragment;
 
 import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
-public class DisplayRotation extends SettingsPreferenceFragment {
+public class DisplayRotation extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener{
     private static final String TAG = "DisplayRotation";
 
     public static final String KEY_ACCELEROMETER = "accelerometer";
