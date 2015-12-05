@@ -37,7 +37,7 @@
         android:summary="@string/trigger_width_summary"
         android:defaultValue="4"
         android:max="64"
-        settings:min="4"
+        settings:minChOS="4"
         settings:unitsLeft=""
         settings:unitsRight="px"
         android:dependency="enable_app_circle_bar" />
@@ -48,7 +48,7 @@
         android:summary="@string/trigger_top_summary"
         android:defaultValue="0"
         android:max="99"
-        settings:min="0"
+        settings:minChOS="0"
         settings:unitsLeft=""
         settings:unitsRight="%"
         android:dependency="enable_app_circle_bar" />
@@ -59,7 +59,7 @@
         android:summary="@string/trigger_bottom_summary"
         android:defaultValue="100"
         android:max="100"
-        settings:min="1"
+        settings:minChOS="1"
         settings:unitsLeft=""
         settings:unitsRight="%"
         android:dependency="enable_app_circle_bar" />

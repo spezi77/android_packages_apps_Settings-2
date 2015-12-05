@@ -30,7 +30,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import com.android.settings.R;
 
-public class SeekBarPreference extends Preference implements OnSeekBarChangeListener {
+public class SeekBarPreferenceCham extends Preference implements OnSeekBarChangeListener {
 
     private final String TAG = getClass().getName();
 
@@ -48,12 +48,12 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
     private TextView mTitle;
     private TextView mStatusText;
 
-    public SeekBarPreference(Context context, AttributeSet attrs) {
+    public SeekBarPreferenceCham(Context context, AttributeSet attrs) {
         super(context, attrs);
         initPreference(context, attrs);
     }
 
-    public SeekBarPreference(Context context, AttributeSet attrs, int defStyle) {
+    public SeekBarPreferenceCham(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initPreference(context, attrs);
     }
@@ -67,7 +67,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
 
     private void setValuesFromXml(AttributeSet attrs) {
         final TypedArray typedArray = getContext().obtainStyledAttributes(
-                      attrs, R.styleable.SeekBarPreference);
+                      attrs, R.styleable.SeekBarPreferenceCham);
 
         mMaxValue = attrs.getAttributeIntValue(ANDROIDNS, "max", 100);
         mMinValue = attrs.getAttributeIntValue(SETTINGS, "minChOS", 0);
@@ -75,11 +75,11 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
         String units = getAttributeStringValue(attrs, SETTINGS, "units", "");
         mUnitsRight = getAttributeStringValue(attrs, SETTINGS, "unitsRight", units);
 
-        Integer id = typedArray.getResourceId(R.styleable.SeekBarPreference_unitsRight, 0);
+        Integer id = typedArray.getResourceId(R.styleable.SeekBarPreferenceCham_unitsRight, 0);
         if (id > 0) {
             mUnitsRight = getContext().getResources().getString(id);
         }
-        id = typedArray.getResourceId(R.styleable.SeekBarPreference_unitsLeft, 0);
+        id = typedArray.getResourceId(R.styleable.SeekBarPreferenceCham_unitsLeft, 0);
         if (id > 0) {
             mUnitsLeft = getContext().getResources().getString(id);
         }

@@ -31,6 +31,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import com.android.internal.logging.MetricsLogger;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -111,6 +112,11 @@ public class AppCircleBar extends SettingsPreferenceFragment implements
 
     }
 
+    @Override
+    protected int getMetricsCategory() {
+        // todo add a constant in MetricsLogger.java
+        return MetricsLogger.MAIN_SETTINGS;
+    }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
