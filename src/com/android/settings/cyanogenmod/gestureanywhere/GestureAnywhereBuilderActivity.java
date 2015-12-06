@@ -44,7 +44,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.BitmapDrawable;
 import com.android.settings.R;
 import com.android.settings.cyanogenmod.ShortcutPickHelper;
-import com.android.internal.logging.MetricsLogger;
 
 import java.util.Map;
 import java.util.Collections;
@@ -110,12 +109,6 @@ public class GestureAnywhereBuilderActivity extends ListActivity
         mPicker = new ShortcutPickHelper(this, this);
 
         registerForContextMenu(getListView());
-    }
-
-    @Override
-    protected int getMetricsCategory() {
-        // todo add a constant in MetricsLogger.java
-        return MetricsLogger.MAIN_SETTINGS;
     }
 
     @Override

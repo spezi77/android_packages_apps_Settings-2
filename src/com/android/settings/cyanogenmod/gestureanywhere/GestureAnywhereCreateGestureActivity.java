@@ -27,7 +27,6 @@ import android.gesture.Gesture;
 import android.gesture.GestureLibrary;
 import android.widget.TextView;
 import com.android.settings.R;
-import com.android.internal.logging.MetricsLogger;
 
 public class GestureAnywhereCreateGestureActivity extends Activity {
     private static final float LENGTH_THRESHOLD = 60.0f;
@@ -64,12 +63,6 @@ public class GestureAnywhereCreateGestureActivity extends Activity {
                 break;
             }
         }
-    }
-
-    @Override
-    protected int getMetricsCategory() {
-        // todo add a constant in MetricsLogger.java
-        return MetricsLogger.MAIN_SETTINGS;
     }
 
     @Override
