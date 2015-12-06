@@ -19,6 +19,7 @@ package com.android.settings.cyanogenmod.gestureanywhere;
 import android.content.Context;
 import android.gesture.GestureOverlayView;
 import android.util.AttributeSet;
+import com.android.internal.logging.MetricsLogger;
 
 public class GestureAnywhereGestureOverlayView extends GestureOverlayView {
     public GestureAnywhereGestureOverlayView(Context context) {
@@ -27,6 +28,12 @@ public class GestureAnywhereGestureOverlayView extends GestureOverlayView {
 
     public GestureAnywhereGestureOverlayView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
+    }
+
+    @Override
+    protected int getMetricsCategory() {
+        // todo add a constant in MetricsLogger.java
+        return MetricsLogger.MAIN_SETTINGS;
     }
 
     public GestureAnywhereGestureOverlayView(Context context, AttributeSet attrs, int defStyle) {
