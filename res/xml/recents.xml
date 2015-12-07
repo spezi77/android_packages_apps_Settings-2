@@ -57,4 +57,10 @@
         android:defaultValue="true"
         android:dependency="show_clear_all_recents" />
 
+    <!-- OmniSwitch -->
+    <PreferenceScreen
+        android:id="@+id/omniswitch"
+	android:title="@string/omniswitch_settings_title"
+        android:fragment="com.android.settings.cyanogenmod.OmniSwitch" />
+
 </PreferenceScreen>
