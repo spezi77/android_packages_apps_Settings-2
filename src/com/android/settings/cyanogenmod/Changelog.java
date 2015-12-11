@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.beanstalk;
+package com.android.settings.cyanogenmod;
 
 import android.app.Fragment;
 import android.os.Bundle;
