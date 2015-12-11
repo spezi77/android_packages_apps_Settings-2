@@ -230,5 +230,9 @@
     <string name="omniswitch_start_settings_summary">Open OmniSwitch settings</string>
     <string name="omniswitch_first_time_title">Information</string>
     <string name="omniswitch_first_time_message">Make sure you have enabled OmniSwitch. You can do this by using \"Settings\" below</string>
+
+    <!-- Changelog -->
+    <string name="changelog_beanstalk_title">BeanStalk changelog</string>
+    <string name="changelog_beanstalk_error">Unable to load BeanStalk changelog</string>
 </resources>
 
