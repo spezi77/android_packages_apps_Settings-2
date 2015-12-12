@@ -44,12 +44,6 @@
                 android:summary="@string/live_display_summary"
                 android:fragment="com.android.settings.livedisplay.LiveDisplay" />
 
-        <PreferenceScreen
-                android:key="wallpaper"
-                android:title="@string/wallpaper_settings_title"
-                settings:keywords="@string/keywords_display_wallpaper"
-                android:fragment="com.android.settings.WallpaperTypeSettings" />
-
 	<ListPreference
 	        android:key="pref_scrollingcache"
 	        android:dialogTitle="@string/pref_scrollingcache_title"
@@ -115,10 +109,11 @@
                 android:persistent="false" />
 
         <!-- Prevent accidental wake-up -->
-        <SwitchPreference
+        <com.android.settings.cyanogenmod.CMSystemSettingSwitchPreference
                 android:key="proximity_on_wake"
                 android:title="@string/proximity_wake_title"
-                android:summary="@string/proximity_wake_summary"/>
+                android:summary="@string/proximity_wake_summary"
+                android:defaultValue="true" />
 
         <!-- Seconds before sleep -->
         <ListPreference
@@ -168,6 +163,13 @@
                 android:key="recents_settings"
                 android:title="@string/recents_title"
                 android:fragment="com.android.settings.cyanogenmod.Recents" />
+
+        <!-- wallpaper -->
+        <PreferenceScreen
+                android:key="wallpaper"
+                android:title="@string/wallpaper_settings_title"
+                settings:keywords="@string/keywords_display_wallpaper"
+                android:fragment="com.android.settings.WallpaperTypeSettings" />
 
         <!-- expanded desktop -->
         <PreferenceScreen
