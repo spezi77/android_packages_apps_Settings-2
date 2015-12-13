@@ -29,6 +29,12 @@
             settings:keywords="@string/keywords_lockscreen"
             android:persistent="false"/>
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="general_category"
+        android:title="@string/title_general">
+
         <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
             android:key="double_tap_sleep_anywhere"
             android:title="@string/double_tap_sleep_anywhere_title"
@@ -39,11 +45,6 @@
             android:title="@string/media_art_title"
             android:summary="@string/media_art_summary"
             android:defaultValue="true" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="general_category"
-        android:title="@string/title_general">
 
         <com.android.settings.SingleLineSummaryPreference
             android:key="owner_info_settings"
