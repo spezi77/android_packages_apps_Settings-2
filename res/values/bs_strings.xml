@@ -238,5 +238,7 @@
     <!-- Double tap to sleep on lockscreen -->
     <string name="double_tap_sleep_anywhere_title">DT2S on Lockscreen</string>
     <string name="double_tap_sleep_anywhere_summary">Double tap lockscreen to put the device to sleep</string>
+
+    <string name="system_ui_tuner">System UI Tuner</string>
 </resources>
 
