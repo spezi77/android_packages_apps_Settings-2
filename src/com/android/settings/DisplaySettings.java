@@ -133,7 +133,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mLiftToWakePreference;
     private SwitchPreference mDozePreference;
     private SwitchPreference mTapToWakePreference;
-    private SwitchPreference mProximityCheckOnWaitPreference;
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mWakeWhenPluggedOrUnplugged;
 
@@ -266,24 +265,19 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
         }
 
-        mCameraGesturePreference = (SwitchPreference) findPreference(KEY_CAMERA_GESTURE);
-        if (mCameraGesturePreference != null && isCameraGestureAvailable(getResources())) {
+        if (isCameraGestureAvailable(getResources())) {
+            mCameraGesturePreference = (SwitchPreference) findPreference(KEY_CAMERA_GESTURE);
             mCameraGesturePreference.setOnPreferenceChangeListener(this);
         } else {
-            if (displayPrefs != null && mCameraGesturePreference != null) {
-                displayPrefs.removePreference(mCameraGesturePreference);
-            }
+            removePreference(KEY_CAMERA_GESTURE);
         }
 
-        mCameraDoubleTapPowerGesturePreference
-                = (SwitchPreference) findPreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
-        if (mCameraDoubleTapPowerGesturePreference != null && 
-                isCameraDoubleTapPowerGestureAvailable(getResources())) {
+        if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
+            mCameraDoubleTapPowerGesturePreference
+                    = (SwitchPreference) findPreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
             mCameraDoubleTapPowerGesturePreference.setOnPreferenceChangeListener(this);
         } else {
-            if (displayPrefs != null && mCameraDoubleTapPowerGesturePreference != null) {
-                displayPrefs.removePreference(mCameraDoubleTapPowerGesturePreference);
-            }
+            removePreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
         }
 
 	mScrollingCachePref = (ListPreference) findPreference(SCROLLINGCACHE_PREF);
@@ -304,18 +298,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (mTapToWakePreference != null && isTapToWakeAvailable(getResources())) {
             mTapToWakePreference.setOnPreferenceChangeListener(this);
         } else {
-            if (displayPrefs != null && mTapToWakePreference != null) {
-                displayPrefs.removePreference(mTapToWakePreference);
-            }
+            removePreference(KEY_TAP_TO_WAKE);
         }
 
-        mProximityCheckOnWaitPreference = (SwitchPreference) findPreference(KEY_PROXIMITY_WAKE);
         boolean proximityCheckOnWait = getResources().getBoolean(
                 org.cyanogenmod.platform.internal.R.bool.config_proximityCheckOnWake);
         if (!proximityCheckOnWait) {
-            if (displayPrefs != null && mProximityCheckOnWaitPreference != null) {
-                displayPrefs.removePreference(mProximityCheckOnWaitPreference);
-            }
+            removePreference(KEY_PROXIMITY_WAKE);
             CMSettings.System.putInt(getContentResolver(), CMSettings.System.PROXIMITY_ON_WAKE, 1);
         }
 
