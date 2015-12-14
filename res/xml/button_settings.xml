@@ -38,6 +38,12 @@
             android:title="@string/navbar_enable_bar"
             android:defaultValue="true" />
 
+	<net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="navigation_bar_tint"
+            android:title="@string/navbar_button_tint_title"
+            android:defaultValue="0xffffff"
+            android:dependency="navigation_bar_show" />
+
         <com.android.settings.cyanogenmod.CMSystemSettingSwitchPreference
             android:key="navigation_bar_left"
             android:title="@string/navigation_bar_left_title"

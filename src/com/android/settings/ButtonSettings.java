@@ -30,6 +30,7 @@ import android.os.RemoteException;
 import android.os.Handler;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
@@ -55,6 +56,7 @@ import cyanogenmod.hardware.CMHardwareManager;
 import cyanogenmod.providers.CMSettings;
 
 import org.cyanogenmod.internal.util.ScreenType;
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import java.util.List;
 
@@ -80,6 +82,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_HOME_ANSWER_CALL = "home_answer_call";
     private static final String KEY_VOLUME_MUSIC_CONTROLS = "volbtn_music_controls";
     private static final String KEY_VOLUME_CONTROL_RING_STREAM = "volume_keys_control_ring_stream";
+
+    private static final String NAVIGATION_BAR_TINT = "navigation_bar_tint";
 
     private static final String CATEGORY_POWER = "power_key";
     private static final String CATEGORY_HOME = "home_key";
@@ -126,6 +130,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mCameraWakeScreen;
     private SwitchPreference mCameraSleepOnRelease;
     private SwitchPreference mCameraLaunch;
+    private ColorPickerPreference mNavbarButtonTint;
     private ListPreference mVolumeKeyCursorControl;
     private SwitchPreference mVolumeWakeScreen;
     private SwitchPreference mVolumeMusicControls;
@@ -201,6 +206,15 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         // Force Navigation bar related options
         mDisableNavigationKeys = (SwitchPreference) findPreference(DISABLE_NAV_KEYS);
+
+	// Navigation bar button color
+        mNavbarButtonTint = (ColorPickerPreference) findPreference(NAVIGATION_BAR_TINT);
+        mNavbarButtonTint.setOnPreferenceChangeListener(this);
+        int intColor = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.NAVIGATION_BAR_TINT, 0xffffffff);
+        String hexColor = String.format("#%08x", (0xffffffff & intColor));
+        mNavbarButtonTint.setSummary(hexColor);
+        mNavbarButtonTint.setNewPreviewColor(intColor);
 
         mNavigationPreferencesCat = (PreferenceCategory) findPreference(CATEGORY_NAVBAR);
 
@@ -566,6 +580,14 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         } else if (preference == mHomeDoubleTapAction) {
             handleActionListChange(mHomeDoubleTapAction, newValue,
                     CMSettings.System.KEY_HOME_DOUBLE_TAP_ACTION);
+            return true;
+	} else if (preference == mNavbarButtonTint) {
+            String hex = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_TINT, intHex);
             return true;
         } else if (preference == mMenuPressAction) {
             handleActionListChange(mMenuPressAction, newValue,
