@@ -291,9 +291,6 @@
     <string name="listview_anticipate_overshoot_interpolator">Anticipate and overshoot</string>
     <string name="listview_bounce_interpolator">Bounce</string>
 
-    <!-- Navigation bar button color -->
-    <string name="navbar_button_tint_title">Button color</string>
-
     <string name="reset_paranoid">Paranoid</string>
     <string name="reset_android">Android</string>
     <string name="reset_message">Reset all entries to default?</string>
