@@ -296,6 +296,8 @@
 
     <string name="reset_paranoid">Paranoid</string>
     <string name="reset_android">Android</string>
+    <string name="reset_message">Reset all entries to default?</string>
+    <string name="reset">Reset</string>
 
     <!-- PA Pie control -->
     <string name="pa_piecontrol_settings_summary">Customize PA Pie 2.0 targets, sytle, size and color</string>
