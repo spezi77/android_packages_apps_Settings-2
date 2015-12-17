@@ -55,6 +55,7 @@
             android:title="@string/weather_category" />
 
         <PreferenceScreen
+	    android:key="lockscreen_shortcuts_settings"
             android:title="@string/lockscreen_targets_message" >
             <intent
                 android:targetPackage="com.android.systemui"
@@ -71,6 +72,11 @@
              <extra android:name="useAppPickerOnly" android:value="true" />
              <extra android:name="fragment" android:value="com.android.settings.cyanogenmod.fragments.AppShortcuts" />
          </PreferenceScreen>
+
+	<com.android.settings.cyanogenmod.CMSecureSettingSwitchPreference
+            android:key="lockscreen_visualizer"
+            android:title="@string/lockscreen_visualizer_title"
+            android:defaultValue="true"/>
 
     </PreferenceCategory>
 
