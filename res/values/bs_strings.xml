@@ -389,13 +389,6 @@
     <string name="reset_lockscreen_weather">OK</string>
     <string name="reset_values_message">Reset values?</string>
 
-    <!-- Lock screen wallpaper -->
-    <string name="lockscreen_category_title">Lockscreen</string>
-    <string name="lockscreen_wallpaper_title">Lockscreen Wallpaper</string>
-    <string name="lockscreen_wallpaper_set_title">Set new wallpaper</string>
-    <string name="lockscreen_wallpaper_clear_title">Return to default</string>
-    <string name="reset_lockscreen_wallpaper">Lockscreen wallpaper set back to default</string>
-
     <!-- Slim lockscreen shortcuts -->
     <string name="shortcut_action_none">None</string>
     <string name="shortcut_action_longpress">Longpress:</string>
