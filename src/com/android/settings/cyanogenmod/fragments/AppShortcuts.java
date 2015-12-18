@@ -58,7 +58,7 @@ public class AppShortcuts extends SettingsPreferenceFragment implements
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.DIRTYTWEAKS;
+        return MetricsLogger.MAIN_SETTINGS;
     }
 
     @Override

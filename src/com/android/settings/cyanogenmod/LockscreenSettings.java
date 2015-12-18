@@ -97,6 +97,6 @@ public class LockscreenSettings extends SettingsPreferenceFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.DIRTYTWEAKS;
+        return MetricsLogger.MAIN_SETTINGS;
     }
 }
