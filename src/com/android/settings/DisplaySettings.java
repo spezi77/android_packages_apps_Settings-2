@@ -79,7 +79,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.android.settings.Util.Helpers;
 import com.android.settings.Utils;
 import com.android.settings.cyanogenmod.DisplayRotation;
 import cyanogenmod.providers.CMSettings;
@@ -111,14 +110,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_NOTIFICATION_LIGHT = "notification_light";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
-    private static final String ENABLE_TASK_MANAGER = "enable_task_manager";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
     private ListPreference mLcdDensityPreference;
     private FontDialogPreference mFontSizePref;
     private PreferenceScreen mDisplayRotationPreference;
-    private SwitchPreference mEnableTaskManager;
 
     private final Configuration mCurConfig = new Configuration();
 
@@ -172,10 +169,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (mAccelerometer != null) {
             mAccelerometer.setPersistent(false);
         }
-
-	mEnableTaskManager = (SwitchPreference) findPreference(ENABLE_TASK_MANAGER);
-        mEnableTaskManager.setChecked((Settings.System.getInt(resolver,
-                Settings.System.ENABLE_TASK_MANAGER, 0) == 1));
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
@@ -686,12 +679,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 Log.e(TAG, "could not persist screen timeout setting", e);
             }
         }
-	if  (preference == mEnableTaskManager) {
-            boolean value = ((SwitchPreference)preference).isChecked();
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.ENABLE_TASK_MANAGER, value ? 1:0);
-		    Helpers.restartSystemUI();
-	}
         if (KEY_LCD_DENSITY.equals(key)) {
             try {
                 int value = Integer.parseInt((String) objValue);

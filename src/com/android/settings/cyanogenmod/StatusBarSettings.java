@@ -38,6 +38,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.util.Helpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +65,15 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private static final String PREF_BATT_BAR_WIDTH = "battery_bar_thickness";
     private static final String PREF_BATT_ANIMATE = "battery_bar_animate";
 
+    private static final String ENABLE_TASK_MANAGER = "enable_task_manager";
+
     private ListPreference mBatteryBar;
     private ListPreference mBatteryBarStyle;
     private ListPreference mBatteryBarThickness;
     private SwitchPreference mBatteryBarChargingAnimation;
     private ColorPickerPreference mBatteryBarColor;
+
+    private SwitchPreference mEnableTaskManager;
 
     private ListPreference mStatusBarClock;
     private ListPreference mStatusBarAmPm;
@@ -107,6 +112,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
             mStatusBarAmPm.setOnPreferenceChangeListener(this);
         }
+
+	mEnableTaskManager = (SwitchPreference) findPreference(ENABLE_TASK_MANAGER);
+        mEnableTaskManager.setChecked((Settings.System.getInt(resolver,
+                Settings.System.ENABLE_TASK_MANAGER, 0) == 1));
 
         int batteryStyle = CMSettings.System.getInt(resolver,
                 CMSettings.System.STATUS_BAR_BATTERY_STYLE, 0);
@@ -179,6 +188,12 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             CMSettings.System.putInt(
                     resolver, CMSettings.System.STATUS_BAR_CLOCK, clockStyle);
             mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
+            return true;
+	} else if (preference == mEnableTaskManager) {
+            boolean value = ((SwitchPreference)preference).isChecked();
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.ENABLE_TASK_MANAGER, value ? 1:0);
+		    Helpers.restartSystemUI();
             return true;
         } else if (preference == mStatusBarAmPm) {
             int statusBarAmPm = Integer.valueOf((String) newValue);
