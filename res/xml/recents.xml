@@ -63,4 +63,10 @@
 	android:title="@string/omniswitch_settings_title"
         android:fragment="com.android.settings.cyanogenmod.OmniSwitch" />
 
+    <!-- Slim Recents -->
+    <PreferenceScreen
+        android:key="recent_panel"
+        android:fragment="com.android.settings.cyanogenmod.RecentPanel"
+        android:title="@string/use_slim_recents_title" />
+
 </PreferenceScreen>
