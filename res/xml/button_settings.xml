@@ -38,6 +38,11 @@
             android:title="@string/navbar_enable_bar"
             android:defaultValue="true" />
 
+        <PreferenceScreen
+            android:key="dim_nav_buttons"
+            android:fragment="com.android.settings.cyanogenmod.SlimDim"
+            android:title="@string/dim_nav_buttons_category" />
+
         <com.android.settings.cyanogenmod.CMSystemSettingSwitchPreference
             android:key="navigation_bar_left"
             android:title="@string/navigation_bar_left_title"
