@@ -15,10 +15,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/slimdim_title">
 
-    <PreferenceCategory
-        android:key="dim_nav_buttons"
-        android:title="@string/dim_nav_buttons_category" >
-
         <SwitchPreference
             android:key="dim_nav_buttons"
             android:title="@string/dim_nav_buttons_title"
@@ -54,7 +50,5 @@
             android:dependency="dim_nav_buttons_animate"
             android:title="@string/dim_nav_buttons_animate_duration_title"
             android:summary="@string/dim_nav_buttons_animate_duration_summary" />
-
-    </PreferenceCategory>
 
 </PreferenceScreen>
