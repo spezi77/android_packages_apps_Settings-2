@@ -97,7 +97,7 @@ public class AppCircleBar extends SettingsPreferenceFragment implements
 
         mTriggerWidthPref = (SeekBarPreferenceCham) findPreference(KEY_TRIGGER_WIDTH);
         mTriggerWidthPref.setValue(Settings.System.getInt(getContentResolver(),
-                Settings.System.APP_CIRCLE_BAR_TRIGGER_WIDTH, 10));
+                Settings.System.APP_CIRCLE_BAR_TRIGGER_WIDTH, 30));
         mTriggerWidthPref.setOnPreferenceChangeListener(this);
 
         mTriggerTopPref = (SeekBarPreferenceCham) findPreference(KEY_TRIGGER_TOP);
