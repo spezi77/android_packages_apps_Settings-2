@@ -241,7 +241,7 @@
     <!-- Share BeanStalk -->
     <string name="share_beanstalk_title">Share BeanStalk</string>
     <string name="share_beanstalk_summary">Let others know about BeanStalk</string>
-    <string name="share_message">Check out what #BeanStalk is all about @ https://plus.google.com/u/0/communities/118297646046960923906</string>
+    <string name="share_message">Check out the official BeanStalk download page to see if your device is supported http://www.romwarehouse.com/scott.hart.bti/beanstalk/</string>
     <string name="share_chooser_title">Share BeanStalk</string>
 
     <!-- Sites BeanStalk -->
