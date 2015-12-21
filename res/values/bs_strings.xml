@@ -235,6 +235,26 @@
     <string name="changelog_beanstalk_title">BeanStalk changelog</string>
     <string name="changelog_beanstalk_error">Unable to load BeanStalk changelog</string>
 
+    <!-- About BeanStalk -->
+    <string name="about_beanstalk">About BeanStalk</string>
+
+    <!-- Share BeanStalk -->
+    <string name="share_beanstalk_title">Share BeanStalk</string>
+    <string name="share_beanstalk_summary">Let others know about BeanStalk</string>
+    <string name="share_message">Check out what #BeanStalk is all about @ https://plus.google.com/u/0/communities/118297646046960923906</string>
+    <string name="share_chooser_title">Share BeanStalk</string>
+
+    <!-- Sites BeanStalk -->
+    <string name="beanstalk_on_web">BeanStalk on web</string>
+    <string name="beanstalk_downloads_title">BeanStalk</string>
+    <string name="beanstalk_downloads_summary">BeanStalk downloads</string>
+    <string name="beanstalk_facebook_title">Facebook</string>
+    <string name="beanstalk_facebook_summary">BeanStalk Facebook page</string>
+    <string name="beanstalk_source_title">Github</string>
+    <string name="beanstalk_source_summary">Visit BeanStalk Github to view source and activity</string>
+    <string name="beanstalk_donation_title">Donate</string>
+    <string name="beanstalk_donation_summary">Donate any amount to BeanStalk development.  You may need to be logged into paypal first before continuing.</string>
+
     <!-- Double tap to sleep on lockscreen -->
     <string name="double_tap_sleep_anywhere_title">DT2S on Lockscreen</string>
     <string name="double_tap_sleep_anywhere_summary">Double tap lockscreen to put the device to sleep</string>
