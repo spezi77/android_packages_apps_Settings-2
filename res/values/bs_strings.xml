@@ -244,6 +244,13 @@
     <string name="share_message">Check out the official BeanStalk download page to see if your device is supported http://www.romwarehouse.com/scott.hart.bti/beanstalk/</string>
     <string name="share_chooser_title">Share BeanStalk</string>
 
+    <!-- BeanStalk Slack -->
+    <string name="join_slack_title">BeanStalk Slack</string>
+    <string name="join_slack_summary">Send request to join the BeanStalk team slack room for discussion and development</string>
+    <string name="join_slack">Attention BeanStalk devs, please add me to the team Slack room!</string>
+    <string name="slack_chooser_title">BeanStalk Slack</string>
+    <string name="slack_subject">request to join beanstalk slack</string>
+
     <!-- Sites BeanStalk -->
     <string name="beanstalk_on_web">BeanStalk on web</string>
     <string name="beanstalk_downloads_title">BeanStalk</string>

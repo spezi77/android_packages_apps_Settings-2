@@ -37,6 +37,7 @@ public class About extends SettingsPreferenceFragment {
     public static final String TAG = "About";
 
     private static final String KEY_BEANSTALK_SHARE = "share";
+    private static final String KEY_BEANSTALK_SLACK = "slack";
 
     Preference mDownloadsUrl;
     Preference mSourceUrl;
@@ -77,6 +78,15 @@ public class About extends SettingsPreferenceFragment {
         intent.putExtra(Intent.EXTRA_TEXT, String.format(
                 getActivity().getString(R.string.share_message), Build.MODEL));
         startActivity(Intent.createChooser(intent, getActivity().getString(R.string.share_chooser_title)));
+        } else if (preference.getKey().equals(KEY_BEANSTALK_SLACK)) {
+	Intent email = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
+        email.setType("message/rfc822");
+	email.putExtra(Intent.EXTRA_EMAIL,new String[] { "beanstalk.fto5a@zapiermail.com" });
+	email.putExtra(Intent.EXTRA_SUBJECT, String.format(
+                getActivity().getString(R.string.slack_subject), Build.MODEL));
+        email.putExtra(Intent.EXTRA_TEXT, String.format(
+                getActivity().getString(R.string.join_slack), Build.MODEL));
+        startActivity(Intent.createChooser(email, getActivity().getString(R.string.join_slack_title)));
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

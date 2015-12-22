@@ -34,7 +34,13 @@
             android:title="@string/beanstalk_donation_title"
             android:summary="@string/beanstalk_donation_summary" />
 
-        <!-- crDroid Share -->
+	<!-- Slack -->
+        <Preference
+            android:key="slack"
+            android:title="@string/join_slack_title"
+            android:summary="@string/join_slack_summary" />
+
+        <!-- Share -->
         <Preference
             android:key="share"
             android:title="@string/share_beanstalk_title"
