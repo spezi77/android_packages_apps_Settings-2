@@ -91,6 +91,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_DEVICE_CPU = "device_cpu";
     private static final String KEY_DEVICE_MEMORY = "device_memory";
     private static final String KEY_MOD_API_LEVEL = "mod_api_level";
+    private static final String KEY_BEANSTALK_BUG = "bugreport";
 
     long[] mHits = new long[3];
 
@@ -248,6 +249,15 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             }
         } else if (preference.getKey().equals(KEY_DEVICE_FEEDBACK)) {
             sendFeedback();
+	} else if (preference.getKey().equals(KEY_BEANSTALK_BUG)) {
+	Intent email = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
+        email.setType("message/rfc822");
+	email.putExtra(Intent.EXTRA_EMAIL,new String[] { "scott.hart.bti@gmail.com" });
+	email.putExtra(Intent.EXTRA_SUBJECT, String.format(
+                getActivity().getString(R.string.bug_subject), Build.MODEL));
+        email.putExtra(Intent.EXTRA_TEXT, String.format(
+                getActivity().getString(R.string.bug_body), Build.MODEL));
+        startActivity(Intent.createChooser(email, getActivity().getString(R.string.report_bug_title)));
         } else if (prefKey.equals(KEY_KERNEL_VERSION)) {
             setStringSummary(KEY_KERNEL_VERSION, getKernelVersion());
             return true;

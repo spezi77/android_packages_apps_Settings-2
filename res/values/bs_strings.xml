@@ -634,4 +634,11 @@
     <string name="dim_nav_buttons_touch_anywhere_title">Listen for touches on entire screen</string>
     <string name="dim_nav_buttons_touch_anywhere_summary_on">Touching anywhere on the screen will cause buttons to un-dim</string>
     <string name="dim_nav_buttons_touch_anywhere_summary_off">Only touches on the navbar will cause buttons to un-dim</string>
+
+    <!-- Bug Report -->
+    <string name="report_bug_title">Report BeanStalk bug</string>
+    <string name="report_bug_summary">Find a bug?  Click here to send a report</string>
+    <string name="bug_subject">IMPORTANT: BeanStalk 6.0x bug report</string>
+    <string name="bug_body">Detailed report of the bug:\n\nHow to reproduce bug:\n\nAttached logcat and/or screenshot?\n\nProposed resolution if applicable:\n\nAdditional info</string>
+
 </resources>
