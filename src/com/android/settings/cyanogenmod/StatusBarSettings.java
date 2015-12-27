@@ -18,6 +18,8 @@ package com.android.settings.cyanogenmod;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -46,6 +48,7 @@ import java.util.Map;
 
 import cyanogenmod.providers.CMSettings;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
+import com.android.internal.util.omni.PackageUtils;
 
 public class StatusBarSettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, Indexable {
@@ -66,6 +69,15 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private static final String PREF_BATT_ANIMATE = "battery_bar_animate";
 
     private static final String ENABLE_TASK_MANAGER = "enable_task_manager";
+
+    private static final String CATEGORY_WEATHER = "weather_category";
+    private static final String WEATHER_ICON_PACK = "weather_icon_pack";
+    private static final String DEFAULT_WEATHER_ICON_PACKAGE = "org.omnirom.omnijaws";
+    private static final String WEATHER_SERVICE_PACKAGE = "org.omnirom.omnijaws";
+    private static final String LOCK_CLOCK_PACKAGE="com.cyanogenmod.lockclock";
+
+    private PreferenceCategory mWeatherCategory;
+    private ListPreference mWeatherIconPack;
 
     private ListPreference mBatteryBar;
     private ListPreference mBatteryBarStyle;
@@ -158,6 +170,32 @@ public class StatusBarSettings extends SettingsPreferenceFragment
                 Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, 1)) + "");
         mBatteryBarThickness.setSummary(mBatteryBarThickness.getEntry());
 
+	mWeatherCategory = (PreferenceCategory) prefScreen.findPreference(CATEGORY_WEATHER);
+        if (mWeatherCategory != null && !isOmniJawsServiceInstalled()) {
+            prefScreen.removePreference(mWeatherCategory);
+        } else {
+            String settingHeaderPackage = Settings.System.getString(getContentResolver(),
+                    Settings.System.STATUS_BAR_WEATHER_ICON_PACK);
+            if (settingHeaderPackage == null) {
+                settingHeaderPackage = DEFAULT_WEATHER_ICON_PACKAGE;
+            }
+            mWeatherIconPack = (ListPreference) findPreference(WEATHER_ICON_PACK);
+            mWeatherIconPack.setEntries(getAvailableWeatherIconPacksEntries());
+            mWeatherIconPack.setEntryValues(getAvailableWeatherIconPacksValues());
+
+            int valueIndex = mWeatherIconPack.findIndexOfValue(settingHeaderPackage);
+            if (valueIndex == -1) {
+                // no longer found
+                settingHeaderPackage = DEFAULT_WEATHER_ICON_PACKAGE;
+                Settings.System.putString(getContentResolver(),
+                        Settings.System.STATUS_BAR_WEATHER_ICON_PACK, settingHeaderPackage);
+                valueIndex = mWeatherIconPack.findIndexOfValue(settingHeaderPackage);
+            }
+            mWeatherIconPack.setValueIndex(valueIndex >= 0 ? valueIndex : 0);
+            mWeatherIconPack.setSummary(mWeatherIconPack.getEntry());
+            mWeatherIconPack.setOnPreferenceChangeListener(this);
+        }
+
         updateBatteryBarOptions();
     }
 
@@ -245,6 +283,12 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             Settings.System.putInt(getActivity().getContentResolver(), Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, val);
             mBatteryBarThickness.setSummary(mBatteryBarThickness.getEntries()[index]);
             return true;
+	} else if (preference == mWeatherIconPack) {
+            String value = (String) newValue;
+            Settings.System.putString(getContentResolver(),
+                    Settings.System.STATUS_BAR_WEATHER_ICON_PACK, value);
+            int valueIndex = mWeatherIconPack.findIndexOfValue(value);
+            mWeatherIconPack.setSummary(mWeatherIconPack.getEntries()[valueIndex]);
         }
         return false;
     }
@@ -305,4 +349,58 @@ public class StatusBarSettings extends SettingsPreferenceFragment
                     return result;
                 }
             };
+
+   private boolean isOmniJawsServiceInstalled() {
+        return PackageUtils.isAvailableApp(WEATHER_SERVICE_PACKAGE, getActivity());
+    }
+
+    private boolean isLockClockInstalled() {
+        return PackageUtils.isAvailableApp(LOCK_CLOCK_PACKAGE, getActivity());
+    }
+
+    private String[] getAvailableWeatherIconPacksValues() {
+        List<String> headerPacks = new ArrayList<String>();
+        Intent i = new Intent();
+        PackageManager packageManager = getPackageManager();
+        i.setAction("org.omnirom.WeatherIconPack");
+        for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
+            String packageName = r.activityInfo.packageName;
+            if (packageName.equals(DEFAULT_WEATHER_ICON_PACKAGE)) {
+                headerPacks.add(0, r.activityInfo.name);
+            } else {
+                headerPacks.add(r.activityInfo.name);
+            }
+        }
+        if (isLockClockInstalled()) {
+            headerPacks.add(LOCK_CLOCK_PACKAGE + ".weather");
+            headerPacks.add(LOCK_CLOCK_PACKAGE + ".weather_color");
+            headerPacks.add(LOCK_CLOCK_PACKAGE + ".weather_vclouds");
+        }
+        return headerPacks.toArray(new String[headerPacks.size()]);
+    }
+
+    private String[] getAvailableWeatherIconPacksEntries() {
+        List<String> headerPacks = new ArrayList<String>();
+        Intent i = new Intent();
+        PackageManager packageManager = getPackageManager();
+        i.setAction("org.omnirom.WeatherIconPack");
+        for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
+            String packageName = r.activityInfo.packageName;
+            String label = r.activityInfo.loadLabel(getPackageManager()).toString();
+            if (label == null) {
+                label = r.activityInfo.packageName;
+            }
+            if (packageName.equals(DEFAULT_WEATHER_ICON_PACKAGE)) {
+                headerPacks.add(0, label);
+            } else {
+                headerPacks.add(label);
+            }
+        }
+        if (isLockClockInstalled()) {
+            headerPacks.add("LockClock (white)");
+            headerPacks.add("LockClock (color)");
+            headerPacks.add("LockClock (vclouds)");
+        }
+        return headerPacks.toArray(new String[headerPacks.size()]);
+    }
 }
