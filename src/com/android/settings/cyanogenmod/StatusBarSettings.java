@@ -170,10 +170,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
                 Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, 1)) + "");
         mBatteryBarThickness.setSummary(mBatteryBarThickness.getEntry());
 
-	mWeatherCategory = (PreferenceCategory) prefScreen.findPreference(CATEGORY_WEATHER);
-        if (mWeatherCategory != null && !isOmniJawsServiceInstalled()) {
-            prefScreen.removePreference(mWeatherCategory);
-        } else {
+	mWeatherCategory = (PreferenceCategory) findPreference(CATEGORY_WEATHER);
             String settingHeaderPackage = Settings.System.getString(getContentResolver(),
                     Settings.System.STATUS_BAR_WEATHER_ICON_PACK);
             if (settingHeaderPackage == null) {
@@ -194,7 +191,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             mWeatherIconPack.setValueIndex(valueIndex >= 0 ? valueIndex : 0);
             mWeatherIconPack.setSummary(mWeatherIconPack.getEntry());
             mWeatherIconPack.setOnPreferenceChangeListener(this);
-        }
 
         updateBatteryBarOptions();
     }
