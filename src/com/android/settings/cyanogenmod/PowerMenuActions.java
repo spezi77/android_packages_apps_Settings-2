@@ -30,7 +30,6 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.preference.ListPreference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.SlimSeekBarPreference;
 import android.provider.Settings;
 
@@ -235,6 +234,11 @@ public class PowerMenuActions extends SettingsPreferenceFragment
             Settings.System.putFloat(getContentResolver(), Settings.System.ON_THE_GO_ALPHA,
                     val / 100);
             return true;
+	} else if (preference == mScreenshotDelay) {
+            int value = Integer.parseInt(newValue.toString());
+            Settings.System.putInt(mCr, Settings.System.SCREENSHOT_DELAY,
+                    value);
+            return true;
         }
         return false;
     }
@@ -297,17 +301,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return true;
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mScreenshotDelay) {
-            int value = Integer.parseInt(newValue.toString());
-            Settings.System.putInt(mCr, Settings.System.SCREENSHOT_DELAY,
-                    value);
-            return true;
-        }
-        return false;
     }
 
 
