@@ -253,7 +253,7 @@
 
     <!-- Sites BeanStalk -->
     <string name="beanstalk_on_web">BeanStalk on web</string>
-    <string name="beanstalk_downloads_title">BeanStalk</string>
+    <string name="beanstalk_downloads_title">Downloads</string>
     <string name="beanstalk_downloads_summary">BeanStalk downloads</string>
     <string name="beanstalk_facebook_title">Facebook</string>
     <string name="beanstalk_facebook_summary">BeanStalk Facebook page</string>
