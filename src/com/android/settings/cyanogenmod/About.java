@@ -70,7 +70,7 @@ public class About extends SettingsPreferenceFragment {
         } else if (preference == mDonationUrl) {
             launchUrl("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=HUUHRXDXNMZPU");
         } else if (preference == mDownloadsUrl) {
-            launchUrl("http://www.romwarehouse.com/scott.hart.bti/beanstalk/");
+            launchUrl("https://androidfilehost.com/?w=devices&uid=23159073880933293");
         } else if (preference.getKey().equals(KEY_BEANSTALK_SHARE)) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);
