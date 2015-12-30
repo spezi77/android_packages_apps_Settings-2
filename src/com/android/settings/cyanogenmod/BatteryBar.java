@@ -120,7 +120,6 @@ public class BatteryBar extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        }
     }
 
     @Override
