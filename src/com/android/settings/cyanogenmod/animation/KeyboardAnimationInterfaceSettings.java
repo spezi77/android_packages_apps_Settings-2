@@ -38,9 +38,12 @@ import android.text.TextUtils;
 import com.android.settings.widget.SeekBarPreferenceCham;
 import com.android.internal.util.benzo.AwesomeAnimationHelper;
 
-import com.android.settings.R;
+import com.android.internal.logging.MetricsLogger;
 
-public static class KeyboardAnimationInterfaceSettingsFragment extends SettingsPreferenceFragment
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+
+public class KeyboardAnimationInterfaceSettings extends SettingsPreferenceFragment
             implements OnPreferenceChangeListener {
 
         private static final String TAG = "KeyboardAnimationInterfaceSettings";
@@ -61,6 +64,11 @@ public static class KeyboardAnimationInterfaceSettingsFragment extends SettingsP
         private int[] mAnimations;
         private String[] mAnimationsStrings;
         private String[] mAnimationsNum;
+
+    	@Override
+    	protected int getMetricsCategory() {
+            return MetricsLogger.DEVELOPMENT;
+    	}
 
         @Override
         public void onCreate(Bundle savedInstanceState) {

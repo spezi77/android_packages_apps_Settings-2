@@ -45,14 +45,13 @@
 
       <com.android.settings.widget.SeekBarPreferenceCham
             android:key="ime_anim_duration"
-            android:persistent="false"
             android:title="@string/ime_duration_title"
             android:summary="@string/animation_duration_summary"
             android:max="100"
-            aicpextras:minChOS="0"
-            aicpextras:interval="1"
-            aicpextras:unitsLeft=""
-            aicpextras:unitsRight=" * 15ms"
+            settings:minChOS="0"
+	    settings:interval="1"
+            settings:unitsLeft=""
+            settings:unitsRight=" * 15ms"
             android:defaultValue="0" />
 
         <Preference
