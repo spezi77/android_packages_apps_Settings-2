@@ -117,6 +117,28 @@ public class Weather extends SettingsPreferenceFragment implements
          mNumberOfNotifications =
                  (ListPreference) findPreference(PREF_NUMBER_OF_NOTIFICATIONS);
 
+        int  hideWeather = Settings.System.getInt(mResolver,
+                Settings.System.LOCK_SCREEN_WEATHER_HIDE_PANEL, 0);
+        mHideWeather.setValue(String.valueOf(hideWeather));
+        mHideWeather.setOnPreferenceChangeListener(this);
+
+        if (hideWeather == 0) {
+            mHideWeather.setSummary(R.string.weather_hide_panel_auto_summary);
+            catNotifications.removePreference(mNumberOfNotifications);
+        } else if (hideWeather == 1) {
+            int numberOfNotifications = Settings.System.getInt(mResolver,
+                   Settings.System.LOCK_SCREEN_WEATHER_NUMBER_OF_NOTIFICATIONS, 6);
+            mNumberOfNotifications.setValue(String.valueOf(numberOfNotifications));
+            mNumberOfNotifications.setSummary(mNumberOfNotifications.getEntry());
+            mNumberOfNotifications.setOnPreferenceChangeListener(this);
+
+            mHideWeather.setSummary(getString(R.string.weather_hide_panel_custom_summary,
+                    mNumberOfNotifications.getEntry()));
+        } else {
+            mHideWeather.setSummary(R.string.weather_hide_panel_never_summary);
+            catNotifications.removePreference(mNumberOfNotifications);
+        }
+
         if (showWeather) {
             mShowLocation = (SwitchPreference) findPreference(PREF_SHOW_LOCATION);
             mShowLocation.setChecked(Settings.System.getInt(mResolver,
@@ -127,28 +149,6 @@ public class Weather extends SettingsPreferenceFragment implements
             mShowTimestamp.setChecked(Settings.System.getInt(mResolver,
                     Settings.System.LOCK_SCREEN_SHOW_WEATHER_TIMESTAMP, 0) == 1);
             mShowTimestamp.setOnPreferenceChangeListener(this);
-
-            int  hideWeather = Settings.System.getInt(mResolver,
-                    Settings.System.LOCK_SCREEN_WEATHER_HIDE_PANEL, 0);
-            mHideWeather.setValue(String.valueOf(hideWeather));
-            mHideWeather.setOnPreferenceChangeListener(this);
-
-            if (hideWeather == 0) {
-                mHideWeather.setSummary(R.string.weather_hide_panel_auto_summary);
-                catNotifications.removePreference(mNumberOfNotifications);
-            } else if (hideWeather == 1) {
-                int numberOfNotifications = Settings.System.getInt(mResolver,
-                       Settings.System.LOCK_SCREEN_WEATHER_NUMBER_OF_NOTIFICATIONS, 6);
-                mNumberOfNotifications.setValue(String.valueOf(numberOfNotifications));
-                mNumberOfNotifications.setSummary(mNumberOfNotifications.getEntry());
-                mNumberOfNotifications.setOnPreferenceChangeListener(this);
-
-                mHideWeather.setSummary(getString(R.string.weather_hide_panel_custom_summary,
-                        mNumberOfNotifications.getEntry()));
-            } else {
-                mHideWeather.setSummary(R.string.weather_hide_panel_never_summary);
-                catNotifications.removePreference(mNumberOfNotifications);
-            }
 
             mConditionIcon = (ListPreference) findPreference(PREF_CONDITION_ICON);
             mConditionIcon.setValue(String.valueOf(conditionIcon));
