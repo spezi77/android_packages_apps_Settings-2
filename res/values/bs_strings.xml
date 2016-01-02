@@ -51,9 +51,9 @@
 
     <!-- Disabling FC notifications -->
     <string name="disable_fc_notifications_title">Disable FC Notifications</string>
-    <string name="disable_fc_notifications_summary">This will hide all force close notificaitons</string>
+    <string name="disable_fc_notifications_summary">This will hide all force close notifications</string>
 
-    <!--Time Contexual Header -->
+    <!--Time Contextual Header -->
     <string name="status_bar_custom_header_title">Time Contextual Header</string>
     <string name="status_bar_custom_header_summary">Enable notification panel header image</string>
     <string name="status_bar_custom_header_default_title">Use Poly HD images</string>
@@ -138,7 +138,7 @@
     <string name="trigger_width_title">Trigger width</string>
     <string name="trigger_width_summary">Adjust the width of the trigger area</string>
     <string name="trigger_top_title">Trigger position</string>
-    <string name="trigger_top_summary">Adjust the vertical postion of the trigger area</string>
+    <string name="trigger_top_summary">Adjust the vertical position of the trigger area</string>
     <string name="trigger_bottom_title">Trigger height</string>
     <string name="trigger_bottom_summary">Adjust the height of the trigger area</string>
 
@@ -146,7 +146,7 @@
     <string name="gesture_anywhere_title">Gesture Anywhere</string>
     <string name="gesture_anywhere_enabled_title">Gesture Anywhere</string>
     <string name="gesture_anywhere_enabled_summary">Enable the Gesture Anywhere feature</string>
-    <string name="gesture_anywhere_position_title">Loction</string>
+    <string name="gesture_anywhere_position_title">Location</string>
     <string name="gesture_anywhere_position_left">Left edge</string>
     <string name="gesture_anywhere_position_right">Right edge</string>
     <string name="gesture_anywhere_gestures_title">Gestures</string>
@@ -241,7 +241,7 @@
     <!-- Share BeanStalk -->
     <string name="share_beanstalk_title">Share BeanStalk</string>
     <string name="share_beanstalk_summary">Let others know about BeanStalk</string>
-    <string name="share_message">Check out the official BeanStalk download page to see if your device is supported http://www.romwarehouse.com/scott.hart.bti/beanstalk/</string>
+    <string name="share_message">Check out the official BeanStalk download page to see if your device is supported https://www.androidfilehost.com/?w=devices&amp;uid=23159073880933293</string>
     <string name="share_chooser_title">Share BeanStalk</string>
 
     <!-- BeanStalk Slack -->
@@ -324,13 +324,13 @@
     <string name="reset">Reset</string>
 
     <!-- PA Pie control -->
-    <string name="pa_piecontrol_settings_summary">Customize PA Pie 2.0 targets, sytle, size and color</string>
+    <string name="pa_piecontrol_settings_summary">Customize PA Pie 2.0 targets, style, size and color</string>
     <string name="pa_pie_control_title">PA Pie Control</string>
     <string name="pa_pie_control_enable_title">Enable Pie Control</string>
     <string name="pa_pie_targets_title">Pie Targets</string>
     <string name="pa_pie_style_title">Pie Style</string>
     <string name="pa_pie_menu_title">Always show menu button</string>
-    <string name="pa_pie_menu_summary">Whether or not the menu button should always be shown, even when its not needed</string>
+    <string name="pa_pie_menu_summary">Whether or not the menu button should always be shown, even when it\'s not needed</string>
     <string name="pa_pie_size_title">Pie Size</string>
     <string name="pa_pie_size_summary">Define Pie controls size</string>
     <string name="pa_pie_size_small">Small</string>
