@@ -51,7 +51,7 @@ public class PowerMenuActions extends SettingsPreferenceFragment
 
     final static String TAG = "PowerMenuActions";
 
-    private static final String POWER_MENU_ONTHEGO_ENABLED = "power_menu_onthego_enabled";
+    private static final String SCREENSHOT_DELAY = "screenshot_delay";
     private static final String PREF_ON_THE_GO_ALPHA = "on_the_go_alpha";
 
     private CheckBoxPreference mRebootPref;
@@ -68,9 +68,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment
     private SlimSeekBarPreference mOnTheGoAlphaPref;
     private CheckBoxPreference mVoiceAssistPref;
     private CheckBoxPreference mAssistPref;
-
-    private static final String SCREENSHOT_DELAY = "screenshot_delay";
-
 
     Context mContext;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
@@ -104,16 +101,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment
                 R.array.power_menu_actions_array);
         mAllActions = PowerMenuConstants.getAllActions();
 
-        mOnTheGoPowerMenu = (CheckBoxPreference) findPreference(POWER_MENU_ONTHEGO_ENABLED);
-        mOnTheGoPowerMenu.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_ONTHEGO_ENABLED, 0) == 1));
-        mOnTheGoPowerMenu.setOnPreferenceChangeListener(this);
-
-        mOnTheGoAlphaPref = (SlimSeekBarPreference) findPreference(PREF_ON_THE_GO_ALPHA);
-        mOnTheGoAlphaPref.setDefault(50);
-        mOnTheGoAlphaPref.setInterval(1);
-        mOnTheGoAlphaPref.setOnPreferenceChangeListener(this);
-
         for (String action : mAllActions) {
         // Remove preferences not present in the overlay
             if (!isActionAllowed(action)) {
@@ -127,6 +114,8 @@ public class PowerMenuActions extends SettingsPreferenceFragment
                 mScreenshotPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SCREENSHOT);
             } else if (action.equals(GLOBAL_ACTION_KEY_SCREENRECORD)) {
                 mScreenrecordPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SCREENRECORD);
+	    } else if (action.equals(GLOBAL_ACTION_KEY_ONTHEGO)) {
+                mOnTheGoPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_ONTHEGO);
             } else if (action.equals(GLOBAL_ACTION_KEY_AIRPLANE)) {
                 mAirplanePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_AIRPLANE);
             } else if (action.equals(GLOBAL_ACTION_KEY_USERS)) {
@@ -154,6 +143,10 @@ public class PowerMenuActions extends SettingsPreferenceFragment
                 Settings.System.SCREENSHOT_DELAY, 1);
         mScreenshotDelay.setCurrentValue(ssDelay);
 
+        mOnTheGoAlphaPref = (SlimSeekBarPreference) findPreference(PREF_ON_THE_GO_ALPHA);
+        mOnTheGoAlphaPref.setDefault(50);
+        mOnTheGoAlphaPref.setInterval(1);
+        mOnTheGoAlphaPref.setOnPreferenceChangeListener(this);
 
         getUserConfig();
     }
@@ -177,6 +170,11 @@ public class PowerMenuActions extends SettingsPreferenceFragment
 
         if (mScreenrecordPref != null) {
             mScreenrecordPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SCREENRECORD));
+        }
+
+
+        if (mOnTheGoPref != null) {
+            mOnTheGoPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_ONTHEGO));
         }
 
         if (mAirplanePref != null) {
@@ -225,19 +223,15 @@ public class PowerMenuActions extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
-        if (preference == mOnTheGoPowerMenu) {
-            boolean value = ((Boolean)newValue).booleanValue();
-            Settings.System.putInt(getContentResolver(), Settings.System.POWER_MENU_ONTHEGO_ENABLED, value ? 1 : 0);
-            return true;
-        } else if (preference == mOnTheGoAlphaPref) {
-            float val = Float.parseFloat((String) newValue);
-            Settings.System.putFloat(getContentResolver(), Settings.System.ON_THE_GO_ALPHA,
-                    val / 100);
-            return true;
-	} else if (preference == mScreenshotDelay) {
+        if (preference == mScreenshotDelay) {
             int value = Integer.parseInt(newValue.toString());
             Settings.System.putInt(mCr, Settings.System.SCREENSHOT_DELAY,
                     value);
+            return true;
+        } else if (preference == mOnTheGoAlphaPref) {
+            float val = Float.parseFloat((String) newValue);
+            Settings.System.putFloat(mCr, Settings.System.ON_THE_GO_ALPHA,
+                    val / 100);
             return true;
         }
         return false;
@@ -264,6 +258,10 @@ public class PowerMenuActions extends SettingsPreferenceFragment
         } else if (preference == mScreenrecordPref) {
             value = mScreenrecordPref.isChecked();
             updateUserConfig(value, GLOBAL_ACTION_KEY_SCREENRECORD);
+
+        } else if (preference == mOnTheGoPref) {
+            value = mOnTheGoPref.isChecked();
+            updateUserConfig(value, GLOBAL_ACTION_KEY_ONTHEGO);
 
         } else if (preference == mAirplanePref) {
             value = mAirplanePref.isChecked();

@@ -40,7 +40,7 @@
         android:defaultValue="false" />
 
     <CheckBoxPreference
-        android:key="power_menu_onthego_enabled"
+        android:key="onthego"
         android:title="@string/power_menu_onthego_title"
         android:defaultValue="false" />
 
@@ -48,7 +48,7 @@
         android:key="on_the_go_alpha"
         android:title="@string/onthego_alpha_title"
         android:summary="@string/onthego_alpha_summary"
-        android:dependency="power_menu_onthego_enabled" />
+        android:dependency="onthego" />
 
     <CheckBoxPreference
         android:key="airplane"
