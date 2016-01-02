@@ -117,6 +117,26 @@ public class Weather extends SettingsPreferenceFragment implements
          mNumberOfNotifications =
                  (ListPreference) findPreference(PREF_NUMBER_OF_NOTIFICATIONS);
 
+        if (showWeather) {
+            mShowLocation = (SwitchPreference) findPreference(PREF_SHOW_LOCATION);
+            mShowLocation.setChecked(Settings.System.getInt(mResolver,
+                    Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1) == 1);
+            mShowLocation.setOnPreferenceChangeListener(this);
+
+            mShowTimestamp = (SwitchPreference) findPreference(PREF_SHOW_TIMESTAMP);
+            mShowTimestamp.setChecked(Settings.System.getInt(mResolver,
+                    Settings.System.LOCK_SCREEN_SHOW_WEATHER_TIMESTAMP, 0) == 1);
+            mShowTimestamp.setOnPreferenceChangeListener(this);
+
+            mConditionIcon = (ListPreference) findPreference(PREF_CONDITION_ICON);
+            mConditionIcon.setValue(String.valueOf(conditionIcon));
+            mConditionIcon.setSummary(mConditionIcon.getEntry());
+            mConditionIcon.setOnPreferenceChangeListener(this);
+
+            mColorizeAllIcons = (SwitchPreference) findPreference(PREF_COLORIZE_ALL_ICONS);
+            mColorizeAllIcons.setChecked(colorizeAllIcons);
+            mColorizeAllIcons.setOnPreferenceChangeListener(this);
+
         int  hideWeather = Settings.System.getInt(mResolver,
                 Settings.System.LOCK_SCREEN_WEATHER_HIDE_PANEL, 0);
         mHideWeather.setValue(String.valueOf(hideWeather));
@@ -137,27 +157,10 @@ public class Weather extends SettingsPreferenceFragment implements
         } else {
             mHideWeather.setSummary(R.string.weather_hide_panel_never_summary);
             catNotifications.removePreference(mNumberOfNotifications);
+            if (!showWeather) {
+                removePreference(PREF_HIDE_WEATHER);
+	    }
         }
-
-        if (showWeather) {
-            mShowLocation = (SwitchPreference) findPreference(PREF_SHOW_LOCATION);
-            mShowLocation.setChecked(Settings.System.getInt(mResolver,
-                    Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1) == 1);
-            mShowLocation.setOnPreferenceChangeListener(this);
-
-            mShowTimestamp = (SwitchPreference) findPreference(PREF_SHOW_TIMESTAMP);
-            mShowTimestamp.setChecked(Settings.System.getInt(mResolver,
-                    Settings.System.LOCK_SCREEN_SHOW_WEATHER_TIMESTAMP, 0) == 1);
-            mShowTimestamp.setOnPreferenceChangeListener(this);
-
-            mConditionIcon = (ListPreference) findPreference(PREF_CONDITION_ICON);
-            mConditionIcon.setValue(String.valueOf(conditionIcon));
-            mConditionIcon.setSummary(mConditionIcon.getEntry());
-            mConditionIcon.setOnPreferenceChangeListener(this);
-
-            mColorizeAllIcons = (SwitchPreference) findPreference(PREF_COLORIZE_ALL_ICONS);
-            mColorizeAllIcons.setChecked(colorizeAllIcons);
-            mColorizeAllIcons.setOnPreferenceChangeListener(this);
 
             intColor = Settings.System.getInt(mResolver,
                     Settings.System.LOCK_SCREEN_WEATHER_TEXT_COLOR,
