@@ -120,6 +120,10 @@
     <string name="recents_searchbar_summary">Show Google search bar in the recents screen</string>
     <string name="recents_show_fullscreen">Fullscreen Recents</string>
     <string name="recents_fullscreen_summary">Enable immersive mode for recents screen</string>
+    <string name="recents_full_screen_clock_title">Show clock</string>
+    <string name="recents_full_screen_clock_summary">Shows clock at the top while in fullscreen</string>
+    <string name="recents_full_screen_date_title">Show date</string>
+    <string name="recents_full_screen_date_summary">Shows date at the top while in fullscreen</string>
 
     <!-- Media art -->
     <string name="media_art_title">Media cover art</string>
