@@ -116,7 +116,7 @@ public class Weather extends SettingsPreferenceFragment implements
 
 	mLockClockFonts = (ListPreference) findPreference(LOCK_CLOCK_FONTS);
         mLockClockFonts.setValue(String.valueOf(Settings.System.getInt(
-                resolver, Settings.System.LOCK_CLOCK_FONTS, 0)));
+                mResolver, Settings.System.LOCK_CLOCK_FONTS, 0)));
         mLockClockFonts.setSummary(mLockClockFonts.getEntry());
         mLockClockFonts.setOnPreferenceChangeListener(this);
 
@@ -240,7 +240,7 @@ public class Weather extends SettingsPreferenceFragment implements
             preference.setSummary(hex);
             return true;
 	} else if (preference == mLockClockFonts) {
-            Settings.System.putInt(resolver, Settings.System.LOCK_CLOCK_FONTS,
+            Settings.System.putInt(mResolver, Settings.System.LOCK_CLOCK_FONTS,
                     Integer.valueOf((String) newValue));
             mLockClockFonts.setValue(String.valueOf(newValue));
             mLockClockFonts.setSummary(mLockClockFonts.getEntry());
