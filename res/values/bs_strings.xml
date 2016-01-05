@@ -845,4 +845,13 @@
     <string name="lock_clock_font_condensed_bold_italic">Condensed Bold Italic</string>
     <string name="lock_clock_font_medium_normal">Medium</string>
     <string name="lock_clock_font_medium_italic">Medium Italic</string>
+
+    <!-- Lockscreen see through -->
+    <string name="lockscreen_see_through_title">Lockscreen blur</string>
+    <string name="lockscreen_see_through_summary">Blurs and displays the content behind your lockscreen.</string>
+    <string name="lockscreen_blur_radius">Blur effect intensity</string>
+
+    <string name="ls_extras_title">Lockscreen extra settings</string>
+    <string name="title_extra">Advanced</string>
+    <string name="ls_extras_summary">Extra BeanStalk lockscreen options</string>
 </resources>

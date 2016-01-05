@@ -50,8 +50,6 @@ public class Weather extends SettingsPreferenceFragment implements
     private static final String PREF_COLORIZE_ALL_ICONS = "weather_colorize_all_icons";
     private static final String PREF_TEXT_COLOR = "weather_text_color";
     private static final String PREF_ICON_COLOR = "weather_icon_color";
-    private static final String LOCKSCREEN_MAX_NOTIF_CONFIG = "lockscreen_max_notif_cofig";
-    private static final String LOCK_CLOCK_FONTS = "lock_clock_fonts";
 
     private static final int MONOCHROME_ICON = 0;
     private static final int DEFAULT_COLOR = 0xffffffff;
@@ -65,8 +63,6 @@ public class Weather extends SettingsPreferenceFragment implements
     private SwitchPreference mColorizeAllIcons;
     private ColorPickerPreference mTextColor;
     private ColorPickerPreference mIconColor;
-    private SeekBarPreferenceCham mMaxKeyguardNotifConfig;
-    private ListPreference mLockClockFonts;
 
     private ContentResolver mResolver;
 
@@ -107,18 +103,6 @@ public class Weather extends SettingsPreferenceFragment implements
         PreferenceCategory catColors = (PreferenceCategory) findPreference(PREF_CAT_COLORS);
         mTextColor = (ColorPickerPreference) findPreference(PREF_TEXT_COLOR);
         mIconColor = (ColorPickerPreference) findPreference(PREF_ICON_COLOR);
-
-	mMaxKeyguardNotifConfig = (SeekBarPreferenceCham) findPreference(LOCKSCREEN_MAX_NOTIF_CONFIG);
-        int kgconf = Settings.System.getInt(mResolver,
-                Settings.System.LOCKSCREEN_MAX_NOTIF_CONFIG, 5);
-        mMaxKeyguardNotifConfig.setValue(kgconf);
-        mMaxKeyguardNotifConfig.setOnPreferenceChangeListener(this);
-
-	mLockClockFonts = (ListPreference) findPreference(LOCK_CLOCK_FONTS);
-        mLockClockFonts.setValue(String.valueOf(Settings.System.getInt(
-                mResolver, Settings.System.LOCK_CLOCK_FONTS, 0)));
-        mLockClockFonts.setSummary(mLockClockFonts.getEntry());
-        mLockClockFonts.setOnPreferenceChangeListener(this);
 
         if (showWeather) {
             mShowLocation = (SwitchPreference) findPreference(PREF_SHOW_LOCATION);
@@ -189,7 +173,6 @@ public class Weather extends SettingsPreferenceFragment implements
         boolean value;
         String hex;
         int intHex;
-
         if (preference == mShowWeather) {
             value = (Boolean) newValue;
             Settings.System.putInt(mResolver,
@@ -226,11 +209,6 @@ public class Weather extends SettingsPreferenceFragment implements
                     Settings.System.LOCK_SCREEN_WEATHER_TEXT_COLOR, intHex);
             preference.setSummary(hex);
             return true;
-	} else if (preference == mMaxKeyguardNotifConfig) {
-            int kgconf = (Integer) newValue;
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.LOCKSCREEN_MAX_NOTIF_CONFIG, kgconf);
-            return true;
         } else if (preference == mIconColor) {
             hex = ColorPickerPreference.convertToARGB(
                 Integer.valueOf(String.valueOf(newValue)));
@@ -238,12 +216,6 @@ public class Weather extends SettingsPreferenceFragment implements
             Settings.System.putInt(mResolver,
                     Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR, intHex);
             preference.setSummary(hex);
-            return true;
-	} else if (preference == mLockClockFonts) {
-            Settings.System.putInt(mResolver, Settings.System.LOCK_CLOCK_FONTS,
-                    Integer.valueOf((String) newValue));
-            mLockClockFonts.setValue(String.valueOf(newValue));
-            mLockClockFonts.setSummary(mLockClockFonts.getEntry());
             return true;
         }
         return false;

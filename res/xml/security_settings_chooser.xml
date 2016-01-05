@@ -30,29 +30,25 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="extra_ls_category"
+        android:title="@string/title_extra">
+
+	<PreferenceScreen
+            android:key="ls_extras"
+            android:title="@string/ls_extras_title"
+            android:summary="@string/ls_extras_summary"
+            android:fragment="com.android.settings.cyanogenmod.LSExtras" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="general_category"
         android:title="@string/title_general">
-
-        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
-            android:key="double_tap_sleep_lock_screen"
-            android:title="@string/double_tap_sleep_anywhere_title"
-            android:summary="@string/double_tap_sleep_anywhere_summary" />
-
-        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
-            android:key="lockscreen_media_metadata"
-            android:title="@string/media_art_title"
-            android:summary="@string/media_art_summary"
-            android:defaultValue="true" />
 
         <com.android.settings.SingleLineSummaryPreference
             android:key="owner_info_settings"
             android:title="@string/owner_info_settings_title"
             android:summary="@string/owner_info_settings_summary"/>
-
-	<Preference
-            android:key="weather"
-            android:fragment="com.android.settings.cyanogenmod.Weather"
-            android:title="@string/weather_category" />
 
         <PreferenceScreen
 	    android:key="lockscreen_shortcuts_settings"
