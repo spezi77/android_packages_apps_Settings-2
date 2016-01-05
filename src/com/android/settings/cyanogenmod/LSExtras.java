@@ -73,8 +73,7 @@ public class LSExtras extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.ls_extras);
-
-        ContentResolver resolver = getActivity().getContentResolver();
+        mResolver = getActivity().getContentResolver();
 
 	mMaxKeyguardNotifConfig = (SeekBarPreferenceCham) findPreference(LOCKSCREEN_MAX_NOTIF_CONFIG);
         int kgconf = Settings.System.getInt(mResolver,
@@ -89,7 +88,7 @@ public class LSExtras extends SettingsPreferenceFragment
         mLockClockFonts.setOnPreferenceChangeListener(this);
 
 	mBlurRadius = (SeekBarPreferenceCham) findPreference(KEY_LOCKSCREEN_BLUR_RADIUS);
-        mBlurRadius.setValue(Settings.System.getInt(resolver,
+        mBlurRadius.setValue(Settings.System.getInt(mResolver,
                 Settings.System.LOCKSCREEN_BLUR_RADIUS, 14));
         mBlurRadius.setOnPreferenceChangeListener(this);
         
