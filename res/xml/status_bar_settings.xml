@@ -105,6 +105,13 @@
         android:fragment="com.android.settings.cyanogenmod.BatteryBar"
         android:title="@string/battery_bar_title"/>
 
+    <PreferenceScreen
+            android:title="@string/system_ui_tuner">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.systemui"
+                android:targetClass="com.android.systemui.tuner.TunerActivity" />
+    </PreferenceScreen>
+
     <com.android.settings.preference.SystemSettingSwitchPreference
         android:key="enable_task_manager"
         android:title="@string/enable_task_manager_title"
