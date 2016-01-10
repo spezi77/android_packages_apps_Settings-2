@@ -60,12 +60,6 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/seekBarPrefUnitsLeft" />
 
-            <android.widget.SeekBar
-                    android:id="@+id/seekBarPrefBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:layout_below="@+id/container" />
     </RelativeLayout>
 
 </RelativeLayout>

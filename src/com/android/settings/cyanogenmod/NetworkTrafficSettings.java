@@ -28,7 +28,7 @@ import android.preference.SwitchPreference;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.cyanogenmod.SeekBarPreference;
+import com.android.settings.widget.SeekBarPreferenceCham;
 import org.cyanogenmod.internal.policy.NetworkTraffic;
 import cyanogenmod.providers.CMSettings;
 
@@ -48,7 +48,7 @@ public class NetworkTrafficSettings extends SettingsPreferenceFragment
     private ListPreference mNetTrafficUnit;
     private ListPreference mNetTrafficPeriod;
     private SwitchPreference mNetTrafficAutohide;
-    private SeekBarPreference mNetTrafficAutohideThreshold;
+    private SeekBarPreferenceCham mNetTrafficAutohideThreshold;
 
     @Override
     protected int getMetricsCategory() {
@@ -72,7 +72,7 @@ public class NetworkTrafficSettings extends SettingsPreferenceFragment
                 CMSettings.System.NETWORK_TRAFFIC_AUTOHIDE, 0) == 1));
         mNetTrafficAutohide.setOnPreferenceChangeListener(this);
 
-        mNetTrafficAutohideThreshold = (SeekBarPreference) prefSet.findPreference(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD);
+        mNetTrafficAutohideThreshold = (SeekBarPreferenceCham) prefSet.findPreference(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD);
         int netTrafficAutohideThreshold = CMSettings.System.getInt(resolver,
                 CMSettings.System.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD, 10);
         mNetTrafficAutohideThreshold.setValue(netTrafficAutohideThreshold);

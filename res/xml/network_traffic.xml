@@ -32,13 +32,13 @@
         android:summary="@string/network_traffic_autohide_summary"
         android:title="@string/network_traffic_autohide" />
 
-    <com.android.settings.cyanogenmod.SeekBarPreference
+    <com.android.settings.widget.SeekBarPreferenceCham
         android:dependency="network_traffic_autohide"
         android:key="network_traffic_autohide_threshold"
         android:max="100"
         android:persistent="false"
         android:title="@string/network_traffic_autohide_threshold"
-        settings:min="0"
+        settings:minChOS="0"
         settings:unitsLeft=""
         settings:unitsRight="kB/s" />
 </PreferenceScreen>
