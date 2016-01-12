@@ -164,11 +164,6 @@
         	android:fragment="com.android.settings.cyanogenmod.gestureanywhere.GestureAnywhereSettings"
         	android:title="@string/gesture_anywhere_title" />
 
-    	<PreferenceScreen
-        	android:key="app_side_bar"
-        	android:fragment="com.android.settings.cyanogenmod.AppSideBar"
-        	android:title="@string/app_sidebar_title"/>
-
         <PreferenceScreen
                 android:key="animation_settings"
                 android:fragment="com.android.settings.cyanogenmod.animation.AnimationSettings"
