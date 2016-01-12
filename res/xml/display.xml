@@ -166,7 +166,7 @@
 
     	<PreferenceScreen
         	android:key="app_side_bar"
-        	android:fragment="com.android.settings.cyanogenmod.AppSidebar"
+        	android:fragment="com.android.settings.cyanogenmod.AppSideBar"
         	android:title="@string/app_sidebar_title"/>
 
         <PreferenceScreen
