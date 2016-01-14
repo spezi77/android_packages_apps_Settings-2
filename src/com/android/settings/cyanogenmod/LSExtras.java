@@ -53,6 +53,7 @@ import java.util.Map;
 
 import com.android.settings.widget.SeekBarPreferenceCham;
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
+import org.cyanogenmod.internal.util.CmLockPatternUtils;
 
 public class LSExtras extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, Indexable {
@@ -62,6 +63,10 @@ public class LSExtras extends SettingsPreferenceFragment
     private static final String LOCKSCREEN_MAX_NOTIF_CONFIG = "lockscreen_max_notif_cofig";
     private static final String LOCK_CLOCK_FONTS = "lock_clock_fonts";
     private static final String KEY_LOCKSCREEN_BLUR_RADIUS = "lockscreen_blur_radius";
+    private static final String PREF_BLOCK_ON_SECURE_KEYGUARD = "block_on_secure_keyguard";
+ 
+    private SwitchPreference mBlockOnSecureKeyguard;
+    private static final int MY_USER_ID = UserHandle.myUserId();
 
     private SeekBarPreferenceCham mMaxKeyguardNotifConfig;
     private ListPreference mLockClockFonts;
@@ -74,6 +79,7 @@ public class LSExtras extends SettingsPreferenceFragment
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.ls_extras);
         mResolver = getActivity().getContentResolver();
+        final CmLockPatternUtils lockPatternUtils = new CmLockPatternUtils(getActivity());
 
 	mMaxKeyguardNotifConfig = (SeekBarPreferenceCham) findPreference(LOCKSCREEN_MAX_NOTIF_CONFIG);
         int kgconf = Settings.System.getInt(mResolver,
@@ -91,6 +97,16 @@ public class LSExtras extends SettingsPreferenceFragment
         mBlurRadius.setValue(Settings.System.getInt(mResolver,
                 Settings.System.LOCKSCREEN_BLUR_RADIUS, 14));
         mBlurRadius.setOnPreferenceChangeListener(this);
+
+	// Block QS on secure LockScreen
+        mBlockOnSecureKeyguard = (SwitchPreference) findPreference(PREF_BLOCK_ON_SECURE_KEYGUARD);
+        if (lockPatternUtils.isSecure(MY_USER_ID)) {
+            mBlockOnSecureKeyguard.setChecked(Settings.Secure.getIntForUser(mResolver,
+                    Settings.Secure.STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD, 1, UserHandle.USER_CURRENT) == 1);
+            mBlockOnSecureKeyguard.setOnPreferenceChangeListener(this);
+        } else if (mBlockOnSecureKeyguard != null) {
+            prefSet.removePreference(mBlockOnSecureKeyguard);
+        }
         
     }
 
@@ -100,7 +116,7 @@ public class LSExtras extends SettingsPreferenceFragment
         return MetricsLogger.MAIN_SETTINGS;
     }
 
-    @Override
+    @Overridefinal CmLockPatternUtils lockPatternUtils = new CmLockPatternUtils(getActivity());
     public void onResume() {
         super.onResume();
     }
@@ -123,6 +139,11 @@ public class LSExtras extends SettingsPreferenceFragment
             int width = ((Integer)newValue).intValue();
             Settings.System.putInt(mResolver,
                     Settings.System.LOCKSCREEN_BLUR_RADIUS, width);
+            return true;
+	} else if (preference == mBlockOnSecureKeyguard) {
+            Settings.Secure.putInt(mResolver,
+                    Settings.Secure.STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD,
+                    (Boolean) newValue ? 1 : 0);
             return true;
         }
         return false;
