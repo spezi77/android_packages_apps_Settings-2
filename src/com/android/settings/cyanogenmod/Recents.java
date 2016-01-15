@@ -104,6 +104,12 @@ public class Recents extends SettingsPreferenceFragment implements
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        updateSettingsVisibility();
+    }
+
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
         if (preference == mRecentsClearAllLocation) {
