@@ -104,7 +104,7 @@ public class LSExtras extends SettingsPreferenceFragment
         mBlockOnSecureKeyguard = (SwitchPreference) findPreference(PREF_BLOCK_ON_SECURE_KEYGUARD);
         if (lockPatternUtils.isSecure(MY_USER_ID)) {
             mBlockOnSecureKeyguard.setChecked(Settings.Secure.getIntForUser(mResolver,
-                    Settings.Secure.STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD, 1, UserHandle.USER_CURRENT) == 1);
+                    Settings.Secure.STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD, 0, UserHandle.USER_CURRENT) == 1);
             mBlockOnSecureKeyguard.setOnPreferenceChangeListener(this);
         } else if (mBlockOnSecureKeyguard != null) {
             prefSet.removePreference(mBlockOnSecureKeyguard);
