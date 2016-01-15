@@ -24,6 +24,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -78,6 +79,7 @@ public class LSExtras extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.ls_extras);
+	PreferenceScreen prefSet = getPreferenceScreen();
         mResolver = getActivity().getContentResolver();
         final CmLockPatternUtils lockPatternUtils = new CmLockPatternUtils(getActivity());
 
@@ -116,7 +118,7 @@ public class LSExtras extends SettingsPreferenceFragment
         return MetricsLogger.MAIN_SETTINGS;
     }
 
-    @Overridefinal CmLockPatternUtils lockPatternUtils = new CmLockPatternUtils(getActivity());
+    @Override
     public void onResume() {
         super.onResume();
     }
