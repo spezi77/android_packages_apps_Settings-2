@@ -45,7 +45,7 @@ public class Recents extends SettingsPreferenceFragment implements
     private static final String RECENTS_CLEAR_ALL_DISMISS_ALL = "recents_clear_all_dismiss_all";
     private static final String RECENTS_SHOW_SEARCH_BAR = "recents_show_search_bar";
     private static final String RECENTS_MEM_DISPLAY = "systemui_recents_mem_display";
-    private static final String RECENTS_FULL_SCREEN = "recents_full_screen";
+    private static final String IMMERSIVE_RECENTS = "immersive_recents";
     private static final String RECENTS_FULL_SCREEN_CLOCK = "recents_full_screen_clock";
     private static final String RECENTS_FULL_SCREEN_DATE = "recents_full_screen_date";
 
@@ -58,7 +58,7 @@ public class Recents extends SettingsPreferenceFragment implements
     private SwitchPreference mRecentsClearAllDismissAll;
     private SwitchPreference mRecentsShowSearchBar;
     private SwitchPreference mRecentsMemDisplay;
-    private SwitchPreference mRecentsFullScreen;
+    private ListPreference mImmersiveRecents;
     private SwitchPreference mRecentsFullScreenClock;
     private SwitchPreference mRecentsFullScreenDate;
 
@@ -89,9 +89,14 @@ public class Recents extends SettingsPreferenceFragment implements
         mRecentsClearAllDismissAll = (SwitchPreference) prefSet.findPreference(RECENTS_CLEAR_ALL_DISMISS_ALL);
         mRecentsShowSearchBar = (SwitchPreference) prefSet.findPreference(RECENTS_SHOW_SEARCH_BAR);
         mRecentsMemDisplay = (SwitchPreference) prefSet.findPreference(RECENTS_MEM_DISPLAY);
-        mRecentsFullScreen = (SwitchPreference) prefSet.findPreference(RECENTS_FULL_SCREEN);
         mRecentsFullScreenClock = (SwitchPreference) prefSet.findPreference(RECENTS_FULL_SCREEN_CLOCK);
         mRecentsFullScreenDate = (SwitchPreference) prefSet.findPreference(RECENTS_FULL_SCREEN_DATE);
+
+	mImmersiveRecents = (ListPreference) prefSet.findPreference(IMMERSIVE_RECENTS);
+        mImmersiveRecents.setValue(String.valueOf(Settings.System.getInt(
+                getContentResolver(), Settings.System.IMMERSIVE_RECENTS, 0)));
+        mImmersiveRecents.setSummary(mImmersiveRecents.getEntry());
+        mImmersiveRecents.setOnPreferenceChangeListener(this);
 
         updateSettingsVisibility();
 
@@ -119,6 +124,11 @@ public class Recents extends SettingsPreferenceFragment implements
                     Settings.System.RECENTS_CLEAR_ALL_LOCATION, location, UserHandle.USER_CURRENT);
             mRecentsClearAllLocation.setSummary(mRecentsClearAllLocation.getEntries()[index]);
             return true;
+	} else if (preference == mImmersiveRecents) {
+            Settings.System.putInt(getContentResolver(), Settings.System.IMMERSIVE_RECENTS,
+                    Integer.valueOf((String) newValue));
+            mImmersiveRecents.setValue(String.valueOf(newValue));
+            mImmersiveRecents.setSummary(mImmersiveRecents.getEntry());
         }
         return false;
     }
@@ -134,7 +144,7 @@ public class Recents extends SettingsPreferenceFragment implements
             mRecentsClearAllDismissAll.setEnabled(false);
             mRecentsShowSearchBar.setEnabled(false);
             mRecentsMemDisplay.setEnabled(false);
-            mRecentsFullScreen.setEnabled(false);
+            mImmersiveRecents.setEnabled(false);
             mRecentsFullScreenClock.setEnabled(false);
             mRecentsFullScreenDate.setEnabled(false);
             Toast.makeText(getActivity(), getString(R.string.stock_recents_disabled),

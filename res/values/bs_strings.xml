@@ -123,13 +123,21 @@
     <string name="recents_clear_all_dismiss_all_summary">Include foreground task when clearing all</string>
     <string name="recents_searchbar_title">Search bar</string>
     <string name="recents_searchbar_summary">Show Google search bar in the recents screen</string>
-    <string name="recents_show_fullscreen">Fullscreen Recents</string>
     <string name="recents_fullscreen_summary">Enable immersive mode for recents screen</string>
     <string name="recents_full_screen_clock_title">Show clock</string>
     <string name="recents_full_screen_clock_summary">Shows clock at the top while in fullscreen</string>
     <string name="recents_full_screen_date_title">Show date</string>
     <string name="recents_full_screen_date_summary">Shows date at the top while in fullscreen</string>
     <string name="stock_recents_disabled">Stock recents are disabled!</string>
+
+    <!-- Immersive Recents -->
+    <string name="immersive_recents_title">Immersive Recents</string>
+    <string name="immersive_recents_summary">Change the view of the recents screen</string>
+    <string name="immersive_recents_dialog_title">Select recents view</string>
+    <string name="immersive_recents_default">Default</string>
+    <string name="immersive_recents_fullscreen">Fullscreen</string>
+    <string name="immersive_recents_statusbar">Statusbar only</string>
+    <string name="immersive_recents_navbar">Navbar only</string>
 
     <!-- Media art -->
     <string name="media_art_title">Media cover art</string>
