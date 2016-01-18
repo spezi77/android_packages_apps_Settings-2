@@ -81,11 +81,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private static final int STATUS_BAR_BATTERY_STYLE_HIDDEN = 4;
     private static final int STATUS_BAR_BATTERY_STYLE_TEXT = 6;
 
-    private static final String ENABLE_TASK_MANAGER = "enable_task_manager";
-
-    private static final String PREF_CUSTOM_HEADER = "status_bar_custom_header";
-    private static final String PREF_CUSTOM_HEADER_DEFAULT = "status_bar_custom_header_default";
-
     public static final int CLOCK_DATE_STYLE_LOWERCASE = 1;
     public static final int CLOCK_DATE_STYLE_UPPERCASE = 2;
     private static final int CUSTOM_CLOCK_DATE_FORMAT_INDEX = 18;
@@ -102,10 +97,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     private ColorPickerPreference mColorPicker;
     private ListPreference mFontStyle;
     private ListPreference mStatusBarClockFontSize;
-
-    private SwitchPreference mCustomHeader;
-    private SwitchPreference mCustomHeaderDefault;
-    private SwitchPreference mEnableTaskManager;
 
     private ListPreference mStatusBarBattery;
     private ListPreference mStatusBarBatteryShowPercent;
@@ -179,20 +170,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         }
 
         parseClockDateFormats();
-
-	mCustomHeader = (SwitchPreference) prefSet.findPreference(PREF_CUSTOM_HEADER);
-        mCustomHeader.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_CUSTOM_HEADER, 0) == 1));
-        mCustomHeader.setOnPreferenceChangeListener(this);
-
-        mCustomHeaderDefault = (SwitchPreference) prefSet.findPreference(PREF_CUSTOM_HEADER_DEFAULT);
-        mCustomHeaderDefault.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_CUSTOM_HEADER_DEFAULT, 0) == 1));
-        mCustomHeaderDefault.setOnPreferenceChangeListener(this);
-
-	mEnableTaskManager = (SwitchPreference) findPreference(ENABLE_TASK_MANAGER);
-        mEnableTaskManager.setChecked((Settings.System.getInt(resolver,
-                Settings.System.ENABLE_TASK_MANAGER, 0) == 1));
 
         int batteryStyle = CMSettings.System.getInt(resolver,
                 CMSettings.System.STATUS_BAR_BATTERY_STYLE, 0);
@@ -272,22 +249,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             CMSettings.System.putInt(
                     resolver, CMSettings.System.STATUS_BAR_CLOCK, clockStyle);
             mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
-            return true;
-	} else if (preference == mEnableTaskManager) {
-            boolean value = ((SwitchPreference)preference).isChecked();
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.ENABLE_TASK_MANAGER, value ? 1:0);
-		    Helpers.restartSystemUI();
-            return true;
-	} else if (preference == mCustomHeader) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER,
-                    (Boolean) newValue ? 1 : 0);
-            return true;
-        } else if (preference == mCustomHeaderDefault) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER_DEFAULT,
-                    (Boolean) newValue ? 1 : 0);
             return true;
         } else if (preference == mStatusBarAmPm) {
             int statusBarAmPm = Integer.valueOf((String) newValue);
