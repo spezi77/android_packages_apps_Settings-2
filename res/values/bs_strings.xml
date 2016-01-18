@@ -939,5 +939,5 @@
 
     <!-- Longpress torch -->
     <string name="keyguard_torch_title">Lockscreen torch</string>
-    <string name="keyguard_torch_summary">Longpress power button with screen of turns on torch</string>
+    <string name="keyguard_torch_summary">Longpress power button with screen off turns on torch</string>
 </resources>
