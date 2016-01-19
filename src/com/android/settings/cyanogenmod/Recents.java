@@ -99,7 +99,6 @@ public class Recents extends SettingsPreferenceFragment implements
         mImmersiveRecents.setOnPreferenceChangeListener(this);
 
         updateSettingsVisibility();
-
     }
 
     @Override
@@ -129,6 +128,7 @@ public class Recents extends SettingsPreferenceFragment implements
                     Integer.valueOf((String) newValue));
             mImmersiveRecents.setValue(String.valueOf(newValue));
             mImmersiveRecents.setSummary(mImmersiveRecents.getEntry());
+	    enabledateandtime();
         }
         return false;
     }
@@ -149,6 +149,29 @@ public class Recents extends SettingsPreferenceFragment implements
             mRecentsFullScreenDate.setEnabled(false);
             Toast.makeText(getActivity(), getString(R.string.stock_recents_disabled),
                 Toast.LENGTH_LONG).show();
+        } else {
+            mRecentsClearAllLocation.setEnabled(true);
+            mRecentsClearAll.setEnabled(true);
+            mRecentsClearAllDismissAll.setEnabled(true);
+            mRecentsShowSearchBar.setEnabled(true);
+            mRecentsMemDisplay.setEnabled(true);
+            mImmersiveRecents.setEnabled(true);
+	    enabledateandtime();
+	}
+    }
+
+    private void enabledateandtime() {
+        int immersivestyle = Settings.System.getInt(
+                getContentResolver(), Settings.System.IMMERSIVE_RECENTS, 0);
+        if (immersivestyle == 0) {
+            mRecentsFullScreenClock.setEnabled(false);
+            mRecentsFullScreenDate.setEnabled(false);
+        } else if (immersivestyle == 2) {
+            mRecentsFullScreenClock.setEnabled(false);
+            mRecentsFullScreenDate.setEnabled(false);
+	} else {
+            mRecentsFullScreenClock.setEnabled(true);
+            mRecentsFullScreenDate.setEnabled(true);
         }
     }
 }
