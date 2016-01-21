@@ -33,6 +33,8 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import cyanogenmod.providers.CMSettings;
+
 public class NotificationDrawerSettings extends SettingsPreferenceFragment  implements Preference.OnPreferenceChangeListener{
 
     private static final String ENABLE_TASK_MANAGER = "enable_task_manager";
