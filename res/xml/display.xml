@@ -174,6 +174,11 @@
                 android:title="@string/recents_title"
                 android:fragment="com.android.settings.cyanogenmod.Recents" />
 
+        <PreferenceScreen
+                android:key="transparency_settings"
+                android:title="@string/transparency_title"
+                android:fragment="com.android.settings.cyanogenmod.Transparency" />
+
         <!-- wallpaper -->
         <PreferenceScreen
                 android:key="wallpaper"

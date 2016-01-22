@@ -1000,4 +1000,12 @@
     <string name="dashboard_tileview_double_lines_title">Dashboard tile view title</string>
     <string name="dashboard_tileview_double_lines_summary_on">Show dashboard tile titles in 1 line</string>
     <string name="dashboard_tileview_double_lines_summary_off">Show dashboard tile titles in 2 lines</string>
+
+    <!-- QS shade transparency -->
+    <string name="qs_transparent_shade">QS shade transparency</string>
+    <string name="qs_transparent_header">QS header transparency</string>
+    <string name="volume_dialog_transparency">Volume dialog transparency</string>
+    <string name="power_menu_transparency">Power/reboot menu transparency</string>
+    <string name="power_menu_dialog_dim">Power/reboot dialog dim background amount</string>
+    <string name="transparency_title">Transparency</string>
 </resources>
