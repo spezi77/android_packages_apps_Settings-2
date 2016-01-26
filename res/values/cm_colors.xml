@@ -93,4 +93,8 @@ limitations under the License.
     <color name="ga_gesture_color">@android:color/holo_blue_light</color>
 
     <color name="secondary_text_material_dark">#B3FFFFFF</color>
+
+    <!-- BlackList colors -->
+    <color name="blacklist_enabled">#DD2C00</color>
+    <color name="blacklist_disabled">#D7D7D7</color>
 </resources>
