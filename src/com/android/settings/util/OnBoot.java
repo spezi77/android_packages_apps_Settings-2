@@ -31,7 +31,7 @@ public class OnBoot extends BroadcastReceiver {
         List<ActivityManager.RunningAppProcessInfo> procInfos = activityManager.getRunningAppProcesses();
         for(int i = 0; i < procInfos.size(); i++)
         {
-            if(procInfos.get(i).processName.equals("com.google.android.setupwizard")) {
+            if(procInfos.get(i).processName.equals("com.google.android.setupwizard") || (procInfos.get(i).processName.equals("com.cyanogenmod.setupwizard"))) {
                 mSetupRunning = true;
             }
         }
