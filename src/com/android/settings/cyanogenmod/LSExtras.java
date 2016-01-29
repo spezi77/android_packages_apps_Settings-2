@@ -91,7 +91,7 @@ public class LSExtras extends SettingsPreferenceFragment
 
 	mLockClockFonts = (ListPreference) findPreference(LOCK_CLOCK_FONTS);
         mLockClockFonts.setValue(String.valueOf(Settings.System.getInt(
-                mResolver, Settings.System.LOCK_CLOCK_FONTS, 0)));
+                mResolver, Settings.System.LOCK_CLOCK_FONTS, 4)));
         mLockClockFonts.setSummary(mLockClockFonts.getEntry());
         mLockClockFonts.setOnPreferenceChangeListener(this);
 
