@@ -23,11 +23,11 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
+import android.preference.SwitchPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,10 +47,12 @@ public class Weather extends SettingsPreferenceFragment implements
     private static final String PREF_SHOW_WEATHER = "weather_show_weather";
     private static final String PREF_SHOW_LOCATION = "weather_show_location";
     private static final String PREF_CONDITION_ICON = "weather_condition_icon";
+    private static final String PREF_COLORIZE_ALL_ICONS = "weather_colorize_all_icons";
     private static final String PREF_TEXT_COLOR = "weather_text_color";
     private static final String PREF_ICON_COLOR = "weather_icon_color";
 
     private static final int MONOCHROME_ICON = 0;
+    private static final int DEFAULT_COLOR = 0xffffffff;
 
     private static final int MENU_RESET = Menu.FIRST;
     private static final int DLG_RESET = 0;
@@ -58,6 +60,7 @@ public class Weather extends SettingsPreferenceFragment implements
     private SwitchPreference mShowWeather;
     private SwitchPreference mShowLocation;
     private ListPreference mConditionIcon;
+    private SwitchPreference mColorizeAllIcons;
     private ColorPickerPreference mTextColor;
     private ColorPickerPreference mIconColor;
 
@@ -87,6 +90,8 @@ public class Weather extends SettingsPreferenceFragment implements
                 Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0) == 1;
         int conditionIcon = Settings.System.getInt(mResolver,
                Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, MONOCHROME_ICON);
+        boolean colorizeAllIcons = Settings.System.getInt(mResolver,
+                    Settings.System.LOCK_SCREEN_WEATHER_COLORIZE_ALL_ICONS, 0) == 1;
 
         int intColor;
         String hexColor;
@@ -95,6 +100,7 @@ public class Weather extends SettingsPreferenceFragment implements
         mShowWeather.setChecked(showWeather);
         mShowWeather.setOnPreferenceChangeListener(this);
 
+        PreferenceCategory catColors = (PreferenceCategory) findPreference(PREF_CAT_COLORS);
         mTextColor = (ColorPickerPreference) findPreference(PREF_TEXT_COLOR);
         mIconColor = (ColorPickerPreference) findPreference(PREF_ICON_COLOR);
 
@@ -109,33 +115,37 @@ public class Weather extends SettingsPreferenceFragment implements
             mConditionIcon.setSummary(mConditionIcon.getEntry());
             mConditionIcon.setOnPreferenceChangeListener(this);
 
+            mColorizeAllIcons = (SwitchPreference) findPreference(PREF_COLORIZE_ALL_ICONS);
+            mColorizeAllIcons.setChecked(colorizeAllIcons);
+            mColorizeAllIcons.setOnPreferenceChangeListener(this);
+
             intColor = Settings.System.getInt(mResolver,
-                Settings.System.LOCK_SCREEN_WEATHER_TEXT_COLOR, -2);
-            if (intColor == -2) {
-                intColor = 0xffffffff;
-                mTextColor.setSummary(getResources().getString(R.string.color_default));
-            } else {
-                hexColor = String.format("#%08x", (0xffffffff & intColor));
-                mTextColor.setSummary(hexColor);
-            }
+                    Settings.System.LOCK_SCREEN_WEATHER_TEXT_COLOR,
+                    DEFAULT_COLOR);
             mTextColor.setNewPreviewColor(intColor);
+            hexColor = String.format("#%08x", (0xffffffff & intColor));
+            mTextColor.setSummary(hexColor);
             mTextColor.setOnPreferenceChangeListener(this);
-            intColor = Settings.System.getInt(mResolver,
-                Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR, -2);
-            if (intColor == -2) {
-                intColor = 0xffffffff;
-                mIconColor.setSummary(getResources().getString(R.string.color_default));
-            } else {
-                hexColor = String.format("#%08x", (0xffffffff & intColor));
-                mIconColor.setSummary(hexColor);
-            }
-            mIconColor.setNewPreviewColor(intColor);
-            mIconColor.setOnPreferenceChangeListener(this);
         } else {
             removePreference(PREF_SHOW_LOCATION);
-            removePreference(KEY_LOCKCLOCK);
             removePreference(PREF_CONDITION_ICON);
-            removePreference(PREF_CAT_COLORS);
+            removePreference(PREF_COLORIZE_ALL_ICONS);
+            catColors.removePreference(mTextColor);
+        }
+        if (showWeather && ((conditionIcon == MONOCHROME_ICON)
+                || (conditionIcon != MONOCHROME_ICON && colorizeAllIcons))) {
+            intColor = Settings.System.getInt(mResolver,
+                    Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR,
+                    DEFAULT_COLOR);
+            mIconColor.setNewPreviewColor(intColor);
+            hexColor = String.format("#%08x", (0xffffffff & intColor));
+            mIconColor.setSummary(hexColor);
+            mIconColor.setOnPreferenceChangeListener(this);
+        } else {
+            catColors.removePreference(mIconColor);
+            if (!showWeather) {
+                removePreference(PREF_CAT_COLORS);
+            }
         }
 
         setHasOptionsMenu(true);
@@ -182,6 +192,13 @@ public class Weather extends SettingsPreferenceFragment implements
             Settings.System.putInt(mResolver,
                     Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, intValue);
             mConditionIcon.setSummary(mConditionIcon.getEntries()[index]);
+            refreshSettings();
+            return true;
+        } else if (preference == mColorizeAllIcons) {
+            value = (Boolean) newValue;
+            Settings.System.putInt(mResolver,
+                    Settings.System.LOCK_SCREEN_WEATHER_COLORIZE_ALL_ICONS,
+                    value ? 1 : 0);
             refreshSettings();
             return true;
         } else if (preference == mTextColor) {
@@ -243,9 +260,13 @@ public class Weather extends SettingsPreferenceFragment implements
                             Settings.System.putInt(getOwner().mResolver,
                                     Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 2);
                             Settings.System.putInt(getOwner().mResolver,
-                                    Settings.System.LOCK_SCREEN_WEATHER_TEXT_COLOR, -2);
+                                    Settings.System.LOCK_SCREEN_WEATHER_COLORIZE_ALL_ICONS, 0);
                             Settings.System.putInt(getOwner().mResolver,
-                                    Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR, -2);
+                                    Settings.System.LOCK_SCREEN_WEATHER_TEXT_COLOR,
+                                    DEFAULT_COLOR);
+                            Settings.System.putInt(getOwner().mResolver,
+                                    Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR,
+                                    DEFAULT_COLOR);
                             getOwner().refreshSettings();
                         }
                     })
