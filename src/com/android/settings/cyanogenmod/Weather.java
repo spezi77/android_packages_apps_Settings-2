@@ -133,6 +133,7 @@ public class Weather extends SettingsPreferenceFragment implements
             mIconColor.setOnPreferenceChangeListener(this);
         } else {
             removePreference(PREF_SHOW_LOCATION);
+            removePreference(KEY_LOCKCLOCK);
             removePreference(PREF_CONDITION_ICON);
             removePreference(PREF_CAT_COLORS);
         }
