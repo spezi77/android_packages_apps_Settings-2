@@ -128,7 +128,7 @@
     <string name="recents_full_screen_clock_summary">Shows clock at the top while in fullscreen</string>
     <string name="recents_full_screen_date_title">Show date</string>
     <string name="recents_full_screen_date_summary">Shows date at the top while in fullscreen</string>
-    <string name="stock_recents_disabled">Stock recents are disabled!</string>
+    <string name="stock_recents_disabled">Stock recents are disabled while omni/slim recents are enabled</string>
 
     <!-- Immersive Recents -->
     <string name="immersive_recents_title">Immersive Recents</string>
