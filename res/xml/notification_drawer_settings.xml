@@ -54,6 +54,12 @@
         android:dependency="status_bar_custom_header"
         android:defaultValue="false"/>
 
+    <ListPreference
+        android:key="status_bar_header_font_style"
+        android:entries="@array/status_bar_weather_font_style_entries"
+        android:entryValues="@array/status_bar_weather_font_style_values"
+        android:title="@string/status_bar_header_font_style_title" />
+
     <!-- Notification colors -->
     <PreferenceScreen
             android:id="@+id/notification_colors"

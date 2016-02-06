@@ -43,12 +43,14 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
     private static final String PREF_CUSTOM_HEADER_DEFAULT = "status_bar_custom_header_default";
     private static final String PREF_SMART_PULLDOWN = "smart_pulldown";
     private static final String STATUS_BAR_QUICK_QS_PULLDOWN = "qs_quick_pulldown";
+    private static final String PREF_STATUS_BAR_HEADER_FONT_STYLE = "status_bar_header_font_style";
 
     private SwitchPreference mCustomHeader;
     private SwitchPreference mCustomHeaderDefault;
     private SwitchPreference mEnableTaskManager;
     private ListPreference mSmartPulldown;
     private ListPreference mQuickPulldown;
+    private ListPreference mStatusBarHeaderFontStyle;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -74,6 +76,13 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
 	mEnableTaskManager = (SwitchPreference) findPreference(ENABLE_TASK_MANAGER);
         mEnableTaskManager.setChecked((Settings.System.getInt(resolver,
                 Settings.System.ENABLE_TASK_MANAGER, 0) == 1));
+
+	// Status bar header font style
+        mStatusBarHeaderFontStyle = (ListPreference) findPreference(PREF_STATUS_BAR_HEADER_FONT_STYLE);
+        mStatusBarHeaderFontStyle.setOnPreferenceChangeListener(this);
+        mStatusBarHeaderFontStyle.setValue(Integer.toString(Settings.System.getIntForUser(resolver,
+                Settings.System.STATUS_BAR_HEADER_FONT_STYLE, 0, UserHandle.USER_CURRENT)));
+        mStatusBarHeaderFontStyle.setSummary(mStatusBarHeaderFontStyle.getEntry());
 
         // Smart Pulldown
         mSmartPulldown = (ListPreference) findPreference(PREF_SMART_PULLDOWN);
@@ -135,6 +144,13 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
             Settings.System.putInt(getContentResolver(), Settings.System.QS_SMART_PULLDOWN,
                     smartPulldown);
             updateSmartPulldownSummary(smartPulldown);
+            return true;
+	} else if (preference == mStatusBarHeaderFontStyle) {
+            int val = Integer.parseInt((String) newValue);
+            int index = mStatusBarHeaderFontStyle.findIndexOfValue((String) newValue);
+            Settings.System.putIntForUser(resolver,
+                    Settings.System.STATUS_BAR_HEADER_FONT_STYLE, val, UserHandle.USER_CURRENT);
+            mStatusBarHeaderFontStyle.setSummary(mStatusBarHeaderFontStyle.getEntries()[index]);
             return true;
         } else if (preference == mQuickPulldown) {
             int quickPulldown = Integer.valueOf((String) newValue);
