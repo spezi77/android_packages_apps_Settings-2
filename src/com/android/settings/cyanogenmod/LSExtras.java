@@ -99,6 +99,9 @@ public class LSExtras extends SettingsPreferenceFragment
         mBlurRadius.setValue(Settings.System.getInt(mResolver,
                 Settings.System.LOCKSCREEN_BLUR_RADIUS, 14));
         mBlurRadius.setOnPreferenceChangeListener(this);
+	if(!getResources().getBoolean(com.android.internal.R.bool.config_use_stackblur)) {
+            prefSet.removePreference(mBlurRadius);
+        }
 
 	// Block QS on secure LockScreen
         mBlockOnSecureKeyguard = (SwitchPreference) findPreference(PREF_BLOCK_ON_SECURE_KEYGUARD);
