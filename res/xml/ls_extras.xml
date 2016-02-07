@@ -68,11 +68,6 @@
 	android:dependency="hide_lockscreen_clock"
         android:persistent="false" />
 
-    <!-- Hide Lockscreen clock & date -->
-    <PreferenceCategory
-        android:key="hide_lockscreen_items_category"
-        android:title="@string/hide_lockscreen_items_title" />
-
     <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
         android:key="hide_lockscreen_clock"
         android:title="@string/hide_lockscreen_clock_title"
