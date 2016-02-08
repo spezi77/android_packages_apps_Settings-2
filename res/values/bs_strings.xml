@@ -1044,4 +1044,8 @@
 
     <!-- Status bar header font style -->
     <string name="status_bar_header_font_style_title">Header font style</string>
+
+    <!-- Navbar buttons rotating icons -->
+    <string name="nav_buttons_rotation_title">Rotation animation for icons</string>
+    <string name="nav_buttons_rotation_summary">Enable for icons to rotate when screen is rotated or navbar recreated.</string>
 </resources>
