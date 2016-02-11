@@ -93,6 +93,11 @@
         android:title="@string/hide_lockscreen_date_title"
         android:defaultValue="true" />
 
+    <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+        android:key="hide_lockscreen_alarm"
+        android:title="@string/hide_lockscreen_alarm_title"
+        android:defaultValue="true" />
+
     <ListPreference
         android:key="lock_clock_fonts"
         android:title="@string/lock_clock_font_title"
@@ -116,7 +121,8 @@
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="lockscreen_alarm_color"
         android:title="@string/lockscreen_alarm_color"
-        android:defaultValue="0xffffffff" />
+        android:defaultValue="0xffffffff"
+        android:dependency="hide_lockscreen_alarm" />
 
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="lockscreen_clock_color"
@@ -127,6 +133,7 @@
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="lockscreen_clock_date_color"
         android:title="@string/lockscreen_clock_date_color"
-        android:defaultValue="0xffffffff" />
+        android:defaultValue="0xffffffff"
+        android:dependency="hide_lockscreen_date" />
 
 </PreferenceScreen>
