@@ -58,26 +58,6 @@
         android:persistent="false"
         android:dependency="lock_screen_custom_notif" />
 
-    <ListPreference
-        android:key="lock_clock_fonts"
-        android:title="@string/lock_clock_font_title"
-        android:dialogTitle="@string/lock_clock_font_dialog_title"
-        android:entries="@array/lock_clock_fonts_entries"
-        android:entryValues="@array/lock_clock_fonts_values"
-        android:summary="@string/lock_clock_font_summary"
-	android:dependency="hide_lockscreen_clock"
-        android:persistent="false" />
-
-    <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
-        android:key="hide_lockscreen_clock"
-        android:title="@string/hide_lockscreen_clock_title"
-        android:defaultValue="true" />
-
-    <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
-        android:key="hide_lockscreen_date"
-        android:title="@string/hide_lockscreen_date_title"
-        android:defaultValue="true" />
-
     <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
         android:key="lockscreen_see_through"
         android:title="@string/lockscreen_see_through_title"
@@ -102,5 +82,51 @@
         android:title="@string/media_art_title"
         android:summary="@string/media_art_summary"
         android:defaultValue="true" />
+
+    <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+        android:key="hide_lockscreen_clock"
+        android:title="@string/hide_lockscreen_clock_title"
+        android:defaultValue="true" />
+
+    <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+        android:key="hide_lockscreen_date"
+        android:title="@string/hide_lockscreen_date_title"
+        android:defaultValue="true" />
+
+    <ListPreference
+        android:key="lock_clock_fonts"
+        android:title="@string/lock_clock_font_title"
+        android:dialogTitle="@string/lock_clock_font_dialog_title"
+        android:entries="@array/lock_clock_fonts_entries"
+        android:entryValues="@array/lock_clock_fonts_values"
+        android:summary="@string/lock_clock_font_summary"
+	android:dependency="hide_lockscreen_clock"
+        android:persistent="false" />
+
+    <!-- Lockscreen colors -->
+    <PreferenceCategory
+        android:key="lockscreen_colors_category"
+        android:title="@string/lockscreen_colors_title" />
+
+    <net.margaritov.preference.colorpicker.ColorPickerPreference
+        android:key="lockscreen_owner_info_color"
+        android:title="@string/lockscreen_owner_info_color"
+        android:defaultValue="0xffffffff" />
+
+    <net.margaritov.preference.colorpicker.ColorPickerPreference
+        android:key="lockscreen_alarm_color"
+        android:title="@string/lockscreen_alarm_color"
+        android:defaultValue="0xffffffff" />
+
+    <net.margaritov.preference.colorpicker.ColorPickerPreference
+        android:key="lockscreen_clock_color"
+        android:title="@string/lockscreen_clock_color"
+        android:defaultValue="0xffffffff"
+        android:dependency="hide_lockscreen_clock" />
+
+    <net.margaritov.preference.colorpicker.ColorPickerPreference
+        android:key="lockscreen_clock_date_color"
+        android:title="@string/lockscreen_clock_date_color"
+        android:defaultValue="0xffffffff" />
 
 </PreferenceScreen>

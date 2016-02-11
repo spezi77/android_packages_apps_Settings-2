@@ -1048,4 +1048,11 @@
     <!-- Navbar buttons rotating icons -->
     <string name="nav_buttons_rotation_title">Rotation animation for icons</string>
     <string name="nav_buttons_rotation_summary">Enable for icons to rotate when screen is rotated or navbar recreated.</string>
+
+    <!-- Lockscreen Colors -->
+    <string name="lockscreen_colors_title">Lockscreen colors</string>
+    <string name="lockscreen_owner_info_color">Owner info</string>
+    <string name="lockscreen_alarm_color">Alarm</string>
+    <string name="lockscreen_clock_color">Clock</string>
+    <string name="lockscreen_clock_date_color">Date</string>
 </resources>
