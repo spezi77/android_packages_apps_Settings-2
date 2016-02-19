@@ -39,14 +39,10 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
 
     private static final String ENABLE_TASK_MANAGER = "enable_task_manager";
 
-    private static final String PREF_CUSTOM_HEADER = "status_bar_custom_header";
-    private static final String PREF_CUSTOM_HEADER_DEFAULT = "status_bar_custom_header_default";
     private static final String PREF_SMART_PULLDOWN = "smart_pulldown";
     private static final String STATUS_BAR_QUICK_QS_PULLDOWN = "qs_quick_pulldown";
     private static final String PREF_STATUS_BAR_HEADER_FONT_STYLE = "status_bar_header_font_style";
 
-    private SwitchPreference mCustomHeader;
-    private SwitchPreference mCustomHeaderDefault;
     private SwitchPreference mEnableTaskManager;
     private ListPreference mSmartPulldown;
     private ListPreference mQuickPulldown;
@@ -63,16 +59,6 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
 	Resources res = getResources();
 
 	mQuickPulldown = (ListPreference) findPreference(STATUS_BAR_QUICK_QS_PULLDOWN);
-
-	mCustomHeader = (SwitchPreference) prefSet.findPreference(PREF_CUSTOM_HEADER);
-        mCustomHeader.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_CUSTOM_HEADER, 0) == 1));
-        mCustomHeader.setOnPreferenceChangeListener(this);
-
-        mCustomHeaderDefault = (SwitchPreference) prefSet.findPreference(PREF_CUSTOM_HEADER_DEFAULT);
-        mCustomHeaderDefault.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_CUSTOM_HEADER_DEFAULT, 0) == 1));
-        mCustomHeaderDefault.setOnPreferenceChangeListener(this);
 
 	mEnableTaskManager = (SwitchPreference) findPreference(ENABLE_TASK_MANAGER);
         mEnableTaskManager.setChecked((Settings.System.getInt(resolver,
@@ -144,16 +130,6 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
             Settings.System.putIntForUser(resolver, Settings.System.QS_NUM_TILE_COLUMNS,
                     numColumns, UserHandle.USER_CURRENT);
             updateNumColumnsSummary(numColumns);
-            return true;
-	} else if (preference == mCustomHeader) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER,
-                    (Boolean) newValue ? 1 : 0);
-            return true;
-        } else if (preference == mCustomHeaderDefault) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER_DEFAULT,
-                    (Boolean) newValue ? 1 : 0);
             return true;
         } else if (preference == mSmartPulldown) {
             int smartPulldown = Integer.valueOf((String) newValue);
