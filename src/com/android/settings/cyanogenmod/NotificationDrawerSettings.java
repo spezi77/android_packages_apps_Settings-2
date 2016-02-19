@@ -29,6 +29,7 @@ import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
+import android.util.Log;
 import com.android.settings.util.Helpers;
 
 import java.util.List;
@@ -38,6 +39,7 @@ import com.android.internal.logging.MetricsLogger;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.widget.SeekBarPreferenceCham;
 
 import cyanogenmod.providers.CMSettings;
 
@@ -51,6 +53,7 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
     private static final String CUSTOM_HEADER_IMAGE = "status_bar_custom_header";
     private static final String DAYLIGHT_HEADER_PACK = "daylight_header_pack";
     private static final String DEFAULT_HEADER_PACKAGE = "com.android.systemui";
+    private static final String CUSTOM_HEADER_IMAGE_SHADOW = "status_bar_custom_header_shadow";
 
     private SwitchPreference mEnableTaskManager;
     private ListPreference mSmartPulldown;
@@ -60,6 +63,7 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
     private ListPreference mNumRows;
     private ListPreference mDaylightHeaderPack;
     private SwitchPreference mCustomHeaderImage;
+    private SeekBarPreferenceCham mHeaderShadow;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -123,7 +127,12 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
          mDaylightHeaderPack.setValueIndex(valueIndexHeader >= 0 ? valueIndexHeader : 0);
          mDaylightHeaderPack.setSummary(mDaylightHeaderPack.getEntry());
          mDaylightHeaderPack.setOnPreferenceChangeListener(this);
-         mDaylightHeaderPack.setEnabled(customHeaderImage);
+         
+	mHeaderShadow = (SeekBarPreference) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
+        final int headerShadow = Settings.System.getInt(getContentResolver(),
+                Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, 0);
+        mHeaderShadow.setValue((int)((headerShadow / 255) * 100));
+        mHeaderShadow.setOnPreferenceChangeListener(this);
 
 	// Status bar header font style
         mStatusBarHeaderFontStyle = (ListPreference) findPreference(PREF_STATUS_BAR_HEADER_FONT_STYLE);
@@ -184,6 +193,12 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
              int valueIndex = mDaylightHeaderPack.findIndexOfValue(value);
              mDaylightHeaderPack.setSummary(mDaylightHeaderPack.getEntries()[valueIndex]);
              return true;
+	} else if (preference == mHeaderShadow) {
+            Integer headerShadow = (Integer) newValue;
+            int realHeaderValue = (int) (((double) headerShadow / 100) * 255);
+            Settings.System.putInt(getContentResolver(),
+              Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, realHeaderValue);
+	    return true;
 	} else if (preference == mNumColumns) {
             int numColumns = Integer.valueOf((String) newValue);
             Settings.System.putIntForUser(resolver, Settings.System.QS_NUM_TILE_COLUMNS,
@@ -235,7 +250,6 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
                 final boolean value = ((SwitchPreference)preference).isChecked();
                 Settings.System.putInt(getContentResolver(),
                         Settings.System.STATUS_BAR_CUSTOM_HEADER, value ? 1 : 0);
-                mDaylightHeaderPack.setEnabled(value);
                 return true;
             }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
