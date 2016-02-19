@@ -56,8 +56,8 @@
     <!--Time Contextual Header -->
     <string name="status_bar_custom_header_title">Time Contextual Header</string>
     <string name="status_bar_custom_header_summary">Enable notification panel header image</string>
-    <string name="status_bar_custom_header_default_title">Use Poly HD images</string>
-    <string name="status_bar_custom_header_default_summary">Enable for Polygraphic HD images. Disable for original images.</string>
+    <string name="daylight_header_pack_title">Header image pack</string>
+    <string name="contexual_header_title">Contexual header</string>
 
     <!-- Battery Bar -->
     <string name="status_bar_battery_cat_title">Battery</string>

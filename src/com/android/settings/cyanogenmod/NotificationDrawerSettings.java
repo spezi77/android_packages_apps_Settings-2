@@ -17,6 +17,9 @@ package com.android.settings.cyanogenmod;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -27,6 +30,9 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import com.android.settings.util.Helpers;
+
+import java.util.List;
+import java.util.ArrayList;
 
 import com.android.internal.logging.MetricsLogger;
 
@@ -42,12 +48,17 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
     private static final String PREF_SMART_PULLDOWN = "smart_pulldown";
     private static final String STATUS_BAR_QUICK_QS_PULLDOWN = "qs_quick_pulldown";
     private static final String PREF_STATUS_BAR_HEADER_FONT_STYLE = "status_bar_header_font_style";
+    private static final String CUSTOM_HEADER_IMAGE = "status_bar_custom_header";
+    private static final String DAYLIGHT_HEADER_PACK = "daylight_header_pack";
+    private static final String DEFAULT_HEADER_PACKAGE = "com.android.systemui";
 
     private SwitchPreference mEnableTaskManager;
     private ListPreference mSmartPulldown;
     private ListPreference mQuickPulldown;
     private ListPreference mStatusBarHeaderFontStyle;
     private ListPreference mNumColumns;
+    private ListPreference mDaylightHeaderPack;
+    private SwitchPreference mCustomHeaderImage;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -72,6 +83,37 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
         mNumColumns.setValue(String.valueOf(numColumns));
         updateNumColumnsSummary(numColumns);
         mNumColumns.setOnPreferenceChangeListener(this);
+
+	// header image packs
+        final boolean customHeaderImage = Settings.System.getInt(getContentResolver(),
+                Settings.System.STATUS_BAR_CUSTOM_HEADER, 0) == 1;
+        mCustomHeaderImage = (SwitchPreference) findPreference(CUSTOM_HEADER_IMAGE);
+        mCustomHeaderImage.setChecked(customHeaderImage);
+
+         String imageHeaderPackage = Settings.System.getString(getContentResolver(),
+                 Settings.System.STATUS_BAR_DAYLIGHT_HEADER_PACK);
+         if (imageHeaderPackage == null) {
+             imageHeaderPackage = DEFAULT_HEADER_PACKAGE;
+         }
+         mDaylightHeaderPack = (ListPreference) findPreference(DAYLIGHT_HEADER_PACK);
+         List<String> entries = new ArrayList<String>();
+         List<String> values = new ArrayList<String>();
+         getAvailableHeaderPacks(entries, values);
+         mDaylightHeaderPack.setEntries(entries.toArray(new String[entries.size()]));
+         mDaylightHeaderPack.setEntryValues(values.toArray(new String[values.size()]));
+ 
+         int valueIndexHeader = mDaylightHeaderPack.findIndexOfValue(imageHeaderPackage);
+         if (valueIndexHeader == -1) {
+             // no longer found
+             imageHeaderPackage = DEFAULT_HEADER_PACKAGE;
+             Settings.System.putString(getContentResolver(),
+                     Settings.System.STATUS_BAR_DAYLIGHT_HEADER_PACK, imageHeaderPackage);
+             valueIndexHeader = mDaylightHeaderPack.findIndexOfValue(imageHeaderPackage);
+         }
+         mDaylightHeaderPack.setValueIndex(valueIndexHeader >= 0 ? valueIndexHeader : 0);
+         mDaylightHeaderPack.setSummary(mDaylightHeaderPack.getEntry());
+         mDaylightHeaderPack.setOnPreferenceChangeListener(this);
+         mDaylightHeaderPack.setEnabled(customHeaderImage);
 
 	// Status bar header font style
         mStatusBarHeaderFontStyle = (ListPreference) findPreference(PREF_STATUS_BAR_HEADER_FONT_STYLE);
@@ -125,6 +167,13 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
                     Settings.System.ENABLE_TASK_MANAGER, value ? 1:0);
 		    Helpers.restartSystemUI();
             return true;
+	} else if (preference == mDaylightHeaderPack) {
+             String value = (String) newValue;
+             Settings.System.putString(getContentResolver(),
+                     Settings.System.STATUS_BAR_DAYLIGHT_HEADER_PACK, value);
+             int valueIndex = mDaylightHeaderPack.findIndexOfValue(value);
+             mDaylightHeaderPack.setSummary(mDaylightHeaderPack.getEntries()[valueIndex]);
+             return true;
 	} else if (preference == mNumColumns) {
             int numColumns = Integer.valueOf((String) newValue);
             Settings.System.putIntForUser(resolver, Settings.System.QS_NUM_TILE_COLUMNS,
@@ -166,6 +215,13 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+	if (preference == mCustomHeaderImage) {
+                final boolean value = ((SwitchPreference)preference).isChecked();
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.STATUS_BAR_CUSTOM_HEADER, value ? 1 : 0);
+                mDaylightHeaderPack.setEnabled(value);
+                return true;
+            }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -213,4 +269,36 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
         }
     }
 
+    private void getAvailableHeaderPacks(List<String> entries, List<String> values) {
+        Intent i = new Intent();
+        PackageManager packageManager = getPackageManager();
+        i.setAction("org.omnirom.DaylightHeaderPack");
+        for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
+            String packageName = r.activityInfo.packageName;
+            if (packageName.equals(DEFAULT_HEADER_PACKAGE)) {
+                values.add(0, packageName);
+            } else {
+                values.add(packageName);
+            }
+            String label = r.activityInfo.loadLabel(getPackageManager()).toString();
+            if (label == null) {
+                label = r.activityInfo.packageName;
+            }
+            if (packageName.equals(DEFAULT_HEADER_PACKAGE)) {
+                entries.add(0, label);
+            } else {
+                entries.add(label);
+            }
+        }
+        i.setAction("org.omnirom.DaylightHeaderPack1");
+        for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
+            String packageName = r.activityInfo.packageName;
+            values.add(packageName  + "/" + r.activityInfo.name);
+            String label = r.activityInfo.loadLabel(getPackageManager()).toString();
+            if (label == null) {
+                label = packageName;
+            }
+            entries.add(label);
+        }
+    }
 }
