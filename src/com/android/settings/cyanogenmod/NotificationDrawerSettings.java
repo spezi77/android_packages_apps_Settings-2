@@ -128,7 +128,7 @@ public class NotificationDrawerSettings extends SettingsPreferenceFragment  impl
          mDaylightHeaderPack.setSummary(mDaylightHeaderPack.getEntry());
          mDaylightHeaderPack.setOnPreferenceChangeListener(this);
          
-	mHeaderShadow = (SeekBarPreference) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
+	mHeaderShadow = (SeekBarPreferenceCham) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
         final int headerShadow = Settings.System.getInt(getContentResolver(),
                 Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, 0);
         mHeaderShadow.setValue((int)((headerShadow / 255) * 100));
