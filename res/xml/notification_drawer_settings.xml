@@ -65,7 +65,6 @@
     <ListPreference
         android:key="daylight_header_pack"
         android:title="@string/daylight_header_pack_title"
-        android:persistent="false"
 	android:persistent="false"
 	android:dependency="status_bar_custom_header" />
 
