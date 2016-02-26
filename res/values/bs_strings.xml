@@ -1073,4 +1073,11 @@
     <!-- QS Tiles Rows -->
     <string name="qs_num_rows_title">Number of QS rows</string>
     <string name="qs_num_rows_showing">%1$s rows are shown</string>
+
+    <!-- Optional Dashboard Switches -->
+    <string name="dashboard_switches_title">Dashboard Switches</string>
+    <string name="dashboard_switches_off">Switches Off</string>
+    <string name="dashboard_switches_on">Switches On</string>
+    <string name="dashboard_switches_summary">Change the position of the dashboard switches</string>
+    <string name="dashboard_switches_dialog_title">Select switch state</string>
 </resources>
