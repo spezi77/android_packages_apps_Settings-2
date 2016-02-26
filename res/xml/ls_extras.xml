@@ -72,6 +72,26 @@
         settings:defaultValue="14"
         android:dependency="lockscreen_see_through" />
 
+    <com.android.settings.widget.SeekBarPreferenceCham
+        android:key="lockscreen_alpha"
+        android:title="@string/lockscreen_alpha"
+        android:max="100"
+        settings:minChOS="0"
+        settings:interval="1"
+        settings:unitsLeft=""
+        settings:unitsRight="%"
+        android:persistent="false" />
+
+    <com.android.settings.widget.SeekBarPreferenceCham
+        android:key="lockscreen_security_alpha"
+        android:title="@string/lockscreen_security_alpha"
+        android:max="100"
+        settings:minChOS="0"
+        settings:interval="1"
+        settings:unitsLeft=""
+        settings:unitsRight="%"
+        android:persistent="false" />
+
     <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
         android:key="double_tap_sleep_anywhere"
         android:title="@string/double_tap_sleep_anywhere_title"

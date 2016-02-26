@@ -1080,4 +1080,8 @@
     <string name="dashboard_switches_on">Switches On</string>
     <string name="dashboard_switches_summary">Change the position of the dashboard switches</string>
     <string name="dashboard_switches_dialog_title">Select switch state</string>
+ 
+    <!-- Lockscreen Alpha -->
+    <string name="lockscreen_alpha">Lockscreen alpha</string>
+    <string name="lockscreen_security_alpha">Lockscreen bouncer alpha</string>
 </resources>

@@ -69,6 +69,8 @@ public class LSExtras extends SettingsPreferenceFragment
     private static final String LOCKSCREEN_ALARM_COLOR = "lockscreen_alarm_color";
     private static final String LOCKSCREEN_CLOCK_COLOR = "lockscreen_clock_color";
     private static final String LOCKSCREEN_CLOCK_DATE_COLOR = "lockscreen_clock_date_color";
+    private static final String LOCKSCREEN_ALPHA = "lockscreen_alpha";
+    private static final String LOCKSCREEN_SECURITY_ALPHA = "lockscreen_security_alpha";
  
     static final int DEFAULT = 0xffffffff;
 
@@ -82,6 +84,8 @@ public class LSExtras extends SettingsPreferenceFragment
     private ColorPickerPreference mLockscreenAlarmColorPicker;
     private ColorPickerPreference mLockscreenClockColorPicker;
     private ColorPickerPreference mLockscreenClockDateColorPicker;
+    private SeekBarPreferenceCham mLsAlpha;
+    private SeekBarPreferenceCham mLsSecurityAlpha;
 
     private ContentResolver mResolver;
 
@@ -147,6 +151,22 @@ public class LSExtras extends SettingsPreferenceFragment
             prefSet.removePreference(mBlurRadius);
         }
 
+	mLsAlpha = (SeekBarPreferenceCham) findPreference(LOCKSCREEN_ALPHA);
+        float alpha = Settings.System.getFloat(mResolver,
+                Settings.System.LOCKSCREEN_ALPHA, 0.45f);
+        mLsAlpha.setValue((int)(100 * alpha));
+        mLsAlpha.setOnPreferenceChangeListener(this);
+
+        mLsSecurityAlpha = (SeekBarPreferenceCham) findPreference(LOCKSCREEN_SECURITY_ALPHA);
+        if (lockPatternUtils.isSecure(MY_USER_ID)) {
+        float alpha2 = Settings.System.getFloat(mResolver,
+                Settings.System.LOCKSCREEN_SECURITY_ALPHA, 0.75f);
+        mLsSecurityAlpha.setValue((int)(100 * alpha2));
+        mLsSecurityAlpha.setOnPreferenceChangeListener(this);
+        } else if (mLsSecurityAlpha != null) {
+            prefSet.removePreference(mLsSecurityAlpha);
+        }
+
 	// Block QS on secure LockScreen
         mBlockOnSecureKeyguard = (SwitchPreference) findPreference(PREF_BLOCK_ON_SECURE_KEYGUARD);
         if (lockPatternUtils.isSecure(MY_USER_ID)) {
@@ -189,6 +209,16 @@ public class LSExtras extends SettingsPreferenceFragment
             int width = ((Integer)newValue).intValue();
             Settings.System.putInt(mResolver,
                     Settings.System.LOCKSCREEN_BLUR_RADIUS, width);
+            return true;
+	} else if (preference == mLsAlpha) {
+            int alpha = (Integer) newValue;
+            Settings.System.putFloat(mResolver,
+                    Settings.System.LOCKSCREEN_ALPHA, alpha / 100.0f);
+            return true;
+        } else if (preference == mLsSecurityAlpha) {
+            int alpha2 = (Integer) newValue;
+            Settings.System.putFloat(mResolver,
+                    Settings.System.LOCKSCREEN_SECURITY_ALPHA, alpha2 / 100.0f);
             return true;
 	} else if (preference == mBlockOnSecureKeyguard) {
             Settings.Secure.putInt(mResolver,
