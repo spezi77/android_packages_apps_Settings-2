@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.cyanogenmod.fragments;
+package com.android.settings.cyanogenmod;
 
 import android.os.Bundle;
 import android.preference.Preference;
@@ -29,9 +29,10 @@ import android.widget.ListView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
 import com.android.internal.logging.MetricsLogger;
 
-public class AppShortcuts extends SettingsPreferenceFragment implements
+public class LockscreenShortcutFragment extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
 
     private static final String PREF_LOCKSCREEN_SHORTCUTS_LAUNCH_TYPE =
@@ -43,7 +44,7 @@ public class AppShortcuts extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.appshortcuts);
+        addPreferencesFromResource(R.xml.lockscreen_shortcut_fragment);
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
@@ -56,7 +57,7 @@ public class AppShortcuts extends SettingsPreferenceFragment implements
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsLogger.MAIN_SETTINGS;
+        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     @Override
