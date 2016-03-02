@@ -86,6 +86,8 @@
 
     <!-- NavBar options -->
     <string name="navbar_enable_bar">Enable</string>
+    <string name="navbar_enable_bar_title">Navigation bar buttons</string>
+    <string name="navbar_enable_bar_summary">Enable on-screen nav bar buttons</string>
     <string name="navbardimenfrag_title">Navbar Dimensions</string>
     <string name="navbar_dimensions_reset_message">Reset all dimensions entries to default?</string>
     <string name="navigation_bar_height_title">Navigation bar height</string>
