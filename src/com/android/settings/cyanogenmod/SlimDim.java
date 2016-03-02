@@ -1,49 +1,73 @@
 /*
-* Copyright (C) 2015 Benzo Rom
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright (C) 2012-2015 Slimroms
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.android.settings.cyanogenmod;
 
+import android.content.ContentResolver;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.UserHandle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.SlimSeekBarPreference;
+import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
+import android.preference.SlimSeekBarPreference;
 import android.provider.Settings;
 
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.internal.util.du.Action;
 import com.android.internal.logging.MetricsLogger;
+
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.R;
 
 public class SlimDim extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
 
+    private static final String TAG = "SlimDim";
     private static final String DIM_NAV_BUTTONS = "dim_nav_buttons";
+    private static final String DIM_NAV_BUTTONS_TOUCH_ANYWHERE = "dim_nav_buttons_touch_anywhere";
     private static final String DIM_NAV_BUTTONS_TIMEOUT = "dim_nav_buttons_timeout";
     private static final String DIM_NAV_BUTTONS_ALPHA = "dim_nav_buttons_alpha";
     private static final String DIM_NAV_BUTTONS_ANIMATE = "dim_nav_buttons_animate";
     private static final String DIM_NAV_BUTTONS_ANIMATE_DURATION = "dim_nav_buttons_animate_duration";
-    private static final String DIM_NAV_BUTTONS_TOUCH_ANYWHERE = "dim_nav_buttons_touch_anywhere";
 
-    private SwitchPreference mDimNavButtons;
-    private SlimSeekBarPreference mDimNavButtonsTimeout;
-    private SlimSeekBarPreference mDimNavButtonsAlpha;
-    private SwitchPreference mDimNavButtonsAnimate;
-    private SlimSeekBarPreference mDimNavButtonsAnimateDuration;
-    private SwitchPreference mDimNavButtonsTouchAnywhere;
+    PreferenceScreen mStyleDimenPreference;
+    SwitchPreference mStatusBarImeArrows;
+    SwitchPreference mDimNavButtons;
+    SwitchPreference mDimNavButtonsTouchAnywhere;
+    SlimSeekBarPreference mDimNavButtonsTimeout;
+    SlimSeekBarPreference mDimNavButtonsAlpha;
+    SwitchPreference mDimNavButtonsAnimate;
+    SlimSeekBarPreference mDimNavButtonsAnimateDuration;
+
+    private SettingsObserver mSettingsObserver = new SettingsObserver(new Handler());
+    private final class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {}
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            updateSettings();
+        }
+    }
 
     @Override
     protected int getMetricsCategory() {
@@ -51,11 +75,12 @@ public class SlimDim extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.slimdim_settings);
 
-        // SlimDim
         mDimNavButtons = (SwitchPreference) findPreference(DIM_NAV_BUTTONS);
         mDimNavButtons.setOnPreferenceChangeListener(this);
 
@@ -85,12 +110,11 @@ public class SlimDim extends SettingsPreferenceFragment implements
         mDimNavButtonsAnimateDuration.minimumValue(100);
         mDimNavButtonsAnimateDuration.multiplyValue(100);
         mDimNavButtonsAnimateDuration.setOnPreferenceChangeListener(this);
+
         updateSettings();
     }
 
     private void updateSettings() {
-        boolean enableNavigationBar = Action.isNavBarEnabled(getActivity());
-
         if (mDimNavButtons != null) {
             mDimNavButtons.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.DIM_NAV_BUTTONS, 0) == 1);
@@ -125,17 +149,6 @@ public class SlimDim extends SettingsPreferenceFragment implements
             // minimum 100 is 1 interval of the 100 multiplier
             mDimNavButtonsAnimateDuration.setInitValue((animateDuration / 100) - 1);
         }
-
-        updateNavbarPreferences(enableNavigationBar);
-    }
-
-    private void updateNavbarPreferences(boolean show) {
-        mDimNavButtons.setEnabled(show);
-        mDimNavButtonsTouchAnywhere.setEnabled(show);
-        mDimNavButtonsTimeout.setEnabled(show);
-        mDimNavButtonsAlpha.setEnabled(show);
-        mDimNavButtonsAnimate.setEnabled(show);
-        mDimNavButtonsAnimateDuration.setEnabled(show);
     }
 
     @Override
@@ -169,6 +182,19 @@ public class SlimDim extends SettingsPreferenceFragment implements
                 Integer.parseInt((String) newValue));
             return true;
         }
-         return false;
+        return false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateSettings();
+        mSettingsObserver.observe();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().getContentResolver().unregisterContentObserver(mSettingsObserver);
     }
 }
