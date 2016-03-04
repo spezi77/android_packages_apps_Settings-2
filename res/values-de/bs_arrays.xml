@@ -23,8 +23,24 @@
         <item>Unter der Navigationsleiste</item>
     </string-array>
 
+    <string-array name="battery_bar_no_navbar_entries">
+        <item>Ausgeblendet</item>
+        <item>Statusleiste</item>
+    </string-array>
+
     <string-array name="battery_bar_style_entries">
         <item>Normal</item>
         <item>Mittig-gespiegelt</item>
+    </string-array>
+
+    <string-array name="qs_num_columns_entries">
+        <item>Drei</item>
+        <item>Vier</item>
+        <item>Fünf</item>
+    </string-array>
+
+    <string-array name="qs_num_rows_entries">
+        <item>Drei</item>
+        <item>Vier</item>
     </string-array>
 </resources>

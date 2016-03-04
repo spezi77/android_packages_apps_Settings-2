@@ -54,10 +54,12 @@
     <string name="disable_fc_notifications_summary">Absturzmeldungen von Apps werden unterdrückt</string>
 
     <!--Time Contextual Header -->
-    <string name="status_bar_custom_header_title">Grafik in der Benachrichtigungsanzeige</string>
-    <string name="status_bar_custom_header_summary">Zeigt eine Grafik im Kopfbereich der Benachrichtigungsanzeige an, die sich tageszeitabhängig verändert.</string>
-    <string name="status_bar_custom_header_default_title">Verwende Poly-HD-Bilder</string>
-    <string name="status_bar_custom_header_default_summary">Anschalten für Polygraphic HD-Bilder. Ausschalten für Original-Bilder.</string>
+    <string name="status_bar_custom_header_title">Grafik in der Benachrichtigungsleiste</string>
+    <string name="status_bar_custom_header_summary">Zeigt eine Grafik im Kopfbereich der Benachrichtigungsleiste an, die sich tageszeitabhängig verändert.</string>
+    <string name="daylight_header_pack_title">Grafikpaket für Kopfzeile</string>
+    <string name="contexual_header_title">Kontextbezogene Kopfzeile</string>
+    <string name="status_bar_custom_header_shadow_title">Schatteneffekt für Kopfzeile</string>
+    <string name="status_bar_custom_header_shadow_summary">Verbessert sie Sichtbarkeit bei Grafiken mit sehr hellen Farbtönen</string>
 
     <!-- Battery Bar -->
     <string name="status_bar_battery_cat_title">Akku</string>
@@ -122,6 +124,19 @@
     <string name="recents_searchbar_summary">Google-Suchleiste im Anwendungsverlauf anzeigen</string>
     <string name="recents_show_fullscreen">Anwendungsverlauf im Vollbildmodus</string>
     <string name="recents_fullscreen_summary">Vollbildmodus für den Anwendungsverlauf aktivieren</string>
+    <string name="recents_full_screen_clock_summary">Im Vollbildmodus Uhrzeit oben anzeigen</string>
+    <string name="recents_full_screen_date_title">Datum anzeigen</string>
+    <string name="recents_full_screen_date_summary">Im Vollbildmodus Datum oben anzeigen</string>
+    <string name="stock_recents_disabled">AOSP Anwendungsverlauf wird deaktiviert während Omni/Slim Anwendungsverlauf aktiviert ist</string>
+
+    <!-- Immersive Recents -->
+    <string name="immersive_recents_title">Vollbild Anwendungsverlauf</string>
+    <string name="immersive_recents_summary">Ansicht für den Anwendungsverlauf ändern</string>
+    <string name="immersive_recents_dialog_title">Ansicht für den Anwendungsverlauf wählen</string>
+    <string name="immersive_recents_default">Standard</string>
+    <string name="immersive_recents_fullscreen">Vollbild</string>
+    <string name="immersive_recents_statusbar">Nur Statusleiste</string>
+    <string name="immersive_recents_navbar">Nur Navigationsleiste</string>
 
     <!-- Media art -->
     <string name="media_art_title">Medien-Cover</string>
@@ -287,10 +302,18 @@
     <string name="wallpaper_close_title">Hintergrundbild schließen-Animation</string>
     <string name="wallpaper_intra_open_title">Hintergrundbild intra öffnen-Animation</string>
     <string name="wallpaper_intra_close_title">Hintergrundbild intra schließen-Animation</string>
+    <string name="task_open_behind_title">Aktivität öffnen-Hintergundanimation</string>
     <string name="animation_duration_title">Animationsdauer</string>
     <string name="title_animation_no_override">Überlagerungen durch Apps verhindern</string>
     <string name="summary_animation_no_override">Verhindert, dass Apps Grafikfehler bei Übergängen erzeugen.</string>
     <string name="animation_duration_default">Standard</string>
+    <string name="animation_exit_only_title">Nur Ausgangsanimation</string>
+    <string name="animation_reverse_exit_title">Umgekehrte Ausgangsanimation</string>
+
+    <!-- UI debug setting: show CPU info? [CHAR LIMIT=25] -->
+    <string name="show_cpu_info">CPU Info anzeigen</string>
+    <!-- UI debug setting: show cpu usage summary [CHAR LIMIT=50] -->
+    <string name="show_cpu_info_summary">CPU Info wird in einem Overlay-Fenster dargestellt</string>
 
     <!-- ListView animation -->
     <string name="listview_animation_title">Animationen für Listenansicht</string>
@@ -399,8 +422,6 @@
     <string name="status_bar_show_weather_summary">Wetter oberhalb der Schnelleinstellungen anzeigen</string>
     <string name="weather_show_location_title">Standort anzeigen</string>
     <string name="weather_show_location_summary">Aktivieren um Standort anzuzeigen</string>
-    <string name="weather_show_timestamp_title">Synchronisierungzeit anzeigen</string>
-    <string name="weather_show_timestamp_summary">Aktivieren um den Zeitpunkt des letzten Abgleichs anzeigen</string>
     <string name="weather_condition_icon_title">Symbol-Pakete</string>
     <string name="weather_condition_icon_dlg_title">Symbol-Paket zur Anzeige der Wetterbedingungen auswählen</string>
     <string name="weather_condition_icon_monochrome_title">Einfarbig</string>
@@ -408,22 +429,6 @@
     <string name="weather_condition_icon_vclouds_title">VClouds</string>
     <string name="weather_colorize_all_icons_title">Alle Symbole einfärben</string>
     <string name="weather_colorize_all_icons_summary">Aktivieren um alle Symbole einzufärben, deaktivieren um lediglich die einfarbigen Icons einzufärben</string>
-    <string name="weather_hide_panel_title">Wetterinfo ausblenden</string>
-    <string name="weather_hide_panel_dlg_title">Auswählen wann die Wetterinfo ausgeblendet werden soll</string>
-    <string name="weather_hide_panel_auto_title">Automatisch</string>
-    <string name="weather_hide_panel_custom_title">Benutzerdefiniert</string>
-    <string name="weather_hide_panel_never_title">Nie</string>
-    <string name="weather_hide_panel_auto_summary">Wetterinfo ausblenden bei Erreichen der Höchstanzahl von gleichzeitig sichtbaren Benachrichtigungen auf dem Sperrbildschirm</string>
-    <string name="weather_hide_panel_custom_summary">Wetterinfo ausblenden bei Erreichen der benutzerdefinierten Anzahl (%s) von sichtbaren Benachrichtigungen</string>
-    <string name="weather_hide_panel_never_summary">Wetterinfo wird nie ausgeblendet</string>
-    <string name="weather_number_of_notifications_title">Anzahl der Benachrichtigungen</string>
-    <string name="weather_number_of_notifications_dlg_title">Anzahl der Benachrichtigungen definieren, bei der die Wetterinfo ausgeblendet wird</string>
-    <string name="weather_number_of_notifications_always_title">Immer</string>
-    <string name="weather_number_of_notifications_two_title">2</string>
-    <string name="weather_number_of_notifications_three_title">3</string>
-    <string name="weather_number_of_notifications_four_title">4</string>
-    <string name="weather_number_of_notifications_five_title">5</string>
-    <string name="weather_number_of_notifications_six_title">6</string>
     <string name="colors_title">Farben</string>
     <string name="icons_title">Symbole</string>
     <string name="text_title">Text</string>
@@ -610,10 +615,13 @@
 
     <string name="reset_message">Standardeinstellungen wiederherstellen?</string>
     <string name="lockscreen_shortcuts_title">Mid-Screen Shortcuts</string>
-    <string name="lockscreen_shorcuts_longpress_title">Lange Drücken-Shortcuts</string>
-    <string name="lockscreen_shorcuts_longpress_summary">Individuelle Sperrbildschirm-Shortcuts durch \"Lange Drücken\" öffnen</string>
+    <string name="lockscreen_shorcuts_launch_type_title">Shortcut Aktivierung</string>
+    <string name="lockscreen_shortcuts_summary">Individuelle Sperrbildschirm-Shortcuts ansehen oder ändern</string>
+    <string name="lockscreen_shortcuts_single_tap">Klick</string>
+    <string name="lockscreen_shortcuts_double_tap">Doppelklick</string>
+    <string name="lockscreen_shortcuts_longpress">Lang gedrückt halten</string>
     <string name="help">Hilfe</string>
-    <string name="shortcut_action_app">Custom App</string>
+    <string name="shortcut_action_app">Individuelle App</string>
     <string name="shortcut_action_home">Home</string>
     <string name="shortcut_action_back">Zurück</string>
     <string name="shortcut_action_menu">Menü</string>
@@ -714,12 +722,19 @@
 
     <!-- Power menu Animations  -->
     <string name="power_menu_animation_title">Power-Menü Animation</string>
-    <string name="power_menu_animation_summary">Amimation für Anzeigen/Verlassen des Power-Menüs ändern</string>
+    <string name="power_menu_animation_summary">Animation für Anzeigen/Verlassen des Power-Menüs ändern</string>
     <string name="power_menu_animation_dialog_title">Power-Menü Animation auswählen</string>
     <string name="power_menu_animation_aosp">AOSP (Standard)</string>
     <string name="power_menu_animation_bottom">Unten</string>
     <string name="power_menu_animation_top">Oben</string>
     <string name="power_menu_animation_rotate">Rotation</string>
+    <string name="power_menu_animation_xylon">Fliegen</string>
+    <string name="power_menu_animation_slide">Gleiten</string>
+    <string name="power_menu_animation_turn">Drehen</string>
+    <string name="power_menu_animation_fly">Glühen</string>
+    <string name="power_menu_animation_card">3D</string>
+    <string name="power_menu_animation_translucent_top">Durchsichtig (oben)</string>
+    <string name="power_menu_animation_translucent_bottom">Durchsichtig (unten)</string>
 
     <!-- Less Notification sounds -->
     <string name="notifications_category_title">Benachrichtigungen</string>
@@ -773,10 +788,21 @@
     <string name="clock_font_thin_italic">Dünn Kursiv</string>
     <string name="clock_font_condensed">Verdichtet</string>
     <string name="clock_font_condensed_italic">Verdichtet Kursiv</string>
+    <string name="clock_font_condensed_light">Verdichtet Leicht</string>
+    <string name="clock_font_condensed_light_italic">Verdichtet Leicht Kursiv</string>
     <string name="clock_font_condensed_bold">Verdichtet Fett</string>
     <string name="clock_font_condensed_bold_italic">Verdichtet Fett Kursiv</string>
     <string name="clock_font_medium">Medium</string>
     <string name="clock_font_medium_italic">Medium Kursiv</string>
+    <string name="clock_font_black">Schwarz</string>
+    <string name="clock_font_black_italic">Schwarz Kursiv</string>
+    <string name="clock_font_dancingscript">DancingScript</string>
+    <string name="clock_font_dancingscript_bold">DancingScript Fett</string>
+    <string name="clock_font_comingsoon">ComingSoon</string>
+    <string name="clock_font_notoserif">NotoSerif Normal</string>
+    <string name="clock_font_notoserif_italic">NotoSerif Kursiv</string>
+    <string name="clock_font_notoserif_bold">NotoSerif Fett</string>
+    <string name="clock_font_notoserif_bold_italic">NotoSerif Fett Kursiv</string>
     <string name="clock_font_size_title">Schriftgröße</string>
     <string name="status_bar_show_clock_second_title">Sekundenanzeige</string>
     <string name="clock_font_size_4">4</string>
@@ -826,4 +852,241 @@
     <string name="ime_duration_title">IME Animationsdauer</string>
     <string name="animation_duration_summary">Dauer einstellen</string>
 
+    <!-- Keyboard and Input ASS methods  -->
+    <string name="title_keyboard_input">Erweiterte Optionen</string>
+    <string name="disable_fullscreen_keyboard_title">Vollbildmodus für Tastatur deaktivieren</string>
+    <string name="disable_fullscreen_keyboard_summary">Tastatur wird im Querformat nie den gesamten Bildschirm einnehmen</string>
+    <string name="keyboard_rotation_toggle_title">Tastatur automatisch rotieren</string>
+    <string name="keyboard_rotation_toggle_summary">Auto-Rotieren erzwingen wenn Tastatur angezeigt wird</string>
+    <string name="keyboard_rotation_timeout_title">Abschaltzeitpunkt für Auto-Rotieren</string>
+    <string name="keyboard_rotation_timeout_summary">Sobald die Tastatur nicht mehr angezeigt wird, schaltet sich der Auto-Rotieren Sensor nach <xliff:g id="rotate_timeout">%1$s</xliff:g> Sekunden ab.</string>
+    <string name="keyboard_rotation_dialog">Diese Option erzwingt die temporäre Aktivierung von Auto-Rotieren während die Tastatur angezeigt wird. Sie zeigt keinen Effekt falls Auto-Rotieren bereits aktiviert ist.</string>
+    <string name="show_enter_key_title">Eingabetaste anzeigen</string>
+    <string name="show_enter_key_summary">Diese Option erzwingt, dass die Tastatur statt der Emoticon-Taste die Eingabetaste anzeigt.</string>
+
+    <string name="lockscreen_maxnotif_title">Sperrbildschirm Benachrichtigungszähler</string>
+    <string name="lockscreen_maxnotif_sumary">Maximale Anzahl von Sperrbildschirmbenachrichtigungen einstellbar machen</string>
+    <string name="lockscreen_maxnotif_config">Maximale Anzahl von Sperrbildschirmbenachrichtigungen</string>
+
+    <!-- Lock Clock Fonts -->
+    <string name="lock_clock_font_title">Lock Clock Schriftarten</string>
+    <string name="lock_clock_font_summary">Standardschriftart für das Uhrzeit-Widget auf dem Sperrbildschirm ändern</string>
+    <string name="lock_clock_font_dialog_title">Lock Clock Schriftart auswählen</string>
+    <string name="lock_clock_font_normal">Roboto</string>
+    <string name="lock_clock_font_bold">Roboto Fett</string>
+    <string name="lock_clock_font_italic">Roboto Kursiv</string>
+    <string name="lock_clock_font_bold_italic">Roboto Fett Kursiv</string>
+    <string name="lock_clock_font_light_normal">Roboto Leicht (Standard)</string>
+    <string name="lock_clock_font_light_italic">Roboto Leicht Kursiv</string>
+    <string name="lock_clock_font_thin_normal">Roboto Dünn</string>
+    <string name="lock_clock_font_thin_italic">Roboto Dünn Kursiv</string>
+    <string name="lock_clock_font_condensed_normal">Roboto Verdichtet</string>
+    <string name="lock_clock_font_condensed_bold">Roboto Verdichtet Fett</string>
+    <string name="lock_clock_font_condensed_italic">Roboto Verdichtet Kursiv</string>
+    <string name="lock_clock_font_condensed_bold_italic">Roboto Verdichtet Fett Kursiv</string>
+    <string name="lock_clock_font_medium_normal">Roboto Medium</string>
+    <string name="lock_clock_font_medium_italic">Roboto Medium Kursiv</string>
+    <string name="lock_clock_font_black_normal">Roboto Schwarz</string>
+    <string name="lock_clock_font_black_italic">Roboto Schwarz Kursiv</string>
+    <string name="lock_clock_font_condensed_light_normal">Roboto Verdichtet Leicht</string>
+    <string name="lock_clock_font_condensed_light_italic">Roboto Verdichtet Leicht Kursiv</string>
+    <string name="lock_clock_font_dancingscript">DancingScript</string>
+    <string name="lock_clock_font_dancingscript_bold">DancingScript Fett</string>
+    <string name="lock_clock_font_comingsoon">ComingSoon</string>
+    <string name="lock_clock_font_notoserif">NotoSerif Normal</string>
+    <string name="lock_clock_font_notoserif_italic">NotoSerif Kursiv</string>
+    <string name="lock_clock_font_notoserif_bold">NotoSerif Fett</string>
+    <string name="lock_clock_font_notoserif_bold_italic">NotoSerif Fett Kursiv</string>
+
+    <!-- Lockscreen see through -->
+    <string name="lockscreen_see_through_title">Sperrbildschirm Transparenz</string>
+    <string name="lockscreen_see_through_summary">Ermöglicht es den Inhalt hinter dem Sperrbildschirm verwischt darzustellen.</string>
+    <string name="lockscreen_blur_radius">Intensität des Verwischungseffektes</string>
+
+    <string name="ls_extras_title">Sperrbildschirm-Zusatzeinstellungen</string>
+    <string name="title_extra">Erweitert</string>
+    <string name="ls_extras_summary">BeanStalk-Zusatzeinstellungen für den Sperrbildschirm</string>
+
+    <!-- app notifications hide on lockscreen -->
+    <string name="app_notification_no_keyguard_title">Auf Sperrbildschirm ausblenden</string>
+    <string name="app_notification_no_keyguard_summary">Benachrichtigungen von dieser App werden nicht auf dem Sperrbildschirm angezeigt.</string>
+    <string name="filter_notif_no_keyguard">Auf Sperrbildschirm ausblenden</string>
+    <string name="notifications_no_keyguard">Auf Sperrbildschirm ausblenden</string>
+    <string name="notifications_four_items"><xliff:g id="notif_state" example="Priorität">%1$s</xliff:g> / <xliff:g id="notif_state" example="Priorität">%2$s</xliff:g> / <xliff:g id="notif_state" example="Priorität">%3$s</xliff:g> / <xliff:g id="notif_state" example="Priorität">%4$s</xliff:g></string>
+
+    <!-- Battery stats reset -->
+    <string name="battery_stats_reset">Statistiken zurücksetzen</string>
+    <string name="battery_stats_message">Akkulaufzeitstatistiken werden zurückgesetzt</string>
+    <string name="ok_string">Ok</string>
+
+    <!-- Network traffic -->
+    <string name="network_traffic_title">Netzwerkaktivität anzeigen</string>
+    <string name="show_network_traffic_state">Netzwerkaktivität in der Statusleiste anzeigen</string>
+    <string name="network_traffic_summary">Es können verschiedene Darstellungen für die Anzeige der Netzwerkaktivität in der Statusleiste gewählt werden.</string>
+    <string name="show_network_traffic_unit">Einheit</string>
+    <string name="show_network_traffic_frequency">Häufigkeit der Aktualisierung</string>
+    <string name="show_network_traffic_disable">Deaktiviert</string>
+    <string name="show_network_traffic_up">Ausgehend</string>
+    <string name="show_network_traffic_down">Eingehend</string>
+    <string name="show_network_traffic_all">Ausgehend und eingehend</string>
+    <string name="show_network_traffic_bit">Bits pro Sekunde</string>
+    <string name="show_network_traffic_byte">Bytes pro Sekunde</string>
+    <string name="network_traffic_autohide">Automatisch ausblenden</string>
+    <string name="network_traffic_autohide_summary">Solange keine Netzwerkaktivität besteht wird nichts angezeigt</string>
+    <string name="network_traffic_autohide_threshold">Grenzwert für Inaktivität</string>
+    <string name="network_traffic_color_style">Farbschema</string>
+    <string name="network_traffic_color_reset">Farben zurücksetzen</string>
+    <string name="network_traffic_color_reset_message">Farbschema für Netzwerkaktivität auf Standard zurücksetzen?</string>
+
+    <!-- Lock screen rotation -->
+    <string name="display_lockscreen_rotation_title">Sperrbildschirm</string>
+
+    <!-- Wakelock blocker -->
+    <string name="wakelock_blocker_title">Wakelock Blocker</string>
+    <string name="wakelock_blocker_summary">System Wakelocks blockieren</string>
+    <string name="wakelock_blocker_save">Speichern</string>
+    <string name="wakelock_list_header">Verfügbare Wakelocks</string>
+    <string name="wakelock_blocker_reload">Neu laden</string>
+    <string name="wakelock_blocker_warning_title">Vorsicht beim Verändern dieser Einstellungen!</string>
+    <string name="wakelock_blocker_warning">Das Blockieren von Wakelocks kann potentiell zu Instabilität, Crashes oder Datenverlust führen.</string>
+
+    <!-- Quick settings disable on lockscreen -->
+    <string name="block_on_secure_keyguard_title">Schnelleinstellungen auf Sperrbildschirm deaktivieren</string>
+    <string name="block_on_secure_keyguard_summary">Ermöglicht es die Schnelleinstellungen auf dem Sperrbildschirm aus Sicherheitsgründen zu deaktivieren.</string>
+
+    <!-- Fingerprint vibration -->
+    <string name="fprint_sucess_vib_title">Vibrieren bei Fingerabdruck-Authentifizierung</string>
+    <string name="fprint_sucess_vib_summary">Vibrieren bei einer erfolgreichen Fingerabdruck-Authentifizierung</string>
+
+    <!-- Longpress torch -->
+    <string name="keyguard_torch_title">Taschenlampe bei ausgeschaltetem Bildschirm</string>
+    <string name="keyguard_torch_summary">Langes Drücken der Power-Taste bei ausgeschaltetem Bildschirm aktiviert die Taschenlampe</string>
+
+    <!-- Notification color settings -->
+    <string name="notification_color">Farbschema für Benachrichtigungen</string>
+
+    <string name="dlg_reset_values_message">Standardeinstellungen wiederherstellen?</string>	
+    <string name="dlg_reset_android">Ok</string>	
+    <string name="cat_colors_title">Benachrichtigung individualisieren</string>
+    <string name="background_title">Hintergund einer Benachrichtigung</string>
+    <string name="icon_title">Symbol</string>
+    <string name="colors_title">Farbschema</string>
+    <string name="text_title">Text</string>
+
+    <string name="notification_color_settings_title">Farbschema einer Benachrichtigung</string>
+    <string name="notification_media_bg_mode_title">Medien Hintergrund einfärben</string>
+    <string name="notification_app_icon_bg_mode_title">App Symbols Hintergrund einfärben</string>
+    <string name="notification_app_icon_color_mode_title">App Symbol einfärben</string>
+    <string name="notification_bg_guts_color_title">Hintergrund einer Ben. bei langem drücken</string>
+    <string name="notification_app_icon_bg_color_title">App Symbol Hintergrund</string>
+    <string name="notification_color_mode_never_title">Nie</string>
+    <string name="notification_icon_color_mode_greyscale_title">Falls es sich um ein Graustufen-Symbol handelt</string>
+    <string name="notification_bg_color_mode_no_color_title">Falls eine Benachrichtigung kein eigenes Farbschema definiert</string>
+    <string name="notification_color_mode_always_title">Immer</string>
+    <string name="notification_drawer_clear_all_icon_color_title">Alles löschen-Symbol</string>
+    <string name="notif_color_switch">Farbschema für Benachrichtigungen</string>
+
+    <!-- QS shade transparency -->
+    <string name="qs_transparent_shade">Schnelleinstellungen Transparenz</string>
+
+    <!-- Notification drawer -->
+    <string name="notification_drawer_title">Benachrichtigungsleiste</string>
+    <string name="qs_category_title">Schnelleinstellungen</string>
+
+    <!-- QuickSettings: Smart Pulldown -->
+    <string name="smart_pulldown_title">Intelligentes Herunterziehen</string>
+    <string name="smart_pulldown_summary">Falls es %1$s Benachrichtigungen gibt, die Schnelleinstellungen anzeigen.</string>
+    <string name="smart_pulldown_off">Aus</string>
+    <string name="smart_pulldown_dismissable">keine schliessbaren</string>
+    <string name="smart_pulldown_persistent">keine dauerhaften</string>
+    <string name="smart_pulldown_all">keine schliessbaren oder dauerhaften</string>
+
+    <!-- Dashboard settings -->
+    <string name="dashboard_category">Kachelnansicht für Einstellungsseite</string>
+    <string name="dashboard_columns_title">Spaltenanzahl ändern</string>
+    <string name="dashboard_columns_summary">Die Anzahl der anzuzeigenden Spalten ändern.</string>
+    <string name="dashboard_columns_dialog_title">Spaltenanzahl festlegen</string>
+    <string name="dashboard_columns_one">Eine</string>
+    <string name="dashboard_columns_two">Zwei</string>
+    <string name="dashboard_columns_three">Drei</string>
+    <string name="dashboard_tileview_double_lines_title">Kachelnansicht</string>
+    <string name="dashboard_tileview_double_lines_summary">Kachelnüberschriften in zwei Zeilen umbrechen</string>
+    <string name="dashboard_tileview_dividers_title">Abgrenzungen zwischen den Kacheln</string>
+    <string name="dashboard_tileview_dividers_summary">Abgrenzungen zwischen den Kacheln ausblenden</string>
+
+    <!-- QS shade transparency -->
+    <string name="qs_transparent_shade">Transparenz Schnelleinstellungen (unten)</string>
+    <string name="qs_transparent_header">Transparenz Schnelleinstellungen (oben)</string>
+    <string name="volume_dialog_transparency">Transparenz für Lautstärkeregelung</string>
+    <string name="power_menu_transparency">Transparenz für Power-Menü</string>
+    <string name="power_menu_dialog_dim">Dimmungsstärke für Power-Menühintergund</string>
+
+    <string name="transparency_title">Transparenz</string>
+
+    <!-- Hide Lockscreen clock, date & alarm -->
+    <string name="hide_lockscreen_items_title">Sperrbildschirm Elemente</string>
+    <string name="hide_lockscreen_clock_title">Uhrzeit auf Sperrbildschirm anzeigen</string>
+    <string name="hide_lockscreen_date_title">Datum auf Sperrbildschirm anzeigen</string>
+    <string name="hide_lockscreen_alarm_title">Alarm auf Sperrbildschirm anzeigen</string>
+
+    <!-- Selinux Switch -->
+    <string name="selinux_switch_title">SELinux Modus ändern</string>
+    <string name="selinux_switch_summary">SELinux (Security-Enhanced Linux) ist eine Erweiterung des Linux-Kernels und implementiert die Zugriffskontrollen auf Ressourcen. Das Umschalten der Modi ist riskant und kann zu ungewollten Resultaten führen!</string>
+    <string name="selinux_title">SELinux Modus</string>
+    <string name="selinux_permissive_title">Permissive (zulassend)</string>
+    <string name="selinux_enforcing_title">Enforcing (restriktiv)</string>
+    <string name="selinux_permissive_toast_title">SELinux ist auf permissive eingestellt!</string>
+
+    <!-- Navigation bar button color -->
+    <string name="navbar_button_tint_title">Farbton für Navigationstasten</string>
+    <string name="navbar_button_tint_switch_title">Farbtongebung für die Navigationstasten ändern</string>
+
+    <!-- Status bar header font style -->
+    <string name="status_bar_header_font_style_title">Kopfzeile Schrifttyp</string>
+
+    <!-- Lockscreen Colors -->
+    <string name="lockscreen_colors_title">Sperrbildschirm Farbtongebung</string>
+    <string name="lockscreen_owner_info_color">Besitzerinformation</string>
+    <string name="lockscreen_alarm_color">Alarm</string>
+    <string name="lockscreen_clock_color">Uhrzeit</string>
+    <string name="lockscreen_clock_date_color">Datum</string>
+
+    <!-- Date position -->
+    <string name="clock_date_position">Position der Datumsanzeige</string>
+    <string name="clock_date_right">Rechts von der Uhrzeit</string>
+    <string name="clock_date_left">Links von der Uhrzeit</string>
+
+    <!-- QS Tiles Columns -->
+    <string name="qs_num_columns_title">Anzahl der Kacheln pro Zeile</string>
+    <string name="qs_num_columns_showing">%1$s Kacheln pro Zeile werden angezeigt</string>
+ 
+    <!-- QS Tiles Rows -->
+    <string name="qs_num_rows_title">Anzahl der Zeilen in den Schnelleinstellungen</string>
+    <string name="qs_num_rows_showing">%1$s Zeilen werden angezeigt</string>
+
+    <!-- Optional Dashboard Switches -->
+    <string name="dashboard_switches_title">Schalter in Kacheln</string>
+    <string name="dashboard_switches_off">Schalter ausblenden</string>
+    <string name="dashboard_switches_on">Schalter anzeigen</string>
+    <string name="dashboard_switches_summary">Anzeige von Schaltern in Kacheln ändern</string>
+    <string name="dashboard_switches_dialog_title">Schalteranzeige wählen</string>
+ 
+    <!-- Lockscreen Alpha -->
+    <string name="lockscreen_alpha">Sperrbildschirm Alphablending</string>
+    <string name="lockscreen_security_alpha">Sperrbildschirm-Sicherheit Alphablending</string>
+
+    <!-- Nfc settings -->
+    <string name="nfc_polling_mode_title">NFC Abfragemodus</string>
+    <string name="nfc_polling_mode_screen_off">Bildschirm aus</string>
+    <string name="nfc_polling_mode_screen_locked">Bildschirm an, gesperrt</string>
+    <string name="nfc_polling_mode_screen_unlocked">Bildschirm an, entsperrt (Standard)</string>
+
+    <!-- Nfc sound mode -->
+    <string name="nfc_sound_mode_title">NFC Klingelmodus</string>
+    <string name="nfc_sound_mode_default">Normal</string>
+    <string name="nfc_sound_mode_vibration">Vibrieren</string>
+    <string name="nfc_sound_mode_mute">Lautlos</string>
+
+    <!-- Power menu torch -->
+    <string name="power_menu_torch_title">Taschenlampe</string>
 </resources>
