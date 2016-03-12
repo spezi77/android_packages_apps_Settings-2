@@ -305,8 +305,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private SwitchPreference mSelinux;
 
-    private SwitchPreference mColorTemperaturePreference;
-
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
 
     private final ArrayList<SwitchPreference> mResetSwitchPrefs
