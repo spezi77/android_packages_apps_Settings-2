@@ -1019,7 +1019,7 @@
     <string name="qs_transparent_header">Transparenz Schnelleinstellungen (oben)</string>
     <string name="volume_dialog_transparency">Transparenz für Lautstärkeregelung</string>
     <string name="power_menu_transparency">Transparenz für Power-Menü</string>
-    <string name="power_menu_dialog_dim">Dimmungsstärke für Power-Menühintergund</string>
+    <string name="power_menu_dialog_dim">Dimmungsstärke für Power-Menühintergrund</string>
 
     <string name="transparency_title">Transparenz</string>
 
